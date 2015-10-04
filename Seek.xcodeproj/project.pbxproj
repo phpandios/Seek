@@ -28,6 +28,9 @@
 		606364BA1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364A81BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364BB1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364AA1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364BC1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364AC1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
+		60E4C1E01BC111EB00611E0A /* README in Resources */ = {isa = PBXBuildFile; fileRef = 60E4C1DA1BC111EB00611E0A /* README */; settings = {ASSET_TAGS = (); }; };
+		60E4C1E21BC111EB00611E0A /* README in Resources */ = {isa = PBXBuildFile; fileRef = 60E4C1DF1BC111EB00611E0A /* README */; settings = {ASSET_TAGS = (); }; };
+		60E4C1E41BC1127100611E0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 60E4C1E31BC1127100611E0A /* Localizable.strings */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,9 @@
 		606364A81BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364AA1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364AC1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		60E4C1DA1BC111EB00611E0A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		60E4C1DF1BC111EB00611E0A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		60E4C1E31BC1127100611E0A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +312,9 @@
 		606364A01BC1011C00A36965 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				60E4C1D91BC111EB00611E0A /* Image */,
+				60E4C1DB1BC111EB00611E0A /* Localization */,
+				60E4C1DE1BC111EB00611E0A /* Data */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -367,6 +376,30 @@
 				606364AC1BC1011C00A36965 /* README */,
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		60E4C1D91BC111EB00611E0A /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				60E4C1DA1BC111EB00611E0A /* README */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		60E4C1DB1BC111EB00611E0A /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				60E4C1E31BC1127100611E0A /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		60E4C1DE1BC111EB00611E0A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				60E4C1DF1BC111EB00611E0A /* README */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,9 +505,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60E4C1E21BC111EB00611E0A /* README in Resources */,
+				60E4C1E01BC111EB00611E0A /* README in Resources */,
 				606364BA1BC1011C00A36965 /* README in Resources */,
 				606364B81BC1011C00A36965 /* README in Resources */,
 				606364B71BC1011C00A36965 /* README in Resources */,
+				60E4C1E41BC1127100611E0A /* Localizable.strings in Resources */,
 				606364B51BC1011C00A36965 /* README in Resources */,
 				606364BB1BC1011C00A36965 /* README in Resources */,
 				606364B61BC1011C00A36965 /* README in Resources */,
@@ -734,6 +770,7 @@
 				6063647D1BC0FD6000A36965 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6063647E1BC0FD6000A36965 /* Build configuration list for PBXNativeTarget "SeekTests" */ = {
 			isa = XCConfigurationList;
@@ -742,6 +779,7 @@
 				606364801BC0FD6000A36965 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		606364811BC0FD6000A36965 /* Build configuration list for PBXNativeTarget "SeekUITests" */ = {
 			isa = XCConfigurationList;
@@ -750,6 +788,7 @@
 				606364831BC0FD6000A36965 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
