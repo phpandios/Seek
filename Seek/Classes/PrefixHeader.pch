@@ -1,0 +1,22 @@
+//
+//  PrefixHeader.pch
+//  Seek
+//
+//  Created by 吴非凡 on 15/10/4.
+//  Copyright © 2015年 吴非凡. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define kUMAppKey @"507fcab25270157b37000010"
+#define kUMQQAppID @"1104893734"
+#define kUMQQAppKey @"baSL8HjsrVQCaKHb"
+#define kUMUrl @"http://www.umeng.com/social"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+
+#endif /* PrefixHeader_pch */
