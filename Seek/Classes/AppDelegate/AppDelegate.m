@@ -8,8 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "MapViewController.h"
-#import "LoginViewController.h"
+#import "MainTabBarViewController.h"
 
 #import "UMSocial.h"
 #import "UMSocialData.h"
@@ -28,7 +27,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = ({
-        UIViewController *vc = [LoginViewController new];
+        UIViewController *vc = [MainTabBarViewController new];
         vc.view.backgroundColor = [UIColor cyanColor];
         vc;
     });

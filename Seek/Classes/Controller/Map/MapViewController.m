@@ -72,10 +72,10 @@
             annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
         }
         annotationView.canShowCallout= YES;       //设置气泡可以弹出，默认为NO[自定义气泡的时候,需要设置为NO]//http://lbs.amap.com/api/ios-sdk/guide/mapkit/
-//        annotationView.animatesDrop = YES;        //设置标注动画显示，默认为NO
-//        annotationView.draggable = YES;        //设置标注可以拖动，默认为NO
+        //        annotationView.animatesDrop = YES;        //设置标注动画显示，默认为NO
+        //        annotationView.draggable = YES;        //设置标注可以拖动，默认为NO
         
-//        annotationView.pinColor = MAPinAnnotationColorPurple;
+        //        annotationView.pinColor = MAPinAnnotationColorPurple;
         
         annotationView.image = [UIImage imageNamed:@"mapPoint.png"];
         //设置中心点偏移，使得标注底部中间点成为经纬度对应点
@@ -120,7 +120,7 @@ updatingLocation:(BOOL)updatingLocation
         [self.mapView updateUserLocationRepresentation:pre];
         
         view.calloutOffset = CGPointMake(0, 0);
-    } 
+    }
 }
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
