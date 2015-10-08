@@ -33,6 +33,15 @@
 		606364BA1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364A81BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364BB1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364AA1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364BC1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364AC1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
+		60B06E3A1BC69DD0006AB01E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E391BC69DD0006AB01E /* MAMapKit.framework */; settings = {ASSET_TAGS = (); }; };
+		60B06E3D1BC69E58006AB01E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60B06E3C1BC69E58006AB01E /* AMap.bundle */; settings = {ASSET_TAGS = (); }; };
+		60B06E401BC69E95006AB01E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E3F1BC69E95006AB01E /* QuartzCore.framework */; };
+		60B06E441BC69EA9006AB01E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E431BC69EA9006AB01E /* CoreLocation.framework */; };
+		60B06E461BC69EC7006AB01E /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E451BC69EC7006AB01E /* libstdc++.6.0.9.tbd */; };
+		60B06E4B1BC69FCB006AB01E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B06E4A1BC69FCB006AB01E /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
+		60B06E4D1BC6A4BC006AB01E /* mapPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 60B06E4C1BC6A4BC006AB01E /* mapPoint.png */; settings = {ASSET_TAGS = (); }; };
+		60B06E511BC6B2C8006AB01E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B06E4F1BC6B2C8006AB01E /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
+		60B06E521BC6B2C8006AB01E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60B06E501BC6B2C8006AB01E /* LoginViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		60DFF4581BC1548F0078A00F /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 60DFF43E1BC1548F0078A00F /* UMSocialLocalizable.strings */; settings = {ASSET_TAGS = (); }; };
 		60DFF4591BC1548F0078A00F /* libUMSocial_Sdk_4.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF44C1BC1548F0078A00F /* libUMSocial_Sdk_4.2.5.a */; settings = {ASSET_TAGS = (); }; };
 		60DFF45A1BC1548F0078A00F /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60DFF44E1BC1548F0078A00F /* UMSCommentDetailController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -112,6 +121,17 @@
 		606364A81BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364AA1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364AC1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		60B06E391BC69DD0006AB01E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
+		60B06E3C1BC69E58006AB01E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
+		60B06E3F1BC69E95006AB01E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		60B06E431BC69EA9006AB01E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		60B06E451BC69EC7006AB01E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		60B06E491BC69FCB006AB01E /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		60B06E4A1BC69FCB006AB01E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		60B06E4C1BC6A4BC006AB01E /* mapPoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapPoint.png; sourceTree = "<group>"; };
+		60B06E4E1BC6B2C8006AB01E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		60B06E4F1BC6B2C8006AB01E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		60B06E501BC6B2C8006AB01E /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		60DFF43F1BC1548F0078A00F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		60DFF4411BC1548F0078A00F /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		60DFF4421BC1548F0078A00F /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
@@ -154,8 +174,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B06E461BC69EC7006AB01E /* libstdc++.6.0.9.tbd in Frameworks */,
+				60B06E441BC69EA9006AB01E /* CoreLocation.framework in Frameworks */,
+				60B06E401BC69E95006AB01E /* QuartzCore.framework in Frameworks */,
 				601C1AF31BC26608007C956A /* libSocialQQ.a in Frameworks */,
 				60DFF4831BC155930078A00F /* libz.tbd in Frameworks */,
+				60B06E3A1BC69DD0006AB01E /* MAMapKit.framework in Frameworks */,
 				60DFF4811BC155870078A00F /* libstdc++.tbd in Frameworks */,
 				60DFF47F1BC155780078A00F /* CoreTelephony.framework in Frameworks */,
 				601C1AF71BC26608007C956A /* libWeChatSDK.a in Frameworks */,
@@ -190,6 +214,8 @@
 		601C1AE61BC26608007C956A /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				60B06E3E1BC69E78006AB01E /* System */,
+				60B06E3B1BC69DD4006AB01E /* AMap */,
 				601C1AF81BC26624007C956A /* UM */,
 			);
 			path = FrameWork;
@@ -230,14 +256,6 @@
 		601C1AF81BC26624007C956A /* UM */ = {
 			isa = PBXGroup;
 			children = (
-				60DFF4821BC155930078A00F /* libz.tbd */,
-				60DFF4801BC155870078A00F /* libstdc++.tbd */,
-				60DFF47C1BC1556A0078A00F /* libsqlite3.tbd */,
-				60DFF4761BC155410078A00F /* libiconv.tbd */,
-				60DFF47E1BC155780078A00F /* CoreTelephony.framework */,
-				60DFF47A1BC1555C0078A00F /* CoreGraphics.framework */,
-				60DFF4781BC155500078A00F /* SystemConfiguration.framework */,
-				60DFF4741BC155320078A00F /* Security.framework */,
 				601C1AE71BC26608007C956A /* UMSocial_Sdk_Extra_Frameworks */,
 			);
 			name = UM;
@@ -382,6 +400,8 @@
 			isa = PBXGroup;
 			children = (
 				606364921BC1011C00A36965 /* README */,
+				60B06E491BC69FCB006AB01E /* MapViewController.h */,
+				60B06E4A1BC69FCB006AB01E /* MapViewController.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -390,6 +410,9 @@
 			isa = PBXGroup;
 			children = (
 				606364941BC1011C00A36965 /* README */,
+				60B06E4E1BC6B2C8006AB01E /* LoginViewController.h */,
+				60B06E4F1BC6B2C8006AB01E /* LoginViewController.m */,
+				60B06E501BC6B2C8006AB01E /* LoginViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -515,6 +538,33 @@
 			path = Mine;
 			sourceTree = "<group>";
 		};
+		60B06E3B1BC69DD4006AB01E /* AMap */ = {
+			isa = PBXGroup;
+			children = (
+				60B06E3C1BC69E58006AB01E /* AMap.bundle */,
+				60B06E391BC69DD0006AB01E /* MAMapKit.framework */,
+			);
+			name = AMap;
+			sourceTree = "<group>";
+		};
+		60B06E3E1BC69E78006AB01E /* System */ = {
+			isa = PBXGroup;
+			children = (
+				60B06E451BC69EC7006AB01E /* libstdc++.6.0.9.tbd */,
+				60DFF4821BC155930078A00F /* libz.tbd */,
+				60DFF4801BC155870078A00F /* libstdc++.tbd */,
+				60DFF47C1BC1556A0078A00F /* libsqlite3.tbd */,
+				60DFF4761BC155410078A00F /* libiconv.tbd */,
+				60B06E431BC69EA9006AB01E /* CoreLocation.framework */,
+				60B06E3F1BC69E95006AB01E /* QuartzCore.framework */,
+				60DFF47E1BC155780078A00F /* CoreTelephony.framework */,
+				60DFF47A1BC1555C0078A00F /* CoreGraphics.framework */,
+				60DFF4781BC155500078A00F /* SystemConfiguration.framework */,
+				60DFF4741BC155320078A00F /* Security.framework */,
+			);
+			name = System;
+			sourceTree = "<group>";
+		};
 		60DFF43D1BC1548F0078A00F /* UMSocial_Sdk_4.2.5 */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,6 +613,7 @@
 		60E4C1D91BC111EB00611E0A /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				60B06E4C1BC6A4BC006AB01E /* mapPoint.png */,
 				60E4C1DA1BC111EB00611E0A /* README */,
 			);
 			path = Image;
@@ -689,6 +740,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B06E4D1BC6A4BC006AB01E /* mapPoint.png in Resources */,
 				60E4C1E21BC111EB00611E0A /* README in Resources */,
 				60E4C1E01BC111EB00611E0A /* README in Resources */,
 				606364BA1BC1011C00A36965 /* README in Resources */,
@@ -696,6 +748,7 @@
 				60DFF45E1BC1548F0078A00F /* UMShareEditViewControlleriPad.xib in Resources */,
 				60DFF45A1BC1548F0078A00F /* UMSCommentDetailController.xib in Resources */,
 				606364B71BC1011C00A36965 /* README in Resources */,
+				60B06E521BC6B2C8006AB01E /* LoginViewController.xib in Resources */,
 				60E4C1E41BC1127100611E0A /* Localizable.strings in Resources */,
 				606364B51BC1011C00A36965 /* README in Resources */,
 				606364BB1BC1011C00A36965 /* README in Resources */,
@@ -707,6 +760,7 @@
 				606364B11BC1011C00A36965 /* README in Resources */,
 				606364BC1BC1011C00A36965 /* README in Resources */,
 				606364B91BC1011C00A36965 /* README in Resources */,
+				60B06E3D1BC69E58006AB01E /* AMap.bundle in Resources */,
 				606364B01BC1011C00A36965 /* README in Resources */,
 				606364AF1BC1011C00A36965 /* README in Resources */,
 				606364AE1BC1011C00A36965 /* README in Resources */,
@@ -744,6 +798,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B06E511BC6B2C8006AB01E /* LoginViewController.m in Sources */,
+				60B06E4B1BC69FCB006AB01E /* MapViewController.m in Sources */,
 				606364AD1BC1011C00A36965 /* AppDelegate.m in Sources */,
 				606364531BC0FD6000A36965 /* main.m in Sources */,
 			);
@@ -895,10 +951,11 @@
 					"$(PROJECT_DIR)/Seek/Classes/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Seek/Classes/FrameWork/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Seek/FrameWork/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/Seek/FrameWork",
 				);
 				GCC_PREFIX_HEADER = Seek/Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = Seek/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -913,6 +970,7 @@
 					"$(PROJECT_DIR)/Seek/FrameWork/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Seek/FrameWork/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = Seek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -930,10 +988,11 @@
 					"$(PROJECT_DIR)/Seek/Classes/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Seek/Classes/FrameWork/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Seek/FrameWork/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/Seek/FrameWork",
 				);
 				GCC_PREFIX_HEADER = Seek/Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = Seek/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -948,6 +1007,7 @@
 					"$(PROJECT_DIR)/Seek/FrameWork/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Seek/FrameWork/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = Seek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

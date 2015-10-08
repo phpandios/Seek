@@ -7,10 +7,13 @@
 //
 
 #import "AppDelegate.h"
+
+#import "MapViewController.h"
+#import "LoginViewController.h"
+
 #import "UMSocial.h"
 #import "UMSocialData.h"
-#import "UMSocialQQHandler.h"
-#import "UMSocialSnsService.h"
+
 @interface AppDelegate ()
 
 @end
@@ -21,48 +24,40 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [UMSocialData setAppKey:kUMAppKey];
-    [UMSocialData openLog:YES];
     
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = ({
-        UIViewController *vc = [UIViewController new];
+        UIViewController *vc = [LoginViewController new];
         vc.view.backgroundColor = [UIColor cyanColor];
         vc;
     });
     
     [self.window makeKeyAndVisible];
     
-    // QQ登陆 NO
-    [UMSocialQQHandler setQQWithAppId:kUMQQAppID appKey:kUMQQAppKey url:kUMUrl];
     
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     
-    snsPlatform.loginClickHandler(self.window.rootViewController,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        
-        //          获取微博用户名、uid、token等
-        
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            
-            NSLog(@"%@", [UMSocialAccountManager socialAccountDictionary]);
-            NSLog(@"%d", [UMSocialAccountManager isLogin]);
-            
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-            
-            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-            
-           
-            
-        }});
     
-    //获取accestoken以及QQ用户信息，得到的数据在回调Block对象形参respone的data属性
-    [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToQQ  completion:^(UMSocialResponseEntity *response){
-        NSLog(@"SnsInformation is %@",response.data);
-        UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-        
-        NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-    }];
+    
+    
+    
+    
+    // 友盟
+    [UMSocialData setAppKey:kUMAppKey];
+    [UMSocialData openLog:YES];
+    
+    
+    
+    
+    
+    
+//    //获取accestoken以及QQ用户信息，得到的数据在回调Block对象形参respone的data属性
+//    [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToQQ  completion:^(UMSocialResponseEntity *response){
+//        NSLog(@"SnsInformation is %@",response.data);
+//        UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
+//        
+//        NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+//    }];
     
     // 分享 OK
 //    [UMSocialSnsService presentSnsIconSheetView:self.window.rootViewController
