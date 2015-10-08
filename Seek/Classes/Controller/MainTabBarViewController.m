@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong) NSArray *itemImagesName;
 
+@property (nonatomic, strong) NSArray *itemNeedNav;
+
 @end
 
 @implementation MainTabBarViewController
@@ -31,19 +33,28 @@
     [super viewDidLoad];
     self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"ChatViewController", @"IssueViewController", @"MineViewController"];
     self.itemTitle = @[@"动态", @"地图", @"聊天", @"发布", @"我的"];
+    self.itemNeedNav = @[@(YES), @(YES), @(YES), @(YES), @(YES)];
     self.itemImagesName = @[@"", @"", @"", @"", @""];
     NSMutableArray *viewControllers = [NSMutableArray array];
     for (int i = 0; i < 5; i++) {
         NSString *classes = self.itemClasses[i];
         NSString *title = self.itemTitle[i];
         NSString *imageName = self.itemImagesName[i];
+        BOOL needNav = [self.itemNeedNav[i] boolValue];
         
         UIViewController *vc = [((UIViewController *)[NSClassFromString(classes) alloc]) initWithNibName:classes bundle:nil];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
-        navigationController.tabBarItem.title = title;
-        navigationController.tabBarItem.image = [UIImage imageNamed:imageName];
         
-        [viewControllers addObject:navigationController];
+        if (needNav) {
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+            navigationController.tabBarItem.title = title;
+            navigationController.tabBarItem.image = [UIImage imageNamed:imageName];
+            [viewControllers addObject:navigationController];
+        } else {
+            vc.tabBarItem.title = title;
+            vc.tabBarItem.image = [UIImage imageNamed:imageName];
+            [viewControllers addObject:vc];
+        }
+        
     }
     
     
