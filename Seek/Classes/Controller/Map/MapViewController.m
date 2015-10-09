@@ -10,13 +10,18 @@
 #import <MAMapKit/MAMapKit.h>
 
 #import "UserInfoForMap.h"
-@interface MapViewController ()<MAMapViewDelegate>
+#import "WFFDropdownList.h"
+
+#define kUserIconSize 30
+@interface MapViewController ()<MAMapViewDelegate, WFFDropdownListDelegate>
 
 @property (nonatomic, strong) MAMapView *mapView;
 
 @property (nonatomic, strong) NSArray *otherUserNearByArray; // 周边用户信息
 
 @property (nonatomic, strong) NSMutableArray *otherAnnotationArray; // 周边用户标注
+
+@property (nonatomic, strong) NSMutableDictionary *otherAnnotationDict; // 周边用户标注分组
 
 @property (nonatomic, strong) MAUserLocation *currentUserLocation;
 
@@ -26,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *locationSwitch;
 - (IBAction)locationSwitchValueChanged:(UISwitch *)sender;
 @property (weak, nonatomic) IBOutlet UIView *dropDownView;
+@property (nonatomic, strong) WFFDropdownList *dropDownList;
 - (IBAction)locationButtonAction:(UIButton *)sender;
 
 @end
@@ -36,6 +42,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 屏幕旋转通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
     // 配置key
     [MAMapServices sharedServices].apiKey = kLBSAppKey;
@@ -51,6 +60,13 @@
     // 设置缩放级别
     [_mapView setZoomLevel:16 animated:YES];
     
+    self.dropDownList = [[WFFDropdownList alloc] initWithFrame:_dropDownView.bounds dataSource:@[@"全部", @"筛选1", @"筛选2", @"筛选3"]];
+    _dropDownList.delegate = self;
+    _dropDownList.selectedIndex = 0;
+    _dropDownList.maxCountForShow = 5;
+    _dropDownList.textColor = [UIColor blackColor];
+    _dropDownList.font = [UIFont systemFontOfSize:17];
+    [self.dropDownView addSubview:_dropDownList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,6 +90,22 @@
 //    [_mapView addAnnotation:pointAnnotation];
 }
 
+// BEGIN
+// 视图切换时,对子视图的frame进行了设置. 因此子视图的frame如果不再手动改变的话,是恒定值,里面的子视图也就不会按autolaytou来布局
+// 也可以代码添加view后,给view添加约束
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    _dropDownList.frame = _dropDownView.bounds;
+}
+#pragma mark 屏幕旋转
+- (void)handleDeviceOrientationDidChange:(NSNotification *)notification
+{
+    _dropDownList.frame = _dropDownView.bounds;
+    
+}
+// END
+
 #pragma mark - MAMapViewDelegate
 // 设置标注样式
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation
@@ -94,8 +126,16 @@
             return annotationView;
         } else { // 周边用户
             NSInteger index = [self.otherAnnotationArray indexOfObject:annotation];
-            UserInfoForMap *model = self.otherUserNearByArray[index];
-            NSLog(@"annoTitle %@ indexTitle %@", model.userID, annotation.title);
+            NSValue *key = self.otherAnnotationDict.allKeys[index];
+            UserInfoForMap *model = [self.otherAnnotationDict[key] firstObject];
+            
+            // 获取当前用户对应的地图坐标
+            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
+            // 获取当前用户在当前地图缩放级别下,在view上的坐标
+            CGPoint currentPoint = [_mapView convertCoordinate:coordinate toPointToView:_mapView];
+            // 获取当前分组
+            NSMutableArray *sectionArray = self.otherAnnotationDict[[NSValue valueWithCGPoint:currentPoint]];
+            
             static NSString *pointReuseIndentifier = @"otherUserReuseIndentifier";
             MAAnnotationView *annotationView = (MAAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
             if (annotationView == nil)
@@ -106,8 +146,9 @@
             
             annotationView.image = [UIImage imageNamed:model.imageUrl];
             //设置中心点偏移，使得标注底部中间点成为经纬度对应点
-            annotationView.centerOffset = CGPointMake(0, -15);
+            annotationView.centerOffset = CGPointMake(0, -kUserIconSize);
             
+            ((MAPointAnnotation *)annotation).subtitle = [NSString stringWithFormat:@"分组个数%ld", sectionArray.count];
             return annotationView;
         }
     }
@@ -164,6 +205,7 @@ updatingLocation:(BOOL)updatingLocation
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
+    [self updateAnnotationOfOtherUser];
     NSLog(@"地图区域变更后");
 }
 
@@ -171,7 +213,21 @@ updatingLocation:(BOOL)updatingLocation
 {
     NSLog(@"地图区域即将变更");
 }
+#pragma mark - WFFDropdownListDelegate
+- (void)dropdownList:(WFFDropdownList *)dropdownList didSelectedIndex:(NSInteger)selectedIndex
+{
+    NSLog(@"选中第%ld个筛选项目", selectedIndex);
+}
 
+#pragma mark - 计算两点距离
+- (CGFloat)distanceFromPointX:(CGPoint)start distanceToPointY:(CGPoint)end{
+    CGFloat distance;
+    //下面就是高中的数学，不详细解释了
+    CGFloat xDist = (end.x - start.x);
+    CGFloat yDist = (end.y - start.y);
+    distance = sqrt((xDist * xDist) + (yDist * yDist));
+    return distance;
+}
 
 #pragma mark - 更新其他用户的地图标注
 - (void)updateAnnotationOfOtherUser
@@ -179,16 +235,52 @@ updatingLocation:(BOOL)updatingLocation
     // 移除标注
     [self.mapView removeAnnotations:self.otherAnnotationArray];
     self.otherAnnotationArray = [NSMutableArray array]; // 清空其中的annotation
+    self.otherAnnotationDict = [NSMutableDictionary dictionary];
 
     
     for (UserInfoForMap *model in self.otherUserNearByArray) {
-     // 大头针标注
+        // 获取当前用户对应的地图坐标
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
+        // 获取当前用户在当前地图缩放级别下,在view上的坐标
+        CGPoint currentPoint = [_mapView convertCoordinate:coordinate toPointToView:_mapView];
+        
+        NSValue *mergedPoint = nil;// 当前点若会与其他点重合,则该值不为nil
+        for (NSValue *pointValue in self.otherAnnotationDict.allKeys) {
+            CGPoint point = [pointValue CGPointValue];
+            if ([self distanceFromPointX:point distanceToPointY:currentPoint] <= kUserIconSize) { // 会发生重合.
+                mergedPoint = pointValue;
+                break;
+            }
+        }
+        if (mergedPoint) { // 说明会与这个key对应的标注点重合.
+            [self.otherAnnotationDict[mergedPoint] addObject:model];
+        } else { // 不与其他标注点重合.
+            NSMutableArray *array = [NSMutableArray arrayWithObject:model];
+            [self.otherAnnotationDict setObject:array forKey:[NSValue valueWithCGPoint:currentPoint]];
+        }
+    }
+    
+    for (NSValue *key in self.otherAnnotationDict.allKeys) {
         MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+        UserInfoForMap *model = [self.otherAnnotationDict[key] firstObject];
         pointAnnotation.coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
         pointAnnotation.title = model.userID;
         pointAnnotation.subtitle = nil;
+        
         [self.otherAnnotationArray addObject:pointAnnotation];
     }
+//
+//
+//        MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+//        pointAnnotation.coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
+//        pointAnnotation.title = model.userID;
+//        pointAnnotation.subtitle = nil;
+//        [self.otherAnnotationArray addObject:pointAnnotation];
+//        
+//        
+//        NSLog(@"%@", NSStringFromCGPoint([_mapView convertCoordinate:pointAnnotation.coordinate toPointToView:_mapView]));
+//    }
+    
     // 把周边用户的标注添加到地图上[一个个添加到地图上,每添加一次就执行一轮viewFor标注.]
     if (_otherAnnotationArray.count > 0) {
         [_mapView addAnnotations:self.otherAnnotationArray];
@@ -232,6 +324,9 @@ updatingLocation:(BOOL)updatingLocation
 - (IBAction)locationSwitchValueChanged:(UISwitch *)sender {
 }
 - (IBAction)locationButtonAction:(UIButton *)sender {
+    
+    // 设置缩放级别
+    [_mapView setZoomLevel:16 animated:YES];
     [_mapView showAnnotations:@[self.currentUserAnnotation] animated:YES];
     [self loadOtherUserNearByWithCompletionHandle:^{
         // 定位结束[周边用户信息加载,显示结束]

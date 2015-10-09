@@ -51,4 +51,4 @@ return share; \
 #import "NetHelper.h"
 
 // 自定义公共类 -- END
-#endif /* PrefixHeader_pch */
+#endif
