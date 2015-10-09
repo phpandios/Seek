@@ -34,7 +34,7 @@
     self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"ChatViewController", @"IssueViewController", @"MineViewController"];
     self.itemTitle = @[@"动态", @"地图", @"聊天", @"发布", @"我的"];
     self.itemNeedNav = @[@(YES), @(YES), @(YES), @(YES), @(YES)];
-    self.itemImagesName = @[@"", @"", @"", @"", @""];
+    self.itemImagesName = @[@"dynamic", @"mapTab", @"chat", @"issue", @"mine"];
     NSMutableArray *viewControllers = [NSMutableArray array];
     for (int i = 0; i < 5; i++) {
         NSString *classes = self.itemClasses[i];
