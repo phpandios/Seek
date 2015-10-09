@@ -31,9 +31,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tabBar.translucent = NO;
     self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"ChatViewController", @"IssueViewController", @"MineViewController"];
     self.itemTitle = @[@"动态", @"地图", @"聊天", @"发布", @"我的"];
-    self.itemNeedNav = @[@(YES), @(YES), @(YES), @(YES), @(YES)];
+    self.itemNeedNav = @[@(YES), @(NO), @(YES), @(YES), @(YES)];
     self.itemImagesName = @[@"dynamic", @"mapTab", @"chat", @"issue", @"mine"];
     NSMutableArray *viewControllers = [NSMutableArray array];
     for (int i = 0; i < 5; i++) {
@@ -46,6 +47,7 @@
         
         if (needNav) {
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+            navigationController.navigationBar.translucent = NO;
             navigationController.tabBarItem.title = title;
             navigationController.tabBarItem.image = [UIImage imageNamed:imageName];
             [viewControllers addObject:navigationController];

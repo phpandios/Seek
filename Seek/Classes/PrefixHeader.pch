@@ -9,6 +9,24 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+
+#pragma mark - 单例
+#define kSingleTon_M(classname) \
++ (instancetype)share##classname\
+{ \
+static classname *share = nil; \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+share = [classname new]; \
+}); \
+return share; \
+}
+
+#define kSingleTon_H(classname) \
++ (instancetype)share##classname;
+
+
+// SDK -- BEGIN
 // 友盟
 #define kUMAppKey @"507fcab25270157b37000010"
 #define kUMQQAppID @"1104893734"
@@ -21,9 +39,16 @@
 // 融云
 #define kRCIMAppKey @"pwe86ga5edft6"
 #define kRCIMAppSecret @"qy9qbCT8df00jN"
-// Include any system framework and library headers here that should be included in all compilation units.
-// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+// SDK -- END
 
 
+// 三方 -- BEGIN
+#import "Reachability.h"
+#import "ALAlertBanner.h"
+// 三方 -- END
 
+// 自定义公共类 -- BEGIN
+#import "NetHelper.h"
+
+// 自定义公共类 -- END
 #endif /* PrefixHeader_pch */
