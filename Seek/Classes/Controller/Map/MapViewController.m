@@ -230,7 +230,7 @@
     if ([view isKindOfClass:[UserAnnotationView class]]) { // 点击的周边用户
         UserAnnotationView *userView = (UserAnnotationView *)view;
         if (userView.userArray.count == 1) { // 只有一个 直接推出
-            NSLog(@"选中用户ID:%@",[userView.userArray.firstObject userID]);
+            SHOWMESSAGE(@"选中用户ID:%@",[userView.userArray.firstObject userID]);
         } else { // 弹出collectionView
             // 移动动画结束后,再根据选中的项进行操作
             self.selectedAnnotationView = view;
@@ -282,7 +282,6 @@ updatingLocation:(BOOL)updatingLocation
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
-    NSLog(@"地图区域变更后");
     // 缩放才重新更新周边用户的标注
     if (self.oldZoomLevel != 0) {
         if (self.oldZoomLevel != mapView.zoomLevel) {
@@ -305,7 +304,7 @@ updatingLocation:(BOOL)updatingLocation
 #pragma mark - WFFDropdownListDelegate
 - (void)dropdownList:(WFFDropdownList *)dropdownList didSelectedIndex:(NSInteger)selectedIndex
 {
-    NSLog(@"选中第%ld个筛选项目", selectedIndex);
+    SHOWMESSAGE(@"选中第%ld个筛选项目", selectedIndex);
 }
 
 #pragma mark - UICollectionViewDatasource && UICollectionViewDelegate
@@ -330,7 +329,7 @@ updatingLocation:(BOOL)updatingLocation
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UserInfoForMap *model = self.otherUsersShowOnCollectionView[indexPath.row];
-    NSLog(@"选中的用户ID%@", model.userID);
+    SHOWMESSAGE(@"选中的用户ID%@", model.userID);
 }
 #pragma mark - 私有方法
 #pragma mark 计算两点距离
