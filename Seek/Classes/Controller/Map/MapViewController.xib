@@ -7,8 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController">
             <connections>
+                <outlet property="collectionShadeView" destination="XAl-Bt-nf7" id="rLw-EB-zaJ"/>
                 <outlet property="dropDownView" destination="Uec-2U-a5x" id="pIB-XR-ieO"/>
                 <outlet property="locationSwitch" destination="ESX-wk-rpJ" id="aOe-MX-pAY"/>
+                <outlet property="otherUsersCollectionView" destination="eW5-ev-SCJ" id="dKZ-kI-yh6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,7 +25,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共享位置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dol-ys-nOh">
                             <rect key="frame" x="10" y="14" width="68" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESX-wk-rpJ">
@@ -71,12 +73,67 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAl-Bt-nf7" userLabel="userCollectionViewShade">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Yl-lI-MDG">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="gja-uy-tbb" appends="YES" id="yYr-4f-aKs"/>
+                            </connections>
+                        </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eW5-ev-SCJ">
+                            <rect key="frame" x="180" y="236" width="240" height="128"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="240" id="Ri5-sJ-n9G"/>
+                                <constraint firstAttribute="height" constant="128" id="xuH-mU-Z10"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="L8V-Sx-GfO">
+                                <size key="itemSize" width="30" height="30"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
+                            </collectionViewFlowLayout>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Ri5-sJ-n9G"/>
+                                    <exclude reference="xuH-mU-Z10"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="TeA-Tb-QVT"/>
+                                <outlet property="delegate" destination="-1" id="DgK-8a-xJm"/>
+                            </connections>
+                        </collectionView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="1Yl-lI-MDG" secondAttribute="bottom" id="8xa-Fe-x8U"/>
+                        <constraint firstItem="eW5-ev-SCJ" firstAttribute="centerX" secondItem="XAl-Bt-nf7" secondAttribute="centerX" id="BEL-Eq-PpG"/>
+                        <constraint firstAttribute="trailing" secondItem="1Yl-lI-MDG" secondAttribute="trailing" id="Hse-B5-kbt"/>
+                        <constraint firstItem="1Yl-lI-MDG" firstAttribute="leading" secondItem="XAl-Bt-nf7" secondAttribute="leading" id="b40-w9-ytT"/>
+                        <constraint firstItem="1Yl-lI-MDG" firstAttribute="top" secondItem="XAl-Bt-nf7" secondAttribute="top" id="qAI-Gl-03w"/>
+                        <constraint firstItem="eW5-ev-SCJ" firstAttribute="centerY" secondItem="XAl-Bt-nf7" secondAttribute="centerY" id="tsN-t6-fcX"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="sTP-x8-DQn" secondAttribute="bottom" constant="10" id="0zP-0U-5ci"/>
+                <constraint firstAttribute="bottom" secondItem="XAl-Bt-nf7" secondAttribute="bottom" id="2Fy-b6-Zfo"/>
                 <constraint firstAttribute="trailing" secondItem="sTP-x8-DQn" secondAttribute="trailing" constant="10" id="MFJ-dm-gWp"/>
+                <constraint firstAttribute="trailing" secondItem="XAl-Bt-nf7" secondAttribute="trailing" id="Mfi-CP-sAL"/>
+                <constraint firstItem="XAl-Bt-nf7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uG4-Nn-dRF"/>
+                <constraint firstItem="XAl-Bt-nf7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="x9j-gW-JoM"/>
             </constraints>
         </view>
+        <tapGestureRecognizer id="gja-uy-tbb">
+            <connections>
+                <action selector="collectionShadeViewTapGRAction:" destination="-1" id="LFW-zN-7Kd"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

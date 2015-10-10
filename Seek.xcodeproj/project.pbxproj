@@ -45,7 +45,6 @@
 		60117BAA1BC7EE86001D4EC0 /* bannerSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60117BA01BC7EE86001D4EC0 /* bannerSuccess@2x.png */; settings = {ASSET_TAGS = (); }; };
 		60117BAD1BC7EF90001D4EC0 /* UserInfoForMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117BAC1BC7EF90001D4EC0 /* UserInfoForMap.m */; settings = {ASSET_TAGS = (); }; };
 		60117BAF1BC7F1BE001D4EC0 /* userIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 60117BAE1BC7F1BE001D4EC0 /* userIcon.png */; settings = {ASSET_TAGS = (); }; };
-		60117BB41BC803A0001D4EC0 /* WFFDropdownList.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117BB31BC803A0001D4EC0 /* WFFDropdownList.m */; settings = {ASSET_TAGS = (); }; };
 		601C1AF31BC26608007C956A /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 601C1AE91BC26608007C956A /* libSocialQQ.a */; settings = {ASSET_TAGS = (); }; };
 		601C1AF41BC26608007C956A /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601C1AEA1BC26608007C956A /* TencentOpenAPI.framework */; settings = {ASSET_TAGS = (); }; };
 		601C1AF51BC26608007C956A /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 601C1AEB1BC26608007C956A /* TencentOpenApi_IOS_Bundle.bundle */; settings = {ASSET_TAGS = (); }; };
@@ -65,6 +64,10 @@
 		606364BA1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364A81BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364BB1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364AA1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364BC1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364AC1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
+		606B4E851BC8AE1F000ED482 /* WFFDropdownList.m in Sources */ = {isa = PBXBuildFile; fileRef = 606B4E841BC8AE1F000ED482 /* WFFDropdownList.m */; settings = {ASSET_TAGS = (); }; };
+		606B4E951BC8C088000ED482 /* UserAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 606B4E941BC8C088000ED482 /* UserAnnotationView.m */; settings = {ASSET_TAGS = (); }; };
+		606B4E9E1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 606B4E9C1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		606B4E9F1BC8C2AD000ED482 /* UserForMapCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 606B4E9D1BC8C2AD000ED482 /* UserForMapCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		60B06E3A1BC69DD0006AB01E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E391BC69DD0006AB01E /* MAMapKit.framework */; settings = {ASSET_TAGS = (); }; };
 		60B06E3D1BC69E58006AB01E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60B06E3C1BC69E58006AB01E /* AMap.bundle */; settings = {ASSET_TAGS = (); }; };
 		60B06E401BC69E95006AB01E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E3F1BC69E95006AB01E /* QuartzCore.framework */; };
@@ -174,8 +177,6 @@
 		60117BAB1BC7EF90001D4EC0 /* UserInfoForMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoForMap.h; sourceTree = "<group>"; };
 		60117BAC1BC7EF90001D4EC0 /* UserInfoForMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoForMap.m; sourceTree = "<group>"; };
 		60117BAE1BC7F1BE001D4EC0 /* userIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = userIcon.png; path = Image/userIcon.png; sourceTree = "<group>"; };
-		60117BB21BC803A0001D4EC0 /* WFFDropdownList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFFDropdownList.h; sourceTree = "<group>"; };
-		60117BB31BC803A0001D4EC0 /* WFFDropdownList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFFDropdownList.m; sourceTree = "<group>"; };
 		601C1AE91BC26608007C956A /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		601C1AEA1BC26608007C956A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		601C1AEB1BC26608007C956A /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
@@ -206,6 +207,13 @@
 		606364A81BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364AA1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364AC1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		606B4E831BC8AE1F000ED482 /* WFFDropdownList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFFDropdownList.h; sourceTree = "<group>"; };
+		606B4E841BC8AE1F000ED482 /* WFFDropdownList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFFDropdownList.m; sourceTree = "<group>"; };
+		606B4E931BC8C088000ED482 /* UserAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAnnotationView.h; sourceTree = "<group>"; };
+		606B4E941BC8C088000ED482 /* UserAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAnnotationView.m; sourceTree = "<group>"; };
+		606B4E9B1BC8C2AD000ED482 /* UserForMapCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserForMapCollectionViewCell.h; sourceTree = "<group>"; };
+		606B4E9C1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserForMapCollectionViewCell.m; sourceTree = "<group>"; };
+		606B4E9D1BC8C2AD000ED482 /* UserForMapCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserForMapCollectionViewCell.xib; sourceTree = "<group>"; };
 		60B06E391BC69DD0006AB01E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		60B06E3C1BC69E58006AB01E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
 		60B06E3F1BC69E95006AB01E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -353,15 +361,6 @@
 			name = ForTest;
 			sourceTree = "<group>";
 		};
-		60117BB11BC803A0001D4EC0 /* WFFDropdownList */ = {
-			isa = PBXGroup;
-			children = (
-				60117BB21BC803A0001D4EC0 /* WFFDropdownList.h */,
-				60117BB31BC803A0001D4EC0 /* WFFDropdownList.m */,
-			);
-			path = WFFDropdownList;
-			sourceTree = "<group>";
-		};
 		601C1AE61BC26608007C956A /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +473,7 @@
 		606364841BC1011C00A36965 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				606B4E7F1BC8ADCC000ED482 /* Custom */,
 				60DFF43D1BC1548F0078A00F /* UMSocial_Sdk_4.2.5 */,
 				606364851BC1011C00A36965 /* AppDelegate */,
 				606364881BC1011C00A36965 /* Category */,
@@ -647,7 +647,6 @@
 		606364A11BC1011C00A36965 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				60117BB11BC803A0001D4EC0 /* WFFDropdownList */,
 				60117B921BC7EE86001D4EC0 /* ALAlertBanner */,
 				60117B8B1BC7ECD3001D4EC0 /* Reachability */,
 			);
@@ -718,6 +717,52 @@
 				606364AC1BC1011C00A36965 /* README */,
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		606B4E7F1BC8ADCC000ED482 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				606B4E801BC8AE03000ED482 /* Classes */,
+				606B4E811BC8AE03000ED482 /* View */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		606B4E801BC8AE03000ED482 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				606B4E821BC8AE1F000ED482 /* WFFDropdownList */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		606B4E811BC8AE03000ED482 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				606B4E921BC8C088000ED482 /* Map */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		606B4E821BC8AE1F000ED482 /* WFFDropdownList */ = {
+			isa = PBXGroup;
+			children = (
+				606B4E831BC8AE1F000ED482 /* WFFDropdownList.h */,
+				606B4E841BC8AE1F000ED482 /* WFFDropdownList.m */,
+			);
+			path = WFFDropdownList;
+			sourceTree = "<group>";
+		};
+		606B4E921BC8C088000ED482 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				606B4E931BC8C088000ED482 /* UserAnnotationView.h */,
+				606B4E941BC8C088000ED482 /* UserAnnotationView.m */,
+				606B4E9B1BC8C2AD000ED482 /* UserForMapCollectionViewCell.h */,
+				606B4E9C1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m */,
+				606B4E9D1BC8C2AD000ED482 /* UserForMapCollectionViewCell.xib */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		60B06E3B1BC69DD4006AB01E /* AMap */ = {
@@ -969,6 +1014,7 @@
 				189950D01BC6CE7800E12BDC /* userAdd.png in Resources */,
 				189950CA1BC6CE7800E12BDC /* camera.png in Resources */,
 				606364BC1BC1011C00A36965 /* README in Resources */,
+				606B4E9F1BC8C2AD000ED482 /* UserForMapCollectionViewCell.xib in Resources */,
 				60B06E3D1BC69E58006AB01E /* AMap.bundle in Resources */,
 				189950CF1BC6CE7800E12BDC /* share.png in Resources */,
 				60B06E691BC6BCD5006AB01E /* ChatViewController.xib in Resources */,
@@ -1016,6 +1062,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				606B4E9E1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m in Sources */,
 				1877F5131BC7E01700026FE7 /* DynamicViewController.m in Sources */,
 				60B06E511BC6B2C8006AB01E /* LoginViewController.m in Sources */,
 				60117BA11BC7EE86001D4EC0 /* ALAlertBanner.m in Sources */,
@@ -1025,6 +1072,7 @@
 				189950B61BC6CB5100E12BDC /* KnowPersonCell.m in Sources */,
 				60B06E591BC6BCB0006AB01E /* MineViewController.m in Sources */,
 				60B06E6F1BC6BF8D006AB01E /* MapViewController.m in Sources */,
+				606B4E951BC8C088000ED482 /* UserAnnotationView.m in Sources */,
 				60B06E5E1BC6BCBD006AB01E /* IssueViewController.m in Sources */,
 				606364AD1BC1011C00A36965 /* AppDelegate.m in Sources */,
 				60117BAD1BC7EF90001D4EC0 /* UserInfoForMap.m in Sources */,
@@ -1032,9 +1080,9 @@
 				189950BE1BC6CB5100E12BDC /* towPhotoCell.m in Sources */,
 				189950BC1BC6CB5100E12BDC /* ThreePhotoCell.m in Sources */,
 				60117B911BC7ED77001D4EC0 /* NetHelper.m in Sources */,
-				60117BB41BC803A0001D4EC0 /* WFFDropdownList.m in Sources */,
 				60117BA21BC7EE86001D4EC0 /* ALAlertBannerManager.m in Sources */,
 				606364531BC0FD6000A36965 /* main.m in Sources */,
+				606B4E851BC8AE1F000ED482 /* WFFDropdownList.m in Sources */,
 				60B06E681BC6BCD5006AB01E /* ChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

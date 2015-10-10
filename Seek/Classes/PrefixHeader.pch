@@ -47,8 +47,10 @@ return share; \
 #import "ALAlertBanner.h"
 // 三方 -- END
 
-// 自定义公共类 -- BEGIN
+// 自定义 -- BEGIN
+#define kUserIconSize 30
+
 #import "NetHelper.h"
 
-// 自定义公共类 -- END
+// 自定义 -- END
 #endif
