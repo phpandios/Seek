@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"发布";
     // Do any additional setup after loading the view from its nib.
 }
 

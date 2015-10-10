@@ -23,7 +23,8 @@ static NSString *pulishIdentifier = @"pulishCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.title = @"动态";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

@@ -15,7 +15,7 @@
 
 
 
-@interface MainTabBarViewController ()
+@interface MainTabBarViewController ()<UITabBarControllerDelegate>
 
 @property (nonatomic, strong) NSArray *itemClasses;
 
@@ -31,6 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = self;
+    
     self.tabBar.translucent = NO;
     self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"ChatViewController", @"IssueViewController", @"MineViewController"];
     self.itemTitle = @[@"动态", @"地图", @"聊天", @"发布", @"我的"];
@@ -48,6 +50,12 @@
         if (needNav) {
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
             navigationController.navigationBar.translucent = NO;
+            // item的颜色
+            navigationController.navigationBar.tintColor = [UIColor whiteColor];
+            // 背景颜色
+            navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.1 green:0.3 blue:1 alpha:1];
+            // title的颜色
+            navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
             navigationController.tabBarItem.title = title;
             navigationController.tabBarItem.image = [UIImage imageNamed:imageName];
             [viewControllers addObject:navigationController];
@@ -69,6 +77,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Delegate
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    if (tabBarController.viewControllers.lastObject == viewController) { // 选中的是我的
+        UINavigationController *mineNav = (UINavigationController *)viewController;
+        MineViewController *mineVC = mineNav.viewControllers.firstObject;
+        NSInteger index = tabBarController.selectedIndex;
+        mineVC.preIndex = index;
+    }
+    return YES;
+}
 /*
 #pragma mark - Navigation
 

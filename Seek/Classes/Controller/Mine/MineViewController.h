@@ -10,4 +10,6 @@
 
 @interface MineViewController : UIViewController
 
+@property (nonatomic, assign) NSInteger preIndex;
+
 @end

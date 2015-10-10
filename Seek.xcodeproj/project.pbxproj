@@ -59,7 +59,6 @@
 		606364B31BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364971BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364B41BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364991BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364B51BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 6063649B1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
-		606364B71BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 6063649F1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364B81BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364A41BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364BA1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364A81BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
 		606364BB1BC1011C00A36965 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 606364AA1BC1011C00A36965 /* README */; settings = {ASSET_TAGS = (); }; };
@@ -68,6 +67,9 @@
 		606B4E951BC8C088000ED482 /* UserAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 606B4E941BC8C088000ED482 /* UserAnnotationView.m */; settings = {ASSET_TAGS = (); }; };
 		606B4E9E1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 606B4E9C1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		606B4E9F1BC8C2AD000ED482 /* UserForMapCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 606B4E9D1BC8C2AD000ED482 /* UserForMapCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		609CEABA1BC9645700F99BD6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 609CEAB91BC9645700F99BD6 /* User.m */; settings = {ASSET_TAGS = (); }; };
+		609CEABD1BC9658000F99BD6 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 609CEABC1BC9658000F99BD6 /* Common.m */; settings = {ASSET_TAGS = (); }; };
+		609CEABF1BC96CC000F99BD6 /* exitLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 609CEABE1BC96CC000F99BD6 /* exitLogin.png */; settings = {ASSET_TAGS = (); }; };
 		60B06E3A1BC69DD0006AB01E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E391BC69DD0006AB01E /* MAMapKit.framework */; settings = {ASSET_TAGS = (); }; };
 		60B06E3D1BC69E58006AB01E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60B06E3C1BC69E58006AB01E /* AMap.bundle */; settings = {ASSET_TAGS = (); }; };
 		60B06E401BC69E95006AB01E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E3F1BC69E95006AB01E /* QuartzCore.framework */; };
@@ -85,6 +87,11 @@
 		60B06E691BC6BCD5006AB01E /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60B06E671BC6BCD5006AB01E /* ChatViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		60B06E6F1BC6BF8D006AB01E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B06E6D1BC6BF8D006AB01E /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
 		60B06E701BC6BF8D006AB01E /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60B06E6E1BC6BF8D006AB01E /* MapViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		60D351051BC956EB00F2C4D7 /* weixinIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D351031BC956EB00F2C4D7 /* weixinIcon.png */; settings = {ASSET_TAGS = (); }; };
+		60D351061BC956EB00F2C4D7 /* qqIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D351041BC956EB00F2C4D7 /* qqIcon.png */; settings = {ASSET_TAGS = (); }; };
+		60D351091BC958D000F2C4D7 /* pwdInput.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D351071BC958D000F2C4D7 /* pwdInput.png */; settings = {ASSET_TAGS = (); }; };
+		60D3510A1BC958D000F2C4D7 /* userInput.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D351081BC958D000F2C4D7 /* userInput.png */; settings = {ASSET_TAGS = (); }; };
+		60D3510D1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D3510C1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m */; settings = {ASSET_TAGS = (); }; };
 		60DFF4581BC1548F0078A00F /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 60DFF43E1BC1548F0078A00F /* UMSocialLocalizable.strings */; settings = {ASSET_TAGS = (); }; };
 		60DFF4591BC1548F0078A00F /* libUMSocial_Sdk_4.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF44C1BC1548F0078A00F /* libUMSocial_Sdk_4.2.5.a */; settings = {ASSET_TAGS = (); }; };
 		60DFF45A1BC1548F0078A00F /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60DFF44E1BC1548F0078A00F /* UMSCommentDetailController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -202,7 +209,6 @@
 		606364971BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364991BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		6063649B1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		6063649F1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364A41BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364A81BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		606364AA1BC1011C00A36965 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -214,6 +220,11 @@
 		606B4E9B1BC8C2AD000ED482 /* UserForMapCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserForMapCollectionViewCell.h; sourceTree = "<group>"; };
 		606B4E9C1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserForMapCollectionViewCell.m; sourceTree = "<group>"; };
 		606B4E9D1BC8C2AD000ED482 /* UserForMapCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserForMapCollectionViewCell.xib; sourceTree = "<group>"; };
+		609CEAB81BC9645700F99BD6 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		609CEAB91BC9645700F99BD6 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		609CEABB1BC9658000F99BD6 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		609CEABC1BC9658000F99BD6 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		609CEABE1BC96CC000F99BD6 /* exitLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exitLogin.png; sourceTree = "<group>"; };
 		60B06E391BC69DD0006AB01E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		60B06E3C1BC69E58006AB01E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
 		60B06E3F1BC69E95006AB01E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -237,6 +248,12 @@
 		60B06E6C1BC6BF8D006AB01E /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		60B06E6D1BC6BF8D006AB01E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		60B06E6E1BC6BF8D006AB01E /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		60D351031BC956EB00F2C4D7 /* weixinIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixinIcon.png; sourceTree = "<group>"; };
+		60D351041BC956EB00F2C4D7 /* qqIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qqIcon.png; sourceTree = "<group>"; };
+		60D351071BC958D000F2C4D7 /* pwdInput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pwdInput.png; sourceTree = "<group>"; };
+		60D351081BC958D000F2C4D7 /* userInput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userInput.png; sourceTree = "<group>"; };
+		60D3510B1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+BorderColorFromUIColor.h"; sourceTree = "<group>"; };
+		60D3510C1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+BorderColorFromUIColor.m"; sourceTree = "<group>"; };
 		60DFF43F1BC1548F0078A00F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		60DFF4411BC1548F0078A00F /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		60DFF4421BC1548F0078A00F /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
@@ -356,6 +373,11 @@
 		60117BB01BC7F1C4001D4EC0 /* ForTest */ = {
 			isa = PBXGroup;
 			children = (
+				609CEABE1BC96CC000F99BD6 /* exitLogin.png */,
+				60D351071BC958D000F2C4D7 /* pwdInput.png */,
+				60D351081BC958D000F2C4D7 /* userInput.png */,
+				60D351031BC956EB00F2C4D7 /* weixinIcon.png */,
+				60D351041BC956EB00F2C4D7 /* qqIcon.png */,
 				60117BAE1BC7F1BE001D4EC0 /* userIcon.png */,
 			);
 			name = ForTest;
@@ -500,6 +522,8 @@
 		606364881BC1011C00A36965 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				60D3510B1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.h */,
+				60D3510C1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -509,6 +533,8 @@
 			children = (
 				60117B8F1BC7ED77001D4EC0 /* NetHelper.h */,
 				60117B901BC7ED77001D4EC0 /* NetHelper.m */,
+				609CEABB1BC9658000F99BD6 /* Common.h */,
+				609CEABC1BC9658000F99BD6 /* Common.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -628,7 +654,8 @@
 		6063649E1BC1011C00A36965 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				6063649F1BC1011C00A36965 /* README */,
+				609CEAB81BC9645700F99BD6 /* User.h */,
+				609CEAB91BC9645700F99BD6 /* User.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -980,6 +1007,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				189950B91BC6CB5100E12BDC /* OnePhotoCell.xib in Resources */,
+				60D351061BC956EB00F2C4D7 /* qqIcon.png in Resources */,
 				60B06E4D1BC6A4BC006AB01E /* mapPoint.png in Resources */,
 				60B06E701BC6BF8D006AB01E /* MapViewController.xib in Resources */,
 				60E4C1E21BC111EB00611E0A /* README in Resources */,
@@ -995,10 +1023,10 @@
 				1877F5141BC7E01700026FE7 /* DynamicViewController.xib in Resources */,
 				60DFF45E1BC1548F0078A00F /* UMShareEditViewControlleriPad.xib in Resources */,
 				60DFF45A1BC1548F0078A00F /* UMSCommentDetailController.xib in Resources */,
-				606364B71BC1011C00A36965 /* README in Resources */,
 				189950CC1BC6CE7800E12BDC /* Map.png in Resources */,
 				189950CE1BC6CE7800E12BDC /* potrai.png in Resources */,
 				60B06E521BC6B2C8006AB01E /* LoginViewController.xib in Resources */,
+				60D3510A1BC958D000F2C4D7 /* userInput.png in Resources */,
 				60117BA81BC7EE86001D4EC0 /* bannerNotify@2x.png in Resources */,
 				189950CB1BC6CE7800E12BDC /* comments.png in Resources */,
 				189950BF1BC6CB5100E12BDC /* towPhotoCell.xib in Resources */,
@@ -1006,6 +1034,7 @@
 				606364B51BC1011C00A36965 /* README in Resources */,
 				606364BB1BC1011C00A36965 /* README in Resources */,
 				60DFF45B1BC1548F0078A00F /* UMSCommentInputController.xib in Resources */,
+				60D351091BC958D000F2C4D7 /* pwdInput.png in Resources */,
 				606364B41BC1011C00A36965 /* README in Resources */,
 				60B06E5A1BC6BCB0006AB01E /* MineViewController.xib in Resources */,
 				189950D61BC6D3EC00E12BDC /* chat.png in Resources */,
@@ -1021,11 +1050,13 @@
 				606364B31BC1011C00A36965 /* README in Resources */,
 				60DFF4611BC1548F0078A00F /* UMSShareListController.xib in Resources */,
 				606364611BC0FD6000A36965 /* LaunchScreen.storyboard in Resources */,
+				60D351051BC956EB00F2C4D7 /* weixinIcon.png in Resources */,
 				60117BA91BC7EE86001D4EC0 /* bannerSuccess.png in Resources */,
 				189950BD1BC6CB5100E12BDC /* ThreePhotoCell.xib in Resources */,
 				60DFF4621BC1548F0078A00F /* UMSocialSDKResourcesNew.bundle in Resources */,
 				6063645E1BC0FD6000A36965 /* Assets.xcassets in Resources */,
 				60DFF45F1BC1548F0078A00F /* UMSLoginViewController.xib in Resources */,
+				609CEABF1BC96CC000F99BD6 /* exitLogin.png in Resources */,
 				60117BA41BC7EE86001D4EC0 /* bannerAlert@2x.png in Resources */,
 				189950CD1BC6CE7800E12BDC /* pen_edit.png in Resources */,
 				601C1AF51BC26608007C956A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -1065,13 +1096,16 @@
 				606B4E9E1BC8C2AD000ED482 /* UserForMapCollectionViewCell.m in Sources */,
 				1877F5131BC7E01700026FE7 /* DynamicViewController.m in Sources */,
 				60B06E511BC6B2C8006AB01E /* LoginViewController.m in Sources */,
+				60D3510D1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m in Sources */,
 				60117BA11BC7EE86001D4EC0 /* ALAlertBanner.m in Sources */,
 				189950B81BC6CB5100E12BDC /* OnePhotoCell.m in Sources */,
 				60B06E551BC6BC43006AB01E /* MainTabBarViewController.m in Sources */,
 				60117B8E1BC7ECD3001D4EC0 /* Reachability.m in Sources */,
+				609CEABA1BC9645700F99BD6 /* User.m in Sources */,
 				189950B61BC6CB5100E12BDC /* KnowPersonCell.m in Sources */,
 				60B06E591BC6BCB0006AB01E /* MineViewController.m in Sources */,
 				60B06E6F1BC6BF8D006AB01E /* MapViewController.m in Sources */,
+				609CEABD1BC9658000F99BD6 /* Common.m in Sources */,
 				606B4E951BC8C088000ED482 /* UserAnnotationView.m in Sources */,
 				60B06E5E1BC6BCBD006AB01E /* IssueViewController.m in Sources */,
 				606364AD1BC1011C00A36965 /* AppDelegate.m in Sources */,
