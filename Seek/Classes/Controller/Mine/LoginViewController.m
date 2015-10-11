@@ -84,9 +84,9 @@
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
 
         // 获取微博用户名、uid、token等
-
+        
+        // QQ头像大小 100 * 100
         if (response.responseCode == UMSResponseCodeSuccess) {
-
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
             User *loginUser = [User new];
             loginUser.userId = snsAccount.usid;

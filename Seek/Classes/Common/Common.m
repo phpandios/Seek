@@ -22,6 +22,7 @@ kSingleTon_M(Common)
 - (void)loginWithUser:(User *)user
 {
     self.loginUser = user;
+    NSLog(@"userName : %@  iconUrl: %@", self.loginUser.userName, self.loginUser.iconUrl);
 }
 
 #pragma mark - 注销

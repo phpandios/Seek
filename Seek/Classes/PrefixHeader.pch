@@ -45,6 +45,7 @@ return share; \
 // 三方 -- BEGIN
 #import "Reachability.h"
 #import "ALAlertBanner.h"
+#import "UIImageView+WebCache.h"
 // 三方 -- END
 
 // 自定义 -- BEGIN

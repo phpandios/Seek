@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) UIColor *borderColorFromUIColor;
 
+@property (nonatomic, copy) NSString *borderColorFromRGBString;
+
 @end

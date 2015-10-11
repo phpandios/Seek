@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#define kCurrentUser ([[Common shareCommon] loginUser])
+
 @interface Common : NSObject
 
-
+// 对于外界 将loginUser属性改成只读
 @property (nonatomic, strong, readonly) User *loginUser;
 
 kSingleTon_H(Common)

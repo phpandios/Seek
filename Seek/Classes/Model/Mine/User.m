@@ -10,4 +10,13 @@
 
 @implementation User
 
+// 默认性别男
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.gender = @"男";
+    }
+    return self;
+}
+
 @end

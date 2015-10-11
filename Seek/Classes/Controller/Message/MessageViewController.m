@@ -1,22 +1,22 @@
 //
-//  ChatViewController.m
+//  MessageViewController.m
 //  Seek
 //
-//  Created by 吴非凡 on 15/10/8.
+//  Created by 吴非凡 on 15/10/11.
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
 
-#import "ChatViewController.h"
+#import "MessageViewController.h"
 
-@interface ChatViewController ()
+@interface MessageViewController ()
 
 @end
 
-@implementation ChatViewController
+@implementation MessageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"聊天";
+    self.title = @"消息";
     // Do any additional setup after loading the view from its nib.
 }
 

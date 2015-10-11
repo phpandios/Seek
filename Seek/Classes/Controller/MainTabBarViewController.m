@@ -7,12 +7,11 @@
 //
 
 #import "MainTabBarViewController.h"
-#import "ChatViewController.h"
 #import "DynamicViewController.h"
 #import "IssueViewController.h"
 #import "MapViewController.h"
 #import "MineViewController.h"
-
+#import "MessageViewController.h"
 
 
 @interface MainTabBarViewController ()<UITabBarControllerDelegate>
@@ -34,10 +33,10 @@
     self.delegate = self;
     
     self.tabBar.translucent = NO;
-    self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"ChatViewController", @"IssueViewController", @"MineViewController"];
-    self.itemTitle = @[@"动态", @"地图", @"聊天", @"发布", @"我的"];
+    self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"MessageViewController", @"IssueViewController", @"MineViewController"];
+    self.itemTitle = @[@"动态", @"地图", @"消息", @"发布", @"我的"];
     self.itemNeedNav = @[@(YES), @(NO), @(YES), @(YES), @(YES)];
-    self.itemImagesName = @[@"dynamic", @"mapTab", @"chat", @"issue", @"mine"];
+    self.itemImagesName = @[@"dynamic", @"mapTab", @"message", @"issue", @"mine"];
     NSMutableArray *viewControllers = [NSMutableArray array];
     for (int i = 0; i < 5; i++) {
         NSString *classes = self.itemClasses[i];

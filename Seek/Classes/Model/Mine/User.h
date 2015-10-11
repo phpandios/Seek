@@ -16,6 +16,12 @@
 
 @property (nonatomic, copy) NSString *iconUrl;
 
-@property (nonatomic, copy) NSString *phoneNum;
+@property (nonatomic, copy) NSString *telPhone;
+
+@property (nonatomic, copy) NSString *gender;
+
+@property (nonatomic, copy) NSString *qqId;
+
+@property (nonatomic, copy) NSString *weixinId;
 
 @end

@@ -21,4 +21,16 @@
     self.borderColor = borderColorFromUIColor.CGColor;
 }
 
+- (NSString *)borderColorFromRGBString
+{
+    return nil;
+}
+
+- (void)setBorderColorFromRGBString:(NSString *)borderColorFromRGBString
+{
+    CGFloat red = [[borderColorFromRGBString componentsSeparatedByString:@","][0] floatValue] / 255.0f;
+    CGFloat green = [[borderColorFromRGBString componentsSeparatedByString:@","][1] floatValue] / 255.0f;
+    CGFloat blue = [[borderColorFromRGBString componentsSeparatedByString:@","][2] floatValue] / 255.0f;
+    self.borderColor = [UIColor colorWithRed:red green:green blue:blue alpha:1].CGColor;
+}
 @end
