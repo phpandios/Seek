@@ -10,4 +10,6 @@
 
 @interface UserLogoutTableViewCell : UITableViewCell
 
+@property (nonatomic, copy) void (^buttonClickBlock)();
+
 @end

@@ -41,8 +41,6 @@
     [super viewWillAppear:animated];
     if (![Common shareCommon].loginUser) { // 没登陆
         [self presentLoginVC];
-    } else {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(logoutBarButtonItemAction:)];
     }
 }
 
@@ -78,11 +76,6 @@
     [self presentViewController:loginVC animated:YES completion:nil];
 }
 
-#pragma mark - 导航栏点击
-- (void)logoutBarButtonItemAction:(UIBarButtonItem *)sender {
-    [[Common shareCommon] logout];
-    [self presentLoginVC];
-}
 
 #pragma mark - UITableViewDelegate && UITableViewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -161,7 +154,11 @@
             }
         } else {
             cell = (UserLogoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"logoutCell" forIndexPath:indexPath];
-            
+            __weak typeof(self) weakSelf = self;
+            ((UserLogoutTableViewCell *)cell).buttonClickBlock = ^(){
+                [[Common shareCommon] logout];
+                [weakSelf presentLoginVC];
+            };
         }
     }
     // 设置选中无反应

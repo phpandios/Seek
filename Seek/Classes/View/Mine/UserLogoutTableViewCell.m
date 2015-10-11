@@ -20,7 +20,9 @@
     // Configure the view for the selected state
 }
 - (IBAction)buttonAction:(UIButton *)sender {
-    NSLog(@"退出登陆");
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock();
+    }
 }
 
 
