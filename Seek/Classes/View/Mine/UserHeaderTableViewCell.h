@@ -12,4 +12,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
+@property (nonatomic, copy) void (^headerViewClickBlock)();
 @end

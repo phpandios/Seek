@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.headerImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerImageViewTapGRAction:)]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -27,5 +28,11 @@
     self.headerImageView.layer.cornerRadius = self.headerImageView.bounds.size.width / 2;
 //    self.headerImageView.layer.borderWidth = 1;
 //    self.headerImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+}
+
+- (void)headerImageViewTapGRAction:(UITapGestureRecognizer *)sender {
+    if (self.headerViewClickBlock) {
+        self.headerViewClickBlock();
+    }
 }
 @end

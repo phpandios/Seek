@@ -10,12 +10,13 @@
 #import "LoginViewController.h"
 #import "UserHeaderTableViewCell.h"
 #import "UserLogoutTableViewCell.h"
-@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *canSelectedArray; // 标识允许选中的项
 
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @end
 
 @implementation MineViewController
@@ -52,11 +53,20 @@
     [self loadUserDataCompletionHandle:nil];
 }
 
-#pragma mark - 根据当前登陆用户获取用户信息
+#pragma mark - 网络相关
+#pragma mark 根据当前登陆用户获取用户信息
 - (void)loadUserDataCompletionHandle:(void(^)())completionHandle
 {
     // 获取用户信息后,
     [self.tableView reloadData];
+}
+#pragma mark 更换头像
+- (void)updateUserHeaderImage:(UIImage *)image
+{
+    // 发送消息到服务器后, 应该返回头像的URL
+//    kCurrentUser.iconUrl = url;
+//    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
 }
 
 
@@ -102,12 +112,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     UITableViewCell *cell = nil;
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"headerCell" forIndexPath:indexPath];
         [((UserHeaderTableViewCell *)cell).headerImageView sd_setImageWithURL:[NSURL URLWithString:kCurrentUser.iconUrl] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
         ((UserHeaderTableViewCell *)cell).userNameLabel.text = kCurrentUser.userName;
-        
+        ((UserHeaderTableViewCell *)cell).headerViewClickBlock = ^(){
+            [weakSelf showImagePickerControllerWithTitle:@"更换头像" cancleHandle:nil];
+//            SHOWMESSAGE(@"更换头像");
+        };
 
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"normalCell"];
@@ -154,7 +168,6 @@
             }
         } else {
             cell = (UserLogoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"logoutCell" forIndexPath:indexPath];
-            __weak typeof(self) weakSelf = self;
             ((UserLogoutTableViewCell *)cell).buttonClickBlock = ^(){
                 [[Common shareCommon] logout];
                 [weakSelf presentLoginVC];
@@ -187,6 +200,85 @@
     }
     return 60;
 }
+
+#pragma mark - UIImagePickerController
+- (void)showImagePickerControllerWithTitle:(NSString *)title cancleHandle:(void (^)())cancleHandle
+{
+    self.imagePickerController = [[UIImagePickerController alloc]init];
+    _imagePickerController.delegate = self;
+    
+    
+    
+    // 判断支持来源类型(拍照,照片库,相册)
+    BOOL isCameraSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    BOOL isPhotoLibrarySupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+    BOOL isSavedPhotosAlbumSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    if (isCameraSupport) {
+        [alertController addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //指定使用照相机模式,可以指定使用相册／照片库
+            _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            /// 相机相关 [sourceType不设置为Camera.下面属性无法设置]
+            //设置拍照时的下方的工具栏是否显示，如果需要自定义拍摄界面，则可把该工具栏隐藏
+            _imagePickerController.showsCameraControls  = YES;
+            //设置当拍照完或在相册选完照片后，是否跳到编辑模式进行图片剪裁。只有当showsCameraControls属性为true时才有效果
+            _imagePickerController.allowsEditing = YES;
+            // 支持的摄像头类型(前置 后置)
+            BOOL isRearSupport = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+            if (isRearSupport) {
+                //设置使用后置摄像头，可以使用前置摄像头
+                _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            } else {
+                _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            }
+            //设置闪光灯模式 自动
+            _imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+            //设置相机支持的类型，拍照和录像
+            _imagePickerController.mediaTypes = @[@"public.image"];// public.movie(录像)
+            
+            [self presentViewController:_imagePickerController animated:YES completion:nil];
+        }]];
+    }
+    
+    if (isPhotoLibrarySupport) {
+        [alertController addAction:[UIAlertAction actionWithTitle:@"从照片库选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //指定使用照相机模式,可以指定使用相册／照片库
+            _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:_imagePickerController animated:YES completion:nil];
+        }]];
+    }
+    
+    if (isSavedPhotosAlbumSupport) {
+        [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //指定使用照相机模式,可以指定使用相册／照片库
+            _imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            [self presentViewController:_imagePickerController animated:YES completion:nil];
+        }]];
+    }
+    // 取消
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //        self.currentMode = ActualModeTypeNormal;
+        if (cancleHandle) {
+            cancleHandle();
+        }
+    }]];
+    
+    if (!(isCameraSupport || isPhotoLibrarySupport || isSavedPhotosAlbumSupport)) { // 三种都不支持
+        alertController.title = @"无法找到可用图片源,请检查设备后重试";
+    }
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = info[UIImagePickerControllerEditedImage] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
+    [self updateUserHeaderImage:image];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    //    self.actualImageView.image = [Common shareCommon].actualImage;
+}
+
 
 
 

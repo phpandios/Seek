@@ -74,6 +74,13 @@
     return YES;
 }
 
+#pragma mark - 触摸其他位置隐藏键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.pwdTextField resignFirstResponder];
+    [self.userTextField resignFirstResponder];
+}
+
 #pragma mark - 控件
 - (IBAction)loginByQQButtonAction:(UIButton *)sender {
     // QQ登陆 NO
