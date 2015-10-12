@@ -14,4 +14,14 @@
     // Initialization code
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.imageView.layer.cornerRadius = self.bounds.size.width / 2;
+    self.imageView.layer.masksToBounds = YES;
+    self.imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.imageView.layer.borderWidth = 1;
+}
+
+
 @end

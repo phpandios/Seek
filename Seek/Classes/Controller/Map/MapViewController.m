@@ -54,7 +54,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.otherUsersCollectionView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.2];
+
     [self.otherUsersCollectionView registerNib:[UINib nibWithNibName:@"UserForMapCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"otherUserCell"];
     
     // 模拟器没有定位.手动创建
@@ -223,8 +224,10 @@
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
 {
+    NSLog(@"click annotationview");
     // 点击先居中.
-    [mapView showAnnotations:@[view.annotation] animated:YES];
+//    [mapView showAnnotations:@[view.annotation] animated:YES];
+    [mapView setCenterCoordinate:[view.annotation coordinate] animated:YES];
     // 先为空,防止点的速度过快,点到其他单个的之后,动画结束.而该属性有值.造成错误操作
     self.selectedAnnotationView = nil;
     if ([view isKindOfClass:[UserAnnotationView class]]) { // 点击的周边用户
@@ -236,50 +239,9 @@
             self.selectedAnnotationView = view;
         }
     }
-    
-
-    
-    
-    
 }
 
-// 用户位置变化时
--(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
-updatingLocation:(BOOL)updatingLocation
-{
-    if(updatingLocation)
-    {
-        self.currentUserLocation = userLocation;// 用户位置修改后,自动修改用户标注
-        if (!_otherUserNearByArray) {// 还没有周边信息,则获取
-            [self loadOtherUserNearByWithCompletionHandle:^() {
-                
-            }];
-        }
-    }
-}
-
-
-//// 自定义定位标注和精度圈的样式
-//- (void)mapView:(MAMapView *)mapView didAddAnnotationViews:(NSArray *)views
-//{
-//    MAAnnotationView *view = views[0];
-//    
-//    // 放到该方法中用以保证userlocation的annotationView已经添加到地图上了。
-//    if ([view.annotation isKindOfClass:[MAUserLocation class]])
-//    {
-//        MAUserLocationRepresentation *pre = [[MAUserLocationRepresentation alloc] init];
-//        pre.fillColor = [UIColor colorWithRed:0.9 green:0.1 blue:0.1 alpha:0.3];
-//        pre.strokeColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.9 alpha:1.0];
-//        pre.image = [UIImage imageNamed:@"location.png"];
-//        pre.lineWidth = 3;
-//        pre.lineDashPattern = @[@6, @3];
-//        
-//        [self.mapView updateUserLocationRepresentation:pre];
-//        
-//        view.calloutOffset = CGPointMake(0, 0);
-//    }
-//}
-
+// 地图范围发生变化
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     // 缩放才重新更新周边用户的标注
@@ -298,8 +260,26 @@ updatingLocation:(BOOL)updatingLocation
         self.collectionShadeView.hidden = NO;
         
         self.selectedAnnotationView = nil;
+        
+//        [self.mapView reloadInputViews];
     }
 }
+
+// 用户位置变化时
+-(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
+updatingLocation:(BOOL)updatingLocation
+{
+    if(updatingLocation)
+    {
+        self.currentUserLocation = userLocation;// 用户位置修改后,自动修改用户标注
+        if (!_otherUserNearByArray) {// 还没有周边信息,则获取
+            [self loadOtherUserNearByWithCompletionHandle:^() {
+                
+            }];
+        }
+    }
+}
+
 
 #pragma mark - WFFDropdownListDelegate
 - (void)dropdownList:(WFFDropdownList *)dropdownList didSelectedIndex:(NSInteger)selectedIndex
@@ -382,17 +362,6 @@ updatingLocation:(BOOL)updatingLocation
         
         [self.otherAnnotationArray addObject:pointAnnotation];
     }
-//
-//
-//        MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-//        pointAnnotation.coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
-//        pointAnnotation.title = model.userID;
-//        pointAnnotation.subtitle = nil;
-//        [self.otherAnnotationArray addObject:pointAnnotation];
-//        
-//        
-//        NSLog(@"%@", NSStringFromCGPoint([_mapView convertCoordinate:pointAnnotation.coordinate toPointToView:_mapView]));
-//    }
     
     // 把周边用户的标注添加到地图上[一个个添加到地图上,每添加一次就执行一轮viewFor标注.]
     if (_otherAnnotationArray.count > 0) {
@@ -464,5 +433,7 @@ updatingLocation:(BOOL)updatingLocation
 - (IBAction)collectionShadeViewTapGRAction:(UITapGestureRecognizer *)sender {
     
     self.collectionShadeView.hidden = YES;
+    
+//     [self.mapView reloadInputViews];
 }
 @end
