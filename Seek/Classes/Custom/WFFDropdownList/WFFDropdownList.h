@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef enum {
+    ListOrientationUp,
+    ListOrientationDown
+} ListOrientation;
+
 @class WFFDropdownList;
 
 @protocol WFFDropdownListDelegate <NSObject>
@@ -18,6 +24,13 @@
 
 @end
 
+
+/*
+ 支持XIB布局
+ 横竖平适配的时候,在屏幕旋转及viewDidLayoutSubviews两个方法内,手动调用即可
+ [self.dropDownList layoutIfNeeded];
+ [self.dropDownList updateSubViews];
+ */
 @interface WFFDropdownList : UIView
 
 /**
@@ -49,4 +62,10 @@
 
 @property (nonatomic, strong) UIFont *font;
 
+@property (nonatomic, strong) NSArray *dataArray;
+
+// 弹出的下啦列表的方向(上或者下)
+@property (nonatomic, assign) ListOrientation listOrientation;
+
+- (void)updateSubViews;
 @end

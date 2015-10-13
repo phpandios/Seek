@@ -62,6 +62,7 @@
 		609CEABA1BC9645700F99BD6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 609CEAB91BC9645700F99BD6 /* User.m */; settings = {ASSET_TAGS = (); }; };
 		609CEABD1BC9658000F99BD6 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 609CEABC1BC9658000F99BD6 /* Common.m */; settings = {ASSET_TAGS = (); }; };
 		609CEABF1BC96CC000F99BD6 /* exitLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 609CEABE1BC96CC000F99BD6 /* exitLogin.png */; settings = {ASSET_TAGS = (); }; };
+		60A3D5B01BCCE80800313F8F /* WFFDropdownList.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A3D5AF1BCCE80800313F8F /* WFFDropdownList.m */; settings = {ASSET_TAGS = (); }; };
 		60B06E3A1BC69DD0006AB01E /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E391BC69DD0006AB01E /* MAMapKit.framework */; settings = {ASSET_TAGS = (); }; };
 		60B06E3D1BC69E58006AB01E /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60B06E3C1BC69E58006AB01E /* AMap.bundle */; settings = {ASSET_TAGS = (); }; };
 		60B06E401BC69E95006AB01E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B06E3F1BC69E95006AB01E /* QuartzCore.framework */; };
@@ -104,7 +105,6 @@
 		60C4BDA41BCAA85E00A50D85 /* UMSnsAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BD981BCAA85E00A50D85 /* UMSnsAccountViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		60C4BDA51BCAA85E00A50D85 /* UMSShareListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BD991BCAA85E00A50D85 /* UMSShareListController.xib */; settings = {ASSET_TAGS = (); }; };
 		60C4BDA61BCAA85E00A50D85 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BD9A1BCAA85E00A50D85 /* UMSocialSDKResourcesNew.bundle */; settings = {ASSET_TAGS = (); }; };
-		60C4BDAA1BCAA89F00A50D85 /* WFFDropdownList.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C4BDA91BCAA89F00A50D85 /* WFFDropdownList.m */; settings = {ASSET_TAGS = (); }; };
 		60C4BDB01BCAA8DF00A50D85 /* UserAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C4BDAC1BCAA8DF00A50D85 /* UserAnnotationView.m */; settings = {ASSET_TAGS = (); }; };
 		60C4BDB11BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C4BDAE1BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		60C4BDB21BCAA8DF00A50D85 /* UserForMapCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BDAF1BCAA8DF00A50D85 /* UserForMapCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -232,6 +232,8 @@
 		609CEABB1BC9658000F99BD6 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		609CEABC1BC9658000F99BD6 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		609CEABE1BC96CC000F99BD6 /* exitLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exitLogin.png; sourceTree = "<group>"; };
+		60A3D5AE1BCCE80800313F8F /* WFFDropdownList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFFDropdownList.h; sourceTree = "<group>"; };
+		60A3D5AF1BCCE80800313F8F /* WFFDropdownList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFFDropdownList.m; sourceTree = "<group>"; };
 		60B06E391BC69DD0006AB01E /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		60B06E3C1BC69E58006AB01E /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
 		60B06E3F1BC69E95006AB01E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -308,8 +310,6 @@
 		60C4BD991BCAA85E00A50D85 /* UMSShareListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSShareListController.xib; sourceTree = "<group>"; };
 		60C4BD9A1BCAA85E00A50D85 /* UMSocialSDKResourcesNew.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResourcesNew.bundle; sourceTree = "<group>"; };
 		60C4BD9B1BCAA85E00A50D85 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMSocialLocalizable.strings"; sourceTree = "<group>"; };
-		60C4BDA81BCAA89F00A50D85 /* WFFDropdownList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFFDropdownList.h; sourceTree = "<group>"; };
-		60C4BDA91BCAA89F00A50D85 /* WFFDropdownList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFFDropdownList.m; sourceTree = "<group>"; };
 		60C4BDAB1BCAA8DF00A50D85 /* UserAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAnnotationView.h; sourceTree = "<group>"; };
 		60C4BDAC1BCAA8DF00A50D85 /* UserAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAnnotationView.m; sourceTree = "<group>"; };
 		60C4BDAD1BCAA8DF00A50D85 /* UserForMapCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserForMapCollectionViewCell.h; sourceTree = "<group>"; };
@@ -909,8 +909,8 @@
 		60C4BDA71BCAA89F00A50D85 /* WFFDropdownList */ = {
 			isa = PBXGroup;
 			children = (
-				60C4BDA81BCAA89F00A50D85 /* WFFDropdownList.h */,
-				60C4BDA91BCAA89F00A50D85 /* WFFDropdownList.m */,
+				60A3D5AE1BCCE80800313F8F /* WFFDropdownList.h */,
+				60A3D5AF1BCCE80800313F8F /* WFFDropdownList.m */,
 			);
 			path = WFFDropdownList;
 			sourceTree = "<group>";
@@ -1192,8 +1192,8 @@
 				60C4BDC21BCAA9E800A50D85 /* UserHeaderTableViewCell.m in Sources */,
 				60C4BD7B1BCAA7BB00A50D85 /* UIImage+GIF.m in Sources */,
 				60B06E5E1BC6BCBD006AB01E /* IssueViewController.m in Sources */,
+				60A3D5B01BCCE80800313F8F /* WFFDropdownList.m in Sources */,
 				606364AD1BC1011C00A36965 /* AppDelegate.m in Sources */,
-				60C4BDAA1BCAA89F00A50D85 /* WFFDropdownList.m in Sources */,
 				60C4BD7C1BCAA7BB00A50D85 /* UIImage+MultiFormat.m in Sources */,
 				60C4BD771BCAA7BB00A50D85 /* SDWebImageDownloaderOperation.m in Sources */,
 				60117BAD1BC7EF90001D4EC0 /* UserInfoForMap.m in Sources */,

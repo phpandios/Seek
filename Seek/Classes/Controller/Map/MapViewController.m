@@ -42,8 +42,7 @@
 #pragma mark 控件组
 @property (weak, nonatomic) IBOutlet UISwitch *locationSwitch;
 - (IBAction)locationSwitchValueChanged:(UISwitch *)sender;
-@property (weak, nonatomic) IBOutlet UIView *dropDownView;
-@property (nonatomic, strong) WFFDropdownList *dropDownList;
+@property (weak, nonatomic) IBOutlet WFFDropdownList *dropDownList;
 - (IBAction)locationButtonAction:(UIButton *)sender;
 - (IBAction)collectionShadeViewTapGRAction:(UITapGestureRecognizer *)sender;
 
@@ -79,14 +78,13 @@
     // 设置缩放级别
     [_mapView setZoomLevel:16 animated:YES];
     
-    self.dropDownList = [[WFFDropdownList alloc] initWithFrame:_dropDownView.bounds dataSource:@[@"全部", @"筛选1", @"筛选2", @"筛选3"]];
+    self.dropDownList.dataArray = @[@"全部", @"筛选1", @"筛选2", @"筛选3"];
     _dropDownList.delegate = self;
     _dropDownList.selectedIndex = 0;
     _dropDownList.maxCountForShow = 5;
     _dropDownList.textColor = [UIColor blackColor];
     _dropDownList.font = [UIFont systemFontOfSize:17];
-    [self.dropDownView addSubview:_dropDownList];
-    
+    _dropDownList.listOrientation = ListOrientationUp;
     
     [self loadOtherUserNearByWithCompletionHandle:nil];
 }
@@ -118,12 +116,14 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    _dropDownList.frame = _dropDownView.bounds;
+    [self.dropDownList layoutIfNeeded];
+    [self.dropDownList updateSubViews];
 }
 #pragma mark 屏幕旋转
 - (void)handleDeviceOrientationDidChange:(NSNotification *)notification
 {
-    _dropDownList.frame = _dropDownView.bounds;
+    [self.dropDownList layoutIfNeeded];
+    [self.dropDownList updateSubViews];
 }
 // END
 

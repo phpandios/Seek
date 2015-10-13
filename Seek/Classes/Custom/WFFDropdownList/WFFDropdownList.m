@@ -14,7 +14,6 @@
     CGRect _rectOnKeyWindow;
 }
 
-@property (nonatomic, strong) NSArray *dataArray;
 
 @property (nonatomic, assign) BOOL isOpen;// 是否打开下拉列表
 
@@ -33,38 +32,41 @@
 - (instancetype)initWithFrame:(CGRect)frame dataSource:(NSArray *)array
 {
     if (self = [super initWithFrame:frame]) {
-        // 屏幕旋转通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    
         
         self.dataArray = array;
         _lineHeight = frame.size.height;
         _lineWidth = frame.size.width;
         
+        self.listOrientation = ListOrientationDown;
+        
         self.maxCountForShow = 5;
+        
         [self addAllViews];
+        
         self.isOpen = NO;
-    }
-    return self;
-}
-
-- (instancetype)init
-{
-    if (self = [super init]) {
         
     }
     return self;
 }
-#pragma mark 屏幕旋转
-- (void)handleDeviceOrientationDidChange:(NSNotification *)notification
+
+- (void)awakeFromNib
 {
-    self.shadeView.frame = [UIApplication sharedApplication].keyWindow.bounds;
-    // 旋转后,self.frame = ** 外界手动调用. 从而调用本类内的frame的setter方法,更新label和tableview和遮罩层
+
+    _lineHeight = self.frame.size.height;
+    _lineWidth = self.frame.size.width;
+    
+    self.maxCountForShow = 5;
+    
+    self.listOrientation = ListOrientationDown;
+    
+    [self addAllViews];
+    
+    self.isOpen = NO;
+    
 }
 #pragma mark - 私有方法
 - (void)addAllViews
 {
-
     UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
     [label addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(currentLabelTapGRAction:)]];
     label.backgroundColor = [UIColor clearColor];
@@ -99,12 +101,21 @@
     
 }
 
+- (CGRect)tableViewFrame
+{
+    CGRect rectOnShadeView = [self convertRect:self.bounds toView:_shadeView];
+    if (_listOrientation == ListOrientationDown) {
+        return CGRectMake(CGRectGetMinX(rectOnShadeView), CGRectGetMaxY(rectOnShadeView), _lineWidth, _lineHeight * _countOfLinesForShow);
+    } else {
+        return CGRectMake(CGRectGetMinX(rectOnShadeView), CGRectGetMinY(rectOnShadeView) - _lineHeight * _countOfLinesForShow, _lineWidth, _lineHeight * _countOfLinesForShow);
+    }
+}
+
 - (void)updateUI
 {
     if (_isOpen) {
         _shadeView.hidden = NO;
-        CGRect rectOnShadeView = [self convertRect:self.bounds toView:_shadeView];
-        self.dropdownTalbeView.frame = CGRectMake(CGRectGetMinX(rectOnShadeView), CGRectGetMinY(rectOnShadeView) - _lineHeight * _countOfLinesForShow, _lineWidth, _lineHeight * _countOfLinesForShow);
+        self.dropdownTalbeView.frame = [self tableViewFrame];
         //
         if (_dataArray) {
             [_dropdownTalbeView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
@@ -165,19 +176,31 @@
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
-    
+    NSLog(@"%@", NSStringFromCGRect(frame));
     _lineHeight = frame.size.height;
     _lineWidth = frame.size.width;
     CGRect rectOnShadeView = [self convertRect:self.bounds toView:_shadeView];
     self.dropdownTalbeView.frame = CGRectMake(CGRectGetMinX(rectOnShadeView), CGRectGetMaxY(rectOnShadeView), _lineWidth, _lineHeight * _countOfLinesForShow);
     self.currentLabel.frame = self.bounds;
 }
+
+
+- (void)updateSubViews
+{
+    _lineHeight = self.frame.size.height;
+    _lineWidth = self.frame.size.width;
+    self.dropdownTalbeView.frame = [self tableViewFrame];
+    self.shadeView.frame = [UIApplication sharedApplication].keyWindow.bounds;
+    self.currentLabel.frame = self.bounds;
+}
+
 #pragma mark - 轻拍手势
 #pragma mark Label手势
 - (void)currentLabelTapGRAction:(UITapGestureRecognizer *)sender
 {
     self.isOpen = !self.isOpen;
 }
+
 #pragma mark 遮罩层手势
 - (void)shadeViewTapGRAction:(UITapGestureRecognizer *)sender{
     self.isOpen = NO;
@@ -221,13 +244,13 @@
     
     
     return cell;
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return _lineHeight;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedIndex = indexPath.row;

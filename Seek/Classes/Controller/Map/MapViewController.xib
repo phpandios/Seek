@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController">
             <connections>
                 <outlet property="collectionShadeView" destination="XAl-Bt-nf7" id="rLw-EB-zaJ"/>
-                <outlet property="dropDownView" destination="Uec-2U-a5x" id="pIB-XR-ieO"/>
+                <outlet property="dropDownList" destination="Uec-2U-a5x" id="y9y-a0-pJV"/>
                 <outlet property="locationSwitch" destination="ESX-wk-rpJ" id="aOe-MX-pAY"/>
                 <outlet property="otherUsersCollectionView" destination="eW5-ev-SCJ" id="dKZ-kI-yh6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -45,7 +45,7 @@
                                 <action selector="locationButtonAction:" destination="-1" eventType="touchUpInside" id="h8N-r9-bwF"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uec-2U-a5x" userLabel="dropDownView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uec-2U-a5x" userLabel="dropDownView" customClass="WFFDropdownList">
                             <rect key="frame" x="165" y="0.0" width="60" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
