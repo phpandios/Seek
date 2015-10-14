@@ -13,6 +13,7 @@
 #import "UMSocial.h"
 #import "UMSocialData.h"
 
+#import "LoginViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -108,6 +109,16 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - 弹出登陆
++ (void)presentLoginVCWithDismisBlock:(void (^)())dismisBlock
+{
+    LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    loginVC.dismisBlock = dismisBlock;
+    
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:loginNav animated:YES completion:nil];
 }
 
 @end

@@ -14,4 +14,5 @@
 
 @property (nonatomic, copy) NSString *borderColorFromRGBString;
 
+@property (nonatomic, copy) NSString *borderColorFromHexColor;
 @end

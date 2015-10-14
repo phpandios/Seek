@@ -43,6 +43,7 @@ return share; \
 
 
 // 三方 -- BEGIN
+#import "TTTAttributedLabel.h"
 #import "Reachability.h"
 #import "ALAlertBanner.h"
 #import "UIImageView+WebCache.h"
@@ -50,10 +51,19 @@ return share; \
 
 // 自定义 -- BEGIN
 #define kUserIconSize 30
+#import "UIColor+Category.h"
+#import "CALayer+BorderColorFromUIColor.h"
+#import "UIView+Category.h"
+#import "NSString+Category.h"
+
 #import "User.h"
 #import "Common.h"
-#import "CALayer+BorderColorFromUIColor.h"
+
 #import "NetHelper.h"
 
+
+
+#define kHexColor(colorString) [UIColor colorFromHexRGB:colorString]
+#define kNavBgColor kHexColor(@"40a3d3")
 // 自定义 -- END
 #endif

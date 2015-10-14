@@ -122,6 +122,28 @@
 		60D351091BC958D000F2C4D7 /* pwdInput.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D351071BC958D000F2C4D7 /* pwdInput.png */; settings = {ASSET_TAGS = (); }; };
 		60D3510A1BC958D000F2C4D7 /* userInput.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D351081BC958D000F2C4D7 /* userInput.png */; settings = {ASSET_TAGS = (); }; };
 		60D3510D1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D3510C1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m */; settings = {ASSET_TAGS = (); }; };
+		60DA7CEF1BCDE96000151717 /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7CEE1BCDE96000151717 /* NSString+Category.m */; settings = {ASSET_TAGS = (); }; };
+		60DA7CFB1BCDEDBF00151717 /* inputBgGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7CF51BCDEDBF00151717 /* inputBgGray@2x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7CFC1BCDEDBF00151717 /* icon_secret@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7CF61BCDEDBF00151717 /* icon_secret@2x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7CFD1BCDEDBF00151717 /* icon_account@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7CF71BCDEDBF00151717 /* icon_account@2x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7CFE1BCDEDBF00151717 /* inputBgBlue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7CF81BCDEDBF00151717 /* inputBgBlue@3x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7CFF1BCDEDBF00151717 /* inputBgGray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7CF91BCDEDBF00151717 /* inputBgGray@3x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7D001BCDEDBF00151717 /* inputBgBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7CFA1BCDEDBF00151717 /* inputBgBlue@2x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7D031BCDF05100151717 /* loginBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D011BCDF05100151717 /* loginBg@2x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7D041BCDF05100151717 /* registerBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D021BCDF05100151717 /* registerBg@2x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7D081BCDF2F800151717 /* CheckPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7D061BCDF2F800151717 /* CheckPhoneViewController.m */; settings = {ASSET_TAGS = (); }; };
+		60DA7D091BCDF2F800151717 /* CheckPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D071BCDF2F800151717 /* CheckPhoneViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		60DA7D0D1BCDF30500151717 /* SetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7D0B1BCDF30500151717 /* SetPwdViewController.m */; settings = {ASSET_TAGS = (); }; };
+		60DA7D0E1BCDF30500151717 /* SetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D0C1BCDF30500151717 /* SetPwdViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		60DA7D111BCDF43C00151717 /* UIColor+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7D101BCDF43C00151717 /* UIColor+Category.m */; settings = {ASSET_TAGS = (); }; };
+		60DA7D151BCDF6B400151717 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7D141BCDF6B400151717 /* TTTAttributedLabel.m */; settings = {ASSET_TAGS = (); }; };
+		60DA7D181BCDFC0C00151717 /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7D171BCDFC0C00151717 /* UIView+Category.m */; settings = {ASSET_TAGS = (); }; };
+		60DA7D1C1BCE010400151717 /* ValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DA7D1A1BCE010400151717 /* ValidateViewController.m */; settings = {ASSET_TAGS = (); }; };
+		60DA7D1D1BCE010400151717 /* ValidateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D1B1BCE010400151717 /* ValidateViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		60DA7D221BCE075000151717 /* resendButtonBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D1E1BCE075000151717 /* resendButtonBg@3x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7D231BCE075000151717 /* resendButtonBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D1F1BCE075000151717 /* resendButtonBg@2x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7D241BCE075000151717 /* resendButtonDisable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D201BCE075000151717 /* resendButtonDisable@3x.png */; settings = {ASSET_TAGS = (); }; };
+		60DA7D251BCE075000151717 /* resendButtonDisable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DA7D211BCE075000151717 /* resendButtonDisable@2x.png */; settings = {ASSET_TAGS = (); }; };
 		60DFF4751BC155320078A00F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF4741BC155320078A00F /* Security.framework */; };
 		60DFF4771BC155410078A00F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF4761BC155410078A00F /* libiconv.tbd */; };
 		60DFF4791BC155500078A00F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60DFF4781BC155500078A00F /* SystemConfiguration.framework */; };
@@ -333,6 +355,35 @@
 		60D351081BC958D000F2C4D7 /* userInput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userInput.png; sourceTree = "<group>"; };
 		60D3510B1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+BorderColorFromUIColor.h"; sourceTree = "<group>"; };
 		60D3510C1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+BorderColorFromUIColor.m"; sourceTree = "<group>"; };
+		60DA7CED1BCDE96000151717 /* NSString+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
+		60DA7CEE1BCDE96000151717 /* NSString+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Category.m"; sourceTree = "<group>"; };
+		60DA7CF51BCDEDBF00151717 /* inputBgGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBgGray@2x.png"; sourceTree = "<group>"; };
+		60DA7CF61BCDEDBF00151717 /* icon_secret@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_secret@2x.png"; sourceTree = "<group>"; };
+		60DA7CF71BCDEDBF00151717 /* icon_account@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_account@2x.png"; sourceTree = "<group>"; };
+		60DA7CF81BCDEDBF00151717 /* inputBgBlue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBgBlue@3x.png"; sourceTree = "<group>"; };
+		60DA7CF91BCDEDBF00151717 /* inputBgGray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBgGray@3x.png"; sourceTree = "<group>"; };
+		60DA7CFA1BCDEDBF00151717 /* inputBgBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBgBlue@2x.png"; sourceTree = "<group>"; };
+		60DA7D011BCDF05100151717 /* loginBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginBg@2x.png"; sourceTree = "<group>"; };
+		60DA7D021BCDF05100151717 /* registerBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registerBg@2x.png"; sourceTree = "<group>"; };
+		60DA7D051BCDF2F800151717 /* CheckPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckPhoneViewController.h; sourceTree = "<group>"; };
+		60DA7D061BCDF2F800151717 /* CheckPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckPhoneViewController.m; sourceTree = "<group>"; };
+		60DA7D071BCDF2F800151717 /* CheckPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckPhoneViewController.xib; sourceTree = "<group>"; };
+		60DA7D0A1BCDF30500151717 /* SetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPwdViewController.h; sourceTree = "<group>"; };
+		60DA7D0B1BCDF30500151717 /* SetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPwdViewController.m; sourceTree = "<group>"; };
+		60DA7D0C1BCDF30500151717 /* SetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPwdViewController.xib; sourceTree = "<group>"; };
+		60DA7D0F1BCDF43C00151717 /* UIColor+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Category.h"; sourceTree = "<group>"; };
+		60DA7D101BCDF43C00151717 /* UIColor+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Category.m"; sourceTree = "<group>"; };
+		60DA7D131BCDF6B400151717 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		60DA7D141BCDF6B400151717 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		60DA7D161BCDFC0C00151717 /* UIView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Category.h"; sourceTree = "<group>"; };
+		60DA7D171BCDFC0C00151717 /* UIView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Category.m"; sourceTree = "<group>"; };
+		60DA7D191BCE010400151717 /* ValidateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateViewController.h; sourceTree = "<group>"; };
+		60DA7D1A1BCE010400151717 /* ValidateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateViewController.m; sourceTree = "<group>"; };
+		60DA7D1B1BCE010400151717 /* ValidateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ValidateViewController.xib; sourceTree = "<group>"; };
+		60DA7D1E1BCE075000151717 /* resendButtonBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "resendButtonBg@3x.png"; sourceTree = "<group>"; };
+		60DA7D1F1BCE075000151717 /* resendButtonBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "resendButtonBg@2x.png"; sourceTree = "<group>"; };
+		60DA7D201BCE075000151717 /* resendButtonDisable@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "resendButtonDisable@3x.png"; sourceTree = "<group>"; };
+		60DA7D211BCE075000151717 /* resendButtonDisable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "resendButtonDisable@2x.png"; sourceTree = "<group>"; };
 		60DFF4741BC155320078A00F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		60DFF4761BC155410078A00F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		60DFF4781BC155500078A00F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -579,6 +630,12 @@
 			children = (
 				60D3510B1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.h */,
 				60D3510C1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m */,
+				60DA7CED1BCDE96000151717 /* NSString+Category.h */,
+				60DA7CEE1BCDE96000151717 /* NSString+Category.m */,
+				60DA7D0F1BCDF43C00151717 /* UIColor+Category.h */,
+				60DA7D101BCDF43C00151717 /* UIColor+Category.m */,
+				60DA7D161BCDFC0C00151717 /* UIView+Category.h */,
+				60DA7D171BCDFC0C00151717 /* UIView+Category.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -641,12 +698,21 @@
 		606364931BC1011C00A36965 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				60B06E4E1BC6B2C8006AB01E /* LoginViewController.h */,
-				60B06E4F1BC6B2C8006AB01E /* LoginViewController.m */,
-				60B06E501BC6B2C8006AB01E /* LoginViewController.xib */,
 				60B06E561BC6BCB0006AB01E /* MineViewController.h */,
 				60B06E571BC6BCB0006AB01E /* MineViewController.m */,
 				60B06E581BC6BCB0006AB01E /* MineViewController.xib */,
+				60B06E4E1BC6B2C8006AB01E /* LoginViewController.h */,
+				60B06E4F1BC6B2C8006AB01E /* LoginViewController.m */,
+				60B06E501BC6B2C8006AB01E /* LoginViewController.xib */,
+				60DA7D051BCDF2F800151717 /* CheckPhoneViewController.h */,
+				60DA7D061BCDF2F800151717 /* CheckPhoneViewController.m */,
+				60DA7D071BCDF2F800151717 /* CheckPhoneViewController.xib */,
+				60DA7D191BCE010400151717 /* ValidateViewController.h */,
+				60DA7D1A1BCE010400151717 /* ValidateViewController.m */,
+				60DA7D1B1BCE010400151717 /* ValidateViewController.xib */,
+				60DA7D0A1BCDF30500151717 /* SetPwdViewController.h */,
+				60DA7D0B1BCDF30500151717 /* SetPwdViewController.m */,
+				60DA7D0C1BCDF30500151717 /* SetPwdViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -711,6 +777,7 @@
 		606364A11BC1011C00A36965 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				60DA7D121BCDF6B400151717 /* TTTAttributedLabel */,
 				60C4BD811BCAA85E00A50D85 /* UMSocial_Sdk_4.2.5 */,
 				60C4BD4F1BCAA7BB00A50D85 /* SDWebImage */,
 				60117B921BC7EE86001D4EC0 /* ALAlertBanner */,
@@ -941,9 +1008,30 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		60DA7D121BCDF6B400151717 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				60DA7D131BCDF6B400151717 /* TTTAttributedLabel.h */,
+				60DA7D141BCDF6B400151717 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
 		60E4C1D91BC111EB00611E0A /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				60DA7D011BCDF05100151717 /* loginBg@2x.png */,
+				60DA7D021BCDF05100151717 /* registerBg@2x.png */,
+				60DA7CF51BCDEDBF00151717 /* inputBgGray@2x.png */,
+				60DA7CF61BCDEDBF00151717 /* icon_secret@2x.png */,
+				60DA7CF71BCDEDBF00151717 /* icon_account@2x.png */,
+				60DA7CF81BCDEDBF00151717 /* inputBgBlue@3x.png */,
+				60DA7CF91BCDEDBF00151717 /* inputBgGray@3x.png */,
+				60DA7CFA1BCDEDBF00151717 /* inputBgBlue@2x.png */,
+				60DA7D1E1BCE075000151717 /* resendButtonBg@3x.png */,
+				60DA7D1F1BCE075000151717 /* resendButtonBg@2x.png */,
+				60DA7D201BCE075000151717 /* resendButtonDisable@3x.png */,
+				60DA7D211BCE075000151717 /* resendButtonDisable@2x.png */,
 				189950D11BC6D3EC00E12BDC /* message.png */,
 				189950D21BC6D3EC00E12BDC /* dynamic.png */,
 				189950D31BC6D3EC00E12BDC /* issue.png */,
@@ -1082,7 +1170,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60DA7D221BCE075000151717 /* resendButtonBg@3x.png in Resources */,
+				60DA7D001BCDEDBF00151717 /* inputBgBlue@2x.png in Resources */,
 				60C4BDA31BCAA85E00A50D85 /* UMSLoginViewController.xib in Resources */,
+				60DA7D031BCDF05100151717 /* loginBg@2x.png in Resources */,
 				189950B91BC6CB5100E12BDC /* OnePhotoCell.xib in Resources */,
 				60D351061BC956EB00F2C4D7 /* qqIcon.png in Resources */,
 				60B06E4D1BC6A4BC006AB01E /* mapPoint.png in Resources */,
@@ -1098,6 +1189,7 @@
 				606364BA1BC1011C00A36965 /* README in Resources */,
 				60B06E5F1BC6BCBD006AB01E /* IssueViewController.xib in Resources */,
 				1877F5141BC7E01700026FE7 /* DynamicViewController.xib in Resources */,
+				60DA7D0E1BCDF30500151717 /* SetPwdViewController.xib in Resources */,
 				189950CC1BC6CE7800E12BDC /* Map.png in Resources */,
 				189950CE1BC6CE7800E12BDC /* potrai.png in Resources */,
 				60B06E521BC6B2C8006AB01E /* LoginViewController.xib in Resources */,
@@ -1109,8 +1201,10 @@
 				60E4C1E41BC1127100611E0A /* Localizable.strings in Resources */,
 				60C4BDB21BCAA8DF00A50D85 /* UserForMapCollectionViewCell.xib in Resources */,
 				60C4BDA41BCAA85E00A50D85 /* UMSnsAccountViewController.xib in Resources */,
+				60DA7CFB1BCDEDBF00151717 /* inputBgGray@2x.png in Resources */,
 				60C4BDA21BCAA85E00A50D85 /* UMShareEditViewControlleriPad.xib in Resources */,
 				60C4BDC81BCAB26E00A50D85 /* UserLogoutTableViewCell.xib in Resources */,
+				60DA7D241BCE075000151717 /* resendButtonDisable@3x.png in Resources */,
 				606364B51BC1011C00A36965 /* README in Resources */,
 				60D351091BC958D000F2C4D7 /* pwdInput.png in Resources */,
 				606364B41BC1011C00A36965 /* README in Resources */,
@@ -1123,6 +1217,7 @@
 				60C4BD9E1BCAA85E00A50D85 /* UMSCommentDetailController.xib in Resources */,
 				60C4BDC31BCAA9E800A50D85 /* UserHeaderTableViewCell.xib in Resources */,
 				60C4BDA11BCAA85E00A50D85 /* UMShareEditViewController.xib in Resources */,
+				60DA7D091BCDF2F800151717 /* CheckPhoneViewController.xib in Resources */,
 				606364611BC0FD6000A36965 /* LaunchScreen.storyboard in Resources */,
 				60D351051BC956EB00F2C4D7 /* weixinIcon.png in Resources */,
 				60117BA91BC7EE86001D4EC0 /* bannerSuccess.png in Resources */,
@@ -1131,18 +1226,26 @@
 				609CEABF1BC96CC000F99BD6 /* exitLogin.png in Resources */,
 				60C4BD9C1BCAA85E00A50D85 /* UMSocialLocalizable.strings in Resources */,
 				60117BA41BC7EE86001D4EC0 /* bannerAlert@2x.png in Resources */,
+				60DA7CFC1BCDEDBF00151717 /* icon_secret@2x.png in Resources */,
 				60C4BDA51BCAA85E00A50D85 /* UMSShareListController.xib in Resources */,
 				189950CD1BC6CE7800E12BDC /* pen_edit.png in Resources */,
 				601C1AF51BC26608007C956A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				60DA7D1D1BCE010400151717 /* ValidateViewController.xib in Resources */,
 				60117BA31BC7EE86001D4EC0 /* bannerAlert.png in Resources */,
 				60117BAA1BC7EE86001D4EC0 /* bannerSuccess@2x.png in Resources */,
 				189950DA1BC6D3EC00E12BDC /* mine.png in Resources */,
 				189950B71BC6CB5100E12BDC /* KnowPersonCell.xib in Resources */,
+				60DA7CFF1BCDEDBF00151717 /* inputBgGray@3x.png in Resources */,
+				60DA7D251BCE075000151717 /* resendButtonDisable@2x.png in Resources */,
 				60C4BDBE1BCAA9D800A50D85 /* README in Resources */,
 				60C4BDA01BCAA85E00A50D85 /* UMSCommentInputControlleriPad.xib in Resources */,
+				60DA7CFE1BCDEDBF00151717 /* inputBgBlue@3x.png in Resources */,
 				60C4BDBB1BCAA9C500A50D85 /* README in Resources */,
 				189950D91BC6D3EC00E12BDC /* mapTab.png in Resources */,
 				189950D71BC6D3EC00E12BDC /* dynamic.png in Resources */,
+				60DA7D041BCDF05100151717 /* registerBg@2x.png in Resources */,
+				60DA7D231BCE075000151717 /* resendButtonBg@2x.png in Resources */,
+				60DA7CFD1BCDEDBF00151717 /* icon_account@2x.png in Resources */,
 				60C4BDCA1BCAB7DA00A50D85 /* placeholderUserIcon.png in Resources */,
 				60117BA51BC7EE86001D4EC0 /* bannerFailure.png in Resources */,
 			);
@@ -1170,8 +1273,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				60C4BD801BCAA7BB00A50D85 /* UIView+WebCacheOperation.m in Sources */,
+				60DA7D181BCDFC0C00151717 /* UIView+Category.m in Sources */,
 				1877F5131BC7E01700026FE7 /* DynamicViewController.m in Sources */,
 				60C4BD7F1BCAA7BB00A50D85 /* UIImageView+WebCache.m in Sources */,
+				60DA7D1C1BCE010400151717 /* ValidateViewController.m in Sources */,
 				60B06E511BC6B2C8006AB01E /* LoginViewController.m in Sources */,
 				60C4BDC71BCAB26E00A50D85 /* UserLogoutTableViewCell.m in Sources */,
 				60C4BD721BCAA7BB00A50D85 /* NSData+ImageContentType.m in Sources */,
@@ -1188,6 +1293,8 @@
 				60C4BD781BCAA7BB00A50D85 /* SDWebImageManager.m in Sources */,
 				60B06E591BC6BCB0006AB01E /* MineViewController.m in Sources */,
 				60B06E6F1BC6BF8D006AB01E /* MapViewController.m in Sources */,
+				60DA7CEF1BCDE96000151717 /* NSString+Category.m in Sources */,
+				60DA7D081BCDF2F800151717 /* CheckPhoneViewController.m in Sources */,
 				609CEABD1BC9658000F99BD6 /* Common.m in Sources */,
 				60C4BDC21BCAA9E800A50D85 /* UserHeaderTableViewCell.m in Sources */,
 				60C4BD7B1BCAA7BB00A50D85 /* UIImage+GIF.m in Sources */,
@@ -1201,6 +1308,8 @@
 				60C4BDB01BCAA8DF00A50D85 /* UserAnnotationView.m in Sources */,
 				189950BE1BC6CB5100E12BDC /* towPhotoCell.m in Sources */,
 				189950BC1BC6CB5100E12BDC /* ThreePhotoCell.m in Sources */,
+				60DA7D111BCDF43C00151717 /* UIColor+Category.m in Sources */,
+				60DA7D151BCDF6B400151717 /* TTTAttributedLabel.m in Sources */,
 				60C4BD751BCAA7BB00A50D85 /* SDWebImageDecoder.m in Sources */,
 				60C4BD7D1BCAA7BB00A50D85 /* UIImage+WebP.m in Sources */,
 				60C4BDB11BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m in Sources */,
@@ -1210,6 +1319,7 @@
 				60C4BD761BCAA7BB00A50D85 /* SDWebImageDownloader.m in Sources */,
 				60C4BD711BCAA7BB00A50D85 /* MKAnnotationView+WebCache.m in Sources */,
 				606364531BC0FD6000A36965 /* main.m in Sources */,
+				60DA7D0D1BCDF30500151717 /* SetPwdViewController.m in Sources */,
 				60C4BDB71BCAA9BB00A50D85 /* MessageViewController.m in Sources */,
 				60C4BD731BCAA7BB00A50D85 /* SDImageCache.m in Sources */,
 			);

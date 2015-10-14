@@ -33,4 +33,14 @@
     CGFloat blue = [[borderColorFromRGBString componentsSeparatedByString:@","][2] floatValue] / 255.0f;
     self.borderColor = [UIColor colorWithRed:red green:green blue:blue alpha:1].CGColor;
 }
+
+- (NSString *)borderColorFromHexColor
+{
+    return nil;
+}
+
+- (void)setBorderColorFromHexColor:(NSString *)borderColorFromHexColor
+{
+    self.borderColor = kHexColor(borderColorFromHexColor).CGColor;
+}
 @end

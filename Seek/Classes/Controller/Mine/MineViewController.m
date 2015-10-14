@@ -10,6 +10,8 @@
 #import "LoginViewController.h"
 #import "UserHeaderTableViewCell.h"
 #import "UserLogoutTableViewCell.h"
+
+#import "AppDelegate.h"
 @interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -40,8 +42,17 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    __weak typeof(self) weakSelf = self;
+    
     if (![Common shareCommon].loginUser) { // 没登陆
-        [self presentLoginVC];
+        [AppDelegate presentLoginVCWithDismisBlock:^(){
+            if ([Common shareCommon].loginUser) { // 已经登陆
+                
+            } else { // 登陆失败
+                UITabBarController *tab = (UITabBarController *)weakSelf.navigationController.parentViewController;
+                tab.selectedIndex = weakSelf.preIndex;
+            }
+        }];
     }
 }
 
@@ -70,21 +81,6 @@
 }
 
 
-#pragma mark - 弹出登陆
-- (void)presentLoginVC
-{
-    __weak typeof(self) weakSelf = self;
-    LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    loginVC.dismisBlock = ^(){
-        if ([Common shareCommon].loginUser) { // 已经登陆
-            
-        } else { // 登陆失败
-            UITabBarController *tab = (UITabBarController *)weakSelf.navigationController.parentViewController;
-            tab.selectedIndex = weakSelf.preIndex;
-        }
-    };
-    [self presentViewController:loginVC animated:YES completion:nil];
-}
 
 
 #pragma mark - UITableViewDelegate && UITableViewDatasource
@@ -170,7 +166,14 @@
             cell = (UserLogoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"logoutCell" forIndexPath:indexPath];
             ((UserLogoutTableViewCell *)cell).buttonClickBlock = ^(){
                 [[Common shareCommon] logout];
-                [weakSelf presentLoginVC];
+                [AppDelegate presentLoginVCWithDismisBlock:^(){
+                    if ([Common shareCommon].loginUser) { // 已经登陆
+                        
+                    } else { // 登陆失败
+                        UITabBarController *tab = (UITabBarController *)weakSelf.navigationController.parentViewController;
+                        tab.selectedIndex = weakSelf.preIndex;
+                    }
+                }];
             };
         }
     }
@@ -186,7 +189,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section != 0) {
-        return 20;
+        return 10;
     }
     return 0;
 }

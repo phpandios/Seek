@@ -52,7 +52,7 @@
             // item的颜色
             navigationController.navigationBar.tintColor = [UIColor whiteColor];
             // 背景颜色
-            navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.1 green:0.3 blue:1 alpha:1];
+            navigationController.navigationBar.barTintColor = kNavBgColor;
             // title的颜色
             navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
             navigationController.tabBarItem.title = title;
@@ -79,14 +79,21 @@
 #pragma mark - Delegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
+    if (tabBarController.selectedViewController == viewController) { // 重复点击
+        return YES;
+    }
     if (tabBarController.viewControllers.lastObject == viewController) { // 选中的是我的
         UINavigationController *mineNav = (UINavigationController *)viewController;
         MineViewController *mineVC = mineNav.viewControllers.firstObject;
         NSInteger index = tabBarController.selectedIndex;
+        
         mineVC.preIndex = index;
     }
     return YES;
 }
+
+
+
 /*
 #pragma mark - Navigation
 
