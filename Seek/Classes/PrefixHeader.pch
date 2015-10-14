@@ -51,6 +51,7 @@ return share; \
 
 // 自定义 -- BEGIN
 #define kUserIconSize 30
+#import "NSString+ConvertDate.h"
 #import "UIColor+Category.h"
 #import "CALayer+BorderColorFromUIColor.h"
 #import "UIView+Category.h"

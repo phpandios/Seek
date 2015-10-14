@@ -46,21 +46,6 @@
                         <action selector="loginButtonAction:" destination="-1" eventType="touchUpInside" id="pM4-30-nmW"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igY-G0-6Dn" userLabel="regist">
-                    <rect key="frame" x="15" y="188" width="275" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="jqo-Sv-2dg"/>
-                    </constraints>
-                    <state key="normal" title="注册" backgroundImage="registerBg.png"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="3"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="registButtonAction:" destination="-1" eventType="touchUpInside" id="mbz-k3-7zJ"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fJ-Th-bGR">
                     <rect key="frame" x="517" y="248" width="68" height="30"/>
                     <state key="normal" title="忘记密码?">
@@ -168,6 +153,21 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igY-G0-6Dn" userLabel="regist">
+                    <rect key="frame" x="15" y="188" width="275" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="jqo-Sv-2dg"/>
+                    </constraints>
+                    <state key="normal" title="注册" backgroundImage="registerBg.png"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="registButtonAction:" destination="-1" eventType="touchUpInside" id="mbz-k3-7zJ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
