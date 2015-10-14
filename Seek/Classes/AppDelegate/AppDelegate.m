@@ -12,7 +12,7 @@
 
 #import "UMSocial.h"
 #import "UMSocialData.h"
-
+#import <RongIMKit/RongIMKit.h>
 #import "LoginViewController.h"
 @interface AppDelegate ()
 
@@ -23,6 +23,33 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // 友盟
+    [UMSocialData setAppKey:kUMAppKey];
+    [UMSocialData openLog:YES];
+    
+    // 融云
+    [[RCIM sharedRCIM] initWithAppKey:kRCIMAppKey];
+    
+    /**
+     * 推送处理1
+     */
+    if ([application
+         respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings
+                                                settingsForTypes:(UIUserNotificationTypeBadge |
+                                                                  UIUserNotificationTypeSound |
+                                                                  UIUserNotificationTypeAlert)
+                                                categories:nil];
+        [application registerUserNotificationSettings:settings];
+    } else {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeAlert |
+        UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:myTypes];
+    }
+    
+    
     
     
     
@@ -42,9 +69,7 @@
     
     
     
-    // 友盟
-    [UMSocialData setAppKey:kUMAppKey];
-    [UMSocialData openLog:YES];
+   
     
     
     
@@ -67,6 +92,33 @@
 //                                shareToSnsNames:@[UMShareToTencent]
 //                                       delegate:nil];
     return YES;
+}
+
+/**
+ * 推送处理2
+ */
+//注册用户通知设置
+- (void)application:(UIApplication *)application
+didRegisterUserNotificationSettings:
+(UIUserNotificationSettings *)notificationSettings {
+    // register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+/**
+ * 推送处理3
+ */
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token =
+    [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<"
+                                                           withString:@""]
+      stringByReplacingOccurrencesOfString:@">"
+      withString:@""]
+     stringByReplacingOccurrencesOfString:@" "
+     withString:@""];
+    
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
