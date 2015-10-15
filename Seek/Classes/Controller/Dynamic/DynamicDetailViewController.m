@@ -141,6 +141,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     return cell;
 }
 
+#pragma mark - 动态计算cell高度 -- 费时操作.
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
@@ -150,7 +151,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     if (comment.respondType == RespondTypeByComment) { // 评论的回复
         cell = (CommentForCommentTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForCommentTableViewCell" owner:nil options:nil].firstObject);
         [cell performSelector:@selector(setComment:) withObject:comment];
-        height = [((CommentForCommentTableViewCell *)cell).mainView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        height = [((CommentForCommentTableViewCell *)cell).mainView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 16;
 
     } else if (comment.respondType == RespondTypeByDynamic) { // 动态的回复
         cell = (CommentForDynamicTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForDynamicTableViewCell" owner:nil options:nil].firstObject);
@@ -162,7 +163,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
             SHOWMESSAGE(@"给- %@ -评论", comment.fromUserName);
         };
         [cell performSelector:@selector(setComment:) withObject:comment];
-        height = [((CommentForDynamicTableViewCell *)cell).mainView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 5;
+        height = [((CommentForDynamicTableViewCell *)cell).mainView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 16;
 
     }
     //    SHOWMESSAGE(@"%.2f", height);

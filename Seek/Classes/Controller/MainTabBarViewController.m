@@ -33,12 +33,12 @@
     self.delegate = self;
     
     self.tabBar.translucent = NO;
-    self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"MessageViewController", @"IssueViewController", @"MineViewController"];
-    self.itemTitle = @[@"动态", @"地图", @"消息", @"发布", @"我的"];
-    self.itemNeedNav = @[@(YES), @(NO), @(YES), @(YES), @(YES)];
-    self.itemImagesName = @[@"dynamic", @"mapTab", @"message", @"issue", @"mine"];
+    self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"MessageViewController", @"MineViewController"];
+    self.itemTitle = @[@"动态", @"地图", @"消息", @"我的"];
+    self.itemNeedNav = @[@(YES), @(NO), @(YES), @(YES)];
+    self.itemImagesName = @[@"dynamic", @"mapTab", @"message", @"mine"];
     NSMutableArray *viewControllers = [NSMutableArray array];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < self.itemClasses.count; i++) {
         NSString *classes = self.itemClasses[i];
         NSString *title = self.itemTitle[i];
         NSString *imageName = self.itemImagesName[i];

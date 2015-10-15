@@ -12,4 +12,11 @@
 
 @property (nonatomic, copy) NSString *backgroundColorFromHexColor;
 
+
+#pragma mark - Animation
+#pragma mark - 颤抖
+- (void)shake;
+- (void)addTransitionWithType:(NSString *)type subType:(NSString *)subType duration:(CGFloat)duration key:(NSString *)key;
+
+- (void)removeAnimationForKey:(NSString *)key;
 @end

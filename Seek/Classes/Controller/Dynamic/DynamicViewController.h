@@ -10,4 +10,8 @@
 
 @interface DynamicViewController : UITableViewController
 
+// 如果是当前用户的动态,第一行显示的发布
+@property (nonatomic, assign) NSInteger userId;
+
+// 
 @end

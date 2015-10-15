@@ -7,7 +7,7 @@
 //
 
 #import "Common.h"
-
+#import "AppDelegate.h"
 @interface Common ()
 
 @property (nonatomic, strong) User *loginUser;
@@ -22,6 +22,8 @@ kSingleTon_M(Common)
 - (void)loginWithUser:(User *)user
 {
     self.loginUser = user;
+    
+    [((AppDelegate *)[UIApplication sharedApplication].delegate) login];
     NSLog(@"userName : %@  iconUrl: %@", self.loginUser.userName, self.loginUser.iconUrl);
 }
 
@@ -29,5 +31,6 @@ kSingleTon_M(Common)
 - (void)logout
 {
     self.loginUser = nil;
+    [((AppDelegate *)[UIApplication sharedApplication].delegate) logout];
 }
 @end

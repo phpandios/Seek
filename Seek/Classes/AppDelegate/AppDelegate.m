@@ -54,23 +54,47 @@
     
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = ({
-        UIViewController *vc = [MainTabBarViewController new];
-        vc.view.backgroundColor = [UIColor cyanColor];
-        vc;
-    });
     
+//    self.window.rootViewController = ({
+//        UIViewController *vc = [MainTabBarViewController new];
+//        vc.view.backgroundColor = [UIColor cyanColor];
+//        vc;
+//    });
+    
+    
+    
+    
+    
+    /*
+     */
+    self.window.rootViewController = ({
+        LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//        loginVC.loginBlock = ^(){
+//            if ([Common shareCommon].loginUser) { // 成功登陆
+//                [UIApplication sharedApplication].keyWindow.rootViewController = ({
+//                            UIViewController *vc = [MainTabBarViewController new];
+//                            vc.view.backgroundColor = [UIColor cyanColor];
+//                            vc;
+//                        });
+//            }
+//        };
+        loginNav;
+    });
+     
+     /*
+     */
     [self.window makeKeyAndVisible];
     
     
     
-    
+//    [AppDelegate presentLoginVCWithDismisBlock:nil];
     
     
     
     
    
-    
+    [self login];
     
     
     
@@ -163,14 +187,39 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-#pragma mark - 弹出登陆
-+ (void)presentLoginVCWithDismisBlock:(void (^)())dismisBlock
+//#pragma mark - 弹出登陆
+//+ (void)presentLoginVCWithDismisBlock:(void (^)())loginBlock
+//{
+//    LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+//    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//    loginVC.loginBlock = loginBlock;
+//    
+//    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:loginNav animated:YES completion:nil];
+//}
+
+
+- (void)login
 {
-    LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    loginVC.dismisBlock = dismisBlock;
-    
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:loginNav animated:YES completion:nil];
+    self.window.rootViewController = ({
+        UIViewController *vc = [MainTabBarViewController new];
+        [vc.view addTransitionWithType:kCATransitionReveal subType:kCATransitionFromTop duration:0.5 key:nil];
+        vc.view.backgroundColor = [UIColor cyanColor];
+        vc;
+    });
 }
 
+- (void)logout
+{
+//    __weak typeof(self) weakSelf = self;
+    self.window.rootViewController = ({
+        LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [loginNav.view addTransitionWithType:kCATransitionReveal subType:kCATransitionFromTop duration:0.5 key:nil];
+
+//        loginVC.loginBlock = ^(){
+//            [weakSelf login];
+//        };
+        loginNav;
+    });
+}
 @end

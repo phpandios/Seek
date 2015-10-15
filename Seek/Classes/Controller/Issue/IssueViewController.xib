@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IssueViewController">
             <connections>
+                <outlet property="categoryDropList" destination="nT2-Or-zhE" id="LWX-m2-WfX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,7 +15,81 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMu-vw-vvG">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qa-O8-KH2" userLabel="exit">
+                            <rect key="frame" x="15" y="26" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="c4V-yb-poe"/>
+                                <constraint firstAttribute="width" constant="32" id="yUM-mf-6jk"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="exitLogin.png"/>
+                            <connections>
+                                <action selector="dismisButtonAction:" destination="-1" eventType="touchUpInside" id="zgs-tm-Csm"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nT2-Or-zhE" customClass="WFFDropdownList">
+                            <rect key="frame" x="250" y="24" width="100" height="35"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="7qs-Df-Ixy"/>
+                                <constraint firstAttribute="width" constant="100" id="Edb-vP-Q9Y"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="arrowDowIcon.png"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="maxCountForShow">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="8fg-4A-ZUR"/>
+                            </connections>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEw-qC-ckA">
+                            <rect key="frame" x="525" y="25.5" width="60" height="33"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="pLZ-Gr-e5N"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="发布">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="commitButtonAction:" destination="-1" eventType="touchUpInside" id="AD6-et-2sq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="2Qa-O8-KH2" firstAttribute="leading" secondItem="GMu-vw-vvG" secondAttribute="leading" constant="15" id="1Rh-Aa-s3R"/>
+                        <constraint firstItem="nT2-Or-zhE" firstAttribute="centerY" secondItem="2Qa-O8-KH2" secondAttribute="centerY" id="6fP-Qn-kpZ"/>
+                        <constraint firstAttribute="height" constant="64" id="C3s-RZ-vCo"/>
+                        <constraint firstItem="HEw-qC-ckA" firstAttribute="centerY" secondItem="nT2-Or-zhE" secondAttribute="centerY" id="D8y-Mp-QUc"/>
+                        <constraint firstItem="2Qa-O8-KH2" firstAttribute="centerY" secondItem="GMu-vw-vvG" secondAttribute="centerY" constant="10" id="gnE-Ns-Hqg"/>
+                        <constraint firstAttribute="trailing" secondItem="HEw-qC-ckA" secondAttribute="trailing" constant="15" id="oRL-W4-5pl"/>
+                        <constraint firstItem="nT2-Or-zhE" firstAttribute="centerX" secondItem="GMu-vw-vvG" secondAttribute="centerX" id="wqt-tr-EJN"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="GMu-vw-vvG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2VO-uc-RuT"/>
+                <constraint firstAttribute="trailing" secondItem="GMu-vw-vvG" secondAttribute="trailing" id="o9n-sM-X5W"/>
+                <constraint firstItem="GMu-vw-vvG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wE8-HH-DZh"/>
+            </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="arrowDowIcon.png" width="25" height="25"/>
+        <image name="exitLogin.png" width="48" height="48"/>
+    </resources>
 </document>

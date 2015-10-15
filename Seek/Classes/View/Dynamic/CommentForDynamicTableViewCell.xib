@@ -15,11 +15,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="383" height="100.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UBu-06-yT5">
-                        <rect key="frame" x="0.0" y="0.0" width="383" height="89.5"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBu-06-yT5">
+                        <rect key="frame" x="8" y="8" width="367" height="80"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1nG-68-ea4">
-                                <rect key="frame" x="10" y="5" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="65o-83-Pml"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="UJK-9S-3nf"/>
@@ -39,8 +39,8 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLK-ZZ-e0V">
-                                <rect key="frame" x="293" y="9" width="80" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLK-ZZ-e0V">
+                                <rect key="frame" x="287" y="4" width="80" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="BWi-kF-8rl"/>
                                 </constraints>
@@ -53,21 +53,21 @@
                                     <action selector="commentButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NPF-Hx-pwL"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="318" placeholderIntrinsicHeight="35.5" text="今天是个好天气" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCO-E5-Lcw">
-                                <rect key="frame" x="55" y="49" width="318" height="35.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="318" placeholderIntrinsicHeight="35.5" text="今天是个好天气" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCO-E5-Lcw">
+                                <rect key="frame" x="45" y="44.5" width="322" height="35.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015.10.01 09:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISL-CO-q6J">
-                                <rect key="frame" x="55" y="31" width="90" height="13.5"/>
+                                <rect key="frame" x="45" y="26" width="90" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="昵称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9OC-gh-s08">
-                                <rect key="frame" x="55" y="5" width="32" height="19.5"/>
+                                <rect key="frame" x="45" y="0.0" width="32" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -79,14 +79,14 @@
                             <constraint firstItem="fCO-E5-Lcw" firstAttribute="top" secondItem="ISL-CO-q6J" secondAttribute="bottom" constant="5" id="B2f-GE-GJ5"/>
                             <constraint firstItem="ISL-CO-q6J" firstAttribute="leading" secondItem="9OC-gh-s08" secondAttribute="leading" id="Lq1-3T-3w2"/>
                             <constraint firstItem="MLK-ZZ-e0V" firstAttribute="centerY" secondItem="1nG-68-ea4" secondAttribute="centerY" id="QG3-RB-lRL"/>
-                            <constraint firstItem="1nG-68-ea4" firstAttribute="leading" secondItem="UBu-06-yT5" secondAttribute="leading" constant="10" id="Un0-rC-3oB"/>
+                            <constraint firstItem="1nG-68-ea4" firstAttribute="leading" secondItem="UBu-06-yT5" secondAttribute="leading" id="Un0-rC-3oB"/>
                             <constraint firstItem="9OC-gh-s08" firstAttribute="leading" secondItem="1nG-68-ea4" secondAttribute="trailing" constant="5" id="eaD-qK-o6l"/>
-                            <constraint firstItem="1nG-68-ea4" firstAttribute="top" secondItem="UBu-06-yT5" secondAttribute="top" constant="5" id="fTx-Og-ai3"/>
+                            <constraint firstItem="1nG-68-ea4" firstAttribute="top" secondItem="UBu-06-yT5" secondAttribute="top" id="fTx-Og-ai3"/>
                             <constraint firstItem="ISL-CO-q6J" firstAttribute="bottom" secondItem="1nG-68-ea4" secondAttribute="bottom" id="gU1-fi-r49"/>
                             <constraint firstItem="MLK-ZZ-e0V" firstAttribute="top" secondItem="9OC-gh-s08" secondAttribute="top" id="nEx-L9-J09"/>
                             <constraint firstItem="fCO-E5-Lcw" firstAttribute="trailing" secondItem="MLK-ZZ-e0V" secondAttribute="trailing" id="olQ-px-yAI"/>
-                            <constraint firstAttribute="bottom" secondItem="fCO-E5-Lcw" secondAttribute="bottom" constant="5" id="pNn-7B-Z66"/>
-                            <constraint firstAttribute="trailing" secondItem="MLK-ZZ-e0V" secondAttribute="trailing" constant="10" id="riM-TM-Hkb"/>
+                            <constraint firstAttribute="bottom" secondItem="fCO-E5-Lcw" secondAttribute="bottom" id="pNn-7B-Z66"/>
+                            <constraint firstAttribute="trailing" secondItem="MLK-ZZ-e0V" secondAttribute="trailing" id="riM-TM-Hkb"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

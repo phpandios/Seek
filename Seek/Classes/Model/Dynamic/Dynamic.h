@@ -28,9 +28,9 @@
 @property (nonatomic, strong) NSArray *images;
 
 /*
- * 评论数组<Comment>[主评论数,即只算 回复的是动态的评论]
+ * 评论数量[主评论数,即只算 回复的是动态的评论]
  */
-@property (nonatomic, strong) NSArray *comments;
+@property (nonatomic, assign) NSInteger commentNum;
 
 // 动态时间
 @property (nonatomic, strong) NSDate *timestamp;

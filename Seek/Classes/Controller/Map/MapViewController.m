@@ -85,8 +85,6 @@
     _dropDownList.textColor = [UIColor blackColor];
     _dropDownList.font = [UIFont systemFontOfSize:17];
     _dropDownList.listOrientation = ListOrientationUp;
-    
-    [self loadOtherUserNearByWithCompletionHandle:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,6 +97,7 @@
     [super viewDidAppear:animated];
     
     
+    [self loadOtherUserNearByWithCompletionHandle:nil];
     
     
     // 大头针标注
@@ -191,15 +190,11 @@
             return annotationView;
         } else { // 周边用户
             NSInteger index = [self.otherAnnotationArray indexOfObject:annotation];
-            NSValue *key = self.otherUserNearByDict.allKeys[index];
+            NSString *key = self.otherUserNearByDict.allKeys[index];
             UserInfoForMap *model = [self.otherUserNearByDict[key] firstObject];
             
-            // 获取当前用户对应的地图坐标
-            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
-            // 获取当前用户在当前地图缩放级别下,在view上的坐标
-            CGPoint currentPoint = [_mapView convertCoordinate:coordinate toPointToView:_mapView];
-            // 获取当前分组
-            NSMutableArray *sectionArray = self.otherUserNearByDict[[NSValue valueWithCGPoint:currentPoint]];
+
+            NSMutableArray *sectionArray = self.otherUserNearByDict[model.userID];
             
             static NSString *pointReuseIndentifier = @"otherUserReuseIndentifier";
             UserAnnotationView *annotationView = (UserAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
@@ -224,15 +219,14 @@
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
 {
-    NSLog(@"click annotationview");
     // 点击先居中.
 //    [mapView showAnnotations:@[view.annotation] animated:YES];
     [mapView setCenterCoordinate:[view.annotation coordinate] animated:YES];
-    // 先为空,防止点的速度过快,点到其他单个的之后,动画结束.而该属性有值.造成错误操作
-    self.selectedAnnotationView = nil;
+//    // 先为空,防止点的速度过快,点到其他单个的之后,动画结束.而该属性有值.造成错误操作
+//    self.selectedAnnotationView = nil;
     if ([view isKindOfClass:[UserAnnotationView class]]) { // 点击的周边用户
         UserAnnotationView *userView = (UserAnnotationView *)view;
-        if (userView.userArray.count == 1) { // 只有一个 直接推出
+        if ([userView.userArray count] == 1) { // 只有一个 直接推出
             SHOWMESSAGE(@"选中用户ID:%@",[userView.userArray.firstObject userID]);
         } else { // 弹出collectionView
             // 移动动画结束后,再根据选中的项进行操作
@@ -247,6 +241,7 @@
     // 缩放才重新更新周边用户的标注
     if (self.oldZoomLevel != 0) {
         if (self.oldZoomLevel != mapView.zoomLevel) {
+            NSLog(@"change");
             [self updateAnnotationOfOtherUser];
         }
     }
@@ -260,7 +255,6 @@
         self.collectionShadeView.hidden = NO;
         
         self.selectedAnnotationView = nil;
-        
 //        [self.mapView reloadInputViews];
     }
 }
@@ -337,23 +331,26 @@ updatingLocation:(BOOL)updatingLocation
         // 获取当前用户在当前地图缩放级别下,在view上的坐标
         CGPoint currentPoint = [_mapView convertCoordinate:coordinate toPointToView:_mapView];
         
-        NSValue *mergedPoint = nil;// 当前点若会与其他点重合,则该值不为nil
-        for (NSValue *pointValue in self.otherUserNearByDict.allKeys) {
-            CGPoint point = [pointValue CGPointValue];
-            if ([self distanceFromPointX:point distanceToPointY:currentPoint] <= kUserIconSize) { // 会发生重合.
-                mergedPoint = pointValue;
+        UserInfoForMap *nearUser = nil;// 当前用户若会与其他用户重合,则该值不为nil
+        for (NSMutableArray *users in self.otherUserNearByDict.allValues) {
+            UserInfoForMap *userForCompare = users.firstObject;
+            // 获取当前用户在当前地图缩放级别下,在view上的坐标
+            
+            CGPoint pointForCompare = [_mapView convertCoordinate:CLLocationCoordinate2DMake(userForCompare.latitude, userForCompare.longitude) toPointToView:_mapView];
+            if ([self distanceFromPointX:pointForCompare distanceToPointY:currentPoint] <= kUserIconSize) { // 会发生重合.
+                nearUser = userForCompare;
                 break;
             }
         }
-        if (mergedPoint) { // 说明会与这个key对应的标注点重合.
-            [self.otherUserNearByDict[mergedPoint] addObject:model];
+        if (nearUser) { // 说明会与这个key对应的标注点重合.
+            [self.otherUserNearByDict[nearUser.userID] addObject:model];
         } else { // 不与其他标注点重合.
             NSMutableArray *array = [NSMutableArray arrayWithObject:model];
-            [self.otherUserNearByDict setObject:array forKey:[NSValue valueWithCGPoint:currentPoint]];
+            [self.otherUserNearByDict setObject:array forKey:model.userID];
         }
     }
     
-    for (NSValue *key in self.otherUserNearByDict.allKeys) {
+    for (NSString *key in self.otherUserNearByDict.allKeys) {
         MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
         UserInfoForMap *model = [self.otherUserNearByDict[key] firstObject];
         pointAnnotation.coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
@@ -372,7 +369,8 @@ updatingLocation:(BOOL)updatingLocation
         [view.layer removeAnimationForKey:@"transition"];
         [self addAnimationToView:view];
     }
-
+    
+    NSLog(@"%@", self.otherUserNearByDict.allKeys);
     // 刷新标注视图
     [self.mapView reloadInputViews];
 }

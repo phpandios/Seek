@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 东方佳联. All rights reserved.
 //
 
+
+#define kImageIconSize 25
+
 #import "WFFDropdownList.h"
 @interface WFFDropdownList () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {
@@ -13,6 +16,7 @@
     CGFloat _lineWidth;
     CGRect _rectOnKeyWindow;
 }
+
 
 
 @property (nonatomic, assign) BOOL isOpen;// 是否打开下拉列表
@@ -24,6 +28,11 @@
 @property (nonatomic, assign) NSInteger countOfLinesForShow;
 
 @property (nonatomic, strong) UIView *shadeView;
+
+@property (nonatomic, strong) UIColor *tableTextColor;
+
+@property (nonatomic, strong) UIImageView *rightImageView;
+
 @end
 
 @implementation WFFDropdownList
@@ -51,7 +60,7 @@
 
 - (void)awakeFromNib
 {
-
+    
     _lineHeight = self.frame.size.height;
     _lineWidth = self.frame.size.width;
     
@@ -108,6 +117,15 @@
         return CGRectMake(CGRectGetMinX(rectOnShadeView), CGRectGetMaxY(rectOnShadeView), _lineWidth, _lineHeight * _countOfLinesForShow);
     } else {
         return CGRectMake(CGRectGetMinX(rectOnShadeView), CGRectGetMinY(rectOnShadeView) - _lineHeight * _countOfLinesForShow, _lineWidth, _lineHeight * _countOfLinesForShow);
+    }
+}
+
+- (void)setDataArray:(NSArray *)dataArray
+{
+    if (_dataArray != dataArray) {
+        _dataArray  = nil;
+        _dataArray = dataArray;
+        [_dropdownTalbeView reloadData];
     }
 }
 
@@ -191,7 +209,13 @@
     _lineWidth = self.frame.size.width;
     self.dropdownTalbeView.frame = [self tableViewFrame];
     self.shadeView.frame = [UIApplication sharedApplication].keyWindow.bounds;
-    self.currentLabel.frame = self.bounds;
+    
+    if (_rightImageView) { // 存在
+        _currentLabel.frame = (CGRect){0, 0, CGRectGetWidth(self.frame) - kImageIconSize, CGRectGetHeight(self.frame)};
+        _rightImageView.frame = CGRectMake(CGRectGetWidth(self.frame) - kImageIconSize, (CGRectGetHeight(self.frame) - kImageIconSize) / 2, kImageIconSize, kImageIconSize);
+    } else {
+        _currentLabel.frame = self.bounds;
+    }
 }
 
 #pragma mark - 轻拍手势
@@ -231,17 +255,20 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    
+    cell.backgroundColor = [UIColor clearColor];
     UILabel *label = (UILabel *)[cell viewWithTag:100];
     if (!label) {
         label = [[UILabel alloc] initWithFrame:cell.bounds];
         [cell addSubview:label];
     }
+    
+    if (_tableTextColor) {
+        label.textColor = _tableTextColor;
+    }
     label.tag = 100;
     label.text = _dataArray[indexPath.row];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = self.font;
-    
     
     return cell;
 }
@@ -258,5 +285,38 @@
     if ([_delegate respondsToSelector:@selector(dropdownList:didSelectedIndex:)]) {
         [_delegate dropdownList:self didSelectedIndex:_selectedIndex];
     }
+}
+
+
+- (void)setListBackColor:(UIColor *)color
+{
+    _dropdownTalbeView.backgroundColor = color;
+}
+
+- (void)setListTextColor:(UIColor *)color
+{
+    self.tableTextColor = color;
+}
+
+
+- (void)setRightImage:(UIImage *)rightImage
+{
+    if (_rightImage != rightImage) {
+        _rightImage = nil;
+        _rightImage = rightImage;
+        self.rightImageView.image = rightImage;
+    }
+}
+
+- (UIImageView *)rightImageView
+{
+    if (!_rightImageView) {
+        _rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kImageIconSize, kImageIconSize)];
+        _rightImageView.userInteractionEnabled = YES;
+        [_rightImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(currentLabelTapGRAction:)]];
+        [self addSubview:_rightImageView];
+        [self updateSubViews];
+    }
+    return _rightImageView;
 }
 @end

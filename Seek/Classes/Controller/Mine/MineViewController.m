@@ -42,18 +42,18 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    __weak typeof(self) weakSelf = self;
-    
-    if (![Common shareCommon].loginUser) { // 没登陆
-        [AppDelegate presentLoginVCWithDismisBlock:^(){
-            if ([Common shareCommon].loginUser) { // 已经登陆
-                
-            } else { // 登陆失败
-                UITabBarController *tab = (UITabBarController *)weakSelf.navigationController.parentViewController;
-                tab.selectedIndex = weakSelf.preIndex;
-            }
-        }];
-    }
+//    __weak typeof(self) weakSelf = self;
+//    
+//    if (![Common shareCommon].loginUser) { // 没登陆
+//        [AppDelegate presentLoginVCWithDismisBlock:^(){
+//            if ([Common shareCommon].loginUser) { // 已经登陆
+//                
+//            } else { // 登陆失败
+//                UITabBarController *tab = (UITabBarController *)weakSelf.navigationController.parentViewController;
+//                tab.selectedIndex = weakSelf.preIndex;
+//            }
+//        }];
+//    }
 }
 
 // 到该方法.说明已经登陆了.设置界面的值
@@ -166,14 +166,6 @@
             cell = (UserLogoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"logoutCell" forIndexPath:indexPath];
             ((UserLogoutTableViewCell *)cell).buttonClickBlock = ^(){
                 [[Common shareCommon] logout];
-                [AppDelegate presentLoginVCWithDismisBlock:^(){
-                    if ([Common shareCommon].loginUser) { // 已经登陆
-                        
-                    } else { // 登陆失败
-                        UITabBarController *tab = (UITabBarController *)weakSelf.navigationController.parentViewController;
-                        tab.selectedIndex = weakSelf.preIndex;
-                    }
-                }];
             };
         }
     }

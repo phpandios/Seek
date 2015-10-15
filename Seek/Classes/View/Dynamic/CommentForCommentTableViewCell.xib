@@ -16,10 +16,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgC-4z-W7d">
-                        <rect key="frame" x="0.0" y="0.0" width="385" height="10"/>
+                        <rect key="frame" x="8" y="8" width="369" height="0.0"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMe-NT-yn3">
-                                <rect key="frame" x="55" y="5" width="320" height="0.0"/>
+                                <rect key="frame" x="45" y="0.0" width="324" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -27,10 +27,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="dMe-NT-yn3" secondAttribute="bottom" constant="5" id="Dgh-Lv-HUY"/>
-                            <constraint firstAttribute="trailing" secondItem="dMe-NT-yn3" secondAttribute="trailing" constant="10" id="aPE-1V-dNF"/>
-                            <constraint firstItem="dMe-NT-yn3" firstAttribute="leading" secondItem="mgC-4z-W7d" secondAttribute="leading" constant="55" id="kEt-2k-6ds"/>
-                            <constraint firstItem="dMe-NT-yn3" firstAttribute="top" secondItem="mgC-4z-W7d" secondAttribute="top" constant="5" id="mk7-8h-t32"/>
+                            <constraint firstAttribute="bottom" secondItem="dMe-NT-yn3" secondAttribute="bottom" id="Dgh-Lv-HUY"/>
+                            <constraint firstAttribute="trailing" secondItem="dMe-NT-yn3" secondAttribute="trailing" id="aPE-1V-dNF"/>
+                            <constraint firstItem="dMe-NT-yn3" firstAttribute="leading" secondItem="mgC-4z-W7d" secondAttribute="leading" constant="45" id="kEt-2k-6ds"/>
+                            <constraint firstItem="dMe-NT-yn3" firstAttribute="top" secondItem="mgC-4z-W7d" secondAttribute="top" id="mk7-8h-t32"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MAPPOISearchViewController">
+            <connections>
+                <outlet property="inputTipTableView" destination="CQS-Kc-YkF" id="UGS-Vx-yLo"/>
+                <outlet property="searchBar" destination="oub-sq-rCp" id="GL3-gW-cPm"/>
+                <outlet property="tableView" destination="6gF-tI-MAA" id="r55-DS-wxN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ydr-s5-ZK5">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HM-j2-2sV" userLabel="exit">
+                            <rect key="frame" x="15" y="26" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="2xp-zW-NJJ"/>
+                                <constraint firstAttribute="width" constant="32" id="pOF-lc-SsD"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="exitLogin.png"/>
+                            <connections>
+                                <action selector="dismisButtonAction:" destination="-1" eventType="touchUpInside" id="foi-1u-73K"/>
+                            </connections>
+                        </button>
+                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="请输入地名" translatesAutoresizingMaskIntoConstraints="NO" id="oub-sq-rCp">
+                            <rect key="frame" x="52" y="20" width="543" height="44"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="WN2-J5-1gK"/>
+                            </connections>
+                        </searchBar>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="oub-sq-rCp" secondAttribute="trailing" constant="5" id="55m-bb-RWL"/>
+                        <constraint firstItem="oub-sq-rCp" firstAttribute="centerY" secondItem="8HM-j2-2sV" secondAttribute="centerY" id="E8w-il-FOY"/>
+                        <constraint firstAttribute="height" constant="64" id="KM0-EL-CYM"/>
+                        <constraint firstItem="8HM-j2-2sV" firstAttribute="leading" secondItem="ydr-s5-ZK5" secondAttribute="leading" constant="15" id="atC-f5-pga"/>
+                        <constraint firstItem="8HM-j2-2sV" firstAttribute="centerY" secondItem="ydr-s5-ZK5" secondAttribute="centerY" constant="10" id="mzU-e7-Ccx"/>
+                        <constraint firstItem="oub-sq-rCp" firstAttribute="leading" secondItem="8HM-j2-2sV" secondAttribute="trailing" constant="5" id="yVT-cM-nwz"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6gF-tI-MAA">
+                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="xQs-ki-eW6"/>
+                        <outlet property="delegate" destination="-1" id="zSP-GK-LSJ"/>
+                    </connections>
+                </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="468" placeholderIntrinsicHeight="300" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CQS-Kc-YkF" customClass="SearchInputTipTableView">
+                    <rect key="frame" x="60" y="64" width="527" height="300"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="W6g-ki-DL6"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="W6g-ki-DL6"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="h1w-UL-jYG"/>
+                        <outlet property="delegate" destination="-1" id="PRV-sF-3JD"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="6gF-tI-MAA" secondAttribute="trailing" id="0po-WO-CeC"/>
+                <constraint firstAttribute="trailing" secondItem="ydr-s5-ZK5" secondAttribute="trailing" id="9Qn-3e-Z9j"/>
+                <constraint firstItem="CQS-Kc-YkF" firstAttribute="trailing" secondItem="oub-sq-rCp" secondAttribute="trailing" constant="-8" id="F2D-4e-edF"/>
+                <constraint firstItem="6gF-tI-MAA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="N4c-9a-FCD"/>
+                <constraint firstItem="CQS-Kc-YkF" firstAttribute="leading" secondItem="oub-sq-rCp" secondAttribute="leading" constant="8" id="V9D-JA-ghp"/>
+                <constraint firstItem="ydr-s5-ZK5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c32-U1-caH"/>
+                <constraint firstItem="6gF-tI-MAA" firstAttribute="top" secondItem="ydr-s5-ZK5" secondAttribute="bottom" id="gHf-u7-R7O"/>
+                <constraint firstItem="ydr-s5-ZK5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="m7q-4q-MPf"/>
+                <constraint firstAttribute="bottom" secondItem="6gF-tI-MAA" secondAttribute="bottom" id="mRS-ae-OIq"/>
+                <constraint firstItem="CQS-Kc-YkF" firstAttribute="top" secondItem="oub-sq-rCp" secondAttribute="bottom" id="vJm-WX-K1T"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="exitLogin.png" width="48" height="48"/>
+    </resources>
+</document>

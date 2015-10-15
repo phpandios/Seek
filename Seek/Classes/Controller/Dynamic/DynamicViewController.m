@@ -16,6 +16,8 @@
 #import "DynamicDetailViewController.h"
 #import "Dynamic.h"
 #import "Comment.h"
+
+#import "IssueViewController.h"
 @interface DynamicViewController ()
 
 @end
@@ -29,6 +31,8 @@ static NSString *pulishIdentifier = @"pulishCell";
     [super viewDidLoad];
     
     self.title = @"动态";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(issueBarButtonItemAction:)];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -41,6 +45,10 @@ static NSString *pulishIdentifier = @"pulishCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)issueBarButtonItemAction:(UIBarButtonItem *)sender {
+    IssueViewController *vc = [[IssueViewController alloc] initWithNibName:@"IssueViewController" bundle:nil];
+    [self presentViewController:vc animated:YES completion:nil];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -59,7 +67,6 @@ static NSString *pulishIdentifier = @"pulishCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OnePhotoCell *oneCell = [tableView dequeueReusableCellWithIdentifier:onePhotoIdentifier];

@@ -41,12 +41,12 @@ typedef enum {
 /**
  *  设置下拉列表最多可显示几项
  */
-@property (nonatomic, assign) NSInteger maxCountForShow;
+@property (nonatomic, assign) IBInspectable NSInteger maxCountForShow;
 
 /**
  *  代理
  */
-@property (nonatomic, assign) id <WFFDropdownListDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id <WFFDropdownListDelegate> delegate;
 
 /**
  *  初始化方法
@@ -58,14 +58,20 @@ typedef enum {
  */
 - (instancetype)initWithFrame:(CGRect)frame dataSource:(NSArray *)array;
 
-@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) IBInspectable UIColor *textColor;
 
 @property (nonatomic, strong) UIFont *font;
 
 @property (nonatomic, strong) NSArray *dataArray;
 
-// 弹出的下啦列表的方向(上或者下)
+// 弹出的下啦列表的方向(上或者下) - 默认下
 @property (nonatomic, assign) ListOrientation listOrientation;
 
+@property (nonatomic, strong) IBInspectable UIImage *rightImage;
+
 - (void)updateSubViews;
+
+- (void)setListBackColor:(UIColor *)color;
+
+- (void)setListTextColor:(UIColor *)color;
 @end
