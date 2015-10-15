@@ -83,7 +83,7 @@ kSingleTon_M(MapSearchHelper)
 {
     if (!_poiAroundSearchRequest) {
         _poiAroundSearchRequest = [AMapPOIAroundSearchRequest new];
-        _poiAroundSearchRequest.types = @"公司企业|道路附属设施|地名地址信息|公共设施|风景名胜|商务住宅|政府机构及社会团体";
+        _poiAroundSearchRequest.types = @"公司企业|道路附属设施|地名地址信息|风景名胜|商务住宅|政府机构及社会团体";
         _poiAroundSearchRequest.sortrule = 0;
         _poiAroundSearchRequest.requireExtension = YES;
     }

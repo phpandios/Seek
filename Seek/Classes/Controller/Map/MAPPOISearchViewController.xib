@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MAPPOISearchViewController">
             <connections>
+                <outlet property="heightConstraintsWhileHideKeyboard" destination="eI8-Sh-13H" id="PUu-Ji-xgY"/>
                 <outlet property="inputTipTableView" destination="CQS-Kc-YkF" id="UGS-Vx-yLo"/>
                 <outlet property="mapView" destination="W1B-qF-hJa" id="eXY-BH-dQj"/>
                 <outlet property="searchBar" destination="oub-sq-rCp" id="GL3-gW-cPm"/>
@@ -19,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ydr-s5-ZK5">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ydr-s5-ZK5" userLabel="topView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HM-j2-2sV" userLabel="exit">
@@ -33,7 +34,7 @@
                                 <action selector="dismisButtonAction:" destination="-1" eventType="touchUpInside" id="foi-1u-73K"/>
                             </connections>
                         </button>
-                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="请输入地名" translatesAutoresizingMaskIntoConstraints="NO" id="oub-sq-rCp">
+                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="请输入地名" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oub-sq-rCp">
                             <rect key="frame" x="52" y="20" width="543" height="44"/>
                             <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             <connections>
@@ -55,12 +56,33 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1B-qF-hJa" customClass="MAMapView">
-                    <rect key="frame" x="0.0" y="64" width="600" height="268"/>
+                    <rect key="frame" x="0.0" y="64" width="600" height="250"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="750" id="2d2-Kx-Nk1"/>
+                        <constraint firstAttribute="height" constant="250" id="z2K-Xe-cwu"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="2d2-Kx-Nk1"/>
+                            <exclude reference="z2K-Xe-cwu"/>
+                        </mask>
+                    </variation>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6gF-tI-MAA">
-                    <rect key="frame" x="0.0" y="332" width="600" height="268"/>
+                    <rect key="frame" x="0.0" y="314" width="600" height="286"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="286" id="eI8-Sh-13H"/>
+                        <constraint firstAttribute="height" constant="300" id="gZG-jM-stW"/>
+                        <constraint firstAttribute="height" constant="200" id="ggM-Te-9Oc"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="gZG-jM-stW"/>
+                            <exclude reference="ggM-Te-9Oc"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="xQs-ki-eW6"/>
                         <outlet property="delegate" destination="-1" id="zSP-GK-LSJ"/>
@@ -92,6 +114,7 @@
                 <constraint firstAttribute="trailing" secondItem="ydr-s5-ZK5" secondAttribute="trailing" id="9Qn-3e-Z9j"/>
                 <constraint firstItem="W1B-qF-hJa" firstAttribute="height" secondItem="6gF-tI-MAA" secondAttribute="height" id="B2o-ra-21p"/>
                 <constraint firstItem="CQS-Kc-YkF" firstAttribute="trailing" secondItem="oub-sq-rCp" secondAttribute="trailing" constant="-8" id="F2D-4e-edF"/>
+                <constraint firstItem="6gF-tI-MAA" firstAttribute="top" secondItem="ydr-s5-ZK5" secondAttribute="bottom" priority="750" id="GWS-Jb-UGA"/>
                 <constraint firstItem="W1B-qF-hJa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KoS-vu-7zv"/>
                 <constraint firstItem="6gF-tI-MAA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="N4c-9a-FCD"/>
                 <constraint firstItem="CQS-Kc-YkF" firstAttribute="leading" secondItem="oub-sq-rCp" secondAttribute="leading" constant="8" id="V9D-JA-ghp"/>
@@ -101,12 +124,15 @@
                 <constraint firstAttribute="bottom" secondItem="6gF-tI-MAA" secondAttribute="bottom" id="mRS-ae-OIq"/>
                 <constraint firstAttribute="trailing" secondItem="W1B-qF-hJa" secondAttribute="trailing" id="nre-ZD-TrQ"/>
                 <constraint firstItem="W1B-qF-hJa" firstAttribute="top" secondItem="ydr-s5-ZK5" secondAttribute="bottom" id="pxo-Vq-Xg3"/>
+                <constraint firstItem="6gF-tI-MAA" firstAttribute="height" secondItem="W1B-qF-hJa" secondAttribute="height" id="uMn-Zx-HI8"/>
                 <constraint firstItem="6gF-tI-MAA" firstAttribute="top" secondItem="W1B-qF-hJa" secondAttribute="bottom" id="ukA-9i-mHy"/>
                 <constraint firstItem="CQS-Kc-YkF" firstAttribute="top" secondItem="oub-sq-rCp" secondAttribute="bottom" id="vJm-WX-K1T"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="gHf-u7-R7O"/>
+                    <exclude reference="uMn-Zx-HI8"/>
+                    <exclude reference="B2o-ra-21p"/>
                 </mask>
             </variation>
         </view>

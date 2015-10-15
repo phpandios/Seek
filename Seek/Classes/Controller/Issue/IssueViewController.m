@@ -69,9 +69,9 @@
     // locationWithLatitude:39.990459 longitude:116.481476
     mapPOISearch.defaultLatitude = 39.990459;
     mapPOISearch.defaultLongitude = 116.481476;
-    mapPOISearch.dismisBlock = ^(CGFloat la, CGFloat lo, BOOL hasChoose) {
+    mapPOISearch.dismisBlock = ^(CGFloat la, CGFloat lo, NSString *address, NSString *name, BOOL hasChoose) {
         if (hasChoose) {
-            SHOWMESSAGE(@"选中经纬度%.2f,%.2f的地址", la, lo);
+            SHOWMESSAGE(@"选中经纬度%.2f,%.2f的地址%@,名称%@", la, lo, address, name);
         } else {
             SHOWMESSAGE(@"未选中地址");
         }
