@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.delegate = self;
     
     self.tabBar.translucent = NO;

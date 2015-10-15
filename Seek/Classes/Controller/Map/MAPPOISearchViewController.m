@@ -9,10 +9,12 @@
 #import "MAPPOISearchViewController.h"
 #import "SearchInputTipTableView.h"
 #import <AMapSearchKit/AMapSearchKit.h>
-@interface MAPPOISearchViewController ()<AMapSearchDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+#import <MAMapKit/MAMapKit.h>
+@interface MAPPOISearchViewController ()<MAMapViewDelegate, AMapSearchDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 - (IBAction)dismisButtonAction:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet SearchInputTipTableView *inputTipTableView;
+@property (weak, nonatomic) IBOutlet MAMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) AMapSearchAPI *searchAPI;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -29,17 +31,45 @@
 
 @property (nonatomic, copy) NSString *province;
 
+
+@property (nonatomic, assign) CLLocationCoordinate2D selectedCoordinate;
+
 @end
 
 @implementation MAPPOISearchViewController
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        // 配置key
+        [MAMapServices sharedServices].apiKey = kLBSAppKey;
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [AMapSearchServices sharedServices].apiKey = kLBSAppKey;
+    
+    
     
     // 检索对象
     self.searchAPI = [[AMapSearchAPI alloc] init];
     _searchAPI.delegate = self;
+    
+    
+    // 地图
+    _mapView.delegate = self;
+    // 开启定位
+    _mapView.showsUserLocation = YES;
+    // 定位用户位置的模式
+    _mapView.userTrackingMode = MAUserTrackingModeNone;//不追踪用户
+    // 设置缩放级别
+    [_mapView setZoomLevel:16 animated:YES];
+    
+    
+    
+    
     
 //    //构造AMapGeocodeSearchRequest对象，address为必选项，city为可选项
 //    AMapGeocodeSearchRequest *geo = [[AMapGeocodeSearchRequest alloc] init];
@@ -48,11 +78,8 @@
 //    //发起正向地理编码
 //    [_searchAPI AMapGeocodeSearch:geo];
     
-    // 逆向地理编码搜索 - 确定当前城市(用于输入提示搜索)
-    self.reGeocodeSearchRequest = [[AMapReGeocodeSearchRequest alloc] init];
-    _reGeocodeSearchRequest.location = [AMapGeoPoint locationWithLatitude:_defaultLatitude longitude:_defaultLongitude];
-    _reGeocodeSearchRequest.radius = 10000;
-    _reGeocodeSearchRequest.requireExtension = YES;
+    
+    
     
     [self.searchBar becomeFirstResponder];
     
@@ -63,17 +90,25 @@
 {
     [super viewDidAppear:animated];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //发起逆地理编码
-    [_searchAPI AMapReGoecodeSearch: _reGeocodeSearchRequest];
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - LazyLoading
+- (AMapReGeocodeSearchRequest *)reGeocodeSearchRequest
+{
+    if (!_reGeocodeSearchRequest) {
+        // 逆向地理编码搜索 - 确定当前城市(用于输入提示搜索)
+        _reGeocodeSearchRequest = [[AMapReGeocodeSearchRequest alloc] init];
+        _reGeocodeSearchRequest.radius = 10000;
+        _reGeocodeSearchRequest.requireExtension = YES;
+    }
+    return _reGeocodeSearchRequest;
+}
 - (AMapPOIAroundSearchRequest *)poiAroundSearchRequest
 {
     if (!_poiAroundSearchRequest) {
@@ -113,10 +148,32 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     if (searchText != nil) {
-        self.inputTipsSearchRequest.keywords = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        self.inputTipsSearchRequest.city = _city ? _city : _province;
-        [_searchAPI AMapInputTipsSearch:_inputTipsSearchRequest];
+        [self inputTipSearchWithKeyword:searchBar.text];
     }
+}
+
+#pragma mark - MAMapViewDelegate
+#pragma mark 定位后,逆向编码获取当前城市.
+-(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
+updatingLocation:(BOOL)updatingLocation
+{
+    
+    // 获取城市
+    [self reGoeCodeSearchWithLatitude:userLocation.location.coordinate.latitude longitude:userLocation.location.coordinate.longitude];
+    
+    // 定位后设置中心
+    [mapView setCenterCoordinate:userLocation.coordinate];
+    // 保存当前定位信息 - 用于poi
+    self.selectedCoordinate = userLocation.location.coordinate;
+    [self poiAroundSearch];
+}
+#pragma mark 移动地图时,刷新poi数组
+- (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    CLLocationCoordinate2D coordinate = mapView.centerCoordinate;
+    // 保存当前定位信息 - 用于poi
+    self.selectedCoordinate = coordinate;
+    [self poiAroundSearch];
 }
 
 #pragma mark - AMapSearchDelegate
@@ -131,8 +188,8 @@
     {
         return;
     }
-    for (AMapPOI *p in response.pois) { // 地址和位置都不为空 -- 地址用于显示,地址用于返回
-        if (p.address && p.location) {
+    for (AMapPOI *p in response.pois) { // 名称 地址和位置都不为空 -- 名称和地址用于显示,地址用于返回
+        if (p.address && p.location && p.name) {
             [self.poiAroundArray addObject:p];
         }
     }
@@ -175,10 +232,9 @@
         AMapReGeocode *reGeocode = response.regeocode;
         self.city = reGeocode.addressComponent.city;
         self.province = reGeocode.addressComponent.province;
-
+        self.inputTipsSearchRequest.city = _city ? _city : _province;
     }
-    
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+   
 }
 
 #pragma mark  实现输入提示的回调函数
@@ -244,10 +300,11 @@
     }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"poiAroundCell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"poiAroundCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"poiAroundCell"];
     }
     AMapPOI *poi = self.poiAroundArray[indexPath.row];
-    cell.textLabel.text = poi.address;
+    cell.detailTextLabel.text = poi.address;
+    cell.textLabel.text = poi.name;
     return cell;
 }
 
@@ -266,9 +323,9 @@
     if (tableView == self.inputTipTableView) {
         AMapTip *tip = self.inputTipsArray[indexPath.row];
         self.searchBar.text = tip.name;
+        self.selectedCoordinate = CLLocationCoordinate2DMake(tip.location.latitude, tip.location.longitude);
 //        [self searchBar:_searchBar textDidChange:tip.name];
-        self.poiAroundSearchRequest.location = tip.location;
-        [_searchAPI AMapPOIAroundSearch:_poiAroundSearchRequest];
+        [self poiAroundSearch];
     } else {
         AMapPOI *poi = self.poiAroundArray[indexPath.row];
         if (_dismisBlock) {
@@ -279,11 +336,29 @@
     }
 }
 
-
 - (IBAction)dismisButtonAction:(UIButton *)sender {
     if (_dismisBlock) {
         _dismisBlock(0, 0, NO);
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 搜索
+- (void)reGoeCodeSearchWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude
+{
+    //发起逆地理编码
+    self.reGeocodeSearchRequest.location = [AMapGeoPoint locationWithLatitude:latitude longitude:longitude];
+    [_searchAPI AMapReGoecodeSearch:_reGeocodeSearchRequest];
+}
+- (void)poiAroundSearch
+{
+    self.poiAroundSearchRequest.location = [AMapGeoPoint locationWithLatitude:self.selectedCoordinate.latitude longitude:self.selectedCoordinate.longitude];
+    [_searchAPI AMapPOIAroundSearch:_poiAroundSearchRequest];
+}
+
+- (void)inputTipSearchWithKeyword:(NSString *)keyword
+{
+    self.inputTipsSearchRequest.keywords = [keyword stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [_searchAPI AMapInputTipsSearch:_inputTipsSearchRequest];
 }
 @end

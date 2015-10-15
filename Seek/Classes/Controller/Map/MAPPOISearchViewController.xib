@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MAPPOISearchViewController">
             <connections>
                 <outlet property="inputTipTableView" destination="CQS-Kc-YkF" id="UGS-Vx-yLo"/>
+                <outlet property="mapView" destination="W1B-qF-hJa" id="eXY-BH-dQj"/>
                 <outlet property="searchBar" destination="oub-sq-rCp" id="GL3-gW-cPm"/>
                 <outlet property="tableView" destination="6gF-tI-MAA" id="r55-DS-wxN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -53,8 +54,12 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1B-qF-hJa" customClass="MAMapView">
+                    <rect key="frame" x="0.0" y="64" width="600" height="268"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6gF-tI-MAA">
-                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <rect key="frame" x="0.0" y="332" width="600" height="268"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="xQs-ki-eW6"/>
@@ -85,15 +90,25 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="6gF-tI-MAA" secondAttribute="trailing" id="0po-WO-CeC"/>
                 <constraint firstAttribute="trailing" secondItem="ydr-s5-ZK5" secondAttribute="trailing" id="9Qn-3e-Z9j"/>
+                <constraint firstItem="W1B-qF-hJa" firstAttribute="height" secondItem="6gF-tI-MAA" secondAttribute="height" id="B2o-ra-21p"/>
                 <constraint firstItem="CQS-Kc-YkF" firstAttribute="trailing" secondItem="oub-sq-rCp" secondAttribute="trailing" constant="-8" id="F2D-4e-edF"/>
+                <constraint firstItem="W1B-qF-hJa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KoS-vu-7zv"/>
                 <constraint firstItem="6gF-tI-MAA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="N4c-9a-FCD"/>
                 <constraint firstItem="CQS-Kc-YkF" firstAttribute="leading" secondItem="oub-sq-rCp" secondAttribute="leading" constant="8" id="V9D-JA-ghp"/>
                 <constraint firstItem="ydr-s5-ZK5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c32-U1-caH"/>
                 <constraint firstItem="6gF-tI-MAA" firstAttribute="top" secondItem="ydr-s5-ZK5" secondAttribute="bottom" id="gHf-u7-R7O"/>
                 <constraint firstItem="ydr-s5-ZK5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="m7q-4q-MPf"/>
                 <constraint firstAttribute="bottom" secondItem="6gF-tI-MAA" secondAttribute="bottom" id="mRS-ae-OIq"/>
+                <constraint firstAttribute="trailing" secondItem="W1B-qF-hJa" secondAttribute="trailing" id="nre-ZD-TrQ"/>
+                <constraint firstItem="W1B-qF-hJa" firstAttribute="top" secondItem="ydr-s5-ZK5" secondAttribute="bottom" id="pxo-Vq-Xg3"/>
+                <constraint firstItem="6gF-tI-MAA" firstAttribute="top" secondItem="W1B-qF-hJa" secondAttribute="bottom" id="ukA-9i-mHy"/>
                 <constraint firstItem="CQS-Kc-YkF" firstAttribute="top" secondItem="oub-sq-rCp" secondAttribute="bottom" id="vJm-WX-K1T"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="gHf-u7-R7O"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>
