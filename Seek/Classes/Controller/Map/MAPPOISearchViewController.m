@@ -90,16 +90,17 @@
 - (void)keyboardDidShow:(NSNotification *)sender
 {
     self.mapView.hidden = YES;
+    [self.mapView addTransitionWithType:kCATransitionMoveIn subType:kCATransitionFromTop duration:0.5 key:nil];
+    [self.tableView addTransitionWithType:kCATransitionMoveIn subType:kCATransitionFromTop duration:0.5 key:nil];
     [self.tableView removeConstraint:self.heightConstraintsWhileHideKeyboard];
-    [self.tableView setNeedsUpdateConstraints];
-    [self.tableView updateConstraintsIfNeeded];
 }
+
 - (void)keyboardDidHide:(NSNotification *)sender
 {
     self.mapView.hidden = NO;
+    [self.tableView addTransitionWithType:kCATransitionMoveIn subType:kCATransitionFromBottom duration:0.5 key:nil];
+    [self.mapView addTransitionWithType:kCATransitionMoveIn subType:kCATransitionFromBottom duration:0.5 key:nil];
     [self.tableView addConstraint:self.heightConstraintsWhileHideKeyboard];
-    [self.tableView setNeedsUpdateConstraints];
-    [self.tableView updateConstraintsIfNeeded];
 }
 #pragma mark - LazyLoading
 - (NSMutableArray *)poiAroundArray
