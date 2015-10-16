@@ -125,6 +125,7 @@
     if (_dataArray != dataArray) {
         _dataArray  = nil;
         _dataArray = dataArray;
+        _countOfLinesForShow = [_dataArray count] > _maxCountForShow ? _maxCountForShow : [_dataArray count];
         [_dropdownTalbeView reloadData];
     }
 }
@@ -177,18 +178,17 @@
             _selectedIndex = [_dataArray count] - 1;
         }
         _currentLabel.text = _dataArray[_selectedIndex];
+        
     } else {
         _selectedIndex = -1;
     }
+    
 }
 
 - (void)setMaxCountForShow:(NSInteger)maxCountForShow
 {
     _maxCountForShow = maxCountForShow;
     _countOfLinesForShow = [_dataArray count] > _maxCountForShow ? _maxCountForShow : [_dataArray count];
-    CGRect frame = self.dropdownTalbeView.frame;
-    frame.size.height = _lineHeight * _countOfLinesForShow;
-    self.dropdownTalbeView.frame = frame;
 }
 
 - (void)setFrame:(CGRect)frame

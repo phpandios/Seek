@@ -65,7 +65,6 @@ return share; \
 
 
 
-#define kHexColor(colorString) [UIColor colorFromHexRGB:colorString]
 #define kNavBgColor kHexColor(@"40a3d3")
 // 自定义 -- END
 #endif

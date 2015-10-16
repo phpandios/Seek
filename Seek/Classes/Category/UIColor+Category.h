@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-
+#define kHexColor(colorString) [UIColor colorFromHexRGB:colorString]
 
 @interface UIColor (Category)
 

@@ -58,7 +58,7 @@ typedef enum {
  */
 - (instancetype)initWithFrame:(CGRect)frame dataSource:(NSArray *)array;
 
-@property (nonatomic, strong) IBInspectable UIColor *textColor;
+@property (nonatomic, strong) UIColor *textColor;
 
 @property (nonatomic, strong) UIFont *font;
 

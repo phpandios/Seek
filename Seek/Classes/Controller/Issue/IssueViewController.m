@@ -16,6 +16,8 @@
 
 - (IBAction)commitButtonAction:(UIButton *)sender;
 - (IBAction)dismisButtonAction:(UIButton *)sender;
+
+@property (nonatomic, copy) NSString *selectedCategory;
 @end
 
 @implementation IssueViewController
@@ -25,9 +27,12 @@
     self.title = @"发布";
     
     self.categoryArray = @[@"分类1", @"分类2", @"分类3", @"分类4", @"分类5"];
+    self.selectedCategory = self.categoryArray.firstObject;
     
+    // 分类下拉列表
     _categoryDropList.dataArray = self.categoryArray;
     _categoryDropList.delegate = self;
+    _categoryDropList.textColor = [UIColor whiteColor];
     _categoryDropList.selectedIndex = 0;
     [_categoryDropList setListBackColor:kNavBgColor];
     [_categoryDropList setListTextColor:[UIColor whiteColor]];
@@ -52,7 +57,7 @@
 #pragma mark - WFFDropdownListDelegate
 - (void)dropdownList:(WFFDropdownList *)dropdownList didSelectedIndex:(NSInteger)selectedIndex
 {
-    
+    self.selectedCategory = self.categoryArray[selectedIndex];
 }
 /*
 #pragma mark - Navigation

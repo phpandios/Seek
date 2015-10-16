@@ -14,9 +14,14 @@
 
 @property (nonatomic, assign) NSInteger dynamicId;
 
+// 地点
 @property (nonatomic, assign) CGFloat longitude; // 经度
 
 @property (nonatomic, assign) CGFloat latitude; // 纬度
+
+@property (nonatomic, copy) NSString *locationName; // 地点名称
+
+@property (nonatomic, copy) NSString *locationAddress;
 
 // 动态内容
 @property (nonatomic, copy) NSString *content;
