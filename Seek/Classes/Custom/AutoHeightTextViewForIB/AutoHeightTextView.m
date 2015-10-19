@@ -30,22 +30,27 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewEndEditing:) name:UITextViewTextDidEndEditingNotification object:self];
         
         self.realTextColor = [[super textColor] copy];
+        self.textContainerInset = UIEdgeInsetsMake(8, 0, 8, 0);
     }
     return self;
 }
 
 - (CGSize)intrinsicContentSize
 {
-//    CGFloat width = self.contentSize.width - kEdgeInsetFromIB * 2;
-//    CGSize makeSize = CGSizeMake(width, 1000);
-//    CGFloat height = [self.text boundingRectWithSize:makeSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.font} context:nil].size.height;
-//    height += kEdgeInsetFromIB * 2;
     CGFloat height = self.contentSize.height;
-    if (height < _minHeight && _minHeight != 0) {
-        height = _minHeight;
-    } else if (height > _maxHeight && _maxHeight != 0){
-        height = _maxHeight;
+    
+    if (_minHeight != 0) {
+        if (height < _minHeight) {
+            height = _minHeight;
+        }
     }
+    
+    if (_maxHeight != 0) {
+        if (height > _maxHeight) {
+            height = _maxHeight;
+        }
+    }
+   
     return CGSizeMake(UIViewNoIntrinsicMetric, height);
 }
 
