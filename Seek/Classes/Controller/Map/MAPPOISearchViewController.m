@@ -38,8 +38,7 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // 配置key
-        [MAMapServices sharedServices].apiKey = kLBSAppKey;
+        
         
     }
     return self;

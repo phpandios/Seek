@@ -75,24 +75,24 @@
     //数据校验
     if (password.length == 0 && surePassword.length == 0)
     {
-        SHOWMESSAGE(@"请输入密码");
+        SHOWERROR(@"请输入密码");
         isValid = NO;
     }
     if ([password rangeOfString:@"[a-zA-Z0-9]+" options:NSRegularExpressionSearch].length < password.length)
     {
-        SHOWMESSAGE(@"密码应为6-16位字母或数字，不包含其他字符");
+        SHOWERROR(@"密码应为6-16位字母或数字，不包含其他字符");
         
         isValid = NO;
     }
     else if (password == nil || password.length < 6 || password.length > 16)
     {
-        SHOWMESSAGE(@"密码长度不正确，应为6-16位字母或数字");
+        SHOWERROR(@"密码长度不正确，应为6-16位字母或数字");
 
         isValid = NO;
     }
     else if (![password isEqualToString:surePassword])
     {
-        SHOWMESSAGE(@"两次输入密码不一致");
+        SHOWERROR(@"两次输入密码不一致");
         isValid = NO;
     }
     
@@ -104,7 +104,18 @@
 }
 - (IBAction)commitButtonAction:(UIButton *)sender {
     if ([self verifyDataValid]) {
-        SHOWMESSAGE(@"注册成功");
+        __weak typeof(self) weakSelf = self;
+        [KVNProgress show];
+        [[Common shareCommon] regWithTelPhone:self.phoneNum password:self.pwdTextField.text completionHandle:^(BOOL isSuccess) {
+            if (isSuccess) {
+                [[Common shareCommon] loginWithTelPhone:weakSelf.phoneNum password:weakSelf.pwdTextField.text completionHandle:^(BOOL isSuccess) {
+                    if (isSuccess) {
+                        SHOWSUCCESS(@"登陆成功");
+                    } 
+                }];
+            } else {
+            }
+        }];
         
 //        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }

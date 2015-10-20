@@ -53,6 +53,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+    
     self.otherUsersCollectionView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.2];
 
     [self.otherUsersCollectionView registerNib:[UINib nibWithNibName:@"UserForMapCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"otherUserCell"];

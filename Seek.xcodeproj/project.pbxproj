@@ -31,8 +31,9 @@
 		189950D81BC6D3EC00E12BDC /* issue.png in Resources */ = {isa = PBXBuildFile; fileRef = 189950D31BC6D3EC00E12BDC /* issue.png */; settings = {ASSET_TAGS = (); }; };
 		189950D91BC6D3EC00E12BDC /* mapTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 189950D41BC6D3EC00E12BDC /* mapTab.png */; settings = {ASSET_TAGS = (); }; };
 		189950DA1BC6D3EC00E12BDC /* mine.png in Resources */ = {isa = PBXBuildFile; fileRef = 189950D51BC6D3EC00E12BDC /* mine.png */; settings = {ASSET_TAGS = (); }; };
+		6003F56F1BD6120D000FB713 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F56E1BD6120D000FB713 /* Tool.m */; settings = {ASSET_TAGS = (); }; };
 		60117B8E1BC7ECD3001D4EC0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117B8D1BC7ECD3001D4EC0 /* Reachability.m */; settings = {ASSET_TAGS = (); }; };
-		60117B911BC7ED77001D4EC0 /* NetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117B901BC7ED77001D4EC0 /* NetHelper.m */; settings = {ASSET_TAGS = (); }; };
+		60117B911BC7ED77001D4EC0 /* DataBaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117B901BC7ED77001D4EC0 /* DataBaseHelper.m */; settings = {ASSET_TAGS = (); }; };
 		60117BA11BC7EE86001D4EC0 /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117B951BC7EE86001D4EC0 /* ALAlertBanner.m */; settings = {ASSET_TAGS = (); }; };
 		60117BA21BC7EE86001D4EC0 /* ALAlertBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117B971BC7EE86001D4EC0 /* ALAlertBannerManager.m */; settings = {ASSET_TAGS = (); }; };
 		60117BA31BC7EE86001D4EC0 /* bannerAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 60117B991BC7EE86001D4EC0 /* bannerAlert.png */; settings = {ASSET_TAGS = (); }; };
@@ -250,10 +251,13 @@
 		189950D31BC6D3EC00E12BDC /* issue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = issue.png; sourceTree = "<group>"; };
 		189950D41BC6D3EC00E12BDC /* mapTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapTab.png; sourceTree = "<group>"; };
 		189950D51BC6D3EC00E12BDC /* mine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mine.png; sourceTree = "<group>"; };
+		6003F56D1BD6120D000FB713 /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
+		6003F56E1BD6120D000FB713 /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
+		6003F5711BD61633000FB713 /* URLConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLConst.h; sourceTree = "<group>"; };
 		60117B8C1BC7ECD3001D4EC0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		60117B8D1BC7ECD3001D4EC0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		60117B8F1BC7ED77001D4EC0 /* NetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetHelper.h; sourceTree = "<group>"; };
-		60117B901BC7ED77001D4EC0 /* NetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetHelper.m; sourceTree = "<group>"; };
+		60117B8F1BC7ED77001D4EC0 /* DataBaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseHelper.h; sourceTree = "<group>"; };
+		60117B901BC7ED77001D4EC0 /* DataBaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseHelper.m; sourceTree = "<group>"; };
 		60117B931BC7EE86001D4EC0 /* ALAlertBanner+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAlertBanner+Private.h"; sourceTree = "<group>"; };
 		60117B941BC7EE86001D4EC0 /* ALAlertBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAlertBanner.h; sourceTree = "<group>"; };
 		60117B951BC7EE86001D4EC0 /* ALAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAlertBanner.m; sourceTree = "<group>"; };
@@ -777,12 +781,15 @@
 		606364891BC1011C00A36965 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				60117B8F1BC7ED77001D4EC0 /* NetHelper.h */,
-				60117B901BC7ED77001D4EC0 /* NetHelper.m */,
+				60117B8F1BC7ED77001D4EC0 /* DataBaseHelper.h */,
+				60117B901BC7ED77001D4EC0 /* DataBaseHelper.m */,
 				609CEABB1BC9658000F99BD6 /* Common.h */,
 				609CEABC1BC9658000F99BD6 /* Common.m */,
 				60C36BA01BCFC2500095F7DC /* MapSearchHelper.h */,
 				60C36BA11BCFC2500095F7DC /* MapSearchHelper.m */,
+				6003F56D1BD6120D000FB713 /* Tool.h */,
+				6003F56E1BD6120D000FB713 /* Tool.m */,
+				6003F5711BD61633000FB713 /* URLConst.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1024,18 +1031,18 @@
 		607AC7921BCF7CB9002F8600 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				607AC7931BCF7CB9002F8600 /* CheckPhoneViewController.h */,
-				607AC7941BCF7CB9002F8600 /* CheckPhoneViewController.m */,
-				607AC7951BCF7CB9002F8600 /* CheckPhoneViewController.xib */,
 				607AC7961BCF7CB9002F8600 /* LoginViewController.h */,
 				607AC7971BCF7CB9002F8600 /* LoginViewController.m */,
 				607AC7981BCF7CB9002F8600 /* LoginViewController.xib */,
-				607AC7991BCF7CB9002F8600 /* SetPwdViewController.h */,
-				607AC79A1BCF7CB9002F8600 /* SetPwdViewController.m */,
-				607AC79B1BCF7CB9002F8600 /* SetPwdViewController.xib */,
+				607AC7931BCF7CB9002F8600 /* CheckPhoneViewController.h */,
+				607AC7941BCF7CB9002F8600 /* CheckPhoneViewController.m */,
+				607AC7951BCF7CB9002F8600 /* CheckPhoneViewController.xib */,
 				607AC79C1BCF7CB9002F8600 /* ValidateViewController.h */,
 				607AC79D1BCF7CB9002F8600 /* ValidateViewController.m */,
 				607AC79E1BCF7CB9002F8600 /* ValidateViewController.xib */,
+				607AC7991BCF7CB9002F8600 /* SetPwdViewController.h */,
+				607AC79A1BCF7CB9002F8600 /* SetPwdViewController.m */,
+				607AC79B1BCF7CB9002F8600 /* SetPwdViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1587,6 +1594,7 @@
 				189950BE1BC6CB5100E12BDC /* towPhotoCell.m in Sources */,
 				189950BC1BC6CB5100E12BDC /* ThreePhotoCell.m in Sources */,
 				607AC76A1BCF4B66002F8600 /* SZTextView.m in Sources */,
+				6003F56F1BD6120D000FB713 /* Tool.m in Sources */,
 				60C30FD31BD5374100EE62FC /* UIImage+KVNEmpty.m in Sources */,
 				60DA7D111BCDF43C00151717 /* UIColor+Category.m in Sources */,
 				60DA7D151BCDF6B400151717 /* TTTAttributedLabel.m in Sources */,
@@ -1594,7 +1602,7 @@
 				60C4BD7D1BCAA7BB00A50D85 /* UIImage+WebP.m in Sources */,
 				60C4BDB11BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m in Sources */,
 				60C4BD741BCAA7BB00A50D85 /* SDWebImageCompat.m in Sources */,
-				60117B911BC7ED77001D4EC0 /* NetHelper.m in Sources */,
+				60117B911BC7ED77001D4EC0 /* DataBaseHelper.m in Sources */,
 				60C30FD01BD5374100EE62FC /* KVNProgressConfiguration.m in Sources */,
 				60117BA21BC7EE86001D4EC0 /* ALAlertBannerManager.m in Sources */,
 				60C4BD761BCAA7BB00A50D85 /* SDWebImageDownloader.m in Sources */,

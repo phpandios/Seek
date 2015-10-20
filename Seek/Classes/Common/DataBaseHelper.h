@@ -1,5 +1,5 @@
 //
-//  NetHelper.h
+//  DataBaseHelper.h
 //  Seek
 //
 //  Created by 吴非凡 on 15/10/9.
@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NetHelper : NSObject
+@interface DataBaseHelper : NSObject
 
-kSingleTon_H(NetHelper)
+kSingleTon_H(DataBaseHelper)
 
 #pragma mark - 网络请求数据基类
 - (void)getDataWithUrlString:(NSString *)urlString completionHandle:(void(^)(NSData *data))completionHandle;
 
+- (void)postDataWithUrlString:(NSString *)urlString paramString:(NSString *)paramString completionHandle:(void(^)(NSData *data))completionHandle;
 
-//- (void)postDataWithUrlString:(NSString *)urlString completionHandle:(void(^)(NSData *data))completionHandle;
+- (BOOL)checkConnectionStatus;
 
 @end

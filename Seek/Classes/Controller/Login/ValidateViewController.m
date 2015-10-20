@@ -56,7 +56,7 @@
             dispatch_source_cancel(timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.resendButton setTitle:@"重新发送" forState:UIControlStateNormal];
-                weakSelf.resendButton.enabled = YES;
+                [weakSelf.resendButton setEnabled:YES];
             });
         }
         else
@@ -64,7 +64,7 @@
             timeout--;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.resendButton setTitle:[NSString stringWithFormat:@"%d秒后重发",timeout] forState:UIControlStateDisabled];
-                weakSelf.resendButton.enabled = NO;
+                [weakSelf.resendButton setEnabled:NO];
             });
         }
     });
@@ -104,6 +104,7 @@
 - (IBAction)commitButtonAction:(UIButton *)sender {
     if (![self errorByValidate]) {
         SetPwdViewController *vc = [[SetPwdViewController alloc] initWithNibName:@"SetPwdViewController" bundle:nil];
+        vc.phoneNum = self.phoneNum;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

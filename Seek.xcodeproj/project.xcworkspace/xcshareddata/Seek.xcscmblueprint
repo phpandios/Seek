@@ -3,16 +3,21 @@
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "3ae940f3-8410-4859-82cb-97a2b19ad8f4++3340" : {
 
+    },
+    "60b5c825-4fb8-4975-a861-cdc06fd4b25b++260" : {
+
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3ae940f3-8410-4859-82cb-97a2b19ad8f4++3340" : 0,
     "5DC53F0CC075DBCAB52E785BA1259BB490E2B29E" : 0,
-    "3ae940f3-8410-4859-82cb-97a2b19ad8f4++3340" : 0
+    "60b5c825-4fb8-4975-a861-cdc06fd4b25b++260" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "64ACFCEA-1170-4469-99F0-09A48CCD0EAE",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3ae940f3-8410-4859-82cb-97a2b19ad8f4++3340" : "Seek\/Seek\/Classes\/Vendor\/MBProgressHUD\/",
     "5DC53F0CC075DBCAB52E785BA1259BB490E2B29E" : "Seek\/",
-    "3ae940f3-8410-4859-82cb-97a2b19ad8f4++3340" : "Seek\/Seek\/Classes\/Vendor\/MBProgressHUD\/"
+    "60b5c825-4fb8-4975-a861-cdc06fd4b25b++260" : "Seek\/Seek\/Classes\/Vendor\/KVN\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Seek",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -27,6 +32,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/phpandios\/Seek.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5DC53F0CC075DBCAB52E785BA1259BB490E2B29E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/115.28.227.1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "60b5c825-4fb8-4975-a861-cdc06fd4b25b++260"
     }
   ]
 }

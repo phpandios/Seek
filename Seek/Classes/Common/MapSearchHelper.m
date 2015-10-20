@@ -33,8 +33,6 @@ kSingleTon_M(MapSearchHelper)
 - (instancetype)init
 {
     if (self = [super init]) {
-        // 搜索
-        [AMapSearchServices sharedServices].apiKey = kLBSAppKey;
         
         
         // 检索对象

@@ -13,6 +13,9 @@
 #import "UMSocial.h"
 #import "UMSocialData.h"
 #import <RongIMKit/RongIMKit.h>
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+
 #import "LoginViewController.h"
 @interface AppDelegate ()
 
@@ -30,6 +33,12 @@
     // 融云
     [[RCIM sharedRCIM] initWithAppKey:kRCIMAppKey];
     
+    // 地图
+    [MAMapServices sharedServices].apiKey = kLBSAppKey;
+    
+    
+    // 搜索
+    [AMapSearchServices sharedServices].apiKey = kLBSAppKey;
     /**
      * 推送处理1
      */
@@ -93,7 +102,7 @@
     
     
    
-    [self login];
+//    [self login];
     
     
     

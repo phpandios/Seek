@@ -10,4 +10,6 @@
 
 @interface SetPwdViewController : UIViewController
 
+@property (nonatomic, copy) NSString *phoneNum;
+
 @end

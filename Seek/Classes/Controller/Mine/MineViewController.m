@@ -112,8 +112,8 @@
     UITableViewCell *cell = nil;
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"headerCell" forIndexPath:indexPath];
-        [((UserHeaderTableViewCell *)cell).headerImageView sd_setImageWithURL:[NSURL URLWithString:kCurrentUser.iconUrl] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
-        ((UserHeaderTableViewCell *)cell).userNameLabel.text = kCurrentUser.userName;
+        [((UserHeaderTableViewCell *)cell).headerImageView sd_setImageWithURL:[NSURL URLWithString:kCurrentUser.head_portrait] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
+        ((UserHeaderTableViewCell *)cell).userNameLabel.text = kCurrentUser.nick_name;
         ((UserHeaderTableViewCell *)cell).headerViewClickBlock = ^(){
             [weakSelf showImagePickerControllerWithTitle:@"更换头像" cancleHandle:nil];
 //            SHOWMESSAGE(@"更换头像");
@@ -138,19 +138,20 @@
             switch (indexPath.row) {
                 case 0:
                     cell.textLabel.text = @"昵称";
-                    cell.detailTextLabel.text = kCurrentUser.userName;
+                    cell.detailTextLabel.text = kCurrentUser.nick_name;
                     break;
                 case 1:
                     cell.textLabel.text = @"手机";
-                    if ([[kCurrentUser telPhone] length] == 0) { // 没绑定手机
+                    if ([[kCurrentUser telephone] length] == 0) { // 没绑定手机
                         cell.detailTextLabel.text = @"点击绑定手机";
                     } else {
-                        cell.detailTextLabel.text = kCurrentUser.telPhone;
+                        cell.detailTextLabel.text = kCurrentUser.telephone;
                     }
                     break;
                 case 2:
                     cell.textLabel.text = @"性别";
-                    cell.detailTextLabel.text = kCurrentUser.gender;
+                    NSString *gender = kCurrentUser.gender == 0 ? @"请选择" : (kCurrentUser.gender == 1 ? @"男" : @"女");
+                    cell.detailTextLabel.text = gender;
                     break;
             }
         } else if (indexPath.section == 3){

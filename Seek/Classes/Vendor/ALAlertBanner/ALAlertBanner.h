@@ -25,7 +25,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-#define SHOWMESSAGE(...) [ALAlertBanner showNotifyWithTitle:[NSString stringWithFormat:__VA_ARGS__]];
 
 typedef enum {
     ALAlertBannerStyleSuccess = 0,

@@ -109,12 +109,7 @@
         // QQ头像大小 100 * 100
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-            User *loginUser = [User new];
-            loginUser.userId = snsAccount.usid;
-            loginUser.userName = snsAccount.userName;
-            loginUser.iconUrl = snsAccount.iconURL;
-            [[Common shareCommon] loginWithUser:loginUser];
-//            [self loginCompletion];
+            [[Common shareCommon] loginWithQQID:snsAccount.usid nick_name:snsAccount.userName head_portrait:snsAccount.iconURL completionHandle:nil];
         }});
 }
 
@@ -126,11 +121,23 @@
     CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
     vc.type = CheckPhoneTypeForRegister;
     [self.navigationController pushViewController:vc animated:YES];
-    SHOWMESSAGE(@"注册");
 }
 
 - (IBAction)loginButtonAction:(UIButton *)sender {
-    SHOWMESSAGE(@"登陆");
+    if ([self.userTextField.text isEmpty]) {
+        SHOWERROR(@"请输入用户名!");
+        return;
+    }
+    if ([self.pwdTextField.text isEmpty]) {
+        SHOWERROR(@"请输入密码!");
+        return;
+    }
+    [KVNProgress show];
+    [[Common shareCommon] loginWithTelPhone:self.userTextField.text password:self.pwdTextField.text completionHandle:^(BOOL isSuccess) {
+        if (isSuccess) {
+            SHOWSUCCESS(@"登录成功");
+        }
+    }];
 }
 - (IBAction)forgetPwdButtonAction:(UIButton *)sender {
     SHOWMESSAGE(@"忘记密码");

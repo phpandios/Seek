@@ -10,13 +10,17 @@
 
 @implementation User
 
-// 默认性别男
-- (instancetype)init
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    if (self = [super init]) {
-        self.gender = @"男";
+    SBLog(@"ERROR KEY:%@", key);
+}
+
+- (void)setValuesForKeysWithDictionary:(NSDictionary<NSString *,id> *)keyedValues
+{
+    [super setValuesForKeysWithDictionary:keyedValues];
+    if ([keyedValues.allKeys containsObject:@"id"]) {
+        [super setValue:keyedValues[@"id"] forKey:@"Id"];
     }
-    return self;
 }
 
 @end

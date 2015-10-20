@@ -101,16 +101,9 @@
 */
 
 #pragma mark - 验证手机号
-/*
- 验证手机号的错误信息
- nil代表验证通过
- */
-- (NSString *)erroByCheckPhoneNum
-{
-    return nil;
-}
 - (IBAction)commitButtonAction:(UIButton *)sender {
-    if ([self erroByCheckPhoneNum]) {
+    if (![Tool isMobileNumber:self.phoneNumTextField.text]) {
+        SHOWERROR(@"请输入正确的手机号");
         return;
     }
     ValidateViewController *vc = [[ValidateViewController alloc] initWithNibName:@"ValidateViewController" bundle:nil];

@@ -10,18 +10,22 @@
 
 @interface User : NSObject
 
-@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *Id;
 
-@property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *nick_name;
 
-@property (nonatomic, copy) NSString *iconUrl;
+@property (nonatomic, copy) NSString *head_portrait;
 
-@property (nonatomic, copy) NSString *telPhone;
+@property (nonatomic, copy) NSString *telephone;
 
-@property (nonatomic, copy) NSString *gender;
+@property (nonatomic, assign) NSInteger gender;
 
-@property (nonatomic, copy) NSString *qqId;
+@property (nonatomic, copy) NSString *qq_id;
 
-@property (nonatomic, copy) NSString *weixinId;
+@property (nonatomic, copy) NSString *we_chat_id;
+
+@property (nonatomic, assign) CGFloat longitude;
+
+@property (nonatomic, assign) CGFloat latitude;
 
 @end
