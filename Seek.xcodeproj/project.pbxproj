@@ -82,7 +82,6 @@
 		6090687C1BCE88BF009A074B /* release_notes_ios.txt in Resources */ = {isa = PBXBuildFile; fileRef = 609068761BCE88BF009A074B /* release_notes_ios.txt */; settings = {ASSET_TAGS = (); }; };
 		6090687D1BCE88BF009A074B /* RongCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 609068771BCE88BF009A074B /* RongCloud.bundle */; settings = {ASSET_TAGS = (); }; };
 		609068811BCE88CB009A074B /* RongIMKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6090687F1BCE88CB009A074B /* RongIMKit.framework */; settings = {ASSET_TAGS = (); }; };
-		609068821BCE88CB009A074B /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609068801BCE88CB009A074B /* RongIMLib.framework */; settings = {ASSET_TAGS = (); }; };
 		609068841BCE898E009A074B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609068831BCE898E009A074B /* AssetsLibrary.framework */; };
 		609068861BCE8999009A074B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609068851BCE8999009A074B /* AudioToolbox.framework */; };
 		609068881BCE89A1009A074B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609068871BCE89A1009A074B /* AVFoundation.framework */; };
@@ -331,7 +330,6 @@
 		609068771BCE88BF009A074B /* RongCloud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RongCloud.bundle; sourceTree = "<group>"; };
 		609068781BCE88BF009A074B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RongCloudKit.strings"; sourceTree = "<group>"; };
 		6090687F1BCE88CB009A074B /* RongIMKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RongIMKit.framework; sourceTree = "<group>"; };
-		609068801BCE88CB009A074B /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RongIMLib.framework; sourceTree = "<group>"; };
 		609068831BCE898E009A074B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		609068851BCE8999009A074B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		609068871BCE89A1009A074B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -538,7 +536,6 @@
 				601C1AF31BC26608007C956A /* libSocialQQ.a in Frameworks */,
 				60DFF4831BC155930078A00F /* libz.tbd in Frameworks */,
 				60B06E3A1BC69DD0006AB01E /* MAMapKit.framework in Frameworks */,
-				609068821BCE88CB009A074B /* RongIMLib.framework in Frameworks */,
 				60DFF4811BC155870078A00F /* libstdc++.tbd in Frameworks */,
 				60DFF47F1BC155780078A00F /* CoreTelephony.framework in Frameworks */,
 				601C1AF71BC26608007C956A /* libWeChatSDK.a in Frameworks */,
@@ -1072,7 +1069,6 @@
 			isa = PBXGroup;
 			children = (
 				6090687F1BCE88CB009A074B /* RongIMKit.framework */,
-				609068801BCE88CB009A074B /* RongIMLib.framework */,
 			);
 			path = RongCloud;
 			sourceTree = "<group>";

@@ -31,6 +31,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [KVNProgress show];
+    [[Common shareCommon] getTokenWithUser:kCurrentUser completionHandle:^(BOOL isSucess) {
+        if (isSucess) {
+            [[RCIM sharedRCIM] connectWithToken:kCurrentToken success:^(NSString *userId) {
+                SBLog(@"连接服务器成功 TOKEN -- %@", kCurrentToken);
+            } error:^(RCConnectErrorCode status) {
+                SHOWERROR(@"连接服务器失败,暂时无法使用聊天功能!");
+            } tokenIncorrect:^{
+                SHOWERROR(@"TOKEN失效,暂时无法使用聊天功能,请联系客服解决!");
+            }];
+        }
+        [KVNProgress dismiss];
+    }];
+    
     self.delegate = self;
     
     self.tabBar.translucent = NO;

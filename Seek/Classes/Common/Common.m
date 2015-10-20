@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) User *loginUser;
 
+@property (nonatomic, copy) NSString *token;
 @end
 
 @implementation Common
@@ -114,8 +115,6 @@ kSingleTon_M(Common)
 #pragma mark - 注册
 - (void)regWithTelPhone:(NSString *)telPhone password:(NSString *)password completionHandle:(void(^)(BOOL isSuccess))completionHandle
 {
-    
-    __weak typeof(self) weakSelf = self;
     [[DataBaseHelper shareDataBaseHelper] postDataWithUrlString:kRegUrlString paramString:kParamForReg(telPhone, password, @"", @"", 0.0f, 0.0f, @"", 1, kRegOrLoginTypeByTel) completionHandle:^(NSData *data) {
         if (!data) {
             SHOWERROR(@"网络故障,请检查后重试!");
@@ -155,11 +154,8 @@ kSingleTon_M(Common)
 - (void)loginWithUser:(User *)user
 {
     self.loginUser = user;
-    
     [((AppDelegate *)[UIApplication sharedApplication].delegate) login];
 }
-
-
 
 #pragma mark - 注销
 - (void)logout
@@ -167,4 +163,46 @@ kSingleTon_M(Common)
     self.loginUser = nil;
     [((AppDelegate *)[UIApplication sharedApplication].delegate) logout];
 }
+
+
+#pragma mark - 获取token
+- (void)getTokenWithUser:(User *)user completionHandle:(void (^)(BOOL isSucess))completionHandle
+{
+    __weak typeof(self) weakSelf = self;
+    [[DataBaseHelper shareDataBaseHelper] postDataWithUrlString:kGetTokenUrlString paramString:kParamForGetToken(user.Id, user.nick_name, user.head_portrait) completionHandle:^(NSData *data) {
+        if (!data) {
+            SHOWERROR(@"网络故障,获取TOKEN失败,聊天功能暂时无法使用!");
+            if (completionHandle) {
+                completionHandle(NO);
+            }
+            return ;
+        }
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        if (dict[@"code"]) {
+            NSInteger code = [dict[@"code"] integerValue];
+            if (code == 200) {
+                weakSelf.token = dict[@"token"];
+                if (completionHandle) {
+                    completionHandle(YES);
+                }
+            } else {
+                if (dict[@"message"] && [dict[@"message"] length] > 0) {
+                    NSString *message = dict[@"message"];
+                    SHOWERROR(@"%@", message);
+                } else {
+                    SHOWERROR(@"获取TOKEN失败,聊天功能暂时无法使用!");
+                }
+                if (completionHandle) {
+                    completionHandle(NO);
+                }
+            }
+        } else {
+            SHOWERROR(@"获取TOKEN失败,聊天功能暂时无法使用!");
+            if (completionHandle) {
+                completionHandle(NO);
+            }
+        }
+    }];
+}
+
 @end

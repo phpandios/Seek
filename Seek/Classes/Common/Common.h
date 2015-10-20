@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import <RongIMKit/RongIMKit.h>
 #define kCurrentUser ([[Common shareCommon] loginUser])
-
+#define kCurrentToken ([[Common shareCommon] token])
 @interface Common : NSObject
 
 // 对于外界 将loginUser属性改成只读
 @property (nonatomic, strong, readonly) User *loginUser;
 
+@property (nonatomic, copy, readonly) NSString *token;
 kSingleTon_H(Common)
-
 
 #pragma mark - 手机登陆
 - (void)loginWithTelPhone:(NSString *)telPhone password:(NSString *)password completionHandle:(void(^)(BOOL isSuccess))completionHandle;
@@ -27,4 +28,7 @@ kSingleTon_H(Common)
 
 #pragma mark - 注册
 - (void)regWithTelPhone:(NSString *)telPhone password:(NSString *)password completionHandle:(void(^)(BOOL isSuccess))completionHandle;
+
+#pragma mark - 获取token
+- (void)getTokenWithUser:(User *)user completionHandle:(void (^)(BOOL isSucess))completionHandle;
 @end
