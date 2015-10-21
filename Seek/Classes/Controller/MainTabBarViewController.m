@@ -11,7 +11,7 @@
 #import "IssueViewController.h"
 #import "MapViewController.h"
 #import "MineViewController.h"
-#import "MessageViewController.h"
+#import "ChatListViewController.h"
 
 
 @interface MainTabBarViewController ()<UITabBarControllerDelegate>
@@ -31,24 +31,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [KVNProgress show];
-    [[Common shareCommon] getTokenWithUser:kCurrentUser completionHandle:^(BOOL isSucess) {
-        if (isSucess) {
-            [[RCIM sharedRCIM] connectWithToken:kCurrentToken success:^(NSString *userId) {
-                SBLog(@"连接服务器成功 TOKEN -- %@", kCurrentToken);
-            } error:^(RCConnectErrorCode status) {
-                SHOWERROR(@"连接服务器失败,暂时无法使用聊天功能!");
-            } tokenIncorrect:^{
-                SHOWERROR(@"TOKEN失效,暂时无法使用聊天功能,请联系客服解决!");
-            }];
-        }
-        [KVNProgress dismiss];
-    }];
+//    [KVNProgress show];
+//    [[Common shareCommon] getTokenWithUser:kCurrentUser completionHandle:^(BOOL isSucess) {
+//        if (isSucess) {
+//            NSLog(@"%@", kCurrentToken);
+//            [[RCIM sharedRCIM] connectWithToken:kCurrentToken success:^(NSString *userId) {
+//                //设置用户信息提供者,页面展现的用户头像及昵称都会从此代理取
+//                [[RCIM sharedRCIM] setUserInfoDataSource:self];
+//                SBLog(@"连接服务器成功 TOKEN -- %@", kCurrentToken);
+//            } error:^(RCConnectErrorCode status) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    
+//                    SBLog(@"连接服务器失败,暂时无法使用聊天功能!");
+//                });
+//            } tokenIncorrect:^{
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    
+//                    SBLog(@"TOKEN失效,暂时无法使用聊天功能,请联系客服解决!");
+//                 });
+//            }];
+//            
+//            [KVNProgress dismiss];
+//        }
+//    }];
     
     self.delegate = self;
     
     self.tabBar.translucent = NO;
-    self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"MessageViewController", @"MineViewController"];
+    self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"ChatListViewController", @"MineViewController"];
     self.itemTitle = @[@"动态", @"地图", @"消息", @"我的"];
     self.itemNeedNav = @[@(YES), @(NO), @(YES), @(YES)];
     self.itemImagesName = @[@"dynamic", @"mapTab", @"message", @"mine"];
@@ -106,8 +116,6 @@
     }
     return YES;
 }
-
-
 
 /*
 #pragma mark - Navigation

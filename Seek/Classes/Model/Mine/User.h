@@ -10,7 +10,7 @@
 
 @interface User : NSObject
 
-@property (nonatomic, copy) NSString *Id;
+@property (nonatomic, assign) NSInteger Id;
 
 @property (nonatomic, copy) NSString *nick_name;
 

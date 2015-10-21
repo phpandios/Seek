@@ -10,7 +10,7 @@
 #import "LoginViewController.h"
 #import "UserHeaderTableViewCell.h"
 #import "UserLogoutTableViewCell.h"
-
+#import "FriendListViewController.h"
 #import "AppDelegate.h"
 @interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -31,6 +31,11 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"UserHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"headerCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"UserLogoutTableViewCell" bundle:nil] forCellReuseIdentifier:@"logoutCell"];
+    
+//    self.navigationItem.rightBarButtonItem = ({
+//        UIBarButtonItem *addFriendItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addFriend:)];
+//        addFriendItem;
+//    });
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -128,10 +133,10 @@
         if (indexPath.section == 1) {
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = @"我的关注";
+                    cell.textLabel.text = @"我的好友";
                     break;
                 case 1:
-                    cell.textLabel.text = @"我的粉丝";
+                    cell.textLabel.text = @"好友请求";
                     break;
             }
         } else if (indexPath.section == 2) {
@@ -197,6 +202,33 @@
     return 60;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) { // 我的好友
+//            if (![Common shareCommon].friendArray) {
+//                [KVNProgress show];
+//                __weak typeof(self) weakSelf = self;
+//                [[Common shareCommon] getFriendListCompletionHandle:^(NSArray *friendArray) {
+//                    if (friendArray) {
+//                        [KVNProgress dismiss];
+//                        [weakSelf pushFriendListVC];
+//                    }
+//                }];
+//            } else {
+//                [self pushFriendListVC];
+//            }
+            
+        }
+    }
+}
+
+- (void)pushFriendListVC
+{
+    FriendListViewController *friendVC = [[FriendListViewController alloc] initWithDisplayConversationTypes:nil collectionConversationType:nil];
+    friendVC.conversationListDataSource = [Common shareCommon].friendArray;
+    [self.navigationController pushViewController:friendVC animated:YES];
+}
 #pragma mark - UIImagePickerController
 - (void)showImagePickerControllerWithTitle:(NSString *)title cancleHandle:(void (^)())cancleHandle
 {
@@ -277,6 +309,20 @@
 
 
 
+//#pragma mark - 右上角添加好友
+//- (void)addFriend:(UIBarButtonItem *)sender
+//{
+//    
+//    [self showAlertControllerWithTitle:@"查找好友" hasTextField:YES okHandle:^(NSString *returnText) {
+//        [KVNProgress show];
+//        [[Common shareCommon] sendFriendRequestWithUserId:[returnText integerValue] message:@"加一下呗" completionHandle:^(BOOL isSuccess) {
+//            if (isSuccess) {
+//                SHOWSUCCESS(@"好友请求发送成功");
+//            }
+//        }];
+//    } cancelHandle:^{
+//    }];
+//}
 
 /*
 #pragma mark - Navigation

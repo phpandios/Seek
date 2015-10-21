@@ -31,6 +31,13 @@
 
 // 获取token
 #define kGetTokenUrlString @"http://hzftjy.com/seek/seek.php/token"
-#define kParamForGetToken(userId, name, portraitUri) [NSString stringWithFormat:@"user_id=%@&nick_name=%@&head_portrait=%@", userId, name, portraitUri]
+#define kParamForGetToken(userId, name, portraitUri) [NSString stringWithFormat:@"user_id=%ld&nick_name=%@&head_portrait=%@", userId, name, portraitUri]
 
+// 添加好友
+#define kSendFriendRequestUrlString @"http://hzftjy.com/seek/seek.php/request_friend"
+#define kParamForSendFriendRequest(id, message) [NSString stringWithFormat:@"id=%ld&message=%@", id, message]
+
+// 获取好友
+#define kGetFriendList @"http://hzftjy.com/seek/seek.php/get_friend"
+#define kParamForGetFriendList(user_id) [NSString stringWithFormat:@"user_id=%ld", user_id]
 #endif /* URLConst_h */

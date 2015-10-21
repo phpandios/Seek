@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/*
+ 网络请求基类
+ */
 @interface DataBaseHelper : NSObject
 
 kSingleTon_H(DataBaseHelper)

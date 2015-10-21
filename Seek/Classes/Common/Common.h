@@ -17,6 +17,8 @@
 @property (nonatomic, strong, readonly) User *loginUser;
 
 @property (nonatomic, copy, readonly) NSString *token;
+
+@property (nonatomic, strong) NSMutableArray *friendArray;
 kSingleTon_H(Common)
 
 #pragma mark - 手机登陆
@@ -31,4 +33,10 @@ kSingleTon_H(Common)
 
 #pragma mark - 获取token
 - (void)getTokenWithUser:(User *)user completionHandle:(void (^)(BOOL isSucess))completionHandle;
+
+//#pragma mark - 添加好友
+//- (void)sendFriendRequestWithUserId:(NSInteger)userId message:(NSString *)message completionHandle:(void (^)(BOOL isSuccess))completionHandle;
+//
+//#pragma mark - 获取好友列表
+//- (void)getFriendListCompletionHandle:(void (^)(NSArray *friendArray))completionHandle;
 @end

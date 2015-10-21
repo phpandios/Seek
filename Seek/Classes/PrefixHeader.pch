@@ -58,6 +58,7 @@ return share; \
 
 // 自定义 -- BEGIN
 #define kUserIconSize 30
+#import "UIViewController+PresentAlertController.h"
 #import "Tool.h"
 #import "DataBaseHelper.h"
 #import "NSString+ConvertDate.h"

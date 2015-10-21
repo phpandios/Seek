@@ -76,6 +76,17 @@
 		607AC7A41BCF7CB9002F8600 /* SetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607AC79B1BCF7CB9002F8600 /* SetPwdViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		607AC7A51BCF7CB9002F8600 /* ValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 607AC79D1BCF7CB9002F8600 /* ValidateViewController.m */; settings = {ASSET_TAGS = (); }; };
 		607AC7A61BCF7CB9002F8600 /* ValidateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607AC79E1BCF7CB9002F8600 /* ValidateViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		608F78821BD6734D0051C462 /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608F78811BD6734D0051C462 /* RongIMLib.framework */; settings = {ASSET_TAGS = (); }; };
+		608F788C1BD67F980051C462 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608F788A1BD67F980051C462 /* ChatListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		608F788D1BD67F980051C462 /* ChatListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 608F788B1BD67F980051C462 /* ChatListViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		608F78901BD6840C0051C462 /* DaoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 608F788F1BD6840C0051C462 /* DaoHelper.m */; settings = {ASSET_TAGS = (); }; };
+		608F789A1BD684210051C462 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 608F78931BD684210051C462 /* FMDatabase.m */; settings = {ASSET_TAGS = (); }; };
+		608F789B1BD684210051C462 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 608F78951BD684210051C462 /* FMDatabaseAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		608F789C1BD684210051C462 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 608F78971BD684210051C462 /* FMDatabasePool.m */; settings = {ASSET_TAGS = (); }; };
+		608F789D1BD684210051C462 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 608F78991BD684210051C462 /* FMResultSet.m */; settings = {ASSET_TAGS = (); }; };
+		608F78A01BD6870C0051C462 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 608F789F1BD6870C0051C462 /* README */; settings = {ASSET_TAGS = (); }; };
+		608F78A31BD68DB50051C462 /* UIViewController+PresentAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608F78A21BD68DB50051C462 /* UIViewController+PresentAlertController.m */; settings = {ASSET_TAGS = (); }; };
+		608F78A61BD692030051C462 /* FriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608F78A51BD692030051C462 /* FriendListViewController.m */; settings = {ASSET_TAGS = (); }; };
 		609068791BCE88BF009A074B /* Emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = 609068721BCE88BF009A074B /* Emoji.plist */; settings = {ASSET_TAGS = (); }; };
 		6090687A1BCE88BF009A074B /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 609068731BCE88BF009A074B /* RongCloudKit.strings */; settings = {ASSET_TAGS = (); }; };
 		6090687B1BCE88BF009A074B /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609068751BCE88BF009A074B /* libopencore-amrnb.a */; settings = {ASSET_TAGS = (); }; };
@@ -163,10 +174,7 @@
 		60C4BDB01BCAA8DF00A50D85 /* UserAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C4BDAC1BCAA8DF00A50D85 /* UserAnnotationView.m */; settings = {ASSET_TAGS = (); }; };
 		60C4BDB11BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C4BDAE1BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		60C4BDB21BCAA8DF00A50D85 /* UserForMapCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BDAF1BCAA8DF00A50D85 /* UserForMapCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
-		60C4BDB71BCAA9BB00A50D85 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C4BDB51BCAA9BB00A50D85 /* MessageViewController.m */; settings = {ASSET_TAGS = (); }; };
-		60C4BDB81BCAA9BB00A50D85 /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BDB61BCAA9BB00A50D85 /* MessageViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		60C4BDBB1BCAA9C500A50D85 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BDBA1BCAA9C500A50D85 /* README */; settings = {ASSET_TAGS = (); }; };
-		60C4BDBE1BCAA9D800A50D85 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BDBD1BCAA9D800A50D85 /* README */; settings = {ASSET_TAGS = (); }; };
 		60C4BDCA1BCAB7DA00A50D85 /* placeholderUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C4BDC91BCAB7DA00A50D85 /* placeholderUserIcon.png */; settings = {ASSET_TAGS = (); }; };
 		60C6496D1BD52FBE00352466 /* issueAddImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C6496C1BD52FBE00352466 /* issueAddImage.png */; settings = {ASSET_TAGS = (); }; };
 		60D351051BC956EB00F2C4D7 /* weixinIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D351031BC956EB00F2C4D7 /* weixinIcon.png */; settings = {ASSET_TAGS = (); }; };
@@ -323,6 +331,25 @@
 		607AC79C1BCF7CB9002F8600 /* ValidateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateViewController.h; sourceTree = "<group>"; };
 		607AC79D1BCF7CB9002F8600 /* ValidateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateViewController.m; sourceTree = "<group>"; };
 		607AC79E1BCF7CB9002F8600 /* ValidateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ValidateViewController.xib; sourceTree = "<group>"; };
+		608F78811BD6734D0051C462 /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RongIMLib.framework; sourceTree = "<group>"; };
+		608F78891BD67F980051C462 /* ChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
+		608F788A1BD67F980051C462 /* ChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
+		608F788B1BD67F980051C462 /* ChatListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatListViewController.xib; sourceTree = "<group>"; };
+		608F788E1BD6840C0051C462 /* DaoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaoHelper.h; sourceTree = "<group>"; };
+		608F788F1BD6840C0051C462 /* DaoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaoHelper.m; sourceTree = "<group>"; };
+		608F78921BD684210051C462 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		608F78931BD684210051C462 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		608F78941BD684210051C462 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		608F78951BD684210051C462 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		608F78961BD684210051C462 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		608F78971BD684210051C462 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		608F78981BD684210051C462 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		608F78991BD684210051C462 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		608F789F1BD6870C0051C462 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		608F78A11BD68DB50051C462 /* UIViewController+PresentAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentAlertController.h"; sourceTree = "<group>"; };
+		608F78A21BD68DB50051C462 /* UIViewController+PresentAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentAlertController.m"; sourceTree = "<group>"; };
+		608F78A41BD692030051C462 /* FriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListViewController.h; sourceTree = "<group>"; };
+		608F78A51BD692030051C462 /* FriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListViewController.m; sourceTree = "<group>"; };
 		609068721BCE88BF009A074B /* Emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Emoji.plist; sourceTree = "<group>"; };
 		609068741BCE88BF009A074B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RongCloudKit.strings; sourceTree = "<group>"; };
 		609068751BCE88BF009A074B /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
@@ -464,11 +491,7 @@
 		60C4BDAD1BCAA8DF00A50D85 /* UserForMapCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserForMapCollectionViewCell.h; sourceTree = "<group>"; };
 		60C4BDAE1BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserForMapCollectionViewCell.m; sourceTree = "<group>"; };
 		60C4BDAF1BCAA8DF00A50D85 /* UserForMapCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserForMapCollectionViewCell.xib; sourceTree = "<group>"; };
-		60C4BDB41BCAA9BB00A50D85 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
-		60C4BDB51BCAA9BB00A50D85 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
-		60C4BDB61BCAA9BB00A50D85 /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
 		60C4BDBA1BCAA9C500A50D85 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		60C4BDBD1BCAA9D800A50D85 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		60C4BDC91BCAB7DA00A50D85 /* placeholderUserIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderUserIcon.png; sourceTree = "<group>"; };
 		60C6496C1BD52FBE00352466 /* issueAddImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = issueAddImage.png; sourceTree = "<group>"; };
 		60D351031BC956EB00F2C4D7 /* weixinIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixinIcon.png; sourceTree = "<group>"; };
@@ -546,6 +569,7 @@
 				6090687B1BCE88BF009A074B /* libopencore-amrnb.a in Frameworks */,
 				60DFF4771BC155410078A00F /* libiconv.tbd in Frameworks */,
 				601C1AF41BC26608007C956A /* TencentOpenAPI.framework in Frameworks */,
+				608F78821BD6734D0051C462 /* RongIMLib.framework in Frameworks */,
 				60DFF4751BC155320078A00F /* Security.framework in Frameworks */,
 				601C1AF61BC26608007C956A /* libSocialWechat.a in Frameworks */,
 				609068811BCE88CB009A074B /* RongIMKit.framework in Frameworks */,
@@ -761,6 +785,8 @@
 		606364881BC1011C00A36965 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				608F78A11BD68DB50051C462 /* UIViewController+PresentAlertController.h */,
+				608F78A21BD68DB50051C462 /* UIViewController+PresentAlertController.m */,
 				60A7589C1BCE5271004362CF /* NSString+ConvertDate.h */,
 				60A7589D1BCE5271004362CF /* NSString+ConvertDate.m */,
 				60D3510B1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.h */,
@@ -780,6 +806,8 @@
 			children = (
 				60117B8F1BC7ED77001D4EC0 /* DataBaseHelper.h */,
 				60117B901BC7ED77001D4EC0 /* DataBaseHelper.m */,
+				608F788E1BD6840C0051C462 /* DaoHelper.h */,
+				608F788F1BD6840C0051C462 /* DaoHelper.m */,
 				609CEABB1BC9658000F99BD6 /* Common.h */,
 				609CEABC1BC9658000F99BD6 /* Common.m */,
 				60C36BA01BCFC2500095F7DC /* MapSearchHelper.h */,
@@ -794,7 +822,7 @@
 		6063648A1BC1011C00A36965 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				60C4BDB31BCAA9BB00A50D85 /* Message */,
+				608F78881BD67F980051C462 /* ChatList */,
 				6063648D1BC1011C00A36965 /* Dynamic */,
 				6063648F1BC1011C00A36965 /* Issue */,
 				606364911BC1011C00A36965 /* Map */,
@@ -848,6 +876,8 @@
 				60B06E561BC6BCB0006AB01E /* MineViewController.h */,
 				60B06E571BC6BCB0006AB01E /* MineViewController.m */,
 				60B06E581BC6BCB0006AB01E /* MineViewController.xib */,
+				608F78A41BD692030051C462 /* FriendListViewController.h */,
+				608F78A51BD692030051C462 /* FriendListViewController.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -855,7 +885,7 @@
 		606364951BC1011C00A36965 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				60C4BDBC1BCAA9D800A50D85 /* Message */,
+				608F789E1BD6870C0051C462 /* ChatList */,
 				606364981BC1011C00A36965 /* Dynamic */,
 				6063649A1BC1011C00A36965 /* Issue */,
 				6063649C1BC1011C00A36965 /* Map */,
@@ -915,6 +945,7 @@
 		606364A11BC1011C00A36965 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				608F78911BD684210051C462 /* FMDB */,
 				60C30FC31BD5374100EE62FC /* KVN */,
 				609068711BCE88BF009A074B /* RongCloud */,
 				60DA7D121BCDF6B400151717 /* TTTAttributedLabel */,
@@ -1053,6 +1084,39 @@
 			path = AutoHeightTextViewForIB;
 			sourceTree = "<group>";
 		};
+		608F78881BD67F980051C462 /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				608F78891BD67F980051C462 /* ChatListViewController.h */,
+				608F788A1BD67F980051C462 /* ChatListViewController.m */,
+				608F788B1BD67F980051C462 /* ChatListViewController.xib */,
+			);
+			path = ChatList;
+			sourceTree = "<group>";
+		};
+		608F78911BD684210051C462 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				608F78921BD684210051C462 /* FMDatabase.h */,
+				608F78931BD684210051C462 /* FMDatabase.m */,
+				608F78941BD684210051C462 /* FMDatabaseAdditions.h */,
+				608F78951BD684210051C462 /* FMDatabaseAdditions.m */,
+				608F78961BD684210051C462 /* FMDatabasePool.h */,
+				608F78971BD684210051C462 /* FMDatabasePool.m */,
+				608F78981BD684210051C462 /* FMResultSet.h */,
+				608F78991BD684210051C462 /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		608F789E1BD6870C0051C462 /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				608F789F1BD6870C0051C462 /* README */,
+			);
+			path = ChatList;
+			sourceTree = "<group>";
+		};
 		609068711BCE88BF009A074B /* RongCloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,6 +1132,7 @@
 		6090687E1BCE88CB009A074B /* RongCloud */ = {
 			isa = PBXGroup;
 			children = (
+				608F78811BD6734D0051C462 /* RongIMLib.framework */,
 				6090687F1BCE88CB009A074B /* RongIMKit.framework */,
 			);
 			path = RongCloud;
@@ -1242,28 +1307,10 @@
 			path = WFFDropdownList;
 			sourceTree = "<group>";
 		};
-		60C4BDB31BCAA9BB00A50D85 /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				60C4BDB41BCAA9BB00A50D85 /* MessageViewController.h */,
-				60C4BDB51BCAA9BB00A50D85 /* MessageViewController.m */,
-				60C4BDB61BCAA9BB00A50D85 /* MessageViewController.xib */,
-			);
-			path = Message;
-			sourceTree = "<group>";
-		};
 		60C4BDB91BCAA9C500A50D85 /* Message */ = {
 			isa = PBXGroup;
 			children = (
 				60C4BDBA1BCAA9C500A50D85 /* README */,
-			);
-			path = Message;
-			sourceTree = "<group>";
-		};
-		60C4BDBC1BCAA9D800A50D85 /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				60C4BDBD1BCAA9D800A50D85 /* README */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -1446,19 +1493,20 @@
 				60C4BDA61BCAA85E00A50D85 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				189950BB1BC6CB5100E12BDC /* PulishCell.xib in Resources */,
 				60117BA71BC7EE86001D4EC0 /* bannerNotify.png in Resources */,
-				60C4BDB81BCAA9BB00A50D85 /* MessageViewController.xib in Resources */,
 				60117BA61BC7EE86001D4EC0 /* bannerFailure@2x.png in Resources */,
 				607AC78A1BCF5BE4002F8600 /* UserLogoutTableViewCell.xib in Resources */,
 				189950D81BC6D3EC00E12BDC /* issue.png in Resources */,
 				60117BAF1BC7F1BE001D4EC0 /* userIcon.png in Resources */,
 				606364BA1BC1011C00A36965 /* README in Resources */,
 				60B06E5F1BC6BCBD006AB01E /* IssueViewController.xib in Resources */,
+				608F788D1BD67F980051C462 /* ChatListViewController.xib in Resources */,
 				607AC7881BCF5BE4002F8600 /* UserHeaderTableViewCell.xib in Resources */,
 				1877F5141BC7E01700026FE7 /* DynamicViewController.xib in Resources */,
 				6090687A1BCE88BF009A074B /* RongCloudKit.strings in Resources */,
 				189950CC1BC6CE7800E12BDC /* Map.png in Resources */,
 				189950CE1BC6CE7800E12BDC /* potrai.png in Resources */,
 				60C4BD9F1BCAA85E00A50D85 /* UMSCommentInputController.xib in Resources */,
+				608F78A01BD6870C0051C462 /* README in Resources */,
 				60D3510A1BC958D000F2C4D7 /* userInput.png in Resources */,
 				60117BA81BC7EE86001D4EC0 /* bannerNotify@2x.png in Resources */,
 				189950CB1BC6CE7800E12BDC /* comments.png in Resources */,
@@ -1504,7 +1552,6 @@
 				60DA7CFF1BCDEDBF00151717 /* inputBgGray@3x.png in Resources */,
 				607AC7A21BCF7CB9002F8600 /* LoginViewController.xib in Resources */,
 				60DA7D251BCE075000151717 /* resendButtonDisable@2x.png in Resources */,
-				60C4BDBE1BCAA9D800A50D85 /* README in Resources */,
 				60C4BDA01BCAA85E00A50D85 /* UMSCommentInputControlleriPad.xib in Resources */,
 				60DA7CFE1BCDEDBF00151717 /* inputBgBlue@3x.png in Resources */,
 				60C4BDBB1BCAA9C500A50D85 /* README in Resources */,
@@ -1547,6 +1594,7 @@
 				60C4BD801BCAA7BB00A50D85 /* UIView+WebCacheOperation.m in Sources */,
 				60DA7D181BCDFC0C00151717 /* UIView+Category.m in Sources */,
 				60B917B11BCF8F8900CFB454 /* SearchInputTipTableView.m in Sources */,
+				608F789C1BD684210051C462 /* FMDatabasePool.m in Sources */,
 				1877F5131BC7E01700026FE7 /* DynamicViewController.m in Sources */,
 				60C4BD7F1BCAA7BB00A50D85 /* UIImageView+WebCache.m in Sources */,
 				609D481A1BCE4A8600F79A65 /* CommentForDynamicTableViewCell.m in Sources */,
@@ -1562,9 +1610,11 @@
 				60C4BD791BCAA7BB00A50D85 /* SDWebImagePrefetcher.m in Sources */,
 				189950B81BC6CB5100E12BDC /* OnePhotoCell.m in Sources */,
 				60B06E551BC6BC43006AB01E /* MainTabBarViewController.m in Sources */,
+				608F78A31BD68DB50051C462 /* UIViewController+PresentAlertController.m in Sources */,
 				60117B8E1BC7ECD3001D4EC0 /* Reachability.m in Sources */,
 				60C4BD7E1BCAA7BB00A50D85 /* UIImageView+HighlightedWebCache.m in Sources */,
 				609CEABA1BC9645700F99BD6 /* User.m in Sources */,
+				608F789B1BD684210051C462 /* FMDatabaseAdditions.m in Sources */,
 				189950B61BC6CB5100E12BDC /* KnowPersonCell.m in Sources */,
 				60C4BD781BCAA7BB00A50D85 /* SDWebImageManager.m in Sources */,
 				60B06E591BC6BCB0006AB01E /* MineViewController.m in Sources */,
@@ -1575,6 +1625,7 @@
 				607AC7691BCF4B66002F8600 /* ACEExpandableTextCell.m in Sources */,
 				609CEABD1BC9658000F99BD6 /* Common.m in Sources */,
 				60C4BD7B1BCAA7BB00A50D85 /* UIImage+GIF.m in Sources */,
+				608F788C1BD67F980051C462 /* ChatListViewController.m in Sources */,
 				60B06E5E1BC6BCBD006AB01E /* IssueViewController.m in Sources */,
 				60B487DD1BD0A4C60019196C /* AutoHeightTextView.m in Sources */,
 				60A3D5B01BCCE80800313F8F /* WFFDropdownList.m in Sources */,
@@ -1587,14 +1638,18 @@
 				607AC7871BCF5BE4002F8600 /* UserHeaderTableViewCell.m in Sources */,
 				60C30FD41BD5374100EE62FC /* UIImage+KVNImageEffects.m in Sources */,
 				60C4BDB01BCAA8DF00A50D85 /* UserAnnotationView.m in Sources */,
+				608F78901BD6840C0051C462 /* DaoHelper.m in Sources */,
 				189950BE1BC6CB5100E12BDC /* towPhotoCell.m in Sources */,
 				189950BC1BC6CB5100E12BDC /* ThreePhotoCell.m in Sources */,
 				607AC76A1BCF4B66002F8600 /* SZTextView.m in Sources */,
 				6003F56F1BD6120D000FB713 /* Tool.m in Sources */,
+				608F789A1BD684210051C462 /* FMDatabase.m in Sources */,
+				608F789D1BD684210051C462 /* FMResultSet.m in Sources */,
 				60C30FD31BD5374100EE62FC /* UIImage+KVNEmpty.m in Sources */,
 				60DA7D111BCDF43C00151717 /* UIColor+Category.m in Sources */,
 				60DA7D151BCDF6B400151717 /* TTTAttributedLabel.m in Sources */,
 				60C4BD751BCAA7BB00A50D85 /* SDWebImageDecoder.m in Sources */,
+				608F78A61BD692030051C462 /* FriendListViewController.m in Sources */,
 				60C4BD7D1BCAA7BB00A50D85 /* UIImage+WebP.m in Sources */,
 				60C4BDB11BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m in Sources */,
 				60C4BD741BCAA7BB00A50D85 /* SDWebImageCompat.m in Sources */,
@@ -1609,7 +1664,6 @@
 				606364531BC0FD6000A36965 /* main.m in Sources */,
 				609D47C51BCE2C9500F79A65 /* DynamicDetailViewController.m in Sources */,
 				607AC7891BCF5BE4002F8600 /* UserLogoutTableViewCell.m in Sources */,
-				60C4BDB71BCAA9BB00A50D85 /* MessageViewController.m in Sources */,
 				60C4BD731BCAA7BB00A50D85 /* SDImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

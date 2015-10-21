@@ -218,6 +218,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (void)logout
 {
+    
+    [[RCIM sharedRCIM] disconnect];
 //    __weak typeof(self) weakSelf = self;
     self.window.rootViewController = ({
         LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
