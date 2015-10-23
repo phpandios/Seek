@@ -18,7 +18,7 @@
  *
  *  @return 颜色
  */
-+ (UIColor *)colorFromHexRGB:(NSString *)inColorString
++ (UIColor *)colorWithHexString:(NSString *)inColorString
 {
     UIColor *result = nil;
     unsigned int colorCode = 0;
@@ -40,7 +40,7 @@
     return result;
 }
 
-+(UIColor *)colorFromHexRGB:(NSString *)inColorString alpha:(float)alpha
++(UIColor *)colorWithHexString:(NSString *)inColorString alpha:(float)alpha
 {
     UIColor *result = [UIColor clearColor];
     unsigned int colorCode = 0;

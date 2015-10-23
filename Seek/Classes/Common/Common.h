@@ -25,12 +25,12 @@ kSingleTon_H(Common)
 - (void)loginWithTelPhone:(NSString *)telPhone password:(NSString *)password completionHandle:(void(^)(BOOL isSuccess))completionHandle;
 #pragma mark - qq登陆
 - (void)loginWithQQID:(NSString *)qqid nick_name:(NSString *)nick_name head_portrait:(NSString *)head_portrait completionHandle:(void(^)(BOOL isSuccess))completionHandle;
-#pragma mark - 注销
-- (void)logout;
 
 #pragma mark - 注册
 - (void)regWithTelPhone:(NSString *)telPhone password:(NSString *)password completionHandle:(void(^)(BOOL isSuccess))completionHandle;
 
+#pragma mark - 注销
+- (void)logout;
 #pragma mark - 获取token
 - (void)getTokenWithUser:(User *)user completionHandle:(void (^)(BOOL isSucess))completionHandle;
 

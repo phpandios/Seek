@@ -11,7 +11,7 @@
 #import "IssueViewController.h"
 #import "MapViewController.h"
 #import "MineViewController.h"
-#import "ChatListViewController.h"
+//#import "RCDChatListViewController.h"
 
 
 @interface MainTabBarViewController ()<UITabBarControllerDelegate>
@@ -58,7 +58,7 @@
     self.delegate = self;
     
     self.tabBar.translucent = NO;
-    self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"ChatListViewController", @"MineViewController"];
+    self.itemClasses = @[@"DynamicViewController", @"MapViewController", @"RCDChatListViewController", @"MineViewController"];
     self.itemTitle = @[@"动态", @"地图", @"消息", @"我的"];
     self.itemNeedNav = @[@(YES), @(NO), @(YES), @(YES)];
     self.itemImagesName = @[@"dynamic", @"mapTab", @"message", @"mine"];

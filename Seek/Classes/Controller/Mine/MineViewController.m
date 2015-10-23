@@ -115,72 +115,72 @@
 {
     __weak typeof(self) weakSelf = self;
     UITableViewCell *cell = nil;
-    if (indexPath.section == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"headerCell" forIndexPath:indexPath];
-        [((UserHeaderTableViewCell *)cell).headerImageView sd_setImageWithURL:[NSURL URLWithString:kCurrentUser.head_portrait] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
-        ((UserHeaderTableViewCell *)cell).userNameLabel.text = kCurrentUser.nick_name;
-        ((UserHeaderTableViewCell *)cell).headerViewClickBlock = ^(){
-            [weakSelf showImagePickerControllerWithTitle:@"更换头像" cancleHandle:nil];
-//            SHOWMESSAGE(@"更换头像");
-        };
-
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"normalCell"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"normalCell"];
-        }
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if (indexPath.section == 1) {
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text = @"我的好友";
-                    break;
-                case 1:
-                    cell.textLabel.text = @"好友请求";
-                    break;
-            }
-        } else if (indexPath.section == 2) {
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text = @"昵称";
-                    cell.detailTextLabel.text = kCurrentUser.nick_name;
-                    break;
-                case 1:
-                    cell.textLabel.text = @"手机";
-                    if ([[kCurrentUser telephone] length] == 0) { // 没绑定手机
-                        cell.detailTextLabel.text = @"点击绑定手机";
-                    } else {
-                        cell.detailTextLabel.text = kCurrentUser.telephone;
-                    }
-                    break;
-                case 2:
-                    cell.textLabel.text = @"性别";
-                    NSString *gender = kCurrentUser.gender == 0 ? @"请选择" : (kCurrentUser.gender == 1 ? @"男" : @"女");
-                    cell.detailTextLabel.text = gender;
-                    break;
-            }
-        } else if (indexPath.section == 3){
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text = @"修改密码";
-                    break;
-                case 1:
-                    cell.textLabel.text = @"意见反馈";
-                    break;
-            }
-        } else {
-            cell = (UserLogoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"logoutCell" forIndexPath:indexPath];
-            ((UserLogoutTableViewCell *)cell).buttonClickBlock = ^(){
-                [[Common shareCommon] logout];
-            };
-        }
-    }
-    // 设置选中无反应
-    if ([self.canSelectedArray[indexPath.section][indexPath.row] boolValue]) {
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    } else {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+//    if (indexPath.section == 0) {
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"headerCell" forIndexPath:indexPath];
+//        [((UserHeaderTableViewCell *)cell).headerImageView sd_setImageWithURL:[NSURL URLWithString:kCurrentUser.head_portrait] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
+//        ((UserHeaderTableViewCell *)cell).userNameLabel.text = kCurrentUser.nick_name;
+//        ((UserHeaderTableViewCell *)cell).headerViewClickBlock = ^(){
+//            [weakSelf showImagePickerControllerWithTitle:@"更换头像" cancleHandle:nil];
+////            SHOWMESSAGE(@"更换头像");
+//        };
+//
+//    } else {
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"normalCell"];
+//        if (!cell) {
+//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"normalCell"];
+//        }
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        if (indexPath.section == 1) {
+//            switch (indexPath.row) {
+//                case 0:
+//                    cell.textLabel.text = @"我的好友";
+//                    break;
+//                case 1:
+//                    cell.textLabel.text = @"好友请求";
+//                    break;
+//            }
+//        } else if (indexPath.section == 2) {
+//            switch (indexPath.row) {
+//                case 0:
+//                    cell.textLabel.text = @"昵称";
+//                    cell.detailTextLabel.text = kCurrentUser.nick_name;
+//                    break;
+//                case 1:
+//                    cell.textLabel.text = @"手机";
+//                    if ([[kCurrentUser telephone] length] == 0) { // 没绑定手机
+//                        cell.detailTextLabel.text = @"点击绑定手机";
+//                    } else {
+//                        cell.detailTextLabel.text = kCurrentUser.telephone;
+//                    }
+//                    break;
+//                case 2:
+//                    cell.textLabel.text = @"性别";
+//                    NSString *gender = kCurrentUser.gender == 0 ? @"请选择" : (kCurrentUser.gender == 1 ? @"男" : @"女");
+//                    cell.detailTextLabel.text = gender;
+//                    break;
+//            }
+//        } else if (indexPath.section == 3){
+//            switch (indexPath.row) {
+//                case 0:
+//                    cell.textLabel.text = @"修改密码";
+//                    break;
+//                case 1:
+//                    cell.textLabel.text = @"意见反馈";
+//                    break;
+//            }
+//        } else {
+//            cell = (UserLogoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"logoutCell" forIndexPath:indexPath];
+//            ((UserLogoutTableViewCell *)cell).buttonClickBlock = ^(){
+//                [[Common shareCommon] logout];
+//            };
+//        }
+//    }
+//    // 设置选中无反应
+//    if ([self.canSelectedArray[indexPath.section][indexPath.row] boolValue]) {
+//        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+//    } else {
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
     return cell;
 }
 
@@ -226,7 +226,7 @@
 - (void)pushFriendListVC
 {
     FriendListViewController *friendVC = [[FriendListViewController alloc] initWithDisplayConversationTypes:nil collectionConversationType:nil];
-    friendVC.conversationListDataSource = [Common shareCommon].friendArray;
+//    friendVC.conversationListDataSource = [Common shareCommon].friendArray;
     [self.navigationController pushViewController:friendVC animated:YES];
 }
 #pragma mark - UIImagePickerController

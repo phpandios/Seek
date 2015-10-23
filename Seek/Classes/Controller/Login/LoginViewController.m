@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-
+#import <RongIMKit/RongIMKit.h>
 #import "CheckPhoneViewController.h"
 #import "UMSocial.h"
 #import "UMSocialData.h"
@@ -109,7 +109,21 @@
         // QQ头像大小 100 * 100
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-            [[Common shareCommon] loginWithQQID:snsAccount.usid nick_name:snsAccount.userName head_portrait:snsAccount.iconURL completionHandle:nil];
+            [AFHttpTool loginWithQQID:snsAccount.usid nick_name:snsAccount.userName head_portrait:snsAccount.iconURL success:^(id response) {
+                
+                RCDLoginInfo *loginInfo = [RCDLoginInfo shareLoginInfo];
+                [loginInfo setValuesForKeysWithDictionary:response];
+                [AFHttpTool getTokenWithUser:loginInfo success:^(id response) {
+                    
+                    NSString *token = response[@"result"][@"token"];
+                    [self loginRongCloud:loginInfo.nick_name token:token password:nil];
+                } failure:^(NSError *err) {
+                    
+                    SHOWERROR(@"APP服务器错误,请联系客服人员!");
+                }];
+            } failure:^(NSError *err) {
+                
+            }];
         }});
 }
 
@@ -132,13 +146,106 @@
         SHOWERROR(@"请输入密码!");
         return;
     }
-    [KVNProgress show];
-    [[Common shareCommon] loginWithTelPhone:self.userTextField.text password:self.pwdTextField.text completionHandle:^(BOOL isSuccess) {
-        if (isSuccess) {
-            SHOWSUCCESS(@"登录成功");
+    
+    [self login:self.userTextField.text password:self.pwdTextField.text];
+
+}
+
+/**
+ *  登陆
+ */
+- (void)login:(NSString *)userName password:(NSString *)password
+{
+    RCNetworkStatus stauts=[[RCIMClient sharedRCIMClient]getCurrentNetworkStatus];
+    
+    if (RC_NotReachable == stauts) {
+        SHOWERROR(@"当前网络不可用，请检查！");
+        return;
+    }
+    
+    [KVNProgress showWithStatus:@"登录中..."];
+    [AFHttpTool loginWithTelPhone:userName password:password success:^(id response) {
+        if ([response[@"code"] intValue] == 200) {
+            RCDLoginInfo *loginInfo = [RCDLoginInfo shareLoginInfo];
+            [loginInfo setValuesForKeysWithDictionary:response[@"result"]];
+            [AFHttpTool getTokenWithUser:loginInfo success:^(id response) {
+                NSString *token = response[@"result"][@"token"];
+                [self loginRongCloud:userName token:token password:password];
+            } failure:^(NSError *err) {
+                SHOWERROR(@"APP服务器错误,请联系客服人员!");
+            }];
+        } else {
+            if (response[@"message"] && [response[@"message"] length] > 0) {
+                NSString *message = response[@"message"];
+                SHOWERROR(@"%@", message);
+            }
+        }
+    } failure:^(NSError *err) {
+        NSLog(@"NSError is %ld",(long)err.code);
+        if (err.code == 3840) {
+            SHOWERROR(@"用户名或密码错误！");
+        }else{
+            SHOWERROR(@"登陆失败");
         }
     }];
 }
+
+/**
+ *  登录融云服务器
+ *
+ *  @param userName 用户名
+ *  @param token    token
+ *  @param password 密码
+ */
+- (void)loginRongCloud:(NSString *)userName token:(NSString *)token password:(NSString *)password
+{
+    //登陆融云服务器
+    [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
+        [self loginSuccess:userName password:password token:token userId:userId];
+    } error:^(RCConnectErrorCode status) {
+        //关闭HUD
+        SHOWERROR(@"Token无效！");
+        
+    } tokenIncorrect:^{
+        NSLog(@"IncorrectToken");
+        
+    }];
+}
+
+- (void)loginSuccess:(NSString *)userName password:(NSString *)password token:(NSString *)token userId:(NSString *)userId
+{
+    //保存默认用户
+    [DEFAULTS setObject:userName forKey:@"userName"];
+    [DEFAULTS setObject:password forKey:@"userPwd"];
+    [DEFAULTS setObject:token forKey:@"userToken"];
+    [DEFAULTS setObject:userId forKey:@"userId"];
+    [DEFAULTS synchronize];
+    
+    //设置当前的用户信息
+    RCUserInfo *_currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:userName portrait:nil];
+    [RCIMClient sharedRCIMClient].currentUserInfo = _currentUserInfo;
+    
+    [RCDHTTPTOOL getUserInfoByUserID:userId
+                          completion:^(RCUserInfo* user) {
+                              [[RCIM sharedRCIM]refreshUserInfoCache:user withUserId:userId];
+                              
+                          }];
+    //同步群组
+    [RCDDataSource syncGroups];
+    [RCDDataSource syncFriendList:^(NSMutableArray *friends) {}];
+    BOOL notFirstTimeLogin = [DEFAULTS boolForKey:@"notFirstTimeLogin"];
+    if (!notFirstTimeLogin) {
+        [RCDDataSource cacheAllData:^{ //auto saved after completion.
+            //                                                   [DEFAULTS setBool:YES forKey:@"notFirstTimeLogin"];
+            //                                                   [DEFAULTS synchronize];
+        }];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ShareApplicationDelegate performSelector:@selector(login)];
+    });
+}
+
+
 - (IBAction)forgetPwdButtonAction:(UIButton *)sender {
     SHOWMESSAGE(@"忘记密码");
 }

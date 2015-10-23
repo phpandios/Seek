@@ -103,19 +103,37 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)commitButtonAction:(UIButton *)sender {
+    RCNetworkStatus stauts=[[RCIMClient sharedRCIMClient]getCurrentNetworkStatus];
+    
+    if (RC_NotReachable == stauts) {
+        SHOWERROR(@"当前网络不可用，请检查！");
+        return;
+    }
+    
     if ([self verifyDataValid]) {
         __weak typeof(self) weakSelf = self;
-        [KVNProgress show];
-        [[Common shareCommon] regWithTelPhone:self.phoneNum password:self.pwdTextField.text completionHandle:^(BOOL isSuccess) {
-            if (isSuccess) {
-                [[Common shareCommon] loginWithTelPhone:weakSelf.phoneNum password:weakSelf.pwdTextField.text completionHandle:^(BOOL isSuccess) {
-                    if (isSuccess) {
-                        SHOWSUCCESS(@"登陆成功");
-                    } 
-                }];
+        [KVNProgress showWithStatus:@"注册中..."];
+        [AFHttpTool regWithTelPhone:self.phoneNum password:self.pwdTextField.text success:^(id response) {
+            if (response[@"code"]) {
+                NSInteger code = [response[@"code"] integerValue];
+                if (code == 200) {
+                    SHOWSUCCESS(@"注册成功");
+                    [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                } else {
+                    if (response[@"message"] && [response[@"message"] length] > 0) {
+                        NSString *message = response[@"message"];
+                        SHOWERROR(@"%@", message);
+                    } else {
+                        SHOWERROR(@"注册失败!");
+                    }
+                }
             } else {
+                SHOWERROR(@"注册失败!");
             }
+        } failure:^(NSError *err) {
+            SHOWERROR(@"注册失败!");
         }];
+        
         
 //        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }

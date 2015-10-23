@@ -34,7 +34,7 @@
     _comment = nil;
     _comment = comment;
     
-    //隐私条款
+    
     NSString *strTipsMessage = [NSString stringWithFormat:@"%@回复%@:%@", comment.fromUserName, comment.toUserName, comment.content];
     NSRange fromUserRange = [strTipsMessage rangeOfString:comment.fromUserName];
     NSRange toUserRange = [strTipsMessage rangeOfString:comment.toUserName];

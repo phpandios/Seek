@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kHexColor(colorString) [UIColor colorFromHexRGB:colorString]
+#define kHexColor(colorString) [UIColor colorWithHexString:colorString]
 
 @interface UIColor (Category)
 
@@ -20,7 +20,7 @@
  *
  *  @return 颜色
  */
-+ (UIColor *)colorFromHexRGB:(NSString *)inColorString;
++ (UIColor *)colorWithHexString:(NSString *)inColorString;
 
 /**
  *  根据字符串生成颜色
@@ -30,6 +30,6 @@
  *
  *  @return 颜色
  */
-+(UIColor *)colorFromHexRGB:(NSString *)inColorString alpha:(float)alpha;
++(UIColor *)colorWithHexString:(NSString *)inColorString alpha:(float)alpha;
 
 @end

@@ -45,7 +45,7 @@
     NSString *strTipsMessage = @"轻触上方注册按钮,即表示同意《用户协议》";
     _lblTips.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _lblTips.backgroundColor  = [UIColor clearColor];
-    _lblTips.textColor = [UIColor colorFromHexRGB:@"999999"];
+    _lblTips.textColor = [UIColor colorWithHexString:@"999999"];
     _lblTips.font = [UIFont systemFontOfSize:13.f];
     _lblTips.linkAttributes = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:(__bridge NSString *)kCTUnderlineStyleAttributeName];
     

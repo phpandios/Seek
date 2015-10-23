@@ -8,7 +8,7 @@
 
 #import "Common.h"
 #import "AppDelegate.h"
-@interface Common () <RCIMUserInfoDataSource>
+@interface Common ()
 
 @property (nonatomic, strong) User *loginUser;
 
@@ -163,7 +163,7 @@ kSingleTon_M(Common)
             NSLog(@"%@", kCurrentToken);
             [[RCIM sharedRCIM] connectWithToken:kCurrentToken success:^(NSString *userId) {
                 //设置用户信息提供者,页面展现的用户头像及昵称都会从此代理取
-                [[RCIM sharedRCIM] setUserInfoDataSource:self];
+//                [[RCIM sharedRCIM] setUserInfoDataSource:self];
                 SBLog(@"连接服务器成功 TOKEN -- %@", kCurrentToken);
             } error:^(RCConnectErrorCode status) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -172,7 +172,6 @@ kSingleTon_M(Common)
                 });
             } tokenIncorrect:^{
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     SBLog(@"TOKEN失效,暂时无法使用聊天功能,请联系客服解决!");
                 });
             }];
@@ -194,10 +193,10 @@ kSingleTon_M(Common)
 
 
 #pragma mark - 获取token
-- (void)getTokenWithUser:(User *)user completionHandle:(void (^)(BOOL isSucess))completionHandle
+- (void)getTokenWithUser:(RCDLoginInfo *)user completionHandle:(void (^)(BOOL isSucess))completionHandle
 {
     __weak typeof(self) weakSelf = self;
-    [[DataBaseHelper shareDataBaseHelper] postDataWithUrlString:kGetTokenUrlString paramString:kParamForGetToken(user.Id, user.nick_name, user.head_portrait) completionHandle:^(NSData *data) {
+    [[DataBaseHelper shareDataBaseHelper] postDataWithUrlString:kGetTokenUrlString paramString:kParamForGetToken(user.id, user.nick_name, user.head_portrait) completionHandle:^(NSData *data) {
         if (!data) {
             SHOWERROR(@"网络故障,获取TOKEN失败,聊天功能暂时无法使用!");
             if (completionHandle) {

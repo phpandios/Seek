@@ -54,10 +54,17 @@ return share; \
 #import "Reachability.h"
 #import "ALAlertBanner.h"
 #import "UIImageView+WebCache.h"
+#import "KxMenu.h"
 // 三方 -- END
 
 // 自定义 -- BEGIN
 #define kUserIconSize 30
+#import "AFHttpTool.h"
+#import "RCDHTTPTOOL.h"
+#import "RCDRCIMDataSource.h"
+#import "RCDCommonDefine.h"
+#import "RCDLoginInfo.h"
+#import "RCDataBaseManager.h"
 #import "UIViewController+PresentAlertController.h"
 #import "Tool.h"
 #import "DataBaseHelper.h"
@@ -67,7 +74,6 @@ return share; \
 #import "UIView+Category.h"
 #import "NSString+Category.h"
 #import "User.h"
-#import "Common.h"
 
 
 
