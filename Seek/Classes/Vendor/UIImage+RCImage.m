@@ -21,7 +21,6 @@
 + (UIImage *)image:(UIImage*)image byScalingToSize:(CGSize)targetSize {
     UIImage *sourceImage = image;
     UIImage *newImage = nil;
-    
     UIGraphicsBeginImageContext(targetSize);
     
     CGRect thumbnailRect = CGRectZero;

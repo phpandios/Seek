@@ -32,6 +32,8 @@
 
 @property (nonatomic, assign) CGFloat latitude;
 
+@property (nonatomic, assign) BOOL needUpdateFriend;
+
 +(id) shareLoginInfo;
 
 @end

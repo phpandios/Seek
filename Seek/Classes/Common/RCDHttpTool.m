@@ -400,6 +400,7 @@
     NSMutableArray* list = [NSMutableArray new];
     
     [AFHttpTool getFriendListFromServerSuccess:^(id response) {
+        [[RCDLoginInfo shareLoginInfo] setNeedUpdateFriend:NO];
         NSString *code = [NSString stringWithFormat:@"%@",response[@"code"]];
         if (friendList) {
             if ([code isEqualToString:@"200"]) {
@@ -416,7 +417,7 @@
                     userInfo.userId = [NSString stringWithFormat:@"%d",idNum.intValue];
                     userInfo.portraitUri = [dic objectForKey:@"portrait"];
                     userInfo.name = [dic objectForKey:@"username"];
-                    userInfo.email = [dic objectForKey:@"email"];
+//                    userInfo.email = [dic objectForKey:@"email"];
                     userInfo.status = [dic objectForKey:@"status"];
                     [list addObject:userInfo];
                     [_allFriends addObject:userInfo];
@@ -444,10 +445,10 @@
     }];
 }
 
-- (void)searchFriendListByEmail:(NSString*)email complete:(void (^)(NSMutableArray*))friendList
+- (void)searchFriendListByTel:(NSString*)tel complete:(void (^)(NSMutableArray*))friendList
 {
     NSMutableArray* list = [NSMutableArray new];
-    [AFHttpTool searchFriendListByEmail:email success:^(id response) {
+    [AFHttpTool searchFriendListByTel:tel success:^(id response) {
         NSString *code = [NSString stringWithFormat:@"%@",response[@"code"]];
         
         if (friendList) {
@@ -463,7 +464,6 @@
                     userInfo.portraitUri = [result objectForKey:@"portrait"];
                     userInfo.name = [result objectForKey:@"username"];
                     [list addObject:userInfo];
-                    
                 }
                 else
                 {
@@ -545,12 +545,14 @@
                 });
                 
             }else{
+                SHOWERROR(@"%@", response[@"message"]);
                 result(NO);
             }
             
         }
     } failure:^(id response) {
         if (result) {
+            SHOWERROR(@"%@", response[@"message"]);
             result(NO);
         }
     }];

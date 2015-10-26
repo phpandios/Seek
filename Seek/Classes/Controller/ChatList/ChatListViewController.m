@@ -8,6 +8,11 @@
 
 #import "ChatListViewController.h"
 #import "RCDChatListCell.h"
+#import "SearchFriendTableViewController.h"
+#import "ChatViewController.h"
+#import "FriendInvitationTableViewController.h"
+#import "KxMenu.h"
+#import "AddressBookViewController.h"
 @interface ChatListViewController ()
 
 @end
@@ -42,6 +47,26 @@
     return self;
 }
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        //设置要显示的会话类型
+        [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)]];
+        
+        //聚合会话类型
+        [self setCollectionConversationType:@[@(ConversationType_GROUP),@(ConversationType_DISCUSSION)]];
+        
+        //设置为不用默认渲染方式
+        self.tabBarItem.image = [[UIImage imageNamed:@"icon_chat"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        self.tabBarItem.selectedImage = [[UIImage imageNamed:@"icon_chat_hover"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        // _myDataSource = [NSMutableArray new];
+        
+        // [self setConversationAvatarStyle:RCUserAvatarCycle];
+        
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -62,13 +87,7 @@
     
     [self setNavigationItemTitleView];
     
-    //自定义rightBarButtonItem
-    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 17, 17)];
-    [rightBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(pushAddFriend:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [rightBtn setTintColor:[UIColor whiteColor]];
-    self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showMenu:)];
     [self notifyUpdateUnreadMessageCount];
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(receiveNeedRefreshNotification:)
@@ -91,6 +110,50 @@
                                                   object:nil];
 }
 
+/**
+ *  弹出层
+ *
+ *  @param sender sender description
+ */
+- (void)showMenu:(UIButton *)sender {
+    NSArray *menuItems =
+    @[
+      
+//      [KxMenuItem menuItem:@"发起聊天"
+//                     image:[UIImage imageNamed:@"chat_icon"]
+//                    target:self
+//                    action:@selector(pushChat:)],
+      
+      [KxMenuItem menuItem:@"添加好友"
+                     image:[UIImage imageNamed:@"addfriend_icon"]
+                    target:self
+                    action:@selector(pushAddFriend:)],
+      
+      [KxMenuItem menuItem:@"通讯录"
+                     image:[UIImage imageNamed:@"contact_icon"]
+                    target:self
+                    action:@selector(pushAddressBook:)],
+      
+//      [KxMenuItem menuItem:@"公众账号"
+//                     image:[UIImage imageNamed:@"public_account"]
+//                    target:self
+//                    action:@selector(pushPublicService:)],
+      
+//      [KxMenuItem menuItem:@"添加公众号"
+//                     image:[UIImage imageNamed:@"add_public_account"]
+//                    target:self
+//                    action:@selector(pushAddPublicService:)],
+      ];
+    
+    CGRect targetFrame = self.navigationItem.rightBarButtonItem.customView.frame;
+    NSLog(@"%@", NSStringFromCGRect(targetFrame));
+    targetFrame.origin.y = targetFrame.origin.y + 15;
+    [KxMenu showMenuInView:self.navigationController.navigationBar.superview
+                  fromRect:targetFrame
+                 menuItems:menuItems];
+}
+
+
 - (void)setNavigationItemTitleView {
     if (self.isEnteredToCollectionViewController) {
         return;
@@ -101,7 +164,7 @@
     titleView.textColor = [UIColor whiteColor];
     titleView.textAlignment = NSTextAlignmentCenter;
     titleView.text = @"会话";
-    self.tabBarController.navigationItem.titleView = titleView;
+    self.navigationItem.titleView = titleView;
 }
 
 - (void)updateBadgeValueForTabBarItem
@@ -110,15 +173,67 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         int count = [[RCIMClient sharedRCIMClient]getUnreadCount:self.displayConversationTypeArray];
         if (count>0) {
-            __weakSelf.tabBarItem.badgeValue = [[NSString alloc]initWithFormat:@"%d",count];
+            __weakSelf.navigationController.tabBarItem.badgeValue = [[NSString alloc]initWithFormat:@"%d",count];
         }else
         {
-            __weakSelf.tabBarItem.badgeValue = nil;
+            __weakSelf.navigationController.tabBarItem.badgeValue = nil;
         }
         
     });
 }
 
+-(void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath
+{
+//    
+//    if (model.conversationModelType == RC_CONVERSATION_MODEL_TYPE_PUBLIC_SERVICE) {
+//        RCPublicServiceChatViewController *_conversationVC = [[RCPublicServiceChatViewController alloc] init];
+//        _conversationVC.conversationType = model.conversationType;
+//        _conversationVC.targetId = model.targetId;
+//        _conversationVC.userName = model.conversationTitle;
+//        _conversationVC.title = model.conversationTitle;
+//        
+//        [self.navigationController pushViewController:_conversationVC animated:YES];
+//    }
+    
+    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_NORMAL) {
+        ChatViewController *_conversationVC = [[ChatViewController alloc]init];
+        _conversationVC.conversationType = model.conversationType;
+        _conversationVC.targetId = model.targetId;
+        _conversationVC.userName = model.conversationTitle;
+        _conversationVC.title = model.conversationTitle;
+        _conversationVC.conversation = model;
+        _conversationVC.unReadMessage = model.unreadMessageCount;
+        _conversationVC.enableNewComingMessageIcon=YES;//开启消息提醒
+        _conversationVC.enableUnreadMessageIcon=YES;
+        _conversationVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:_conversationVC animated:YES];
+    }
+    
+//    //聚合会话类型，此处自定设置。
+//    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_COLLECTION) {
+//        
+//        RCDChatListViewController *temp = [[RCDChatListViewController alloc] init];
+//        NSArray *array = [NSArray arrayWithObject:[NSNumber numberWithInt:model.conversationType]];
+//        [temp setDisplayConversationTypes:array];
+//        [temp setCollectionConversationType:nil];
+//        temp.isEnteredToCollectionViewController = YES;
+//        [self.navigationController pushViewController:temp animated:YES];
+//    }
+    
+    //自定义会话类型
+    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION) {
+        RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+        
+        FriendInvitationTableViewController *temp = [FriendInvitationTableViewController new];
+        temp.conversationType = model.conversationType;
+        temp.targetId = model.targetId;
+        temp.userName = model.conversationTitle;
+        temp.title = model.conversationTitle;
+        temp.conversation = model;
+        [self.navigationController pushViewController:temp animated:YES];
+    }
+    
+}
 
 /**
  *  添加好友
@@ -127,29 +242,106 @@
  */
 - (void) pushAddFriend:(id) sender
 {
-//    RCDSearchFriendViewController *searchFirendVC = [RCDSearchFriendViewController searchFriendViewController];
-//    [self.navigationController pushViewController:searchFirendVC  animated:YES];
+    SearchFriendTableViewController *searchFirendVC = [SearchFriendTableViewController searchFriendViewController];
+    [self.navigationController pushViewController:searchFirendVC  animated:YES];
+    
+}
+
+
+///**
+// *  发起聊天
+// *
+// *  @param sender sender description
+// */
+//- (void) pushChat:(id)sender
+//{
+//    SelectPersonViewController *selectPersonVC = [SelectPersonViewController new];
+//    //设置点击确定之后回传被选择联系人操作
+//    __weak typeof(&*self)  weakSelf = self;
+//    selectPersonVC.clickDoneCompletion = ^(SelectPersonViewController *selectPersonViewController,NSArray *selectedUsers){
+//        if(selectedUsers.count == 1)
+//        {
+//            RCUserInfo *user = selectedUsers[0];
+//            ChatViewController *chat =[[ChatViewController alloc]init];
+//            chat.targetId                      = user.userId;
+//            chat.userName                    = user.name;
+//            chat.conversationType              = ConversationType_PRIVATE;
+//            chat.title                         = user.name;
+//            
+//            //跳转到会话页面
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+//                [weakSelf.navigationController popToViewController:tabbarVC animated:NO];
+//                [tabbarVC.navigationController  pushViewController:chat animated:YES];
+//            });
+//            
+//        }
+//        //选择多人则创建讨论组
+//        else if(selectedUsers.count > 1)
+//        {
+//            
+//            NSMutableString *discussionTitle = [NSMutableString string];
+//            NSMutableArray *userIdList = [NSMutableArray new];
+//            for (RCUserInfo *user in selectedUsers) {
+//                [discussionTitle appendString:[NSString stringWithFormat:@"%@%@", user.name,@","]];
+//                [userIdList addObject:user.userId];
+//            }
+//            [discussionTitle deleteCharactersInRange:NSMakeRange(discussionTitle.length - 1, 1)];
+//            
+//            [[RCIMClient sharedRCIMClient] createDiscussion:discussionTitle userIdList:userIdList success:^(RCDiscussion *discussion) {
+//                NSLog(@"create discussion ssucceed!");
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    ChatViewController *chat =[[ChatViewController alloc]init];
+//                    chat.targetId                      = discussion.discussionId;
+//                    chat.userName                    = discussion.discussionName;
+//                    chat.conversationType              = ConversationType_DISCUSSION;
+//                    chat.title                         = @"讨论组";
+//                    
+//                    
+//                    UITabBarController *tabbarVC = weakSelf.navigationController.viewControllers[0];
+//                    [weakSelf.navigationController popViewControllerAnimated:NO];
+//                    [tabbarVC.navigationController  pushViewController:chat animated:YES];
+//                });
+//            } error:^(RCErrorCode status) {
+//                NSLog(@"create discussion Failed > %ld!", (long)status);
+//            }];
+//            return;
+//        }
+//    };
+//    
+//    [self.navigationController pushViewController :selectPersonVC animated:YES];
+//}
+
+/**
+ *  通讯录
+ *
+ *  @param sender sender description
+ */
+-(void) pushAddressBook:(id) sender
+{
+    AddressBookViewController *addressBookVC = [AddressBookViewController new];
+    [self.navigationController pushViewController:addressBookVC animated:YES];
     
 }
 
 
 //*********************插入自定义Cell*********************//
 
-//插入自定义会话model
--(NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
-{
-    
-    for (int i=0; i<dataSource.count; i++) {
-        RCConversationModel *model = dataSource[i];
-        //筛选请求添加好友的系统消息，用于生成自定义会话类型的cell
-        if(model.conversationType == ConversationType_SYSTEM && [model.lastestMessage isMemberOfClass:[RCContactNotificationMessage class]])
-        {
-            model.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
-        }
-    }
-    
-    return dataSource;
-}
+////插入自定义会话model
+//-(NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
+//{
+//    
+//    for (int i=0; i<dataSource.count; i++) {
+//        RCConversationModel *model = dataSource[i];
+//        //筛选请求添加好友的系统消息，用于生成自定义会话类型的cell
+//        if(model.conversationType == ConversationType_SYSTEM && [model.lastestMessage isMemberOfClass:[RCContactNotificationMessage class]])
+//        {
+//            model.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
+//        }
+//    }
+//    
+//    return dataSource;
+//}
 
 //左滑删除
 -(void)rcConversationListTableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -274,6 +466,7 @@
 #pragma mark - 收到消息监听
 -(void)didReceiveMessageNotification:(NSNotification *)notification
 {
+    NSLog(@"%@", self.conversationListDataSource);
     __weak typeof(&*self) blockSelf_ = self;
     //处理好友请求
     RCMessage *message = notification.object;
@@ -331,7 +524,6 @@
             //调用父类刷新未读消息数
             [super didReceiveMessageNotification:notification];
             [blockSelf_ resetConversationListBackgroundViewIfNeeded];
-            //            [self notifyUpdateUnreadMessageCount]; super会调用notifyUpdateUnreadMessageCount
         });
     }
 }

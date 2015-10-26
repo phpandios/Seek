@@ -17,6 +17,12 @@
 //#define ContentType @"text/plain"
 #define ContentType @"text/html"
 
+/* 注册和登陆方式 BEGIN*/
+#define kRegOrLoginTypeByTel @"tel"
+#define kRegOrLoginTypeByWeChat @"we_chat"
+#define kRegOrLoginTypeByQQ @"qq_chat"
+/* 注册和登陆方式 END*/
+
 @implementation AFHttpTool
 
 + (void)requestWihtMethod:(RequestMethodType)methodType
@@ -233,11 +239,11 @@
 }
 
 
-+(void)searchFriendListByEmail:(NSString*)email success:(void (^)(id))success failure:(void (^)(NSError *))failure
++(void)searchFriendListByTel:(NSString*)telePhone success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     [AFHttpTool requestWihtMethod:RequestMethodTypeGet
-                              url:@"seach_email"
-                           params:@{@"email":email}
+                              url:@"seach_telephone"
+                           params:@{@"telephone":telePhone}
                           success:success
                           failure:failure];
 }

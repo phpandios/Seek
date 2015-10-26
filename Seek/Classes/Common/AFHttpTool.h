@@ -100,9 +100,10 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 //按昵称搜素好友
 +(void)searchFriendListByName:(NSString*)name success:(void (^)(id response))success
                       failure:(void (^)(NSError* err))failure;
-//按邮箱搜素好友
-+(void)searchFriendListByEmail:(NSString*)email success:(void (^)(id response))success
-                       failure:(void (^)(NSError* err))failure;
+//按手机搜素好友
++(void)searchFriendListByTel:(NSString*)telePhone
+                     success:(void (^)(id))success
+                     failure:(void (^)(NSError *))failure;
 
 //请求加好友
 +(void)requestFriend:(NSString*) userId

@@ -5,7 +5,7 @@
 //  Created by 吴非凡 on 15/10/4.
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
-
+//#ifdef __OJBC__ 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
@@ -32,6 +32,7 @@ return share; \
 #define SBLog(...)
 #endif
 
+
 // SDK -- BEGIN
 // 友盟
 #define kUMAppKey @"507fcab25270157b37000010"
@@ -41,13 +42,14 @@ return share; \
 
 // 高德地图
 #define kLBSAppKey @"fdcbea9fd7feb6b97ced5e1005e6275a"
+#define kUserIconSize 30
 
 // 融云
 #define kRCIMAppKey @"pwe86ga5edft6"
 #define kRCIMAppSecret @"qy9qbCT8df00jN"
 // SDK -- END
 
-
+#ifdef __OBJC__
 // 三方 -- BEGIN
 #import "KVNProgress.h"
 #import "TTTAttributedLabel.h"
@@ -58,7 +60,6 @@ return share; \
 // 三方 -- END
 
 // 自定义 -- BEGIN
-#define kUserIconSize 30
 #import "AFHttpTool.h"
 #import "RCDHTTPTOOL.h"
 #import "RCDRCIMDataSource.h"
@@ -75,15 +76,18 @@ return share; \
 #import "NSString+Category.h"
 #import "User.h"
 
+#endif
 
-
-#import "URLConst.h"
 
 
 #define kNavBgColor kHexColor(@"40a3d3")
 
-#define SHOWMESSAGE(...) [ALAlertBanner showNotifyWithTitle:[NSString stringWithFormat:__VA_ARGS__]];
+#define SHOWMESSAGE(...) [KVNProgress showWithStatus:[NSString stringWithFormat:__VA_ARGS__]];
 #define SHOWERROR(...) [KVNProgress showErrorWithStatus:[NSString stringWithFormat:__VA_ARGS__]]
 #define SHOWSUCCESS(...) [KVNProgress showSuccessWithStatus:[NSString stringWithFormat:__VA_ARGS__]]
-// 自定义 -- END
+
+
 #endif
+
+// 自定义 -- END
+//#endif

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -20,18 +20,21 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHQ-0F-g5h" userLabel="tipLabel">
                     <rect key="frame" x="10" y="74" width="580" height="0.0"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inputBgGray.png" highlightedImage="inputBgBlue.png" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F4z-s0-mHH">
                     <rect key="frame" x="10" y="75" width="455" height="40"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="UNi-It-QbZ"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpy-nU-H2k">
                     <rect key="frame" x="470" y="76" width="120" height="38"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="51U-R4-bzv"/>
                         <constraint firstAttribute="height" constant="38" id="jih-wp-GdN"/>
@@ -50,11 +53,13 @@
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ull-G1-ePL">
                     <rect key="frame" x="20" y="75" width="435" height="40"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doy-2H-gz3">
                     <rect key="frame" x="10" y="130" width="580" height="40"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.18823529410000001" green="0.56078431370000004" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="yeG-K9-EOW"/>
@@ -71,12 +76,14 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="填写验证码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LE-OD-hvg">
                             <rect key="frame" x="252" y="30" width="95" height="23"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0E4-rA-F5F" userLabel="exit">
                             <rect key="frame" x="15" y="26" width="32" height="32"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="BTU-b8-NdO"/>
                                 <constraint firstAttribute="width" constant="32" id="bur-Hl-fTA"/>
@@ -87,6 +94,7 @@
                             </connections>
                         </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="0E4-rA-F5F" firstAttribute="centerY" secondItem="yFN-zu-YTY" secondAttribute="centerY" constant="10" id="Xpl-p1-Qut"/>
@@ -100,6 +108,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="IHQ-0F-g5h" firstAttribute="top" secondItem="yFN-zu-YTY" secondAttribute="bottom" constant="10" id="3d4-co-YHh"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -26,6 +26,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qa-O8-KH2" userLabel="exit">
                             <rect key="frame" x="15" y="26" width="32" height="32"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="c4V-yb-poe"/>
                                 <constraint firstAttribute="width" constant="32" id="yUM-mf-6jk"/>
@@ -37,6 +38,7 @@
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nT2-Or-zhE" customClass="WFFDropdownList">
                             <rect key="frame" x="250" y="24" width="100" height="35"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="7qs-Df-Ixy"/>
@@ -57,6 +59,7 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEw-qC-ckA">
                             <rect key="frame" x="525" y="25" width="60" height="33"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="pLZ-Gr-e5N"/>
@@ -70,6 +73,7 @@
                             </connections>
                         </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="2Qa-O8-KH2" firstAttribute="leading" secondItem="GMu-vw-vvG" secondAttribute="leading" constant="15" id="1Rh-Aa-s3R"/>
@@ -89,6 +93,7 @@
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="标题" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crW-KP-Ys1">
                             <rect key="frame" x="15" y="0.0" width="570" height="40"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="z3U-e0-izC"/>
@@ -102,6 +107,7 @@
                         </textField>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7jY-Vs-PJd">
                             <rect key="frame" x="15" y="99" width="570" height="80"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="s8H-4A-lWS"/>
@@ -119,6 +125,7 @@
                         </collectionView>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="584" placeholderIntrinsicHeight="59" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UIK-Go-Y0u" customClass="AutoHeightTextView">
                             <rect key="frame" x="10" y="40" width="575" height="59"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -137,6 +144,7 @@
                             </connections>
                         </textView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="7jY-Vs-PJd" secondAttribute="bottom" id="0LJ-6D-21E"/>
@@ -174,6 +182,7 @@
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="地点" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M3n-P6-fGe">
                             <rect key="frame" x="15" y="0.0" width="570" height="40"/>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="bKN-Ul-j3h"/>
@@ -191,6 +200,7 @@
                             </connections>
                         </textField>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="M3n-P6-fGe" firstAttribute="top" secondItem="2C1-7E-PLV" secondAttribute="top" id="9Zs-B5-94a"/>
@@ -205,6 +215,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ocv-hJ-7Wr">
                             <rect key="frame" x="555" y="0.0" width="30" height="40"/>
+                            <animations/>
                             <state key="normal" title="公开"/>
                             <connections>
                                 <action selector="permissionButtonAction:" destination="-1" eventType="touchUpInside" id="ptX-Xe-aov"/>
@@ -212,11 +223,13 @@
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="谁能看见" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nm-xG-Sqx">
                             <rect key="frame" x="15" y="0.0" width="68" height="40"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="7nm-xG-Sqx" firstAttribute="leading" secondItem="YRr-YI-xe8" secondAttribute="leading" id="0d4-TW-xmX"/>
@@ -235,6 +248,7 @@
                     </variation>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="crW-KP-Ys1" firstAttribute="leading" secondItem="2Qa-O8-KH2" secondAttribute="leading" id="1Xw-Ik-qvn"/>

@@ -59,8 +59,8 @@
 //按昵称搜素好友
 -(void) searchFriendListByName:(NSString*)name
                      complete:(void (^)(NSMutableArray* result))friendList;
-//按邮箱搜素好友
--(void) searchFriendListByEmail:(NSString*)email
+//按手机搜素好友
+-(void) searchFriendListByTel:(NSString*)email
                       complete:(void (^)(NSMutableArray* result))friendList;
 
 //请求加好友

@@ -16,6 +16,12 @@
 
 @end
 
+/* 注册和登陆方式 BEGIN*/
+#define kRegOrLoginTypeByTel @"tel"
+#define kRegOrLoginTypeByWeChat @"we_chat"
+#define kRegOrLoginTypeByQQ @"qq_chat"
+/* 注册和登陆方式 END*/
+
 @implementation Common
 
 kSingleTon_M(Common)

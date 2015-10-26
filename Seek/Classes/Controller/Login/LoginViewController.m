@@ -101,7 +101,8 @@
     [UMSocialQQHandler setQQWithAppId:kUMQQAppID appKey:kUMQQAppKey url:kUMUrl];
 
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
-
+    
+    [KVNProgress showWithStatus:@"授权中..."];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
 
         // 获取微博用户名、uid、token等
@@ -111,8 +112,10 @@
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
             [AFHttpTool loginWithQQID:snsAccount.usid nick_name:snsAccount.userName head_portrait:snsAccount.iconURL success:^(id response) {
                 
+                [KVNProgress showWithStatus:@"授权成功,登录中..."];
                 RCDLoginInfo *loginInfo = [RCDLoginInfo shareLoginInfo];
-                [loginInfo setValuesForKeysWithDictionary:response];
+                NSLog(@"%@", response);
+                [loginInfo setValuesForKeysWithDictionary:response[@"result"]];
                 [AFHttpTool getTokenWithUser:loginInfo success:^(id response) {
                     
                     NSString *token = response[@"result"][@"token"];

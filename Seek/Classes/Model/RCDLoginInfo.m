@@ -16,6 +16,7 @@
     static dispatch_once_t  predicate;
     dispatch_once(&predicate,^{
         loginInfo = [[self alloc] init];
+        loginInfo.needUpdateFriend = NO;
     });
 
     return loginInfo;

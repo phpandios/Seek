@@ -55,16 +55,16 @@
         {
             dispatch_source_cancel(timer);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.resendButton setTitle:@"重新发送" forState:UIControlStateNormal];
                 [weakSelf.resendButton setEnabled:YES];
+                [weakSelf.resendButton setTitle:@"重新发送" forState:UIControlStateNormal];
             });
         }
         else
         {
             timeout--;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.resendButton setTitle:[NSString stringWithFormat:@"%d秒后重发",timeout] forState:UIControlStateDisabled];
                 [weakSelf.resendButton setEnabled:NO];
+                [weakSelf.resendButton setTitle:[NSString stringWithFormat:@"%d秒后重发",timeout] forState:UIControlStateDisabled];
             });
         }
     });
