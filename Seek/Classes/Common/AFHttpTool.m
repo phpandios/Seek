@@ -77,6 +77,34 @@
     }
 }
 
+
+#pragma mark - 上传头像
++ (void)uploadImage:(NSData *)imageData
+            success:(void (^)(id response))success
+            failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{@"upload_file" : imageData};
+    [AFHttpTool requestWihtMethod:RequestMethodTypePost
+                              url:@"update_photo"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
+
+#pragma mark - 改绑手机
++ (void)bindingTelphone:(NSString *)telPhone
+                success:(void (^)(id response))success
+                failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{@"telephone" : telPhone};
+    [AFHttpTool requestWihtMethod:RequestMethodTypePost
+                              url:@"update_phone"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
 #pragma mark - 登陆
 + (void)loginWithTelPhone:(NSString *)telPhone password:(NSString *)password success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure;

@@ -28,7 +28,6 @@
     } else {
         self.titleLabel.text = @"找回密码";
     }
-    [self.phoneNumTextField becomeFirstResponder];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -37,6 +36,10 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+    
+    self.phoneNumTextField.clearsOnBeginEditing = YES;
+    
+    [self.phoneNumTextField becomeFirstResponder];
 }
 
 - (void)setupLabel
@@ -110,15 +113,7 @@
     vc.type = self.type;
     vc.phoneNum = self.phoneNumTextField.text;
     
-    if (_type == CheckPhoneTypeForRegister) { // 注册
-        
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (_type == CheckPhoneTypeForFindPwd) {// 找回密码
-        
-        [self.navigationController pushViewController:vc animated:YES];
-    } else { // 绑定手机
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)dismisButtonAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];

@@ -13,7 +13,8 @@
 #import "FriendListViewController.h"
 #import "AppDelegate.h"
 #import "RCDLoginInfo.h"
-@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#import "CheckPhoneViewController.h"
+@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -48,6 +49,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (self.navigationController.navigationBarHidden) {
+        self.navigationController.navigationBarHidden = NO;
+    }
 //    __weak typeof(self) weakSelf = self;
 //    
 //    if (![Common shareCommon].loginUser) { // 没登陆
@@ -80,10 +84,7 @@
 #pragma mark 更换头像
 - (void)updateUserHeaderImage:(UIImage *)image
 {
-    // 发送消息到服务器后, 应该返回头像的URL
-//    kCurrentUser.iconUrl = url;
-//    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+   
 }
 
 
@@ -220,6 +221,13 @@
 //                [self pushFriendListVC];
 //            }
             
+        }
+    }
+    if (indexPath.section == 2 && indexPath.row == 1) { // 手机
+        if ([[[RCDLoginInfo shareLoginInfo] telephone] length] == 0) { // 没绑定手机,就绑定手机
+            CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
+            vc.type = CheckPhoneTypeForBindingTelPhone;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

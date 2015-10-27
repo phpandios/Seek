@@ -32,6 +32,17 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError *err))failure;
 
+#pragma mark - 上传头像
++ (void)uploadImage:(NSData *)imageData
+            success:(void (^)(id response))success
+            failure:(void (^)(NSError* err))failure;
+
+
+#pragma mark - 改绑手机
++ (void)bindingTelphone:(NSString *)telPhone
+                success:(void (^)(id response))success
+                failure:(void (^)(NSError* err))failure;
+
 #pragma mark - 手机登陆
 + (void)loginWithTelPhone:(NSString *)telPhone
                  password:(NSString *)password

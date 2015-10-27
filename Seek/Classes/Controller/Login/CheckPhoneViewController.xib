@@ -41,7 +41,7 @@
                         <constraint firstAttribute="height" constant="18" id="Rqa-4G-ct6"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYg-87-dOu">
                     <rect key="frame" x="15" y="149" width="570" height="40"/>
@@ -50,7 +50,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="4NL-Zx-nm2"/>
                     </constraints>
-                    <state key="normal" title="注册">
+                    <state key="normal" title="验证手机号">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
