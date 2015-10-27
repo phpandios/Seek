@@ -97,6 +97,7 @@
 
 #pragma mark - 控件
 - (IBAction)loginByQQButtonAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     // QQ登陆 NO
     [UMSocialQQHandler setQQWithAppId:kUMQQAppID appKey:kUMQQAppKey url:kUMUrl];
 
@@ -114,11 +115,13 @@
                 
                 [KVNProgress showWithStatus:@"授权成功,登录中..."];
                 RCDLoginInfo *loginInfo = [RCDLoginInfo shareLoginInfo];
-                NSLog(@"%@", response);
+//                NSLog(@"%@", response);
                 [loginInfo setValuesForKeysWithDictionary:response[@"result"]];
                 [AFHttpTool getTokenWithUser:loginInfo success:^(id response) {
                     
                     NSString *token = response[@"result"][@"token"];
+                    
+                    // 三方登陆没有密码,因此本地没存密码.无法自动登陆,无需判断
                     [self loginRongCloud:loginInfo.nick_name token:token password:nil];
                 } failure:^(NSError *err) {
                     
@@ -132,6 +135,7 @@
 
 - (IBAction)loginByWeiChatButtonAction:(UIButton *)sender {
     SHOWMESSAGE(@"微信登陆");
+    [self.view endEditing:YES];
 }
 
 - (IBAction)registButtonAction:(UIButton *)sender {
@@ -151,7 +155,7 @@
     }
     
     [self login:self.userTextField.text password:self.pwdTextField.text];
-
+    [self.view endEditing:YES];
 }
 
 /**
@@ -217,6 +221,7 @@
 
 - (void)loginSuccess:(NSString *)userName password:(NSString *)password token:(NSString *)token userId:(NSString *)userId
 {
+    
     //保存默认用户
     [DEFAULTS setObject:userName forKey:@"userName"];
     [DEFAULTS setObject:password forKey:@"userPwd"];

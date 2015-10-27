@@ -87,8 +87,6 @@
 }
 
 
-
-
 #pragma mark - UITableViewDelegate && UITableViewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -237,8 +235,6 @@
 {
     self.imagePickerController = [[UIImagePickerController alloc]init];
     _imagePickerController.delegate = self;
-    
-    
     
     // 判断支持来源类型(拍照,照片库,相册)
     BOOL isCameraSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];

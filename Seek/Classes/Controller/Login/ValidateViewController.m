@@ -103,9 +103,18 @@
 
 - (IBAction)commitButtonAction:(UIButton *)sender {
     if (![self errorByValidate]) {
-        SetPwdViewController *vc = [[SetPwdViewController alloc] initWithNibName:@"SetPwdViewController" bundle:nil];
-        vc.phoneNum = self.phoneNum;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (_type == CheckPhoneTypeForBindingTelPhone) {
+            if (1) { // 绑定手机请求 - 绑定结果 - 绑定成功跳转到之前页面; 绑定失败跳转到手机号页面
+                [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
+            } else {
+//                [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] animated:YES];
+            }
+            
+        } else {
+            SetPwdViewController *vc = [[SetPwdViewController alloc] initWithNibName:@"SetPwdViewController" bundle:nil];
+            vc.phoneNum = self.phoneNum;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 @end

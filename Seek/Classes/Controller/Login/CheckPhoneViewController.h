@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    CheckPhoneTypeForRegister,
-    CheckPhoneTypeForFindPwd
-} CheckPhoneType;
 @interface CheckPhoneViewController : UIViewController
 
 @property (nonatomic, assign) CheckPhoneType type;

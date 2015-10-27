@@ -33,6 +33,12 @@ return share; \
 #endif
 
 
+typedef enum {
+    CheckPhoneTypeForRegister,
+    CheckPhoneTypeForFindPwd,
+    CheckPhoneTypeForBindingTelPhone
+} CheckPhoneType;
+
 // SDK -- BEGIN
 // 友盟
 #define kUMAppKey @"507fcab25270157b37000010"

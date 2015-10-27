@@ -80,7 +80,7 @@
 {
     
     RCUserInfo *userInfo=[[RCDataBaseManager shareInstance] getUserByUserId:userID];
-    if (userInfo==nil) {
+    if (userInfo == nil) {
         [AFHttpTool getUserById:userID success:^(id response) {
             if (response) {
                 NSString *code = [NSString stringWithFormat:@"%@",response[@"code"]];

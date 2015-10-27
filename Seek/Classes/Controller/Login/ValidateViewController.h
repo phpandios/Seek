@@ -10,6 +10,8 @@
 
 @interface ValidateViewController : UIViewController
 
+@property (nonatomic, assign) CheckPhoneType type;
+
 @property (nonatomic, copy) NSString *phoneNum;
 
 @end

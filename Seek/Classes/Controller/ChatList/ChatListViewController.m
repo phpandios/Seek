@@ -146,8 +146,8 @@
       ];
     
     CGRect targetFrame = self.navigationItem.rightBarButtonItem.customView.frame;
-    NSLog(@"%@", NSStringFromCGRect(targetFrame));
     targetFrame.origin.y = targetFrame.origin.y + 15;
+    NSLog(@"%@", self.navigationController.navigationBar.superview);
     [KxMenu showMenuInView:self.navigationController.navigationBar.superview
                   fromRect:targetFrame
                  menuItems:menuItems];

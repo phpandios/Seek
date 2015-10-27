@@ -107,14 +107,16 @@
         return;
     }
     ValidateViewController *vc = [[ValidateViewController alloc] initWithNibName:@"ValidateViewController" bundle:nil];
-    
+    vc.type = self.type;
     vc.phoneNum = self.phoneNumTextField.text;
     
     if (_type == CheckPhoneTypeForRegister) { // 注册
         
         [self.navigationController pushViewController:vc animated:YES];
-    } else {// 找回密码
+    } else if (_type == CheckPhoneTypeForFindPwd) {// 找回密码
         
+        [self.navigationController pushViewController:vc animated:YES];
+    } else { // 绑定手机
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
