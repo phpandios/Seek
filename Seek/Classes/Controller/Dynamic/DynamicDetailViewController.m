@@ -46,6 +46,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
         comment.fromUserHeadImage = @"userIcon";
         comment.fromUserName = [NSString stringWithFormat:@"用户%02d", i];
         comment.content = [NSString stringWithFormat:@"不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么%2d", i];
+        comment.timestamp = [NSDate date];
         NSMutableArray *childCommentArray = [NSMutableArray array];
         for (int j = 0; j < i; j++) {
             Comment *childComment = [Comment new];
@@ -53,6 +54,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
             childComment.fromUserName = [NSString stringWithFormat:@"**%02d", j];
             childComment.toUserName = [NSString stringWithFormat:@"用户%02d", i];
             childComment.content = [NSString stringWithFormat:@"不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么%2d", i];
+            comment.timestamp = [NSDate date];
             [childCommentArray addObject:childComment];
         }
         
@@ -142,32 +144,55 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 }
 
 #pragma mark - 动态计算cell高度 -- 费时操作.
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 30;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = nil;
-
-    Comment *comment = [self commentByIndexPath:indexPath];
-    CGFloat height;
-    if (comment.respondType == RespondTypeByComment) { // 评论的回复
-        cell = (CommentForCommentTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForCommentTableViewCell" owner:nil options:nil].firstObject);
+    if (IS_IOS8_OR_ABOVE) {
+        
+        return UITableViewAutomaticDimension;
+    } else {
+#warning IOS8以下自适应高度未解决,(app版本8.0+,暂不考虑)
+        UITableViewCell *cell = nil;
+        Comment *comment = [self commentByIndexPath:indexPath];
+        if (comment.respondType == RespondTypeByComment) { // 评论的回复
+            cell = (CommentForCommentTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForCommentTableViewCell" owner:nil options:nil].firstObject);
+    
+        } else if (comment.respondType == RespondTypeByDynamic) {
+             cell = (CommentForDynamicTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForDynamicTableViewCell" owner:nil options:nil].firstObject);
+        }
         [cell performSelector:@selector(setComment:) withObject:comment];
-        height = [((CommentForCommentTableViewCell *)cell).mainView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 16;
-
-    } else if (comment.respondType == RespondTypeByDynamic) { // 动态的回复
-        cell = (CommentForDynamicTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForDynamicTableViewCell" owner:nil options:nil].firstObject);
-        ((CommentForDynamicTableViewCell *)cell).btnClickBlock = ^(UITableViewCell *cell) {
-            NSIndexPath *indexPath = [tableView indexPathForCell:cell];
-            
-            Comment *comment = [self commentByIndexPath:indexPath];
-            
-            SHOWMESSAGE(@"给- %@ -评论", comment.fromUserName);
-        };
-        [cell performSelector:@selector(setComment:) withObject:comment];
-        height = [((CommentForDynamicTableViewCell *)cell).mainView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 16;
-
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height + 1;//由于分割线，所以contentView的高度要小于row 一个像素。
     }
-    //    SHOWMESSAGE(@"%.2f", height);
-    return height;
+//    UITableViewCell *cell = nil;
+//
+//    Comment *comment = [self commentByIndexPath:indexPath];
+//    CGFloat height;
+//    if (comment.respondType == RespondTypeByComment) { // 评论的回复
+//        cell = (CommentForCommentTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForCommentTableViewCell" owner:nil options:nil].firstObject);
+//        [cell performSelector:@selector(setComment:) withObject:comment];
+//        height = [((CommentForCommentTableViewCell *)cell).mainView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 16;
+//
+//    } else if (comment.respondType == RespondTypeByDynamic) { // 动态的回复
+//        cell = (CommentForDynamicTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForDynamicTableViewCell" owner:nil options:nil].firstObject);
+//        ((CommentForDynamicTableViewCell *)cell).btnClickBlock = ^(UITableViewCell *cell) {
+//            NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+//            
+//            Comment *comment = [self commentByIndexPath:indexPath];
+//            
+//            SHOWMESSAGE(@"给- %@ -评论", comment.fromUserName);
+//        };
+//        [cell performSelector:@selector(setComment:) withObject:comment];
+//        height = [((CommentForDynamicTableViewCell *)cell).mainView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 16;
+//
+//    }
+//    //    SHOWMESSAGE(@"%.2f", height);
+//    return height;
 }
 /*
 #pragma mark - Navigation

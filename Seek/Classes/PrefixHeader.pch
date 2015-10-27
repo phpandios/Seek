@@ -9,6 +9,7 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#define IS_IOS8_OR_ABOVE ([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0 ? YES : NO)
 
 #pragma mark - 单例
 #define kSingleTon_M(classname) \

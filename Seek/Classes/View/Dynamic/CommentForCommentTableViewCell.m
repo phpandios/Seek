@@ -46,9 +46,5 @@
                        value:(id)kNavBgColor.CGColor
                        range:toUserRange];
     self.infoLabel.attributedText = attrString;
-    
-    [self setNeedsUpdateConstraints];
-    
-    [self updateConstraintsIfNeeded];
 }
 @end

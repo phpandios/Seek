@@ -15,11 +15,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="385" height="87.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgC-4z-W7d">
-                        <rect key="frame" x="8" y="8" width="369" height="0.0"/>
+                    <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mgC-4z-W7d">
+                        <rect key="frame" x="8" y="8" width="369" height="71.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMe-NT-yn3">
-                                <rect key="frame" x="45" y="0.0" width="324" height="0.0"/>
+                                <rect key="frame" x="45" y="0.0" width="324" height="71.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -38,6 +38,7 @@
                 </subviews>
                 <animations/>
                 <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="mgC-4z-W7d" secondAttribute="bottom" id="mTC-Ea-611"/>
                     <constraint firstItem="mgC-4z-W7d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="pzt-a4-9Dt"/>
                     <constraint firstItem="mgC-4z-W7d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="rYT-g2-qpI"/>
                     <constraint firstAttribute="trailingMargin" secondItem="mgC-4z-W7d" secondAttribute="trailing" id="sIf-Jp-bez"/>

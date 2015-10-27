@@ -41,10 +41,6 @@
     self.userNameLabel.text = comment.fromUserName;
     self.timestampLabel.text = [NSString stringWithDate:comment.timestamp];
     self.contentLabel.text = comment.content;
-    
-    [self setNeedsUpdateConstraints];
-    
-    [self updateConstraintsIfNeeded];
 }
 
 - (IBAction)commentButtonAction:(UIButton *)sender {
