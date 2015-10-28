@@ -171,7 +171,7 @@
 {
     __weak typeof(self) __weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        int count = [[RCIMClient sharedRCIMClient]getUnreadCount:self.displayConversationTypeArray];
+        int count = [[RCIMClient sharedRCIMClient] getUnreadCount:self.displayConversationTypeArray];
         if (count>0) {
             __weakSelf.navigationController.tabBarItem.badgeValue = [[NSString alloc]initWithFormat:@"%d",count];
         }else
@@ -507,7 +507,7 @@
                                   dispatch_async(dispatch_get_main_queue(), ^{
                                       //调用父类刷新未读消息数
                                       [blockSelf_ refreshConversationTableViewWithConversationModel:customModel];
-                                      //[super didReceiveMessageNotification:notification];
+                                      [super didReceiveMessageNotification:notification];
                                       [blockSelf_ resetConversationListBackgroundViewIfNeeded];
                                       [self notifyUpdateUnreadMessageCount];
                                       

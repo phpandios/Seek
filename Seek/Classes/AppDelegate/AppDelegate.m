@@ -176,7 +176,7 @@
                                                                            withUserId:userId];
                                                                       }];
                                                 //登陆demoserver成功之后才能调demo 的接口
-                                                [RCDDataSource syncGroups];
+//                                                [RCDDataSource syncGroups];
                                                 [RCDDataSource syncFriendList:^(NSMutableArray * result) {}];
                                                 self.window.rootViewController = ({
                                                     UIViewController *vc = [MainTabBarViewController new];
@@ -203,14 +203,9 @@
                                         }];
                                     }
                                       error:^(RCConnectErrorCode status) {
-                                          RCUserInfo *_currentUserInfo =[[RCUserInfo alloc] initWithUserId:userId
-                                                                                                      name:userName
-                                                                                                  portrait:nil];
-                                          [RCIMClient sharedRCIMClient].currentUserInfo = _currentUserInfo;
-                                          [RCDDataSource syncGroups];
                                           NSLog(@"connect error %ld", (long)status);
                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                              SHOWERROR(@"用户名密码失效,请重新登陆!");
+                                              SHOWERROR(@"连接出错,请重新连接!");
                                               self.window.rootViewController = ({
                                                   LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
                                                   UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVC];

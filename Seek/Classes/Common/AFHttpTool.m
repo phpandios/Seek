@@ -77,6 +77,31 @@
     }
 }
 
+#pragma mark - 手机号是否存在
++ (void)telphoneIsExist:(NSString *)telphone
+                success:(void (^)(id response))success
+                failure:(void (^)(NSError *err))failure
+{
+    NSDictionary *params = @{@"telephone" : telphone};
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"mobile_exists"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
+#pragma mark - 修改密码
++ (void)modifyPassword:(NSString *)password
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError *err))failure
+{
+    NSDictionary *params = @{@"password" : password};
+    [AFHttpTool requestWihtMethod:RequestMethodTypePost
+                              url:@"update_password"
+                           params:params
+                          success:success
+                          failure:failure];
+}
 
 #pragma mark - 上传头像
 + (void)uploadImage:(NSData *)imageData
@@ -94,10 +119,11 @@
 
 #pragma mark - 改绑手机
 + (void)bindingTelphone:(NSString *)telPhone
+               password:(NSString *)password
                 success:(void (^)(id response))success
-                failure:(void (^)(NSError* err))failure
+                failure:(void (^)(NSError* err))failure;
 {
-    NSDictionary *params = @{@"telephone" : telPhone};
+    NSDictionary *params = @{@"telephone" : telPhone, @"password" : password};
     [AFHttpTool requestWihtMethod:RequestMethodTypePost
                               url:@"update_phone"
                            params:params

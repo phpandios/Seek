@@ -33,7 +33,12 @@
     [super viewDidLoad];
     self.title = @"登陆";
     
-    
+    NSString *telephone = [DEFAULTS objectForKey:@"userName"];
+    NSString *pwd = [DEFAULTS objectForKey:@"userPwd"];
+    if ([telephone length] > 0 && [pwd length] > 0) {
+        self.userTextField.text = telephone;
+        self.pwdTextField.text = pwd;
+    }
     
     [self.userTextField becomeFirstResponder];
     // Do any additional setup after loading the view from its nib.

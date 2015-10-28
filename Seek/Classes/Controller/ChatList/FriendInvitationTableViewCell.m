@@ -42,22 +42,20 @@
     if (_contactNotificationMsg.sourceUserId == nil || _contactNotificationMsg.sourceUserId .length ==0) {
         return;
     }
-    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.superview animated:YES];
-    hud.labelText = @"添加中...";
+    SHOWMESSAGE(@"添加中");
     [AFHttpTool processRequestFriend:_contactNotificationMsg.sourceUserId withIsAccess:YES success:^(id response) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [hud hide:YES];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"已添加好友！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];;
-            
-            [alertView show];
-            [weakSelf.acceptButton setEnabled:NO];
-        });
+        if ([response[@"code"] intValue] == 200) {
+            SHOWSUCCESS(@"添加成功");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.acceptButton setEnabled:NO];
+            });
+        } else {
+            SHOWERROR(@"%@", response[@"message"]);
+        }
         
     } failure:^(NSError *err) {
+        SHOWERROR(@"网络故障,请检查后重试!");
         dispatch_async(dispatch_get_main_queue(), ^{
-            [hud hide:YES];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"添加失败！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];;
-            [alertView show];
             [weakSelf.acceptButton setEnabled:YES];
         });
     }];

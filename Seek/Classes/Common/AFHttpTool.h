@@ -32,6 +32,16 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError *err))failure;
 
+#pragma mark - 手机号是否存在
++ (void)telphoneIsExist:(NSString *)telphone
+                success:(void (^)(id response))success
+                failure:(void (^)(NSError *err))failure;
+
+#pragma mark - 修改密码
++ (void)modifyPassword:(NSString *)password
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError *err))failure;
+
 #pragma mark - 上传头像
 + (void)uploadImage:(NSData *)imageData
             success:(void (^)(id response))success
@@ -40,6 +50,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 
 #pragma mark - 改绑手机
 + (void)bindingTelphone:(NSString *)telPhone
+               password:(NSString *)password
                 success:(void (^)(id response))success
                 failure:(void (^)(NSError* err))failure;
 
@@ -134,5 +145,6 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 +(void)getUserById:(NSString*) userId
             success:(void (^)(id response))success
             failure:(void (^)(NSError* err))failure;
+
 @end
 

@@ -115,15 +115,21 @@
     if ([self verifyDataValid]) {
         if (_type == CheckPhoneTypeForBindingTelPhone) {
             [KVNProgress show];
-            [AFHttpTool bindingTelphone:self.phoneNum success:^(id response) {
+            [AFHttpTool bindingTelphone:self.phoneNum password:self.pwdTextField.text success:^(id response) {
                 if ([response[@"code"] intValue] == 200) {
-                    SHOWSUCCESS(@"绑定成功");
                     RCDLoginInfo *loginInfo = [RCDLoginInfo shareLoginInfo];
+                    // 保存信息到本地.
+                    [DEFAULTS setObject:weakSelf.phoneNum forKey:@"userName"];
+                    [DEFAULTS setObject:weakSelf.pwdTextField.text forKey:@"userPwd"];
                     [loginInfo setValuesForKeysWithDictionary:response[@"result"]];
-                    [weakSelf.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
+                    [KVNProgress showSuccessWithStatus:@"绑定成功" completion:^{
+                        [weakSelf.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 4] animated:YES];
+                    }];
+                    
                 } else {
-                    SHOWERROR(@"%@", response[@"message"]);
-                    [weakSelf.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] animated:YES];
+                    [KVNProgress showErrorWithStatus:response[@"message"] completion:^{
+                        [weakSelf.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
+                    }];
                 }
             } failure:^(NSError *err) {
                 SHOWERROR(@"网络故障,请重试!");

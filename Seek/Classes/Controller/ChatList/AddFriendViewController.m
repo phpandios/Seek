@@ -26,10 +26,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)actionAddFriend:(id)sender {
-    [KVNProgress show];
+    SHOWMESSAGE(@"发送好友请求中");
     [RCDHTTPTOOL requestFriend:_targetUserInfo.userId complete:^(BOOL result) {
         if (result) {
-            SHOWMESSAGE(@"好友请求已发送");
+            SHOWSUCCESS(@"好友请求已发送");
         }
     }];
 }
