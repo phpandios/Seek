@@ -7,7 +7,7 @@
 //
 
 #import "OnePhotoCell.h"
-
+#import "Dynamic.h"
 @implementation OnePhotoCell
 
 - (void)awakeFromNib {
@@ -20,4 +20,19 @@
     // Configure the view for the selected state
 }
 
+- (void)setDynamicObj:(Dynamic *)dynamicObj
+{
+    _dynamicObj = dynamicObj;
+    [self.head_portrait sd_setImageWithURL:[NSURL URLWithString:dynamicObj.head_portrait] placeholderImage:nil];
+    self.contentMode = UIViewContentModeScaleAspectFit;
+    self.name.text = dynamicObj.nick_name;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    [formatter setTimeZone:timeZone];
+    NSString *nowtimeStr = [formatter stringFromDate:dynamicObj.timestamp];
+    self.insert_time.text = nowtimeStr;
+    self.publish_content.text =dynamicObj.content;
+    [self.photo sd_setImageWithURL:[NSURL URLWithString:dynamicObj.images] placeholderImage:nil];
+    self.comments_nums.text = [NSString stringWithFormat:@"%ld评论", dynamicObj.commentNum];
+}
 @end

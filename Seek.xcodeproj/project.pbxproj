@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1877F5131BC7E01700026FE7 /* DynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1877F5111BC7E01700026FE7 /* DynamicViewController.m */; };
 		1877F5141BC7E01700026FE7 /* DynamicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1877F5121BC7E01700026FE7 /* DynamicViewController.xib */; };
+		1882DA341BE5DBCD009DE69B /* recommd.png in Resources */ = {isa = PBXBuildFile; fileRef = 1882DA331BE5DBCD009DE69B /* recommd.png */; settings = {ASSET_TAGS = (); }; };
+		1882DA381BE6390B009DE69B /* NoPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1882DA361BE6390B009DE69B /* NoPhotoCell.m */; settings = {ASSET_TAGS = (); }; };
+		1882DA391BE6390B009DE69B /* NoPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1882DA371BE6390B009DE69B /* NoPhotoCell.xib */; settings = {ASSET_TAGS = (); }; };
+		1882DA3C1BE6473E009DE69B /* NSString+textHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 1882DA3B1BE6473E009DE69B /* NSString+textHeightAndWidth.m */; settings = {ASSET_TAGS = (); }; };
 		189950B61BC6CB5100E12BDC /* KnowPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189950A81BC6CB5100E12BDC /* KnowPersonCell.m */; };
 		189950B71BC6CB5100E12BDC /* KnowPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189950A91BC6CB5100E12BDC /* KnowPersonCell.xib */; };
 		189950B81BC6CB5100E12BDC /* OnePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189950AB1BC6CB5100E12BDC /* OnePhotoCell.m */; };
@@ -31,6 +35,10 @@
 		189950D81BC6D3EC00E12BDC /* issue.png in Resources */ = {isa = PBXBuildFile; fileRef = 189950D31BC6D3EC00E12BDC /* issue.png */; };
 		189950D91BC6D3EC00E12BDC /* mapTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 189950D41BC6D3EC00E12BDC /* mapTab.png */; };
 		189950DA1BC6D3EC00E12BDC /* mine.png in Resources */ = {isa = PBXBuildFile; fileRef = 189950D51BC6D3EC00E12BDC /* mine.png */; };
+		189DCD641BE27AFE00E408A0 /* correct.png in Resources */ = {isa = PBXBuildFile; fileRef = 189DCD631BE27AFE00E408A0 /* correct.png */; settings = {ASSET_TAGS = (); }; };
+		18AF577B1BE50C9600562AB1 /* NSString+Feifa_str.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AF577A1BE50C9600562AB1 /* NSString+Feifa_str.m */; settings = {ASSET_TAGS = (); }; };
+		18E79E5B1BE128FA0036AE02 /* PermissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E79E591BE128FA0036AE02 /* PermissionsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		18E79E5C1BE128FA0036AE02 /* PermissionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E79E5A1BE128FA0036AE02 /* PermissionsViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		6003F56F1BD6120D000FB713 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F56E1BD6120D000FB713 /* Tool.m */; };
 		60117B8E1BC7ECD3001D4EC0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117B8D1BC7ECD3001D4EC0 /* Reachability.m */; };
 		60117B911BC7ED77001D4EC0 /* DataBaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60117B901BC7ED77001D4EC0 /* DataBaseHelper.m */; };
@@ -312,6 +320,12 @@
 		1877F5101BC7E01700026FE7 /* DynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicViewController.h; sourceTree = "<group>"; };
 		1877F5111BC7E01700026FE7 /* DynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicViewController.m; sourceTree = "<group>"; };
 		1877F5121BC7E01700026FE7 /* DynamicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicViewController.xib; sourceTree = "<group>"; };
+		1882DA331BE5DBCD009DE69B /* recommd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recommd.png; sourceTree = "<group>"; };
+		1882DA351BE6390B009DE69B /* NoPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoPhotoCell.h; sourceTree = "<group>"; };
+		1882DA361BE6390B009DE69B /* NoPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoPhotoCell.m; sourceTree = "<group>"; };
+		1882DA371BE6390B009DE69B /* NoPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoPhotoCell.xib; sourceTree = "<group>"; };
+		1882DA3A1BE6473E009DE69B /* NSString+textHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+textHeightAndWidth.h"; sourceTree = "<group>"; };
+		1882DA3B1BE6473E009DE69B /* NSString+textHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+textHeightAndWidth.m"; sourceTree = "<group>"; };
 		189950A71BC6CB5100E12BDC /* KnowPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnowPersonCell.h; sourceTree = "<group>"; };
 		189950A81BC6CB5100E12BDC /* KnowPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnowPersonCell.m; sourceTree = "<group>"; };
 		189950A91BC6CB5100E12BDC /* KnowPersonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KnowPersonCell.xib; sourceTree = "<group>"; };
@@ -339,6 +353,12 @@
 		189950D31BC6D3EC00E12BDC /* issue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = issue.png; sourceTree = "<group>"; };
 		189950D41BC6D3EC00E12BDC /* mapTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapTab.png; sourceTree = "<group>"; };
 		189950D51BC6D3EC00E12BDC /* mine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mine.png; sourceTree = "<group>"; };
+		189DCD631BE27AFE00E408A0 /* correct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = correct.png; sourceTree = "<group>"; };
+		18AF57791BE50C9600562AB1 /* NSString+Feifa_str.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Feifa_str.h"; sourceTree = "<group>"; };
+		18AF577A1BE50C9600562AB1 /* NSString+Feifa_str.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Feifa_str.m"; sourceTree = "<group>"; };
+		18E79E581BE128FA0036AE02 /* PermissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionsViewController.h; sourceTree = "<group>"; };
+		18E79E591BE128FA0036AE02 /* PermissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionsViewController.m; sourceTree = "<group>"; };
+		18E79E5A1BE128FA0036AE02 /* PermissionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionsViewController.xib; sourceTree = "<group>"; };
 		6003F56D1BD6120D000FB713 /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
 		6003F56E1BD6120D000FB713 /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
 		60117B8C1BC7ECD3001D4EC0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -1038,6 +1058,10 @@
 				60DA7D101BCDF43C00151717 /* UIColor+Category.m */,
 				60DA7D161BCDFC0C00151717 /* UIView+Category.h */,
 				60DA7D171BCDFC0C00151717 /* UIView+Category.m */,
+				18AF57791BE50C9600562AB1 /* NSString+Feifa_str.h */,
+				18AF577A1BE50C9600562AB1 /* NSString+Feifa_str.m */,
+				1882DA3A1BE6473E009DE69B /* NSString+textHeightAndWidth.h */,
+				1882DA3B1BE6473E009DE69B /* NSString+textHeightAndWidth.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1099,6 +1123,9 @@
 				60B06E5B1BC6BCBD006AB01E /* IssueViewController.h */,
 				60B06E5C1BC6BCBD006AB01E /* IssueViewController.m */,
 				60B06E5D1BC6BCBD006AB01E /* IssueViewController.xib */,
+				18E79E581BE128FA0036AE02 /* PermissionsViewController.h */,
+				18E79E591BE128FA0036AE02 /* PermissionsViewController.m */,
+				18E79E5A1BE128FA0036AE02 /* PermissionsViewController.xib */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -1243,6 +1270,9 @@
 		606364A51BC1011C00A36965 /* Dynamic */ = {
 			isa = PBXGroup;
 			children = (
+				1882DA351BE6390B009DE69B /* NoPhotoCell.h */,
+				1882DA361BE6390B009DE69B /* NoPhotoCell.m */,
+				1882DA371BE6390B009DE69B /* NoPhotoCell.xib */,
 				609D47C71BCE2DC700F79A65 /* Comment */,
 				189950A71BC6CB5100E12BDC /* KnowPersonCell.h */,
 				189950A81BC6CB5100E12BDC /* KnowPersonCell.m */,
@@ -1765,6 +1795,8 @@
 		60E4C1D91BC111EB00611E0A /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				1882DA331BE5DBCD009DE69B /* recommd.png */,
+				189DCD631BE27AFE00E408A0 /* correct.png */,
 				60DA7D011BCDF05100151717 /* loginBg@2x.png */,
 				60DA7D021BCDF05100151717 /* registerBg@2x.png */,
 				60DA7CF51BCDEDBF00151717 /* inputBgGray@2x.png */,
@@ -2023,6 +2055,7 @@
 				60C4BDA11BCAA85E00A50D85 /* UMShareEditViewController.xib in Resources */,
 				607AC78C1BCF72C7002F8600 /* arrowDowIcon.png in Resources */,
 				609D48201BCE4A9400F79A65 /* CommentForCommentTableViewCell.xib in Resources */,
+				1882DA391BE6390B009DE69B /* NoPhotoCell.xib in Resources */,
 				606364611BC0FD6000A36965 /* LaunchScreen.storyboard in Resources */,
 				60D351051BC956EB00F2C4D7 /* weixinIcon.png in Resources */,
 				60117BA91BC7EE86001D4EC0 /* bannerSuccess.png in Resources */,
@@ -2031,6 +2064,7 @@
 				609CEABF1BC96CC000F99BD6 /* exitLogin.png in Resources */,
 				60C4BD9C1BCAA85E00A50D85 /* UMSocialLocalizable.strings in Resources */,
 				60117BA41BC7EE86001D4EC0 /* bannerAlert@2x.png in Resources */,
+				189DCD641BE27AFE00E408A0 /* correct.png in Resources */,
 				60DA7CFC1BCDEDBF00151717 /* icon_secret@2x.png in Resources */,
 				60C4BDA51BCAA85E00A50D85 /* UMSShareListController.xib in Resources */,
 				189950CD1BC6CE7800E12BDC /* pen_edit.png in Resources */,
@@ -2042,6 +2076,7 @@
 				189950DA1BC6D3EC00E12BDC /* mine.png in Resources */,
 				607EE3701BDDC8F00008BF7E /* AddressBookTableViewCell.xib in Resources */,
 				189950B71BC6CB5100E12BDC /* KnowPersonCell.xib in Resources */,
+				1882DA341BE5DBCD009DE69B /* recommd.png in Resources */,
 				60DA7CFF1BCDEDBF00151717 /* inputBgGray@3x.png in Resources */,
 				607AC7A21BCF7CB9002F8600 /* LoginViewController.xib in Resources */,
 				60DA7D251BCE075000151717 /* resendButtonDisable@2x.png in Resources */,
@@ -2057,6 +2092,7 @@
 				607EE35A1BDDB3DE0008BF7E /* AddFriendViewController.xib in Resources */,
 				60DA7D231BCE075000151717 /* resendButtonBg@2x.png in Resources */,
 				609D481B1BCE4A8600F79A65 /* CommentForDynamicTableViewCell.xib in Resources */,
+				18E79E5C1BE128FA0036AE02 /* PermissionsViewController.xib in Resources */,
 				60DA7CFD1BCDEDBF00151717 /* icon_account@2x.png in Resources */,
 				60C4BDCA1BCAB7DA00A50D85 /* placeholderUserIcon.png in Resources */,
 				60117BA51BC7EE86001D4EC0 /* bannerFailure.png in Resources */,
@@ -2111,10 +2147,12 @@
 				60E3C27E1BD8D25500D43072 /* AFURLRequestSerialization.m in Sources */,
 				60F6C4771BDA32FF00C1FE1A /* RCDChatListCell.m in Sources */,
 				609D47BE1BCE256200F79A65 /* Dynamic.m in Sources */,
+				1882DA3C1BE6473E009DE69B /* NSString+textHeightAndWidth.m in Sources */,
 				60E3C2C41BD8D41C00D43072 /* RCDRCIMDataSource.m in Sources */,
 				60D3510D1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m in Sources */,
 				60117BA11BC7EE86001D4EC0 /* ALAlertBanner.m in Sources */,
 				60C4BD7A1BCAA7BB00A50D85 /* UIButton+WebCache.m in Sources */,
+				1882DA381BE6390B009DE69B /* NoPhotoCell.m in Sources */,
 				607AC7901BCF7C87002F8600 /* MAPPOISearchViewController.m in Sources */,
 				607EE3A91BDDDAB70008BF7E /* RCDSelectPersonTableViewCell.m in Sources */,
 				60A7589B1BCE512B004362CF /* CommentHeaderView.m in Sources */,
@@ -2218,9 +2256,11 @@
 				60C30FD21BD5374100EE62FC /* UIColor+KVNContrast.m in Sources */,
 				609D47C11BCE284700F79A65 /* Comment.m in Sources */,
 				606364531BC0FD6000A36965 /* main.m in Sources */,
+				18AF577B1BE50C9600562AB1 /* NSString+Feifa_str.m in Sources */,
 				609D47C51BCE2C9500F79A65 /* DynamicDetailViewController.m in Sources */,
 				60E3C2D71BD8D47D00D43072 /* FMDatabase.m in Sources */,
 				607AC7891BCF5BE4002F8600 /* UserLogoutTableViewCell.m in Sources */,
+				18E79E5B1BE128FA0036AE02 /* PermissionsViewController.m in Sources */,
 				607EE3901BDDD8570008BF7E /* RCDConversationSettingTableViewHeader.m in Sources */,
 				60E3C29B1BD8D39500D43072 /* RCDGroupInfo.m in Sources */,
 				607EE3841BDDD7B30008BF7E /* RCDPrivateSettingViewController.m in Sources */,

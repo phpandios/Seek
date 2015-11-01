@@ -135,10 +135,10 @@
         if (indexPath.section == 1) {
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = @"我的好友";
+                    cell.textLabel.text = @"我的关注";
                     break;
                 case 1:
-                    cell.textLabel.text = @"好友请求";
+                    cell.textLabel.text = @"关注请求";
                     break;
             }
         } else if (indexPath.section == 2) {

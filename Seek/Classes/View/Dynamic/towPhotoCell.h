@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class Dynamic;
 @interface towPhotoCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *head_portrait;//头像
 @property (weak, nonatomic) IBOutlet UILabel *name;//会员名称
@@ -19,4 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *comments_nums;//评论数量
 @property (weak, nonatomic) IBOutlet UIButton *comments_btn;//评论按钮
 @property (weak, nonatomic) IBOutlet UIButton *share_btn;//分享按钮
+
+@property (nonatomic, retain)Dynamic *dynamicObj;
 @end

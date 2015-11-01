@@ -33,6 +33,9 @@ return share; \
 #define SBLog(...)
 #endif
 
+//获取屏幕尺寸
+#define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
+#define kScreenFrame ([UIScreen mainScreen].bounds)
 
 typedef enum {
     CheckPhoneTypeForRegister,
@@ -54,6 +57,7 @@ typedef enum {
 // 融云
 #define kRCIMAppKey @"pwe86ga5edft6"
 #define kRCIMAppSecret @"qy9qbCT8df00jN"
+
 // SDK -- END
 
 #ifdef __OBJC__
@@ -78,6 +82,7 @@ typedef enum {
 #import "DataBaseHelper.h"
 #import "NSString+ConvertDate.h"
 #import "UIColor+Category.h"
+#import "NSString+Feifa_str.h"
 #import "CALayer+BorderColorFromUIColor.h"
 #import "UIView+Category.h"
 #import "NSString+Category.h"

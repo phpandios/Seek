@@ -6,10 +6,15 @@
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
 
+//动态发布屏蔽敏感词
+#define Sensitive_words @""
+
 #import "IssueViewController.h"
 #import "WFFDropdownList.h"
 #import "AutoHeightTextView.h"
 #import "MAPPOISearchViewController.h"
+#import "PermissionsViewController.h"
+#import "AFHttpTool.h"
 @interface IssueViewController ()<WFFDropdownListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet WFFDropdownList *categoryDropList;
 @property (nonatomic, strong) NSArray *categoryArray;
@@ -28,6 +33,10 @@
 @property (nonatomic, copy) NSString *selectedCategory;
 
 @property (nonatomic, strong) NSDictionary *selectedAddressDict;// 键值对,latitude, longitude, address, name
+@property (nonatomic, retain) NSMutableDictionary *currentPermission;
+@property (weak, nonatomic) IBOutlet UIButton *perssionName;
+@property (weak, nonatomic) IBOutlet UILabel *perssionDecrip;
+
 @end
 
 @implementation IssueViewController
@@ -35,6 +44,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"发布";
+    //赋初值
+    _titleTextField.text = nil;
+    _contentTextView.text = nil;
+    
     [self.imageCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
     self.imagesArray = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"issueAddImage"]];
@@ -148,16 +161,62 @@
 }
 #pragma mark - 按钮点击
 - (IBAction)commitButtonAction:(UIButton *)sender {
-    if (!self.selectedAddressDict) {
-        [KVNProgress showErrorWithStatus:@"地点不能为空"];
-        return;
+    if ([_titleTextField.text isEqualToString:@""] || _titleTextField.text== nil ) {
+        [KVNProgress showErrorWithStatus:@"标题不能为空"];
+    }else if ([_contentTextView.text isEqualToString:@""] || _contentTextView.text== nil )
+    {
+        [KVNProgress showErrorWithStatus:@"内容不能为空"];
+    }
+    else
+    {
+        if ([NSString feifaSensitiveStr:_titleTextField.text]) {
+            [KVNProgress showErrorWithStatus:@"标题不能出现敏感词语"];
+        } else if([NSString feifaSensitiveStr:_contentTextView.text]) {
+            [KVNProgress showErrorWithStatus:@"内容不能出现敏感词语"];
+        } else {
+            NSInteger permission = [self.currentPermission objectForKey:_perssionName.titleLabel.text] ? [[self.currentPermission objectForKey:_perssionName.titleLabel.text] intValue] : 3;
+            
+            [AFHttpTool publishMessage:_titleTextField.text
+                               content:_contentTextView.text
+                                images:@"faf"
+                             longitude:[[_selectedAddressDict objectForKey:@"longitude"] floatValue]
+                              latitude:[[_selectedAddressDict objectForKey:@"latitude"] floatValue]
+                          locationName:[_selectedAddressDict objectForKey:@"name"]
+                       locationAddress:[_selectedAddressDict objectForKey:@"address"]
+                            permission:permission
+                               success:^(id response)
+                                    {
+                                        [KVNProgress showSuccessWithStatus:@"发布成功"];
+                                        [self dismissViewControllerAnimated:YES completion:nil];
+                                    }
+                               failure:^(NSError *err) {
+                                   [KVNProgress showErrorWithStatus:@"发布失败请重新发布"];
+            }];
+        }
     }
 }
+
 - (IBAction)dismisButtonAction:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (NSMutableDictionary *)currentPermission
+{
+    if (_currentPermission) {
+        self.currentPermission = [NSMutableDictionary new];
+    }
+    return _currentPermission;
+}
+
 - (IBAction)permissionButtonAction:(UIButton *)sender {
+    PermissionsViewController *permission = [PermissionsViewController new];
+    __weak typeof(self) weakSelf = self;
+    permission.currentPermission = ^(int currentNum, id currentName, id currentDescrip){
+        weakSelf.perssionName.titleLabel.text = currentName;
+        weakSelf.perssionDecrip.text = currentDescrip;
+        [weakSelf.currentPermission setObject:[NSNumber numberWithInt:currentNum] forKey:currentName];
+    };
+    [self presentViewController:permission animated:YES completion:nil];
 }
 
 

@@ -8,7 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Dynamic : NSObject
+@interface Dynamic : NSObject<NSCoding>
+
+@property (nonatomic, assign)NSInteger category_id;//分类id
+
+@property (nonatomic, retain)NSDate *statr_time;
+
+@property (nonatomic, retain)NSDate *end_time;
+
+@property (nonatomic, copy) NSString *nick_name;
+
+@property (nonatomic, copy) NSString *head_portrait;
 
 @property (nonatomic, assign) NSInteger userId;
 
@@ -30,7 +40,7 @@
 @property (nonatomic, copy) NSString *title;
 
 // 动态的图片数组
-@property (nonatomic, strong) NSArray *images;
+@property (nonatomic, copy) NSString *images;
 
 /*
  * 评论数量[主评论数,即只算 回复的是动态的评论]

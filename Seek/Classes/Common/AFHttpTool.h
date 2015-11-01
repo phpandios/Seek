@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 };
 
 @class RCDLoginInfo;
+@class Dynamic;
 @interface AFHttpTool : NSObject
 
 /**
@@ -77,6 +78,26 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 + (void)getTokenWithUser:(RCDLoginInfo *)user
                  success:(void (^)(id response))success
                  failure:(void (^)(NSError* err))failure;
+
+#pragma mark -发布消息
++ (void)publishMessage:(NSString *)title
+               content:(NSString *)content
+                images:(NSString *)images
+             longitude:(CGFloat)longitude
+              latitude:(CGFloat)latitude
+          locationName:(NSString *)locationName
+       locationAddress:(NSString *)locationAddress
+            permission:(NSInteger)permission
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError * err))failure;
+#pragma mark -请求动态消息
++ (void)getDynamicWithPage:(NSInteger)page
+                     limit:(NSInteger)limit
+               permissions:(NSInteger)permissions
+             promote_state:(NSInteger)promote_state
+                     state:(NSInteger)state
+                      success:(void (^)(id response))success
+                      failure:(void (^)(NSError* err))failure;
 //get token
 //+(void) getTokenSuccess:(void (^)(id response))success
 //                failure:(void (^)(NSError* err))failure;

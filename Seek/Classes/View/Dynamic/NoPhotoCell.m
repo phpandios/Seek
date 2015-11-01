@@ -1,14 +1,14 @@
 //
-//  ThreePhotoCell.m
+//  OnePhotoCell.m
 //  Seek
 //
-//  Created by apple on 15/10/8.
+//  Created by apple on 15/10/6.
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
 
-#import "ThreePhotoCell.h"
+#import "NoPhotoCell.h"
 #import "Dynamic.h"
-@implementation ThreePhotoCell
+@implementation NoPhotoCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -31,13 +31,7 @@
     [formatter setTimeZone:timeZone];
     NSString *nowtimeStr = [formatter stringFromDate:dynamicObj.timestamp];
     self.insert_time.text = nowtimeStr;
-    
     self.publish_content.text =dynamicObj.content;
-    NSArray *arr = [_dynamicObj.images componentsSeparatedByString:@"#@#"];
-    [self.onePhoto sd_setImageWithURL:[NSURL URLWithString:arr[0]] placeholderImage:nil];
-    [self.twoPhoto sd_setImageWithURL:[NSURL URLWithString:arr[1]] placeholderImage:nil];
-    [self.threePhoto sd_setImageWithURL:[NSURL URLWithString:arr[2]] placeholderImage:nil];
-    
     self.comments_nums.text = [NSString stringWithFormat:@"%ld评论", dynamicObj.commentNum];
 }
 @end

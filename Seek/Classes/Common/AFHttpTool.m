@@ -184,7 +184,55 @@
                           failure:failure];
 }
 
-
+#pragma mark -发布消息
++ (void)publishMessage:(NSString *)title
+               content:(NSString *)content
+                images:(NSString *)images
+             longitude:(CGFloat)longitude
+              latitude:(CGFloat)latitude
+          locationName:(NSString *)locationName
+       locationAddress:(NSString *)locationAddress
+            permission:(NSInteger)permission
+               success:(void (^)(id response))success
+               failure:(void (^)(NSError * err))failure
+{
+    NSDictionary *params = @{
+                             @"title" : title,
+                             @"content" : content,
+                             @"images" : images,
+                             @"longitude" : @(longitude),
+                             @"latitude" : @(latitude),
+                             @"locationName":locationName,
+                             @"locationAddress":locationAddress,
+                             @"permission" : @(permission)};
+    [AFHttpTool requestWihtMethod:RequestMethodTypePost
+                              url:@"pulish_dynamic"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+#pragma mark -请求动态消息
++ (void)getDynamicWithPage:(NSInteger)page
+                     limit:(NSInteger)limit
+               permissions:(NSInteger)permissions
+             promote_state:(NSInteger)promote_state
+                     state:(NSInteger)state
+                      success:(void (^)(id response))success
+                      failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{
+                             @"page" : @(page),
+                             @"limit" : @(limit),
+                             @"permissions" : @(permissions),
+                             @"promote_state" : @(promote_state),
+                             @"state" : @(state)
+                             };
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"get_dynamic"
+                           params:params
+                          success:success
+                          failure:failure];
+}
 //get friends
 +(void) getFriendsSuccess:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure

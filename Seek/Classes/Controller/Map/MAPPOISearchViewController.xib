@@ -130,9 +130,9 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="B2o-ra-21p"/>
                     <exclude reference="gHf-u7-R7O"/>
                     <exclude reference="uMn-Zx-HI8"/>
-                    <exclude reference="B2o-ra-21p"/>
                 </mask>
             </variation>
         </view>

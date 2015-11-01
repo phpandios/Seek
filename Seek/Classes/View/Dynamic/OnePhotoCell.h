@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class Dynamic;
 @interface OnePhotoCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageH;//内容图片高度
 @property (weak, nonatomic) IBOutlet UIImageView *head_portrait;//头像
@@ -19,5 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *comments_nums;//评论数量
 @property (weak, nonatomic) IBOutlet UIButton *comments_btn;//评论按钮
 @property (weak, nonatomic) IBOutlet UIButton *share_btn;//分享按钮
+
+@property (nonatomic, retain)Dynamic *dynamicObj;
 
 @end

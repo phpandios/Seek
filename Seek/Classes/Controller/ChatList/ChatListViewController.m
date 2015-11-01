@@ -124,7 +124,7 @@
 //                    target:self
 //                    action:@selector(pushChat:)],
       
-      [KxMenuItem menuItem:@"添加好友"
+      [KxMenuItem menuItem:@"添加关注"
                      image:[UIImage imageNamed:@"addfriend_icon"]
                     target:self
                     action:@selector(pushAddFriend:)],
@@ -376,7 +376,7 @@
             RCContactNotificationMessage *_contactNotificationMsg = (RCContactNotificationMessage *)model.lastestMessage;
             if (_contactNotificationMsg.sourceUserId == nil) {
                 RCDChatListCell *cell = [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-                cell.lblDetail.text = @"好友请求";
+                cell.lblDetail.text = @"关注请求";
                 [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:portraitUri] placeholderImage:[UIImage imageNamed:@"system_notice"]];
                 return cell;
                 
@@ -475,7 +475,7 @@
         if (message.conversationType != ConversationType_SYSTEM) {
             NSLog(@"好友消息要发系统消息！！！");
 #if DEBUG
-            @throw  [[NSException alloc] initWithName:@"error" reason:@"好友消息要发系统消息！！！" userInfo:nil];
+            @throw  [[NSException alloc] initWithName:@"error" reason:@"关注消息要发系统消息！！！" userInfo:nil];
 #endif
         }
         RCContactNotificationMessage *_contactNotificationMsg = (RCContactNotificationMessage *)message.content;
