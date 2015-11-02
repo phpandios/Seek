@@ -87,6 +87,7 @@ typedef enum {
 #import "UIView+Category.h"
 #import "NSString+Category.h"
 #import "User.h"
+#import "AFNetworking.h"
 
 #endif
 

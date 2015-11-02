@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1872D1BB1BE7C1640006D314 /* UIImage+uploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1872D1BA1BE7C1640006D314 /* UIImage+uploadImage.m */; settings = {ASSET_TAGS = (); }; };
 		1877F5131BC7E01700026FE7 /* DynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1877F5111BC7E01700026FE7 /* DynamicViewController.m */; };
 		1877F5141BC7E01700026FE7 /* DynamicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1877F5121BC7E01700026FE7 /* DynamicViewController.xib */; };
 		1882DA341BE5DBCD009DE69B /* recommd.png in Resources */ = {isa = PBXBuildFile; fileRef = 1882DA331BE5DBCD009DE69B /* recommd.png */; settings = {ASSET_TAGS = (); }; };
@@ -317,6 +318,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1872D1B91BE7C1640006D314 /* UIImage+uploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+uploadImage.h"; sourceTree = "<group>"; };
+		1872D1BA1BE7C1640006D314 /* UIImage+uploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+uploadImage.m"; sourceTree = "<group>"; };
 		1877F5101BC7E01700026FE7 /* DynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicViewController.h; sourceTree = "<group>"; };
 		1877F5111BC7E01700026FE7 /* DynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicViewController.m; sourceTree = "<group>"; };
 		1877F5121BC7E01700026FE7 /* DynamicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicViewController.xib; sourceTree = "<group>"; };
@@ -1062,6 +1065,8 @@
 				18AF577A1BE50C9600562AB1 /* NSString+Feifa_str.m */,
 				1882DA3A1BE6473E009DE69B /* NSString+textHeightAndWidth.h */,
 				1882DA3B1BE6473E009DE69B /* NSString+textHeightAndWidth.m */,
+				1872D1B91BE7C1640006D314 /* UIImage+uploadImage.h */,
+				1872D1BA1BE7C1640006D314 /* UIImage+uploadImage.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2184,6 +2189,7 @@
 				60DA7CEF1BCDE96000151717 /* NSString+Category.m in Sources */,
 				607AC7691BCF4B66002F8600 /* ACEExpandableTextCell.m in Sources */,
 				60C4BD7B1BCAA7BB00A50D85 /* UIImage+GIF.m in Sources */,
+				1872D1BB1BE7C1640006D314 /* UIImage+uploadImage.m in Sources */,
 				60B06E5E1BC6BCBD006AB01E /* IssueViewController.m in Sources */,
 				60B487DD1BD0A4C60019196C /* AutoHeightTextView.m in Sources */,
 				60E3C2D81BD8D47D00D43072 /* FMDatabaseAdditions.m in Sources */,
