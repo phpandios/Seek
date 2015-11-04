@@ -13,7 +13,6 @@
 #import "MAPPOISearchViewController.h"
 #import "PermissionsViewController.h"
 #import "AFHttpTool.h"
-#import "UIImage+uploadImage.h"
 @interface IssueViewController ()<WFFDropdownListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
 @property (weak, nonatomic) IBOutlet WFFDropdownList *categoryDropList;
 @property (nonatomic, strong) NSArray *categoryArray;
@@ -49,9 +48,11 @@
     _contentTextView.text = nil;
     
     [self.imageCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-    
     self.imagesArray = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"issueAddImage"]];
-    
+    //照相选择图片
+    if (self.tokePhoto != nil) {
+        [self.imagesArray addObject:_tokePhoto];
+    }
     
     self.categoryArray = @[@"分类1", @"分类2", @"分类3", @"分类4", @"分类5"];
     self.selectedCategory = self.categoryArray.firstObject;
@@ -159,7 +160,7 @@
     if (indexPath.row==self.imagesArray.count-1) {
         imageView.image = self.imagesArray[0];
     } else {
-        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imagesArray[indexPath.row]] placeholderImage:nil];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imagesArray[indexPath.row+1]] placeholderImage:nil];
     }
     
     
@@ -191,14 +192,34 @@
             [KVNProgress showErrorWithStatus:@"内容不能出现敏感词语"];
         } else {
             NSInteger permission = [self.currentPermission objectForKey:_perssionName.titleLabel.text] ? [[self.currentPermission objectForKey:_perssionName.titleLabel.text] intValue] : 3;
-            
+            //将图片编历
+            NSString *images_arr = nil;
+            if (self.imagesArray.count > 1) {
+                if (self.imagesArray.count == 2) {
+                    images_arr =self.imagesArray[1];
+                } else {
+                    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.imagesArray];
+                    [arr removeObjectAtIndex:0];
+                    images_arr = [arr componentsJoinedByString:@"#@#"];
+                }
+            }
+            CGFloat longitude=0,latitude=0;
+            NSString *name=@"",*address = @"";
+            //判断字典是否有值
+            if (_selectedAddressDict != nil) {
+                longitude = [[_selectedAddressDict objectForKey:@"longitude"] floatValue];
+                latitude =[[_selectedAddressDict objectForKey:@"latitude"] floatValue];
+                name = [_selectedAddressDict objectForKey:@"name"];
+                address = [_selectedAddressDict objectForKey:@"address"];
+            }
+
             [AFHttpTool publishMessage:_titleTextField.text
                                content:_contentTextView.text
-                                images:@"faf"
-                             longitude:[[_selectedAddressDict objectForKey:@"longitude"] floatValue]
-                              latitude:[[_selectedAddressDict objectForKey:@"latitude"] floatValue]
-                          locationName:[_selectedAddressDict objectForKey:@"name"]
-                       locationAddress:[_selectedAddressDict objectForKey:@"address"]
+                                images:images_arr
+                             longitude:longitude
+                              latitude:latitude
+                          locationName:name
+                       locationAddress:address
                             permission:permission
                                success:^(id response)
                                     {
@@ -239,83 +260,97 @@
 #pragma mark - UIImagePickerController
 - (void)showImagePickerControllerWithTitle:(NSString *)title cancleHandle:(void (^)())cancleHandle
 {
-    self.imagePickerController = [[UIImagePickerController alloc]init];
-    _imagePickerController.delegate = self;
-    
-    // 判断支持来源类型(拍照,照片库,相册)
-    BOOL isCameraSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-    BOOL isPhotoLibrarySupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
-    BOOL isSavedPhotosAlbumSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    if (isCameraSupport) {
-        [alertController addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //指定使用照相机模式,可以指定使用相册／照片库
-            _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-            /// 相机相关 [sourceType不设置为Camera.下面属性无法设置]
-            //设置拍照时的下方的工具栏是否显示，如果需要自定义拍摄界面，则可把该工具栏隐藏
-            _imagePickerController.showsCameraControls  = YES;
-            //设置当拍照完或在相册选完照片后，是否跳到编辑模式进行图片剪裁。只有当showsCameraControls属性为true时才有效果
-            _imagePickerController.allowsEditing = YES;
-            // 支持的摄像头类型(前置 后置)
-            BOOL isRearSupport = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
-            if (isRearSupport) {
-                //设置使用后置摄像头，可以使用前置摄像头
-                _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-            } else {
-                _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-            }
-            //设置闪光灯模式 自动
-            _imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
-            //设置相机支持的类型，拍照和录像
-            _imagePickerController.mediaTypes = @[@"public.image"];// public.movie(录像)
-            
-            [self presentViewController:_imagePickerController animated:YES completion:nil];
-        }]];
-    }
-    
-    if (isPhotoLibrarySupport) {
-        [alertController addAction:[UIAlertAction actionWithTitle:@"从照片库选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //指定使用照相机模式,可以指定使用相册／照片库
-            _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:_imagePickerController animated:YES completion:nil];
-        }]];
-    }
-    
-    if (isSavedPhotosAlbumSupport) {
-        [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //指定使用照相机模式,可以指定使用相册／照片库
-            _imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-            [self presentViewController:_imagePickerController animated:YES completion:nil];
-        }]];
-    }
-    // 取消
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        //        self.currentMode = ActualModeTypeNormal;
-        if (cancleHandle) {
-            cancleHandle();
+    if (self.imagesArray.count >= 5) {
+        [KVNProgress showErrorWithStatus:@"上传照片已经超过限制"];
+    } else {
+        self.imagePickerController = [[UIImagePickerController alloc]init];
+        _imagePickerController.delegate = self;
+        
+        // 判断支持来源类型(拍照,照片库,相册)
+        BOOL isCameraSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+        BOOL isPhotoLibrarySupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+        BOOL isSavedPhotosAlbumSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+        if (isCameraSupport) {
+            [alertController addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //指定使用照相机模式,可以指定使用相册／照片库
+                _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                /// 相机相关 [sourceType不设置为Camera.下面属性无法设置]
+                //设置拍照时的下方的工具栏是否显示，如果需要自定义拍摄界面，则可把该工具栏隐藏
+                _imagePickerController.showsCameraControls  = YES;
+                //设置当拍照完或在相册选完照片后，是否跳到编辑模式进行图片剪裁。只有当showsCameraControls属性为true时才有效果
+                _imagePickerController.allowsEditing = YES;
+                // 支持的摄像头类型(前置 后置)
+                BOOL isRearSupport = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+                if (isRearSupport) {
+                    //设置使用后置摄像头，可以使用前置摄像头
+                    _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+                } else {
+                    _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+                }
+                //设置闪光灯模式 自动
+                _imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+                //设置相机支持的类型，拍照和录像
+                _imagePickerController.mediaTypes = @[@"public.image"];// public.movie(录像)
+                
+                [self presentViewController:_imagePickerController animated:YES completion:nil];
+            }]];
         }
-    }]];
-    
-    if (!(isCameraSupport || isPhotoLibrarySupport || isSavedPhotosAlbumSupport)) { // 三种都不支持
-        alertController.title = @"无法找到可用图片源,请检查设备后重试";
+        
+        if (isPhotoLibrarySupport) {
+            [alertController addAction:[UIAlertAction actionWithTitle:@"从照片库选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //指定使用照相机模式,可以指定使用相册／照片库
+                _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                [self presentViewController:_imagePickerController animated:YES completion:nil];
+            }]];
+        }
+        
+        if (isSavedPhotosAlbumSupport) {
+            [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //指定使用照相机模式,可以指定使用相册／照片库
+                _imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                [self presentViewController:_imagePickerController animated:YES completion:nil];
+            }]];
+        }
+        // 取消
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            //        self.currentMode = ActualModeTypeNormal;
+            if (cancleHandle) {
+                cancleHandle();
+            }
+        }]];
+        
+        if (!(isCameraSupport || isPhotoLibrarySupport || isSavedPhotosAlbumSupport)) { // 三种都不支持
+            alertController.title = @"无法找到可用图片源,请检查设备后重试";
+        }
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = info[UIImagePickerControllerEditedImage] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
     NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
+    
     __weak typeof(self) weakSelf = self;
-    [UIImage uplodImageWithData:imageData method:@"POST" urlString:@"http://www.hzftjy.com/seek/seek.php/dynamic_image" mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
-        NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-#warning 有错，解决不了了
-        [weakSelf.imagesArray addObject:dict[@"result"]];
-        [weakSelf.imageCollectionView reloadData];
-    }];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //异步函数
+    dispatch_async(queue, ^{
+        [UIImage uplodImageWithData:imageData method:@"POST" urlString:@"http://www.hzftjy.com/seek/seek.php/dynamic_image" mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
+            if (obj != nil) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            }
+            NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            [weakSelf.imagesArray addObject:dict[@"result"]];
+            [weakSelf.imageCollectionView reloadData];
+        }];
+    });
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
     //    self.actualImageView.image = [Common shareCommon].actualImage;
 }

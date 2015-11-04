@@ -68,6 +68,7 @@ typedef enum {
 #import "ALAlertBanner.h"
 #import "UIImageView+WebCache.h"
 #import "KxMenu.h"
+#import "MBProgressHUD.h"
 // 三方 -- END
 
 // 自定义 -- BEGIN
@@ -88,7 +89,7 @@ typedef enum {
 #import "NSString+Category.h"
 #import "User.h"
 #import "AFNetworking.h"
-
+#import "UIImage+uploadImage.h"
 #endif
 
 

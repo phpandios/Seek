@@ -26,11 +26,7 @@
     [self.head_portrait sd_setImageWithURL:[NSURL URLWithString:dynamicObj.head_portrait] placeholderImage:nil];
     self.contentMode = UIViewContentModeScaleAspectFit;
     self.name.text = dynamicObj.nick_name;
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
-    [formatter setTimeZone:timeZone];
-    NSString *nowtimeStr = [formatter stringFromDate:dynamicObj.timestamp];
-    self.insert_time.text = nowtimeStr;
+    self.insert_time.text = dynamicObj.timestamp;
     
     self.publish_content.text =dynamicObj.content;
     NSArray *arr = [_dynamicObj.images componentsSeparatedByString:@"#@#"];
@@ -39,5 +35,8 @@
     [self.threePhoto sd_setImageWithURL:[NSURL URLWithString:arr[2]] placeholderImage:nil];
     
     self.comments_nums.text = [NSString stringWithFormat:@"%ld评论", dynamicObj.commentNum];
+    if (dynamicObj.is_friend == 1) {
+        [self.attention removeFromSuperview];
+    }
 }
 @end

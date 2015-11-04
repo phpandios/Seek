@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) NSInteger dynamicId;
 
+@property (nonatomic, assign) BOOL is_friend;
+
 // 地点
 @property (nonatomic, assign) CGFloat longitude; // 经度
 
@@ -48,6 +50,6 @@
 @property (nonatomic, assign) NSInteger commentNum;
 
 // 动态时间
-@property (nonatomic, strong) NSDate *timestamp;
+@property (nonatomic, copy) NSString *timestamp;
 
 @end

@@ -19,11 +19,17 @@
 #import "Dynamic.h"
 #import "Comment.h"
 
+#import "MJRefresh.h"
 #import "NSString+textHeightAndWidth.h"
 #import "IssueViewController.h"
-@interface DynamicViewController ()
+#import "RCDLoginInfo.h"
+@interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
+{
+     MBProgressHUD *HUD;
+}
 @property (nonatomic, retain)NSMutableArray *dynamicArr;
 @property (nonatomic, retain)Dynamic *dynamicObj;
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @end
 static NSString *onePhotoIdentifier = @"oneCell";
 static NSString *twoPhotoIdentifier = @"twoCell";
@@ -34,22 +40,75 @@ static NSString *noPhotolIdentifier = @"noCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"%@", [RCDLoginInfo shareLoginInfo]);
     self.title = @"动态";
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(issueBarButtonItemAction:)];
     
     [self loadRemmondData];
+    HUD.labelText = @"正在加载中...";
+    [HUD show:YES];
     // 加载数据
-    [self loadData];
-   
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self loadDataPage:0 limit:10 finish:^(id obj) {
+        if (obj != nil) {
+            //取消
+            [HUD hide:YES];
+        }
+    }];
+    //上拉下载刷新
+    [self refreshHeaderFooer];
+  
 }
 
+#pragma mark -出的时候进行刷新
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
+}
+#pragma mark - 上拉下载
+- (void)refreshHeaderFooer
+{
+    __weak typeof(self) weakSelf = self;
+    // 下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf loadRemmondData];
+            //重新置空
+            weakSelf.dynamicArr = [NSMutableArray new];
+            // 加载数据
+            [weakSelf loadDataPage:0 limit:10 finish:^(id obj) {
+                if (obj != nil) {
+                    // 结束刷新
+                    [self.tableView.header endRefreshing];
+                }
+            }];
+            
+            
+        });
+    }];
+    
+    
+    // 上拉刷新
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            static NSInteger page = 1,offset=0,limit=10;
+            offset = page * limit;
+            page++;
+            [weakSelf loadDataPage:offset limit:limit finish:^(id obj) {
+                if (obj != nil) {
+                    [weakSelf.tableView reloadData];
+                    // 结束刷新
+                    [weakSelf.tableView.footer endRefreshing];
+                }
+            }];
+            
+        });
+    }];
+}
 - (NSMutableArray *)dynamicArr
 {
     if (!_dynamicArr) {
@@ -58,20 +117,24 @@ static NSString *noPhotolIdentifier = @"noCell";
     return _dynamicArr;
 }
 #pragma mark -请求数据
-- (void)loadData
+- (void)loadDataPage:(NSInteger)page
+               limit:(NSInteger)limit
+              finish:(void(^)(id obj))finish
 {
-    NSInteger page = 0, limit = 10, permission = 3, promote_state=0, state = 2;
+    NSInteger permission = 3, promote_state=0, state = 2;
     __weak typeof(self) weakSelf = self;
     [AFHttpTool getDynamicWithPage:page limit:limit permissions:permission promote_state:promote_state state:state success:^(id response) {
         if ([response[@"result"] count] == 0) {
             return;
         }
+        
         for (int i=0; i < [response[@"result"] count]; i++) {
             NSLog(@"%@", response[@"result"][i]);
             Dynamic *dynamic = [Dynamic new];
             [dynamic setValuesForKeysWithDictionary:response[@"result"][i]];
             [weakSelf.dynamicArr addObject:dynamic];
         }
+        finish(weakSelf.dynamicArr);
         
         [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dynamicArr] forKey:@"dynamic"];
         [self.tableView reloadData];
@@ -133,7 +196,7 @@ static NSString *noPhotolIdentifier = @"noCell";
         return 116;
     }
     if (indexPath.section == 1 && _dynamicObj != nil) {
-        CGFloat height = [NSString calcWithTextHeightStr:_dynamicObj.content width:kScreenWidth font:[UIFont systemFontOfSize:17.0]];
+        CGFloat height = [NSString calcWithTextHeightStr:_dynamicObj.content width:self.tableView.bounds.size.width font:[UIFont systemFontOfSize:18.0]];
         NSArray *arr = [_dynamicObj.images componentsSeparatedByString:@"#@#"];
         NSRange range = [_dynamicObj.images rangeOfString:@"#@#"];
         NSInteger case_num = [arr count];
@@ -165,6 +228,7 @@ static NSString *noPhotolIdentifier = @"noCell";
         }
         Dynamic *dynamic = self.dynamicArr[num1];
         CGFloat height = [NSString calcWithTextHeightStr:dynamic.content width:self.tableView.bounds.size.width font:[UIFont systemFontOfSize:18.0]];
+        
         NSArray *arr = [dynamic.images componentsSeparatedByString:@"#@#"];
         NSRange range = [dynamic.images rangeOfString:@"#@#"];
         NSInteger case_num = [arr count];
@@ -176,15 +240,12 @@ static NSString *noPhotolIdentifier = @"noCell";
         }
         switch (case_num) {
             case 0:
-                NSLog(@"%f", 136 + height);
                 return 136 + height;
                 break;
             case 3:
-                NSLog(@"%f", 507 + height);
                 return 507 + height;
                 break;
             default:
-                NSLog(@"%f", 352 + height);
                 return 352 + height;
                 break;
         }
@@ -238,6 +299,7 @@ static NSString *noPhotolIdentifier = @"noCell";
         }
         [pulishCell.edit_btn addTarget:self action:@selector(issueEditBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [pulishCell.share_btn addTarget:self action:@selector(issueEditBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [pulishCell.take_photo addTarget:self action:@selector(showImagePickerController:) forControlEvents:UIControlEventTouchUpInside];
         NSString *loginUserPortrait = [[RCDLoginInfo shareLoginInfo] head_portrait];
         [pulishCell.head_portrait sd_setImageWithURL:[NSURL URLWithString:loginUserPortrait] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
         pulishCell.contentMode = UIViewContentModeScaleAspectFit;
@@ -385,4 +447,50 @@ static NSString *noPhotolIdentifier = @"noCell";
         [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - UIImagePickerController
+- (void)showImagePickerController:(UIButton *)sender{
+    self.imagePickerController = [[UIImagePickerController alloc]init];
+    _imagePickerController.delegate = self;
+    //指定使用照相机模式,可以指定使用相册／照片库
+    _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    /// 相机相关 [sourceType不设置为Camera.下面属性无法设置]
+    //设置拍照时的下方的工具栏是否显示，如果需要自定义拍摄界面，则可把该工具栏隐藏
+    _imagePickerController.showsCameraControls  = YES;
+    //设置当拍照完或在相册选完照片后，是否跳到编辑模式进行图片剪裁。只有当showsCameraControls属性为true时才有效果
+    _imagePickerController.allowsEditing = YES;
+    // 支持的摄像头类型(前置 后置)
+    BOOL isRearSupport = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+    if (isRearSupport) {
+        //设置使用后置摄像头，可以使用前置摄像头
+        _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+    } else {
+        _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    }
+    //设置闪光灯模式 自动
+    _imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+    //设置相机支持的类型，拍照和录像
+    _imagePickerController.mediaTypes = @[@"public.image"];// public.movie(录像)
+    
+    [self presentViewController:_imagePickerController animated:YES completion:nil];
+    
+   }
+#pragma mark-获取图片的代理方法
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = info[UIImagePickerControllerEditedImage] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
+    HUD.labelText = @"图片正在上传中...";
+    [HUD show:YES];
+    [UIImage uplodImageWithData:imageData method:@"POST" urlString:@"http://www.hzftjy.com/seek/seek.php/dynamic_image" mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
+        if (obj != nil) {
+            [HUD hide:YES];
+        }
+        NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        IssueViewController *vc = [[IssueViewController alloc] initWithNibName:@"IssueViewController" bundle:nil];
+        vc.tokePhoto = dict[@"result"];
+        [self presentViewController:vc animated:YES completion:nil];
+    }];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 @end

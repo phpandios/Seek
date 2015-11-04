@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface IssueViewController : UIViewController
-
+@property (nonatomic, copy)NSString *tokePhoto;
 @end
