@@ -5,6 +5,8 @@
 //  Created by apple on 15/10/9.
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
+#define dynamicList @"dynamic"
+#define dynamicRecommend @"recommend_dynamic"
 
 #import "DynamicViewController.h"
 #import "KnowPersonCell.h"
@@ -23,6 +25,7 @@
 #import "NSString+textHeightAndWidth.h"
 #import "IssueViewController.h"
 #import "RCDLoginInfo.h"
+
 @interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
 {
      MBProgressHUD *HUD;
@@ -40,23 +43,34 @@ static NSString *noPhotolIdentifier = @"noCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@", [RCDLoginInfo shareLoginInfo]);
     self.title = @"动态";
+    
+    
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(issueBarButtonItemAction:)];
     
-    [self loadRemmondData];
     HUD.labelText = @"正在加载中...";
     [HUD show:YES];
-    // 加载数据
-    [self loadDataPage:0 limit:10 finish:^(id obj) {
-        if (obj != nil) {
-            //取消
-            [HUD hide:YES];
-        }
-    }];
+    if (kIsNetWork) {
+        [self loadRemmondData];
+        // 加载数据
+        [self loadDataPage:0 limit:10 finish:^(id obj) {
+            if (obj != nil) {
+                //取消
+                [HUD hide:YES];
+            }
+        }];
+    } else {
+        [self loadLocalDataList:^(id obj) {
+            if (obj != nil) {
+                //取消
+                [HUD hide:YES];
+            }
+        }];
+    }
+    
     //上拉下载刷新
     [self refreshHeaderFooer];
   
@@ -81,6 +95,8 @@ static NSString *noPhotolIdentifier = @"noCell";
             // 加载数据
             [weakSelf loadDataPage:0 limit:10 finish:^(id obj) {
                 if (obj != nil) {
+                    //取消
+                    [HUD hide:YES];
                     // 结束刷新
                     [self.tableView.header endRefreshing];
                 }
@@ -116,6 +132,15 @@ static NSString *noPhotolIdentifier = @"noCell";
     }
     return _dynamicArr;
 }
+#pragma mark -加载本地数据
+- (void)loadLocalDataList:(void (^)(id obj))load
+{
+    self.dynamicArr=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:dynamicList]];
+    load(self.dynamicArr);
+    self.dynamicObj =[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:dynamicRecommend]];
+    
+}
+
 #pragma mark -请求数据
 - (void)loadDataPage:(NSInteger)page
                limit:(NSInteger)limit
@@ -136,7 +161,7 @@ static NSString *noPhotolIdentifier = @"noCell";
         }
         finish(weakSelf.dynamicArr);
         
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dynamicArr] forKey:@"dynamic"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dynamicArr] forKey:dynamicList];
         [self.tableView reloadData];
     } failure:^(NSError *err) {
         
@@ -155,7 +180,7 @@ static NSString *noPhotolIdentifier = @"noCell";
             Dynamic *dynamic = [Dynamic new];
             [dynamic setValuesForKeysWithDictionary:response[@"result"]];
             weakSelf.dynamicObj = dynamic;
-            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dynamic] forKey:@"recommend_dynamic"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dynamic] forKey:dynamicRecommend];
             [self.tableView reloadData];
         } else {
             weakSelf.dynamicObj = nil;

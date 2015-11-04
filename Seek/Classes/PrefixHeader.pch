@@ -36,6 +36,8 @@ return share; \
 //获取屏幕尺寸
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define kScreenFrame ([UIScreen mainScreen].bounds)
+//网络链接
+#define kIsNetWork (([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] != NotReachable) || ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable))
 
 typedef enum {
     CheckPhoneTypeForRegister,

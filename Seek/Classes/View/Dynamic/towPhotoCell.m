@@ -30,10 +30,12 @@
     
     self.publish_content.text =dynamicObj.content;
     NSArray *arr = [_dynamicObj.images componentsSeparatedByString:@"#@#"];
+    self.onePhoto.contentMode = UIViewContentModeScaleAspectFit;
+    self.twoPhoto.contentMode = UIViewContentModeScaleAspectFit;
     [self.onePhoto sd_setImageWithURL:[NSURL URLWithString:arr[0]] placeholderImage:nil];
     [self.twoPhoto sd_setImageWithURL:[NSURL URLWithString:arr[1]] placeholderImage:nil];
     self.comments_nums.text = [NSString stringWithFormat:@"%ld评论", dynamicObj.commentNum];
-    if (dynamicObj.is_friend == 1) {
+    if (dynamicObj.is_friend == 1 || [[[RCDLoginInfo shareLoginInfo] valueForKey:@"id"] intValue] == dynamicObj.userId) {
         [self.attention removeFromSuperview];
     }
 }

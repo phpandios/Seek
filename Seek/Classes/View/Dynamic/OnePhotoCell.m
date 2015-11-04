@@ -30,8 +30,9 @@
     self.insert_time.text = dynamicObj.timestamp;
     self.publish_content.text =dynamicObj.content;
     [self.photo sd_setImageWithURL:[NSURL URLWithString:dynamicObj.images] placeholderImage:nil];
+    self.photo.contentMode = UIViewContentModeScaleAspectFit;
     self.comments_nums.text = [NSString stringWithFormat:@"%ld评论", dynamicObj.commentNum];
-    if (dynamicObj.is_friend == 1) {
+    if (dynamicObj.is_friend == 1  || [[[RCDLoginInfo shareLoginInfo] valueForKey:@"id"] intValue] == dynamicObj.userId) {
         [self.attention removeFromSuperview];
     }
 }
