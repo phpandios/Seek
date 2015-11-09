@@ -14,8 +14,12 @@
 #import "AppDelegate.h"
 #import "RCDLoginInfo.h"
 #import "CheckPhoneViewController.h"
-@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
+#import "PhotoCutViewController.h"
 
+@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,PhotoCueDelegate>
+{
+    MBProgressHUD *HUD;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *canSelectedArray; // 标识允许选中的项
@@ -28,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的";
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
     
     self.canSelectedArray = @[@[@(NO)], @[@(YES), @(YES)], @[@(YES), @(YES), @(YES)], @[@(YES), @(YES)], @[@(NO)]];
     
@@ -80,11 +86,6 @@
 {
     // 获取用户信息后,
     [self.tableView reloadData];
-}
-#pragma mark 更换头像
-- (void)updateUserHeaderImage:(UIImage *)image
-{
-   
 }
 
 
@@ -304,17 +305,49 @@
     }
     
     [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = info[UIImagePickerControllerEditedImage] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
-    [self updateUserHeaderImage:image];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    //    self.actualImageView.image = [Common shareCommon].actualImage;
+    PhotoCutViewController *photoVc = [PhotoCutViewController new];
+    photoVc.delegate = self;
+    photoVc.image = image;
+    self.imagePickerController = picker;
+    [picker pushViewController:photoVc animated:YES];
 }
 
 
+#pragma mark - 图片回传协议方法头像更换图片
+-(void)passImage:(UIImage *)image
+{
+    [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
+    HUD.labelText = @"图片正在上传中...";
+    [HUD show:YES];
+    [UIImage uplodImageWithData:imageData method:@"POST" urlString:[kRequestUrl stringByAppendingString:@"update_photo"] mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
+        if (obj != nil) {
+            [HUD hide:YES];
+        }
+        NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        [[RCDLoginInfo shareLoginInfo] setValue:dict[@"result"] forKey:@"head_portrait"];
+        [self.tableView reloadData];
+    }];
+
+    NSLog(@"%@", image);
+}
+
+#pragma mark- 缩放图片
+-(UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize
+{
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width*scaleSize,image.size.height*scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height *scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}
 
 //#pragma mark - 右上角添加好友
 //- (void)addFriend:(UIBarButtonItem *)sender

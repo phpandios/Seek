@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 @interface DynamicDetailViewController : UIViewController
 
-@property (nonatomic, copy) NSString *dynamicId;
+@property (nonatomic, assign) NSInteger dynamicId;
 
 @end

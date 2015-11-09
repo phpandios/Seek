@@ -12,7 +12,7 @@
 #import "RCDLoginInfo.h"
 #define DEV_FAKE_SERVER @"http://119.254.110.241/" //Beijing SUN-QUAN  测试环境（北京）
 #define PRO_FAKE_SERVER @"http://119.254.110.79:8080/" //Beijing Liu-Bei    线上环境（北京）、
-#define FAKE_SERVER @"http://hzftjy.com/seek/seek.php/"//@"http://119.254.110.241:80/" //Login 线下测试
+#define FAKE_SERVER @"http://www.seek-sb.cn/seek.php/"//@"http://119.254.110.241:80/" //Login 线下测试
 
 //#define ContentType @"text/plain"
 #define ContentType @"text/html"

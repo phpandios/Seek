@@ -15,6 +15,7 @@
 #import "towPhotoCell.h"
 #import "ThreePhotoCell.h"
 #import "NoPhotoCell.h"
+#import "FourPhotoViewCell.h"
 
 #import "DynamicDetailViewController.h"
 #import "AddFriendViewController.h"
@@ -25,20 +26,24 @@
 #import "NSString+textHeightAndWidth.h"
 #import "IssueViewController.h"
 #import "RCDLoginInfo.h"
+#import "UMSocial.h"
 
-@interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
+@interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,UMSocialUIDelegate>
 {
      MBProgressHUD *HUD;
+    UMSocialBar *_socialBar;
 }
+
 @property (nonatomic, retain)NSMutableArray *dynamicArr;
 @property (nonatomic, retain)Dynamic *dynamicObj;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @end
 static NSString *onePhotoIdentifier = @"oneCell";
 static NSString *twoPhotoIdentifier = @"twoCell";
-static NSString *threePhotoIdentifier = @"twoCell";
+static NSString *threePhotoIdentifier = @"threeCell";
 static NSString *pulishIdentifier = @"pulishCell";
 static NSString *noPhotolIdentifier = @"noCell";
+static NSString *fourPhotolIdentifier = @"fourCell";
 @implementation DynamicViewController
 
 - (void)viewDidLoad {
@@ -53,6 +58,12 @@ static NSString *noPhotolIdentifier = @"noCell";
     
     HUD.labelText = @"正在加载中...";
     [HUD show:YES];
+    [self loadLocalDataList:^(id obj) {
+        if (obj != nil) {
+            //取消
+            [HUD hide:YES];
+        }
+    }];
     if (kIsNetWork) {
         [self loadRemmondData];
         // 加载数据
@@ -62,15 +73,7 @@ static NSString *noPhotolIdentifier = @"noCell";
                 [HUD hide:YES];
             }
         }];
-    } else {
-        [self loadLocalDataList:^(id obj) {
-            if (obj != nil) {
-                //取消
-                [HUD hide:YES];
-            }
-        }];
     }
-    
     //上拉下载刷新
     [self refreshHeaderFooer];
   
@@ -94,12 +97,11 @@ static NSString *noPhotolIdentifier = @"noCell";
             weakSelf.dynamicArr = [NSMutableArray new];
             // 加载数据
             [weakSelf loadDataPage:0 limit:10 finish:^(id obj) {
-                if (obj != nil) {
+                NSLog(@"%@", obj);
                     //取消
                     [HUD hide:YES];
                     // 结束刷新
-                    [self.tableView.header endRefreshing];
-                }
+                    [weakSelf.tableView.header endRefreshing];
             }];
             
             
@@ -117,9 +119,9 @@ static NSString *noPhotolIdentifier = @"noCell";
             [weakSelf loadDataPage:offset limit:limit finish:^(id obj) {
                 if (obj != nil) {
                     [weakSelf.tableView reloadData];
-                    // 结束刷新
-                    [weakSelf.tableView.footer endRefreshing];
                 }
+                // 结束刷新
+                [weakSelf.tableView.footer endRefreshing];
             }];
             
         });
@@ -154,7 +156,6 @@ static NSString *noPhotolIdentifier = @"noCell";
         }
         
         for (int i=0; i < [response[@"result"] count]; i++) {
-            NSLog(@"%@", response[@"result"][i]);
             Dynamic *dynamic = [Dynamic new];
             [dynamic setValuesForKeysWithDictionary:response[@"result"][i]];
             [weakSelf.dynamicArr addObject:dynamic];
@@ -239,6 +240,9 @@ static NSString *noPhotolIdentifier = @"noCell";
             case 3:
                 return 507 + height;
                 break;
+            case 4:
+                return 436 + height;
+                break;
             default:
                 return 352 + height;
                 break;
@@ -269,6 +273,9 @@ static NSString *noPhotolIdentifier = @"noCell";
                 break;
             case 3:
                 return 507 + height;
+                break;
+            case 4:
+                return 436 + height;
                 break;
             default:
                 return 352 + height;
@@ -316,6 +323,7 @@ static NSString *noPhotolIdentifier = @"noCell";
     ThreePhotoCell *threeCell = [tableView dequeueReusableCellWithIdentifier:threePhotoIdentifier];
     NoPhotoCell *noPhotoCell = [tableView dequeueReusableCellWithIdentifier:noPhotolIdentifier];
     PulishCell *pulishCell = [tableView dequeueReusableCellWithIdentifier:pulishIdentifier];
+    FourPhotoViewCell *fourCell = [tableView dequeueReusableCellWithIdentifier:fourPhotolIdentifier];
     if(indexPath.section == 0)
     {
         if(!pulishCell)
@@ -349,7 +357,8 @@ static NSString *noPhotolIdentifier = @"noCell";
                 oneCell.dynamicObj = _dynamicObj;
                 oneCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(_dynamicObj.userId), _dynamicObj.nick_name, _dynamicObj.head_portrait, nil];
                 [oneCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
-                
+                [oneCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                oneCell.comments_btn.tag = _dynamicObj.dynamicId;
                 return oneCell;
                 break;
             case 2:
@@ -360,6 +369,8 @@ static NSString *noPhotolIdentifier = @"noCell";
                 twoCell.dynamicObj = _dynamicObj;
                 twoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(_dynamicObj.userId), _dynamicObj.nick_name, _dynamicObj.head_portrait, nil];
                 [twoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+                [twoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                twoCell.comments_btn.tag = _dynamicObj.dynamicId;
                 return twoCell;
                 break;
             case 3:
@@ -369,7 +380,20 @@ static NSString *noPhotolIdentifier = @"noCell";
                 }
                 threeCell.dynamicObj = _dynamicObj;
                 [threeCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+                [threeCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                threeCell.comments_btn.tag = _dynamicObj.dynamicId;
                 return threeCell;
+                break;
+            case 4:
+                if(!fourCell)
+                {
+                    fourCell = [[NSBundle mainBundle] loadNibNamed:@"FourPhotoViewCell" owner:nil options:nil].firstObject;
+                }
+                fourCell.dynamicObj = _dynamicObj;
+                [fourCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+                [fourCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                fourCell.comments_btn.tag = _dynamicObj.dynamicId;
+                return fourCell;
                 break;
             default:
                 if(!noPhotoCell)
@@ -378,6 +402,8 @@ static NSString *noPhotolIdentifier = @"noCell";
                 }
                 noPhotoCell.dynamicObj = _dynamicObj;
                 [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+                [noPhotoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                noPhotoCell.comments_btn.tag = _dynamicObj.dynamicId;
                 return noPhotoCell;
                 break;
         }
@@ -408,6 +434,8 @@ static NSString *noPhotolIdentifier = @"noCell";
                 oneCell.dynamicObj = dynamic;
                 oneCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [oneCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+                [oneCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                oneCell.comments_btn.tag = dynamic.dynamicId;
                 return oneCell;
                 break;
             case 2:
@@ -418,6 +446,8 @@ static NSString *noPhotolIdentifier = @"noCell";
                 twoCell.dynamicObj = dynamic;
                 twoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [twoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+                [twoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                twoCell.comments_btn.tag = dynamic.dynamicId;
                 return twoCell;
                 break;
             case 3:
@@ -428,6 +458,8 @@ static NSString *noPhotolIdentifier = @"noCell";
                 threeCell.dynamicObj = dynamic;
                 threeCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [threeCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+                [threeCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                threeCell.comments_btn.tag = dynamic.dynamicId;
                 return threeCell;
                 break;
             default:
@@ -438,6 +470,8 @@ static NSString *noPhotolIdentifier = @"noCell";
                 noPhotoCell.dynamicObj = dynamic;
                 noPhotoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+                [noPhotoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+                noPhotoCell.comments_btn.tag = dynamic.dynamicId;
                 return noPhotoCell;
                 break;
         }
@@ -467,37 +501,83 @@ static NSString *noPhotolIdentifier = @"noCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DynamicDetailViewController *vc = [[DynamicDetailViewController alloc] initWithNibName:@"DynamicDetailViewController" bundle:nil];
-        vc.dynamicId = @"dynamicId";
-        [self.navigationController pushViewController:vc animated:YES];
+    OnePhotoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
 }
+
+#pragma mark - 点击效果
+- (void)commentAction:(UIButton *)sender
+{
+    NSLog(@"%@", sender);
+    DynamicDetailViewController *vc = [[DynamicDetailViewController alloc] initWithNibName:@"DynamicDetailViewController" bundle:nil];
+    vc.dynamicId = sender.tag;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 #pragma mark - UIImagePickerController
 - (void)showImagePickerController:(UIButton *)sender{
     self.imagePickerController = [[UIImagePickerController alloc]init];
     _imagePickerController.delegate = self;
-    //指定使用照相机模式,可以指定使用相册／照片库
-    _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    /// 相机相关 [sourceType不设置为Camera.下面属性无法设置]
-    //设置拍照时的下方的工具栏是否显示，如果需要自定义拍摄界面，则可把该工具栏隐藏
-    _imagePickerController.showsCameraControls  = YES;
-    //设置当拍照完或在相册选完照片后，是否跳到编辑模式进行图片剪裁。只有当showsCameraControls属性为true时才有效果
-    _imagePickerController.allowsEditing = YES;
-    // 支持的摄像头类型(前置 后置)
-    BOOL isRearSupport = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
-    if (isRearSupport) {
-        //设置使用后置摄像头，可以使用前置摄像头
-        _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-    } else {
-        _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    
+    // 判断支持来源类型(拍照,照片库,相册)
+    BOOL isCameraSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    BOOL isPhotoLibrarySupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+    BOOL isSavedPhotosAlbumSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"图片上传" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    if (isCameraSupport) {
+        [alertController addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //指定使用照相机模式,可以指定使用相册／照片库
+            _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            /// 相机相关 [sourceType不设置为Camera.下面属性无法设置]
+            //设置拍照时的下方的工具栏是否显示，如果需要自定义拍摄界面，则可把该工具栏隐藏
+            _imagePickerController.showsCameraControls  = YES;
+            //设置当拍照完或在相册选完照片后，是否跳到编辑模式进行图片剪裁。只有当showsCameraControls属性为true时才有效果
+            _imagePickerController.allowsEditing = YES;
+            // 支持的摄像头类型(前置 后置)
+            BOOL isRearSupport = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+            if (isRearSupport) {
+                //设置使用后置摄像头，可以使用前置摄像头
+                _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            } else {
+                _imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            }
+            //设置闪光灯模式 自动
+            _imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+            //设置相机支持的类型，拍照和录像
+            _imagePickerController.mediaTypes = @[@"public.image"];// public.movie(录像)
+            
+            [self presentViewController:_imagePickerController animated:YES completion:nil];
+        }]];
     }
-    //设置闪光灯模式 自动
-    _imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
-    //设置相机支持的类型，拍照和录像
-    _imagePickerController.mediaTypes = @[@"public.image"];// public.movie(录像)
     
-    [self presentViewController:_imagePickerController animated:YES completion:nil];
+    if (isPhotoLibrarySupport) {
+        [alertController addAction:[UIAlertAction actionWithTitle:@"从照片库选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //指定使用照相机模式,可以指定使用相册／照片库
+            _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:_imagePickerController animated:YES completion:nil];
+        }]];
+    }
     
+    if (isSavedPhotosAlbumSupport) {
+        [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //指定使用照相机模式,可以指定使用相册／照片库
+            _imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            [self presentViewController:_imagePickerController animated:YES completion:nil];
+        }]];
+    }
+    // 取消
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    if (!(isCameraSupport || isPhotoLibrarySupport || isSavedPhotosAlbumSupport)) { // 三种都不支持
+        alertController.title = @"无法找到可用图片源,请检查设备后重试";
+    }
+    
+    [self presentViewController:alertController animated:YES completion:nil];
    }
 #pragma mark-获取图片的代理方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

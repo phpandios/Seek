@@ -13,6 +13,7 @@
 #import "MAPPOISearchViewController.h"
 #import "PermissionsViewController.h"
 #import "AFHttpTool.h"
+#import "CateViewController.h"
 @interface IssueViewController ()<WFFDropdownListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
 @property (weak, nonatomic) IBOutlet WFFDropdownList *categoryDropList;
 @property (nonatomic, strong) NSArray *categoryArray;
@@ -36,6 +37,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *perssionDecrip;
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
+
+- (IBAction)cateGoryAction:(id)sender;
+
 @end
 
 @implementation IssueViewController
@@ -340,7 +344,7 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //异步函数
     dispatch_async(queue, ^{
-        [UIImage uplodImageWithData:imageData method:@"POST" urlString:@"http://www.hzftjy.com/seek/seek.php/dynamic_image" mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
+        [UIImage uplodImageWithData:imageData method:@"POST" urlString:[kRequestUrl stringByAppendingString:@"dynamic_image"] mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
             if (obj != nil) {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             }
@@ -353,5 +357,9 @@
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     //    self.actualImageView.image = [Common shareCommon].actualImage;
+}
+- (IBAction)cateGoryAction:(id)sender {
+    CateViewController *cate = [CateViewController new];
+    [self presentViewController:cate animated:YES completion:nil];
 }
 @end

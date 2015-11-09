@@ -41,7 +41,7 @@ typedef enum {
 @property (nonatomic, copy) NSString *content;
 
 // 时间
-@property (nonatomic, strong) NSDate *timestamp;
+@property (nonatomic, copy) NSString *timestamp;
 
 
 @end

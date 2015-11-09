@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CateViewController">
+            <connections>
+                <outlet property="collectView" destination="wgQ-lh-njF" id="iww-4h-Xhx"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jeK-XN-f6O">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byN-d5-LVv">
+                            <rect key="frame" x="15" y="16" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="iu0-dt-rEg"/>
+                                <constraint firstAttribute="height" constant="32" id="lkG-iF-AH5"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="exitLogin.png"/>
+                            <connections>
+                                <action selector="exitAction:" destination="-1" eventType="touchUpInside" id="kum-3H-Bl7"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AH-5C-rjY">
+                            <rect key="frame" x="555" y="17" width="30" height="30"/>
+                            <state key="normal" title="完成">
+                                <color key="titleColor" red="0.9351325757575758" green="0.9351325757575758" blue="0.9351325757575758" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="completeAction:" destination="-1" eventType="touchUpInside" id="jgi-RI-Vuz"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="byN-d5-LVv" firstAttribute="leading" secondItem="jeK-XN-f6O" secondAttribute="leading" constant="15" id="EZh-vk-kHO"/>
+                        <constraint firstItem="byN-d5-LVv" firstAttribute="centerY" secondItem="jeK-XN-f6O" secondAttribute="centerY" id="Eeg-cs-58o"/>
+                        <constraint firstItem="8AH-5C-rjY" firstAttribute="centerY" secondItem="jeK-XN-f6O" secondAttribute="centerY" id="SMA-e2-ZIY"/>
+                        <constraint firstAttribute="height" constant="64" id="gCh-yH-ho5"/>
+                        <constraint firstAttribute="trailing" secondItem="8AH-5C-rjY" secondAttribute="trailing" constant="15" id="kLK-R7-cqj"/>
+                        <constraint firstItem="byN-d5-LVv" firstAttribute="top" secondItem="jeK-XN-f6O" secondAttribute="top" constant="10" id="spf-95-b8P"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="spf-95-b8P"/>
+                        </mask>
+                    </variation>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wgQ-lh-njF">
+                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QJx-hn-hcT">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="wgQ-lh-njF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Gas-gR-n1c"/>
+                <constraint firstItem="wgQ-lh-njF" firstAttribute="top" secondItem="jeK-XN-f6O" secondAttribute="bottom" id="JW2-ES-a8Z"/>
+                <constraint firstAttribute="trailing" secondItem="jeK-XN-f6O" secondAttribute="trailing" id="XwC-Sh-ca4"/>
+                <constraint firstItem="jeK-XN-f6O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c9E-Gq-xv6"/>
+                <constraint firstAttribute="trailing" secondItem="wgQ-lh-njF" secondAttribute="trailing" id="eRG-OX-x92"/>
+                <constraint firstAttribute="bottom" secondItem="wgQ-lh-njF" secondAttribute="bottom" id="r89-Yd-gUf"/>
+                <constraint firstItem="jeK-XN-f6O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ype-cG-vfC"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="exitLogin.png" width="48" height="48"/>
+    </resources>
+</document>

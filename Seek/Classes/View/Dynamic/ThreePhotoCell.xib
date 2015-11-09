@@ -65,11 +65,8 @@
                             <constraint firstAttribute="height" constant="150" id="bD9-DT-VHl"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qZB-HV-ZRD">
-                        <rect key="frame" x="304" y="309" width="280" height="150"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38J-T0-ERg">
-                        <rect key="frame" x="18" y="467" width="200" height="18"/>
+                        <rect key="frame" x="18" y="464" width="200" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="mPS-Mf-loJ"/>
                         </constraints>
@@ -78,26 +75,29 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41Y-gb-DoF">
-                        <rect key="frame" x="18" y="490" width="575" height="1"/>
+                        <rect key="frame" x="18" y="487" width="575" height="1"/>
                         <color key="backgroundColor" red="0.58299794823232332" green="0.58299794823232332" blue="0.58299794823232332" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="Olh-gu-xMM"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ya-me-u0O">
-                        <rect key="frame" x="18" y="496" width="288" height="32"/>
+                        <rect key="frame" x="18" y="493" width="288" height="32"/>
                         <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="评论" image="comments.png">
                             <color key="titleColor" red="0.57445549242424243" green="0.57445549242424243" blue="0.57445549242424243" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBa-ob-vmm">
-                        <rect key="frame" x="306" y="496" width="287" height="31"/>
+                        <rect key="frame" x="306" y="493" width="287" height="31"/>
                         <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="分享" image="share.png">
                             <color key="titleColor" red="0.57970328282828287" green="0.57970328282828287" blue="0.57970328282828287" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qZB-HV-ZRD">
+                        <rect key="frame" x="304" y="309" width="280" height="150"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="qZB-HV-ZRD" firstAttribute="trailing" secondItem="3sz-Fm-aMY" secondAttribute="trailing" id="0mf-Ef-xnC"/>
@@ -124,7 +124,7 @@
                     <constraint firstItem="sKL-Ph-09b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="a5l-Qf-vnZ"/>
                     <constraint firstItem="saA-OC-vbf" firstAttribute="leading" secondItem="ap7-pm-vYY" secondAttribute="leading" id="ajd-VU-zPY"/>
                     <constraint firstItem="7Ya-me-u0O" firstAttribute="leading" secondItem="41Y-gb-DoF" secondAttribute="leading" id="bSH-oK-aV0"/>
-                    <constraint firstItem="38J-T0-ERg" firstAttribute="top" secondItem="ves-AK-TCq" secondAttribute="bottom" constant="8" id="bcX-Ej-hh2"/>
+                    <constraint firstItem="38J-T0-ERg" firstAttribute="top" secondItem="ves-AK-TCq" secondAttribute="bottom" constant="5" id="bcX-Ej-hh2"/>
                     <constraint firstItem="qZB-HV-ZRD" firstAttribute="leading" secondItem="ves-AK-TCq" secondAttribute="trailing" constant="5" id="dIn-qh-VYM"/>
                     <constraint firstItem="ap7-pm-vYY" firstAttribute="top" secondItem="j5z-Ee-vrX" secondAttribute="top" id="e0l-af-D4b"/>
                     <constraint firstAttribute="trailingMargin" secondItem="h4A-Lr-8tC" secondAttribute="trailing" constant="10" id="fOc-C9-Twp"/>

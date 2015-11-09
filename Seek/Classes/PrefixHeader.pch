@@ -51,6 +51,7 @@ typedef enum {
 #define kUMQQAppID @"1104893734"
 #define kUMQQAppKey @"baSL8HjsrVQCaKHb"
 #define kUMUrl @"http://www.umeng.com/social"
+#define kRequestUrl @"http://www.seek-sb.cn/seek.php/"
 
 // 高德地图
 #define kLBSAppKey @"fdcbea9fd7feb6b97ced5e1005e6275a"

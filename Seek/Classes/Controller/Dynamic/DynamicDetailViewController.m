@@ -25,6 +25,8 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"%ld", self.dynamicId);
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentForCommentTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifierForComment];
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentForDynamicTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifierForDynamic];
     // Do any additional setup after loading the view from its nib.
@@ -46,7 +48,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
         comment.fromUserHeadImage = @"userIcon";
         comment.fromUserName = [NSString stringWithFormat:@"用户%02d", i];
         comment.content = [NSString stringWithFormat:@"不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么%2d", i];
-        comment.timestamp = [NSDate date];
+//        comment.timestamp = [NSDate date];
         NSMutableArray *childCommentArray = [NSMutableArray array];
         for (int j = 0; j < i; j++) {
             Comment *childComment = [Comment new];
@@ -54,7 +56,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
             childComment.fromUserName = [NSString stringWithFormat:@"**%02d", j];
             childComment.toUserName = [NSString stringWithFormat:@"用户%02d", i];
             childComment.content = [NSString stringWithFormat:@"不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么%2d", i];
-            comment.timestamp = [NSDate date];
+//            comment.timestamp = [NSDate date];
             [childCommentArray addObject:childComment];
         }
         
