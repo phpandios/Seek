@@ -42,7 +42,8 @@ return share; \
 typedef enum {
     CheckPhoneTypeForRegister,
     CheckPhoneTypeForFindPwd,
-    CheckPhoneTypeForBindingTelPhone
+    CheckPhoneTypeForBindingTelPhone,
+    CheckPhoneTypeForModifyPwd
 } CheckPhoneType;
 
 // SDK -- BEGIN

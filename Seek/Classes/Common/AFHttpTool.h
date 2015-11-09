@@ -60,6 +60,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                  password:(NSString *)password
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure;
+
 #pragma mark - qq登陆
 + (void)loginWithQQID:(NSString *)qqid
             nick_name:(NSString *)nick_name

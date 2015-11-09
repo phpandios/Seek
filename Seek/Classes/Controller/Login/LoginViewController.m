@@ -260,7 +260,9 @@
 
 
 - (IBAction)forgetPwdButtonAction:(UIButton *)sender {
-    SHOWMESSAGE(@"忘记密码");
+    CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
+    vc.type = CheckPhoneTypeForFindPwd;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)exitButtonAction:(UIButton *)sender {

@@ -157,7 +157,51 @@
             } failure:^(NSError *err) {
                 SHOWERROR(@"网络故障,请重试!");
             }];
-        } else { // 找回密码
+        } else if (_type == CheckPhoneTypeForFindPwd){ // 找回密码
+#warning 找回密码
+//            [KVNProgress showWithStatus:@"密码重置..."];
+//            [AFHttpTool modifyPassword:self.pwdTextField.text success:^(id response) {
+//                if (response[@"code"]) {
+//                    NSInteger code = [response[@"code"] integerValue];
+//                    if (code == 200) {
+//                        SHOWSUCCESS(@"密码重置成功");
+//                        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+//                    } else {
+//                        if (response[@"message"] && [response[@"message"] length] > 0) {
+//                            NSString *message = response[@"message"];
+//                            SHOWERROR(@"%@", message);
+//                        } else {
+//                            SHOWERROR(@"密码重置出错!");
+//                        }
+//                    }
+//                } else {
+//                    SHOWERROR(@"密码重置失败!");
+//                }
+//            } failure:^(NSError *err) {
+//                SHOWERROR(@"网络故障,请重试!");
+//            }];
+        } else { // 修改密码
+            [KVNProgress showWithStatus:@"修改密码..."];
+            [AFHttpTool modifyPassword:self.pwdTextField.text success:^(id response) {
+                if (response[@"code"]) {
+                    NSInteger code = [response[@"code"] integerValue];
+                    if (code == 200) {
+                        SHOWSUCCESS(@"密码修改成功");
+                        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                    } else {
+                        if (response[@"message"] && [response[@"message"] length] > 0) {
+                            NSString *message = response[@"message"];
+                            SHOWERROR(@"%@", message);
+                        } else {
+                            SHOWERROR(@"密码修改出错!");
+                        }
+                    }
+                } else {
+                    SHOWERROR(@"密码修改失败!");
+                }
+            } failure:^(NSError *err) {
+                SHOWERROR(@"网络故障,请重试!");
+            }];
             
         }
         

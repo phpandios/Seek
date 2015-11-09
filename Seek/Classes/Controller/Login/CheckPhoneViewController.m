@@ -109,6 +109,16 @@
         SHOWERROR(@"请输入正确的手机号");
         return;
     }
+    if (_type == CheckPhoneTypeForModifyPwd) {
+        if ([[[RCDLoginInfo shareLoginInfo] telephone] isEmpty]) { // 三方登陆
+            self.type = CheckPhoneTypeForBindingTelPhone;
+        } else {
+            if (![[[RCDLoginInfo shareLoginInfo] telephone] isEqualToString:self.phoneNumTextField.text]) {
+                SHOWERROR(@"请输入您注册或绑定的手机号!");
+                return;
+            }
+        }
+    }
     ValidateViewController *vc = [[ValidateViewController alloc] initWithNibName:@"ValidateViewController" bundle:nil];
     vc.type = self.type;
     vc.phoneNum = self.phoneNumTextField.text;

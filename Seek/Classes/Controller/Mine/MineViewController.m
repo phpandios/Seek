@@ -231,6 +231,12 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
+    
+    if (indexPath.section == 3 && indexPath.row == 0) { // 修改密码
+//        CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
+//        vc.type = CheckPhoneTypeForModifyPwd;
+//        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)pushFriendListVC
