@@ -81,16 +81,17 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                  failure:(void (^)(NSError* err))failure;
 
 #pragma mark -发布消息
-+ (void)publishMessage:(NSString *)title
-               content:(NSString *)content
-                images:(NSString *)images
-             longitude:(CGFloat)longitude
-              latitude:(CGFloat)latitude
-          locationName:(NSString *)locationName
-       locationAddress:(NSString *)locationAddress
-            permission:(NSInteger)permission
-               success:(void (^)(id response))success
-               failure:(void (^)(NSError * err))failure;
++ (void)publishMessageCate:(NSInteger)category_id
+                     title:(NSString *)title
+                   content:(NSString *)content
+                    images:(NSString *)images
+                 longitude:(CGFloat)longitude
+                  latitude:(CGFloat)latitude
+              locationName:(NSString *)locationName
+           locationAddress:(NSString *)locationAddress
+                permission:(NSInteger)permission
+                   success:(void (^)(id response))success
+                   failure:(void (^)(NSError * err))failure;
 #pragma mark -请求动态消息
 + (void)getDynamicWithPage:(NSInteger)page
                      limit:(NSInteger)limit
@@ -99,6 +100,11 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                      state:(NSInteger)state
                       success:(void (^)(id response))success
                       failure:(void (^)(NSError* err))failure;
+
+#pragma mark -请求动态分类
++ (void)getCateGoryWithstate:(NSInteger)state
+                     success:(void (^)(id response))success
+                     failure:(void (^)(NSError* err))failure;
 //get token
 //+(void) getTokenSuccess:(void (^)(id response))success
 //                failure:(void (^)(NSError* err))failure;

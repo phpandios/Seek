@@ -185,7 +185,8 @@
 }
 
 #pragma mark -发布消息
-+ (void)publishMessage:(NSString *)title
++ (void)publishMessageCate:(NSInteger)category_id
+                     title:(NSString *)title
                content:(NSString *)content
                 images:(NSString *)images
              longitude:(CGFloat)longitude
@@ -197,6 +198,7 @@
                failure:(void (^)(NSError * err))failure
 {
     NSDictionary *params = @{
+                             @"category_id":@(category_id),
                              @"title" : title,
                              @"content" : content,
                              @"images" : images,
@@ -229,6 +231,21 @@
                              };
     [AFHttpTool requestWihtMethod:RequestMethodTypeGet
                               url:@"get_dynamic"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
+#pragma mark -请求动态分类
++ (void)getCateGoryWithstate:(NSInteger)state
+                   success:(void (^)(id response))success
+                   failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{
+                            @"state" : @(state)
+                             };
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"category_list"
                            params:params
                           success:success
                           failure:failure];

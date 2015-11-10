@@ -39,6 +39,7 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 
 - (IBAction)cateGoryAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *cateGoryBtn;
 
 @end
 
@@ -217,22 +218,21 @@
                 address = [_selectedAddressDict objectForKey:@"address"];
             }
 
-            [AFHttpTool publishMessage:_titleTextField.text
-                               content:_contentTextView.text
-                                images:images_arr
-                             longitude:longitude
-                              latitude:latitude
-                          locationName:name
-                       locationAddress:address
-                            permission:permission
-                               success:^(id response)
-                                    {
+            [AFHttpTool publishMessageCate:self.cateGoryBtn.tag
+                                     title:_titleTextField.text
+                                   content:_contentTextView.text
+                                    images:images_arr
+                                 longitude:longitude
+                                  latitude:latitude
+                              locationName:name
+                           locationAddress:address
+                                permission:permission success:^(id response) {
                                         [KVNProgress showSuccessWithStatus:@"发布成功"];
                                         [self dismissViewControllerAnimated:YES completion:nil];
                                     }
-                               failure:^(NSError *err) {
-                                   [KVNProgress showErrorWithStatus:@"发布失败请重新发布"];
-            }];
+                                   failure:^(NSError *err) {
+                                       [KVNProgress showErrorWithStatus:@"发布失败请重新发布"];
+                                   }];
         }
     }
 }
@@ -360,6 +360,11 @@
 }
 - (IBAction)cateGoryAction:(id)sender {
     CateViewController *cate = [CateViewController new];
+    __weak typeof(self) weakSelf=self;
+    cate.cateCurrent = ^(NSString *cate_name, NSInteger ID){
+        [weakSelf.cateGoryBtn setTitle:cate_name forState:UIControlStateNormal];
+        weakSelf.cateGoryBtn.tag= ID;
+    };
     [self presentViewController:cate animated:YES completion:nil];
 }
 @end

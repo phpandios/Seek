@@ -93,11 +93,14 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf loadRemmondData];
-            //重新置空
-            weakSelf.dynamicArr = [NSMutableArray new];
+            [weakSelf.dynamicArr removeAllObjects];
             // 加载数据
             [weakSelf loadDataPage:0 limit:10 finish:^(id obj) {
-                NSLog(@"%@", obj);
+                    NSLog(@"%@", obj);
+                
+                    weakSelf.dynamicArr = obj;
+                    //重新加载
+                    [weakSelf.tableView reloadData];
                     //取消
                     [HUD hide:YES];
                     // 结束刷新
@@ -117,12 +120,10 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             offset = page * limit;
             page++;
             [weakSelf loadDataPage:offset limit:limit finish:^(id obj) {
-                if (obj != nil) {
-                    [weakSelf.tableView reloadData];
-                }
-                // 结束刷新
-                [weakSelf.tableView.footer endRefreshing];
+                [weakSelf.tableView reloadData];
             }];
+            // 结束刷新
+            [weakSelf.tableView.footer endRefreshing];
             
         });
     }];
@@ -148,8 +149,13 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                limit:(NSInteger)limit
               finish:(void(^)(id obj))finish
 {
-    NSInteger permission = 3, promote_state=0, state = 2;
     __weak typeof(self) weakSelf = self;
+    NSInteger permission = 3, promote_state=0, state = 2;
+    static NSInteger first_state = 1;
+    //判断第一次加载的时候清除内容
+    if (first_state == 1) {
+        [self.dynamicArr removeAllObjects];
+    }
     [AFHttpTool getDynamicWithPage:page limit:limit permissions:permission promote_state:promote_state state:state success:^(id response) {
         if ([response[@"result"] count] == 0) {
             return;
@@ -161,7 +167,10 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             [weakSelf.dynamicArr addObject:dynamic];
         }
         finish(weakSelf.dynamicArr);
-        
+        //判断本地缓存存在进行移除
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:dynamicList]) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:dynamicList];
+        }
         [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dynamicArr] forKey:dynamicList];
         [self.tableView reloadData];
     } failure:^(NSError *err) {
@@ -181,6 +190,9 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             Dynamic *dynamic = [Dynamic new];
             [dynamic setValuesForKeysWithDictionary:response[@"result"]];
             weakSelf.dynamicObj = dynamic;
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:dynamicRecommend]) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:dynamicRecommend];
+            }
             [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dynamic] forKey:dynamicRecommend];
             [self.tableView reloadData];
         } else {
@@ -209,6 +221,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSLog(@"%s", __FUNCTION__);
     if (_dynamicObj != nil) {
         return [self.dynamicArr count] + 2;
     }
