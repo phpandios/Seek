@@ -76,6 +76,20 @@
             break;
     }
 }
+#pragma mark - 更新位置
++ (void)updateLocationWithLongitude:(CGFloat)longitude
+                           latitude:(CGFloat)latitude
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError *err))failure
+{
+    NSDictionary *params = @{@"longitude" : @(longitude), @"latitude" : @(latitude)};
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"update_location"
+                           params:params
+                          success:success
+                          failure:failure];
+
+}
 
 #pragma mark - 手机号是否存在
 + (void)telphoneIsExist:(NSString *)telphone

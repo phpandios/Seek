@@ -50,12 +50,15 @@
     
     // 地图
     _mapView.delegate = self;
-    // 开启定位
-    _mapView.showsUserLocation = YES;
+//    // 开启定位
+//    _mapView.showsUserLocation = YES;
     // 定位用户位置的模式
     _mapView.userTrackingMode = MAUserTrackingModeNone;//不追踪用户
+    
     // 设置缩放级别
     [_mapView setZoomLevel:16 animated:YES];
+    
+    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake([[RCDLoginInfo shareLoginInfo] latitude], [[RCDLoginInfo shareLoginInfo] longitude])];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];    

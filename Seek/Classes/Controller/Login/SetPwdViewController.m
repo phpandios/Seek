@@ -182,12 +182,18 @@
 //            }];
         } else { // 修改密码
             [KVNProgress showWithStatus:@"修改密码..."];
-            [AFHttpTool modifyPassword:self.pwdTextField.text success:^(id response) {
+            NSString *pwd = self.pwdTextField.text;
+            [AFHttpTool modifyPassword:pwd success:^(id response) {
                 if (response[@"code"]) {
                     NSInteger code = [response[@"code"] integerValue];
                     if (code == 200) {
-                        SHOWSUCCESS(@"密码修改成功");
-                        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                        
+                        [DEFAULTS setObject:pwd forKey:@"userPwd"];
+                        [KVNProgress dismiss];
+                        [self showAlertControllerWithTitle:@"修改成功" hasTextField:NO okHandle:^(NSString *returnText) {
+                            
+                            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                        } cancelHandle:nil];
                     } else {
                         if (response[@"message"] && [response[@"message"] length] > 0) {
                             NSString *message = response[@"message"];

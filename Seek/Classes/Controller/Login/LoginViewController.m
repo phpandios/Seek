@@ -121,6 +121,7 @@
                 [KVNProgress showWithStatus:@"授权成功,登录中..."];
                 RCDLoginInfo *loginInfo = [RCDLoginInfo shareLoginInfo];
 //                NSLog(@"%@", response);
+                loginInfo.isThirdLogin = YES;
                 [loginInfo setValuesForKeysWithDictionary:response[@"result"]];
                 [AFHttpTool getTokenWithUser:loginInfo success:^(id response) {
                     
@@ -179,6 +180,7 @@
     [AFHttpTool loginWithTelPhone:userName password:password success:^(id response) {
         if ([response[@"code"] intValue] == 200) {
             RCDLoginInfo *loginInfo = [RCDLoginInfo shareLoginInfo];
+            loginInfo.isThirdLogin = NO;
             [loginInfo setValuesForKeysWithDictionary:response[@"result"]];
             [AFHttpTool getTokenWithUser:loginInfo success:^(id response) {
                 NSString *token = response[@"result"][@"token"];
@@ -226,13 +228,22 @@
 
 - (void)loginSuccess:(NSString *)userName password:(NSString *)password token:(NSString *)token userId:(NSString *)userId
 {
+    if (![[RCDLoginInfo shareLoginInfo] isThirdLogin]) {
+        //保存默认用户
+        [DEFAULTS setObject:userName forKey:@"userName"];
+        [DEFAULTS setObject:password forKey:@"userPwd"];
+        [DEFAULTS setObject:token forKey:@"userToken"];
+        [DEFAULTS setObject:userId forKey:@"userId"];
+        [DEFAULTS synchronize];
+    } else {
+        //保存默认用户
+        [DEFAULTS removeObjectForKey:@"userName"];
+        [DEFAULTS removeObjectForKey:@"userPwd"];
+        [DEFAULTS removeObjectForKey:@"userToken"];
+        [DEFAULTS removeObjectForKey:@"userId"];
+        [DEFAULTS synchronize];
+    }
     
-    //保存默认用户
-    [DEFAULTS setObject:userName forKey:@"userName"];
-    [DEFAULTS setObject:password forKey:@"userPwd"];
-    [DEFAULTS setObject:token forKey:@"userToken"];
-    [DEFAULTS setObject:userId forKey:@"userId"];
-    [DEFAULTS synchronize];
     
     //设置当前的用户信息
     RCUserInfo *_currentUserInfo = [[RCUserInfo alloc]initWithUserId:userId name:userName portrait:nil];

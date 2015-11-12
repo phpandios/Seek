@@ -14,9 +14,7 @@
 #import "PermissionsViewController.h"
 #import "AFHttpTool.h"
 #import "CateViewController.h"
-@interface IssueViewController ()<WFFDropdownListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
-@property (weak, nonatomic) IBOutlet WFFDropdownList *categoryDropList;
-@property (nonatomic, strong) NSArray *categoryArray;
+@interface IssueViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
 
 - (IBAction)commitButtonAction:(UIButton *)sender;
 - (IBAction)dismisButtonAction:(UIButton *)sender;
@@ -29,7 +27,6 @@
 - (IBAction)permissionButtonAction:(UIButton *)sender;
 
 @property (nonatomic, strong) NSMutableArray *imagesArray;
-@property (nonatomic, copy) NSString *selectedCategory;
 
 @property (nonatomic, strong) NSDictionary *selectedAddressDict;// 键值对,latitude, longitude, address, name
 @property (nonatomic, retain) NSMutableDictionary *currentPermission;
@@ -59,19 +56,10 @@
         [self.imagesArray addObject:_tokePhoto];
     }
     
-    self.categoryArray = @[@"分类1", @"分类2", @"分类3", @"分类4", @"分类5"];
-    self.selectedCategory = self.categoryArray.firstObject;
+    if ([[RCDLoginInfo shareLoginInfo] addressName]) {
+        self.addressTextField.text = [[RCDLoginInfo shareLoginInfo] addressName];
+    }
     
-    
-    // 分类下拉列表
-    _categoryDropList.dataArray = self.categoryArray;
-    _categoryDropList.delegate = self;
-    _categoryDropList.textColor = [UIColor whiteColor];
-    _categoryDropList.selectedIndex = 0;
-    [_categoryDropList setListBackColor:kNavBgColor];
-    [_categoryDropList setListTextColor:[UIColor whiteColor]];
-    _categoryDropList.font = [UIFont systemFontOfSize:17];
-    // Do any additional setup after loading the view from its nib.
     
 }
 
@@ -83,15 +71,8 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [_categoryDropList layoutIfNeeded];
-    [_categoryDropList updateSubViews];
 }
 
-#pragma mark - WFFDropdownListDelegate
-- (void)dropdownList:(WFFDropdownList *)dropdownList didSelectedIndex:(NSInteger)selectedIndex
-{
-    self.selectedCategory = self.categoryArray[selectedIndex];
-}
 /*
 #pragma mark - Navigation
 
@@ -176,8 +157,8 @@
 {
     MAPPOISearchViewController *mapPOISearch = [[MAPPOISearchViewController alloc] initWithNibName:@"MAPPOISearchViewController" bundle:nil];
     // locationWithLatitude:39.990459 longitude:116.481476
-    mapPOISearch.defaultLatitude = 39.990459;
-    mapPOISearch.defaultLongitude = 116.481476;
+    mapPOISearch.defaultLatitude = [[RCDLoginInfo shareLoginInfo] latitude];
+    mapPOISearch.defaultLongitude = [[RCDLoginInfo shareLoginInfo] longitude];
     mapPOISearch.dismisBlock = completionHandle;
     [self presentViewController:mapPOISearch animated:YES completion:nil];
 }

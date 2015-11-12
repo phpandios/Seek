@@ -15,11 +15,14 @@
 #import "RCDLoginInfo.h"
 #import "CheckPhoneViewController.h"
 #import "PhotoCutViewController.h"
-
+#import "AddressBookViewController.h"
+#import "AFPickerView.h"
 @interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,PhotoCueDelegate>
 {
     MBProgressHUD *HUD;
 }
+
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *canSelectedArray; // 标识允许选中的项
@@ -31,6 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     self.title = @"我的";
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
@@ -100,8 +105,8 @@
     switch (section) {
         case 0: // 头像
             return 1;
-        case 1: // 关注,粉丝
-            return 2;
+        case 1: // 关注 --------粉丝
+            return 1;
         case 2: // 昵称,手机,性别
             return 3;
         case 3: // 修改密码,意见反馈
@@ -138,9 +143,9 @@
                 case 0:
                     cell.textLabel.text = @"我的关注";
                     break;
-                case 1:
-                    cell.textLabel.text = @"关注请求";
-                    break;
+//                case 1:
+//                    cell.textLabel.text = @"关注请求";
+//                    break;
             }
         } else if (indexPath.section == 2) {
             switch (indexPath.row) {
@@ -209,21 +214,11 @@
 {
     if (indexPath.section == 1) {
         if (indexPath.row == 0) { // 我的好友
-//            if (![Common shareCommon].friendArray) {
-//                [KVNProgress show];
-//                __weak typeof(self) weakSelf = self;
-//                [[Common shareCommon] getFriendListCompletionHandle:^(NSArray *friendArray) {
-//                    if (friendArray) {
-//                        [KVNProgress dismiss];
-//                        [weakSelf pushFriendListVC];
-//                    }
-//                }];
-//            } else {
-//                [self pushFriendListVC];
-//            }
-            
+            AddressBookViewController *addressBookVC = [AddressBookViewController new];
+            [self.navigationController pushViewController:addressBookVC animated:YES];
         }
     }
+    
     if (indexPath.section == 2 && indexPath.row == 1) { // 手机
         if ([[[RCDLoginInfo shareLoginInfo] telephone] length] == 0) { // 没绑定手机,就绑定手机
             CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
@@ -232,19 +227,20 @@
         }
     }
     
+    if (indexPath.section == 2 && indexPath.row == 2) { // 选择性别
+        
+    }
+    
     if (indexPath.section == 3 && indexPath.row == 0) { // 修改密码
-//        CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
-//        vc.type = CheckPhoneTypeForModifyPwd;
-//        [self.navigationController pushViewController:vc animated:YES];
+        CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
+        vc.type = CheckPhoneTypeForModifyPwd;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
-- (void)pushFriendListVC
-{
-    FriendListViewController *friendVC = [[FriendListViewController alloc] initWithDisplayConversationTypes:nil collectionConversationType:nil];
-//    friendVC.conversationListDataSource = [Common shareCommon].friendArray;
-    [self.navigationController pushViewController:friendVC animated:YES];
-}
+#pragma mark - UIPickerViewDelegate
+
+
 #pragma mark - UIImagePickerController
 - (void)showImagePickerControllerWithTitle:(NSString *)title cancleHandle:(void (^)())cancleHandle
 {

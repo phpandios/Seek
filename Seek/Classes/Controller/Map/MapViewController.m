@@ -63,7 +63,7 @@
     
     // 模拟器没有定位.手动创建
     self.currentUserLocation = [[MAUserLocation alloc] init];
-    _currentUserLocation.coordinate = CLLocationCoordinate2DMake(39.989631, 116.481018);
+    _currentUserLocation.coordinate = CLLocationCoordinate2DMake([[RCDLoginInfo shareLoginInfo] latitude], [[RCDLoginInfo shareLoginInfo] longitude]);
     
     // 屏幕旋转通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];

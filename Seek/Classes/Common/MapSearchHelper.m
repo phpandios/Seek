@@ -107,6 +107,7 @@ kSingleTon_M(MapSearchHelper)
     }
     [_searchAPI AMapReGoecodeSearch:_reGeocodeSearchRequest];
 }
+
 - (void)poiAroundSearchWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude completionHandle:(void (^)(AMapPOISearchResponse *response))completionHandle
 
 {

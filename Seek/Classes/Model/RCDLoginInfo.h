@@ -32,6 +32,10 @@
 
 @property (nonatomic, assign) CGFloat latitude;
 
+@property (nonatomic, copy) NSString *addressName;
+
+@property (nonatomic, assign) BOOL isThirdLogin;
+
 @property (nonatomic, assign) BOOL needUpdateFriend;
 
 +(id) shareLoginInfo;

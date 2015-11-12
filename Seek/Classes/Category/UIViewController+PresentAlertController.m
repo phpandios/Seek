@@ -38,6 +38,9 @@
 - (void)showAlertControllerWithTitle:(NSString *)title
 {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+       
+    }]];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 @end

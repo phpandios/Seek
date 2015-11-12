@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 
 #import "MainTabBarViewController.h"
-
 #import "UMSocial.h"
 #import "UMSocialData.h"
 #import <RongIMKit/RongIMKit.h>
@@ -32,6 +31,7 @@
 : NO)
 @interface AppDelegate ()
 
+
 @end
 
 @implementation AppDelegate
@@ -39,26 +39,37 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+        
     // 友盟
+    int i = 0;
+    NSLog(@"%d", i++);
     [UMSocialData setAppKey:kUMAppKey];
+    NSLog(@"%d", i++);
     [UMSocialData openLog:YES];
+    NSLog(@"%d", i++);
     
     // 融云
     [[RCIM sharedRCIM] initWithAppKey:kRCIMAppKey];
+    NSLog(@"%d", i++);
     
     //设置会话列表头像和会话界面头像
     [[RCIM sharedRCIM] setConnectionStatusDelegate:self];
+    NSLog(@"%d", i++);
     if (iPhone6Plus) {
         [RCIM sharedRCIM].globalConversationPortraitSize = CGSizeMake(56, 56);
     } else {
         NSLog(@"iPhone6 %d", iPhone6);
         [RCIM sharedRCIM].globalConversationPortraitSize = CGSizeMake(46, 46);
     }
+    NSLog(@"%d", i++);
     //    [RCIM sharedRCIM].portraitImageViewCornerRadius = 10;
     //设置用户信息源和群组信息源
     [RCIM sharedRCIM].userInfoDataSource = RCDDataSource;
+    NSLog(@"%d", i++);
     [RCIM sharedRCIM].groupInfoDataSource = RCDDataSource;
+    NSLog(@"%d", i++);
     [RCIM sharedRCIM].receiveMessageDelegate=self;
+    NSLog(@"%d", i++);
 
     /**
      * 推送处理1
@@ -280,6 +291,12 @@
 //                                     shareImage:[UIImage imageNamed:@"icon.png"]
 //                                shareToSnsNames:@[UMShareToTencent]
 //                                       delegate:nil];
+    
+    
+    
+    
+  
+    
     return YES;
 }
 
@@ -514,4 +531,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
      name:RCKitDispatchMessageNotification
      object:nil];
 }
+
+
 @end

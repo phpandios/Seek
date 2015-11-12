@@ -7,7 +7,8 @@
 //
 
 #import "CheckPhoneViewController.h"
-#import "ValidateViewController.h"
+//#import "ValidateViewController.h"
+#import "SetPwdViewController.h"
 @interface CheckPhoneViewController () <TTTAttributedLabelDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *commitButton;
 - (IBAction)commitButtonAction:(UIButton *)sender;
@@ -114,12 +115,13 @@
             self.type = CheckPhoneTypeForBindingTelPhone;
         } else {
             if (![[[RCDLoginInfo shareLoginInfo] telephone] isEqualToString:self.phoneNumTextField.text]) {
-                SHOWERROR(@"请输入您注册或绑定的手机号!");
+                SHOWERROR(@"您输入的手机号不正确,请输入您注册或绑定的手机号!");
                 return;
             }
         }
     }
-    ValidateViewController *vc = [[ValidateViewController alloc] initWithNibName:@"ValidateViewController" bundle:nil];
+    
+    SetPwdViewController *vc = [[SetPwdViewController alloc] initWithNibName:@"SetPwdViewController" bundle:nil];
     vc.type = self.type;
     vc.phoneNum = self.phoneNumTextField.text;
     
