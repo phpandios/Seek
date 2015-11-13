@@ -25,22 +25,12 @@
                         <outlet property="delegate" destination="-1" id="9hj-UB-apC"/>
                     </connections>
                 </tableView>
-                <pickerView contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="0J1-tY-TGJ">
-                    <rect key="frame" x="0.0" y="400" width="600" height="200"/>
-                    <animations/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="200" id="jrb-2x-m6q"/>
-                    </constraints>
-                </pickerView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="0J1-tY-TGJ" secondAttribute="trailing" id="0We-Wd-3mj"/>
                 <constraint firstItem="A6R-8Y-sjv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8N1-Fq-rRc"/>
                 <constraint firstAttribute="bottom" secondItem="A6R-8Y-sjv" secondAttribute="bottom" id="CJs-TF-oji"/>
-                <constraint firstItem="0J1-tY-TGJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PA2-O4-hRX"/>
-                <constraint firstAttribute="bottom" secondItem="0J1-tY-TGJ" secondAttribute="bottom" id="d06-9r-86k"/>
                 <constraint firstAttribute="bottom" secondItem="A6R-8Y-sjv" secondAttribute="bottom" id="lrh-4d-Pq2"/>
                 <constraint firstAttribute="trailing" secondItem="A6R-8Y-sjv" secondAttribute="trailing" id="tFH-RS-AOb"/>
                 <constraint firstItem="A6R-8Y-sjv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xxB-bK-94P"/>

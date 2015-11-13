@@ -28,6 +28,7 @@
 #import "RCDLoginInfo.h"
 #import "UMSocial.h"
 
+#import "SearchDynamicViewController.h"
 @interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,UMSocialUIDelegate>
 {
      MBProgressHUD *HUD;
@@ -54,7 +55,12 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(issueBarButtonItemAction:)];
+    self.navigationItem.rightBarButtonItems = ({
+        UIBarButtonItem *issueBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(issueBarButtonItemAction:)];
+        UIBarButtonItem *searchBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBarButtonItemAction:)];
+        @[issueBarButtonItem, searchBarButtonItem];
+        
+    });
     
     HUD.labelText = @"正在加载中...";
     [HUD show:YES];
@@ -210,6 +216,10 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 
 - (void)issueBarButtonItemAction:(UIBarButtonItem *)sender {
     IssueViewController *vc = [[IssueViewController alloc] initWithNibName:@"IssueViewController" bundle:nil];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+- (void)searchBarButtonItemAction:(UIBarButtonItem *)sender {
+    SearchDynamicViewController *vc = [[SearchDynamicViewController alloc] initWithNibName:@"SearchDynamicViewController" bundle:nil];
     [self presentViewController:vc animated:YES completion:nil];
 }
 #pragma mark-点击编辑按钮模态发布页面

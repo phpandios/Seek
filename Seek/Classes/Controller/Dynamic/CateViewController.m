@@ -102,6 +102,10 @@ static NSString * const reuseIdentifier = @"Cell";
     _lastIndex = indexPath;
 }
 - (IBAction)exitAction:(id)sender {
+    if (_cateCurrent) {
+//        Dynamic_category *cate = self.cate_arr[_lastIndex.row];
+        _cateCurrent(nil, -1);
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -59,8 +59,6 @@
     if ([[RCDLoginInfo shareLoginInfo] addressName]) {
         self.addressTextField.text = [[RCDLoginInfo shareLoginInfo] addressName];
     }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -164,6 +162,10 @@
 }
 #pragma mark - 按钮点击
 - (IBAction)commitButtonAction:(UIButton *)sender {
+    if (self.cateGoryBtn.tag < 0) {
+        [KVNProgress showErrorWithStatus:@"请选择分类!"];
+        return;
+    }
     if ([_titleTextField.text isEqualToString:@""] || _titleTextField.text== nil ) {
         [KVNProgress showErrorWithStatus:@"标题不能为空"];
     }else if ([_contentTextView.text isEqualToString:@""] || _contentTextView.text== nil )
@@ -340,7 +342,7 @@
     //    self.actualImageView.image = [Common shareCommon].actualImage;
 }
 - (IBAction)cateGoryAction:(id)sender {
-    CateViewController *cate = [CateViewController new];
+    CateViewController *cate = [[CateViewController alloc] initWithNibName:@"CateViewController" bundle:nil];
     __weak typeof(self) weakSelf=self;
     cate.cateCurrent = ^(NSString *cate_name, NSInteger ID){
         [weakSelf.cateGoryBtn setTitle:cate_name forState:UIControlStateNormal];

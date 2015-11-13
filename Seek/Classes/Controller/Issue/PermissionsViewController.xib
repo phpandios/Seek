@@ -20,8 +20,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJR-te-GhG" userLabel="top">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mb-kO-7TR">
-                            <rect key="frame" x="15" y="18" width="32" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mb-kO-7TR">
+                            <rect key="frame" x="15" y="27" width="32" height="30"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="32" id="kJ2-4F-pbV"/>
@@ -32,8 +32,8 @@
                                 <action selector="exitAction:" destination="-1" eventType="touchUpInside" id="o38-7t-qJc"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGl-RC-mJx">
-                            <rect key="frame" x="539" y="18" width="46" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGl-RC-mJx">
+                            <rect key="frame" x="539" y="27" width="46" height="30"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="elx-Zq-4wn"/>
@@ -55,7 +55,8 @@
                         <constraint firstAttribute="height" constant="64" id="ldb-lJ-Qtx"/>
                         <constraint firstItem="RGl-RC-mJx" firstAttribute="centerY" secondItem="UJR-te-GhG" secondAttribute="centerY" id="nHe-zd-CeC"/>
                         <constraint firstAttribute="trailing" secondItem="RGl-RC-mJx" secondAttribute="trailing" constant="15" id="oUe-fX-OyP"/>
-                        <constraint firstItem="4mb-kO-7TR" firstAttribute="centerY" secondItem="UJR-te-GhG" secondAttribute="centerY" id="vCo-Jt-pcA"/>
+                        <constraint firstItem="RGl-RC-mJx" firstAttribute="centerY" secondItem="4mb-kO-7TR" secondAttribute="centerY" id="uHm-SK-fs7"/>
+                        <constraint firstItem="4mb-kO-7TR" firstAttribute="centerY" secondItem="UJR-te-GhG" secondAttribute="centerY" constant="10" id="vCo-Jt-pcA"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
@@ -63,6 +64,7 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="Jmp-zO-FVw"/>
+                            <exclude reference="nHe-zd-CeC"/>
                         </mask>
                     </variation>
                 </view>

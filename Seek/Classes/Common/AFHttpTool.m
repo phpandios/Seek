@@ -197,7 +197,21 @@
                           success:success
                           failure:failure];
 }
-
+#pragma mark - 搜索动态
++ (void)searchDynamicWithPage:(NSInteger)page
+                        limit:(NSInteger)limit
+                  category_id:(NSInteger)category_id
+                      keyword:(NSString *)keyword
+                      success:(void (^)(id response))success
+                      failure:(void (^)(NSError * err))failure
+{
+    NSDictionary *params = @{@"page" : @(page), @"limit" : @(limit), @"category_id" : @(category_id), @"keyword" : keyword};
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"search__dynamic"
+                           params:params
+                          success:success
+                          failure:failure];
+}
 #pragma mark -发布消息
 + (void)publishMessageCate:(NSInteger)category_id
                      title:(NSString *)title

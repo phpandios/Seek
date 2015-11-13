@@ -28,7 +28,7 @@
                     <rect key="frame" x="0.0" y="64" width="600" height="179"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7jY-Vs-PJd">
-                            <rect key="frame" x="15" y="99" width="579" height="80"/>
+                            <rect key="frame" x="15" y="99" width="570" height="80"/>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -45,8 +45,22 @@
                                 <outlet property="delegate" destination="-1" id="G8M-A9-Za2"/>
                             </connections>
                         </collectionView>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="标题" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crW-KP-Ys1">
+                            <rect key="frame" x="15" y="0.0" width="570" height="40"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="z3U-e0-izC"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="WB7-Rp-XYV"/>
+                            </connections>
+                        </textField>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="584" placeholderIntrinsicHeight="59" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UIK-Go-Y0u" customClass="AutoHeightTextView">
-                            <rect key="frame" x="10" y="40" width="584" height="59"/>
+                            <rect key="frame" x="10" y="40" width="575" height="59"/>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
@@ -65,20 +79,6 @@
                                 <outlet property="delegate" destination="-1" id="oXj-Oe-wUs"/>
                             </connections>
                         </textView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="标题" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crW-KP-Ys1">
-                            <rect key="frame" x="15" y="0.0" width="579" height="40"/>
-                            <animations/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="z3U-e0-izC"/>
-                            </constraints>
-                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="WB7-Rp-XYV"/>
-                            </connections>
-                        </textField>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -99,6 +99,7 @@
                         <constraint firstAttribute="trailing" secondItem="UIK-Go-Y0u" secondAttribute="trailing" id="l3i-8O-RlP"/>
                         <constraint firstItem="UIK-Go-Y0u" firstAttribute="leading" secondItem="jEl-0r-uCV" secondAttribute="leading" id="qCL-KA-T3U"/>
                         <constraint firstItem="7jY-Vs-PJd" firstAttribute="leading" secondItem="crW-KP-Ys1" secondAttribute="leading" id="vZw-rx-PbD"/>
+                        <constraint firstAttribute="trailing" secondItem="crW-KP-Ys1" secondAttribute="trailing" constant="15" id="vai-WK-2t1"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -116,7 +117,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2C1-7E-PLV">
                     <rect key="frame" x="0.0" y="244" width="600" height="40"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="地点" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M3n-P6-fGe">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="地点" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M3n-P6-fGe">
                             <rect key="frame" x="15" y="0.0" width="570" height="40"/>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -150,7 +151,7 @@
                     <rect key="frame" x="0.0" y="285" width="600" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ocv-hJ-7Wr">
-                            <rect key="frame" x="294" y="0.0" width="300" height="40"/>
+                            <rect key="frame" x="511" y="0.0" width="74" height="40"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="COp-7x-f7d"/>
@@ -172,13 +173,6 @@
                             <color key="textColor" red="0.48151436237373735" green="0.48151436237373735" blue="0.48151436237373735" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="所有人都能看见" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEt-Xk-5fm">
-                            <rect key="frame" x="0.0" y="-285" width="105" height="18"/>
-                            <animations/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.48151436240000001" green="0.48151436240000001" blue="0.48151436240000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -196,6 +190,7 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="0d4-TW-xmX"/>
+                            <exclude reference="G5M-le-ZKW"/>
                             <exclude reference="bvU-rK-BaY"/>
                         </mask>
                     </variation>
@@ -216,7 +211,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEw-qC-ckA">
-                            <rect key="frame" x="551" y="16" width="34" height="33"/>
+                            <rect key="frame" x="551" y="26" width="34" height="33"/>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -227,12 +222,13 @@
                                 <action selector="commitButtonAction:" destination="-1" eventType="touchUpInside" id="AD6-et-2sq"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukG-9R-hHc">
-                            <rect key="frame" x="200" y="17" width="200" height="30"/>
+                        <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukG-9R-hHc">
+                            <rect key="frame" x="200" y="24.5" width="200" height="35"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="mKW-iU-cbT"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="分类">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -248,13 +244,21 @@
                         <constraint firstItem="ukG-9R-hHc" firstAttribute="centerY" secondItem="GMu-vw-vvG" secondAttribute="centerY" id="49E-uJ-uSQ"/>
                         <constraint firstItem="ukG-9R-hHc" firstAttribute="centerX" secondItem="GMu-vw-vvG" secondAttribute="centerX" id="6rF-be-fG0"/>
                         <constraint firstAttribute="height" constant="64" id="C3s-RZ-vCo"/>
+                        <constraint firstItem="HEw-qC-ckA" firstAttribute="centerY" secondItem="ukG-9R-hHc" secondAttribute="centerY" id="EiV-Eg-69h"/>
                         <constraint firstItem="HEw-qC-ckA" firstAttribute="centerY" secondItem="GMu-vw-vvG" secondAttribute="centerY" id="GeP-qv-k9g"/>
                         <constraint firstItem="2Qa-O8-KH2" firstAttribute="centerY" secondItem="GMu-vw-vvG" secondAttribute="centerY" constant="10" id="gnE-Ns-Hqg"/>
+                        <constraint firstItem="ukG-9R-hHc" firstAttribute="centerY" secondItem="2Qa-O8-KH2" secondAttribute="centerY" id="pZy-Aw-efi"/>
                         <constraint firstAttribute="trailing" secondItem="HEw-qC-ckA" secondAttribute="trailing" constant="15" id="uSe-1c-1aG"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
                     </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="49E-uJ-uSQ"/>
+                            <exclude reference="GeP-qv-k9g"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <animations/>
@@ -268,6 +272,7 @@
                 <constraint firstItem="ocv-hJ-7Wr" firstAttribute="trailing" secondItem="crW-KP-Ys1" secondAttribute="trailing" id="PNR-dg-DlW"/>
                 <constraint firstAttribute="trailing" secondItem="jEl-0r-uCV" secondAttribute="trailing" id="WQw-lH-9jb"/>
                 <constraint firstItem="2C1-7E-PLV" firstAttribute="top" secondItem="jEl-0r-uCV" secondAttribute="bottom" constant="1" id="WsT-Tm-n8M"/>
+                <constraint firstItem="ocv-hJ-7Wr" firstAttribute="trailing" secondItem="M3n-P6-fGe" secondAttribute="trailing" id="bhr-bP-XdS"/>
                 <constraint firstItem="7nm-xG-Sqx" firstAttribute="leading" secondItem="crW-KP-Ys1" secondAttribute="leading" id="gY6-kg-olf"/>
                 <constraint firstItem="jEl-0r-uCV" firstAttribute="trailing" secondItem="HEw-qC-ckA" secondAttribute="trailing" id="hrM-VH-Mdn"/>
                 <constraint firstItem="7nm-xG-Sqx" firstAttribute="leading" secondItem="7jY-Vs-PJd" secondAttribute="leading" id="ih0-SQ-ee1"/>
@@ -285,6 +290,7 @@
                     <exclude reference="hrM-VH-Mdn"/>
                     <exclude reference="pIA-b3-MUN"/>
                     <exclude reference="ih0-SQ-ee1"/>
+                    <exclude reference="PNR-dg-DlW"/>
                     <exclude reference="vPB-5Y-nHa"/>
                 </mask>
             </variation>

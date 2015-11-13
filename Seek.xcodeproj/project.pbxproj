@@ -308,6 +308,8 @@
 		60E3C2DB1BD8D47D00D43072 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E3C2D51BD8D47D00D43072 /* FMResultSet.m */; };
 		60E4C1E21BC111EB00611E0A /* README in Resources */ = {isa = PBXBuildFile; fileRef = 60E4C1DF1BC111EB00611E0A /* README */; };
 		60E4C1E41BC1127100611E0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 60E4C1E31BC1127100611E0A /* Localizable.strings */; };
+		60F059351BF637AE00C6AC90 /* SearchDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F059331BF637AE00C6AC90 /* SearchDynamicViewController.m */; };
+		60F059361BF637AE00C6AC90 /* SearchDynamicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60F059341BF637AE00C6AC90 /* SearchDynamicViewController.xib */; };
 		60F6C3D01BDA1A9500C1FE1A /* HeadCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F6C3BE1BDA1A9500C1FE1A /* HeadCollectionView.m */; };
 		60F6C3D11BDA1A9500C1FE1A /* RCAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F6C3C11BDA1A9500C1FE1A /* RCAnnotation.m */; };
 		60F6C3D21BDA1A9500C1FE1A /* RCAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F6C3C31BDA1A9500C1FE1A /* RCAnnotationView.m */; };
@@ -841,6 +843,9 @@
 		60E3C2DC1BD8D4AA00D43072 /* RCDCommonDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCDCommonDefine.h; sourceTree = "<group>"; };
 		60E4C1DF1BC111EB00611E0A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		60E4C1E31BC1127100611E0A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		60F059321BF637AE00C6AC90 /* SearchDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDynamicViewController.h; sourceTree = "<group>"; };
+		60F059331BF637AE00C6AC90 /* SearchDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDynamicViewController.m; sourceTree = "<group>"; };
+		60F059341BF637AE00C6AC90 /* SearchDynamicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchDynamicViewController.xib; sourceTree = "<group>"; };
 		60F6C3BD1BDA1A9500C1FE1A /* HeadCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadCollectionView.h; sourceTree = "<group>"; };
 		60F6C3BE1BDA1A9500C1FE1A /* HeadCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadCollectionView.m; sourceTree = "<group>"; };
 		60F6C3C01BDA1A9500C1FE1A /* RCAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCAnnotation.h; sourceTree = "<group>"; };
@@ -1310,6 +1315,9 @@
 				181A87C81BF014B2001A58BF /* CateViewController.h */,
 				181A87C91BF014B2001A58BF /* CateViewController.m */,
 				181A87CA1BF014B2001A58BF /* CateViewController.xib */,
+				60F059321BF637AE00C6AC90 /* SearchDynamicViewController.h */,
+				60F059331BF637AE00C6AC90 /* SearchDynamicViewController.m */,
+				60F059341BF637AE00C6AC90 /* SearchDynamicViewController.xib */,
 			);
 			path = Dynamic;
 			sourceTree = "<group>";
@@ -2313,6 +2321,7 @@
 				607EE3751BDDC93F0008BF7E /* PersonDetailViewController.xib in Resources */,
 				607EE35A1BDDB3DE0008BF7E /* AddFriendViewController.xib in Resources */,
 				60DA7D231BCE075000151717 /* resendButtonBg@2x.png in Resources */,
+				60F059361BF637AE00C6AC90 /* SearchDynamicViewController.xib in Resources */,
 				609D481B1BCE4A8600F79A65 /* CommentForDynamicTableViewCell.xib in Resources */,
 				181A87CC1BF014B2001A58BF /* CateViewController.xib in Resources */,
 				18E79E5C1BE128FA0036AE02 /* PermissionsViewController.xib in Resources */,
@@ -2491,6 +2500,7 @@
 				188D18DA1BE8F85500BAF2EE /* MJRefreshFooter.m in Sources */,
 				60C30FD01BD5374100EE62FC /* KVNProgressConfiguration.m in Sources */,
 				60117BA21BC7EE86001D4EC0 /* ALAlertBannerManager.m in Sources */,
+				60F059351BF637AE00C6AC90 /* SearchDynamicViewController.m in Sources */,
 				607EE3961BDDD8970008BF7E /* RCDConversationSettingTableViewCell.m in Sources */,
 				60C4BD761BCAA7BB00A50D85 /* SDWebImageDownloader.m in Sources */,
 				60C4BD711BCAA7BB00A50D85 /* MKAnnotationView+WebCache.m in Sources */,
