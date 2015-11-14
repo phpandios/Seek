@@ -11,13 +11,22 @@
 #import "Comment.h"
 #import "CommentForCommentTableViewCell.h"
 #import "CommentForDynamicTableViewCell.h"
-@interface DynamicDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface DynamicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *commentTextField;
+- (IBAction)commentButtonAction:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constaintForBottom;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *commentArray;
-//@property (nonatomic, strong) NSMutableDictionary *commentDict;
+
+// 选中的回复
+@property (nonatomic, strong) Comment *selectedComment;
+
+
 @end
 
+
+#warning 第一个cell要放当前动态内容.当点击当前动态时,selectedComment要设置为nil. 因为最终点击回复,是根据selectedComment是否为空.来决定当前回复的是动态还是某条回复
 @implementation DynamicDetailViewController
 
 static NSString *cellIdentifierForComment = @"CommentForCommentTableViewCell";
@@ -26,6 +35,9 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%ld", self.dynamicId);
+    
+#warning self.commentTextField占位   例如:回复***  初始时,回复当前动态的用户
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentForCommentTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifierForComment];
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentForDynamicTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifierForDynamic];
@@ -38,7 +50,18 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+}
 
+#pragma mark - 键盘
+- (void)keyboardDidChangeFrame:(NSNotification *)sender {
+    CGRect endRect = [sender.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    self.constaintForBottom.constant = endRect.size.height;
+}
+
+#pragma mark - 加载数据
 - (void)loadData
 {
     NSMutableArray *commentArray = [NSMutableArray array];
@@ -145,6 +168,13 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Comment *comment = [self commentByIndexPath:indexPath];
+    self.selectedComment = comment;
+#warning 根据模型改变当前选中的回复,同时更新清空self.commentTextField的值,重置其占位文字 
+}
+
 #pragma mark - 动态计算cell高度 -- 费时操作.
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -205,5 +235,18 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     // Pass the selected object to the new view controller.
 }
 */
-
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+- (IBAction)commentButtonAction:(UIButton *)sender {
+#warning 根据selectedComment是否为空,判断是选中了回复还是选中了动态.   
+    /*
+     selectedComment为空,说明回复的是动态,
+     不为空,说明回复的是某条回复,
+     据此来构造回复对象,并提交
+     */
+}
 @end

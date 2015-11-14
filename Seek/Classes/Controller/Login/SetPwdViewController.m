@@ -123,12 +123,12 @@
                     [DEFAULTS setObject:weakSelf.pwdTextField.text forKey:@"userPwd"];
                     [loginInfo setValuesForKeysWithDictionary:response[@"result"]];
                     [KVNProgress showSuccessWithStatus:@"绑定成功" completion:^{
-                        [weakSelf.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 4] animated:YES];
+                        [weakSelf.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
                     }];
                     
                 } else {
                     [KVNProgress showErrorWithStatus:response[@"message"] completion:^{
-                        [weakSelf.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
+                        [weakSelf.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] animated:YES];
                     }];
                 }
             } failure:^(NSError *err) {

@@ -532,10 +532,12 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 #pragma mark - 点击效果
 - (void)commentAction:(UIButton *)sender
 {
-    NSLog(@"%@", sender);
+    NSLog(@"%@", _dynamicObj);
+    self.hidesBottomBarWhenPushed = YES;
     DynamicDetailViewController *vc = [[DynamicDetailViewController alloc] initWithNibName:@"DynamicDetailViewController" bundle:nil];
     vc.dynamicId = sender.tag;
     [self.navigationController pushViewController:vc animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 

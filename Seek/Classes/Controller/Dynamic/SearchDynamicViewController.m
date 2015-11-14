@@ -108,13 +108,11 @@
         return;
     }
     
-    
     self.currentPage = 0;
     
     __weak typeof(self) weakSelf = self;
     [self loadDataWithCategory_id:self.categoryDynamicButton.tag keyword:searchText completionHandle:^(BOOL success){
        [weakSelf doByLoadDataResult:success];
-        
     }];
 }
 
