@@ -13,6 +13,7 @@
 #import "UMSocialData.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialSnsService.h"
+#import "UMSocialWechatHandler.h"
 @interface LoginViewController ()<UITextFieldDelegate>
 - (IBAction)loginByQQButtonAction:(UIButton *)sender;
 - (IBAction)loginByWeiChatButtonAction:(UIButton *)sender;
@@ -140,7 +141,20 @@
 }
 
 - (IBAction)loginByWeiChatButtonAction:(UIButton *)sender {
-    SHOWMESSAGE(@"微信登陆");
+//    SHOWMESSAGE(@"微信登陆");
+    [UMSocialWechatHandler setWXAppId:kUMWXAppID appSecret:kUMWXAppKey url:kUMUrl];
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        [KVNProgress showWithStatus:@"授权成功,登录中..."];
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [KVNProgress dismiss];
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+            
+            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+        }
+        
+    });
     [self.view endEditing:YES];
 }
 

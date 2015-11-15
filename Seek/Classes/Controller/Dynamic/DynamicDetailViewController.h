@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+
+@class Dynamic;
 @interface DynamicDetailViewController : UIViewController
 
-@property (nonatomic, assign) NSInteger dynamicId;
+@property (nonatomic, assign) Dynamic *dnamicObj;
 
 @end

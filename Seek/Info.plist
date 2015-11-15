@@ -40,6 +40,16 @@
 				<string>QQ41db5726</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>wx24af2df53c965cf6</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wx24af2df53c965cf6</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

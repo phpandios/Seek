@@ -91,6 +91,8 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    printf("%p", textField);
+    printf("%p", self.addressTextField);
     __weak typeof(self) weakSelf = self;
     if (textField == self.addressTextField) {
         [self presentPOISearchViewControllerWithCompletionHandle:^(CGFloat la, CGFloat lo, NSString *address, NSString *name, BOOL hasChoose) {
@@ -181,7 +183,7 @@
         } else {
             NSInteger permission = [self.currentPermission objectForKey:_perssionName.titleLabel.text] ? [[self.currentPermission objectForKey:_perssionName.titleLabel.text] intValue] : 3;
             //将图片编历
-            NSString *images_arr = nil;
+            NSString *images_arr = @"";
             if (self.imagesArray.count > 1) {
                 if (self.imagesArray.count == 2) {
                     images_arr =self.imagesArray[1];
@@ -200,7 +202,7 @@
                 name = [_selectedAddressDict objectForKey:@"name"];
                 address = [_selectedAddressDict objectForKey:@"address"];
             }
-
+          
             [AFHttpTool publishMessageCate:self.cateGoryBtn.tag
                                      title:_titleTextField.text
                                    content:_contentTextView.text

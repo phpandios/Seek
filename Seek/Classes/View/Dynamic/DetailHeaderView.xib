@@ -1,10 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="IES-FT-T6E" customClass="DetailHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kfb-Tj-hJS">
+                    <rect key="frame" x="10" y="10" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="RWb-Mw-KqF"/>
+                        <constraint firstAttribute="height" constant="50" id="sJ6-fi-Bps"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opr-ZT-Z5G">
+                    <rect key="frame" x="65" y="10" width="200" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="OZr-J0-ymr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6tO-dj-0sh">
+                    <rect key="frame" x="65" y="36" width="200" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEv-Bl-OKy">
+                    <rect key="frame" x="10" y="70" width="580" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="6tO-dj-0sh" firstAttribute="top" secondItem="opr-ZT-Z5G" secondAttribute="bottom" constant="5" id="525-7X-REv"/>
+                <constraint firstItem="opr-ZT-Z5G" firstAttribute="top" secondItem="Kfb-Tj-hJS" secondAttribute="top" id="8E2-iF-oiU"/>
+                <constraint firstItem="6tO-dj-0sh" firstAttribute="width" secondItem="opr-ZT-Z5G" secondAttribute="width" id="Bgg-94-ttQ"/>
+                <constraint firstItem="6tO-dj-0sh" firstAttribute="leading" secondItem="opr-ZT-Z5G" secondAttribute="leading" id="Ge7-Y4-Jsr"/>
+                <constraint firstItem="EEv-Bl-OKy" firstAttribute="leading" secondItem="Kfb-Tj-hJS" secondAttribute="leading" id="Ttb-iP-pTr"/>
+                <constraint firstItem="Kfb-Tj-hJS" firstAttribute="top" secondItem="IES-FT-T6E" secondAttribute="top" constant="10" id="Vy0-es-2FR"/>
+                <constraint firstAttribute="trailing" secondItem="EEv-Bl-OKy" secondAttribute="trailing" constant="10" id="b8J-DJ-Yqd"/>
+                <constraint firstItem="Kfb-Tj-hJS" firstAttribute="leading" secondItem="IES-FT-T6E" secondAttribute="leading" constant="10" id="bK1-sW-YC7"/>
+                <constraint firstItem="EEv-Bl-OKy" firstAttribute="top" secondItem="Kfb-Tj-hJS" secondAttribute="bottom" constant="10" id="gcv-ig-eng"/>
+                <constraint firstItem="opr-ZT-Z5G" firstAttribute="leading" secondItem="Kfb-Tj-hJS" secondAttribute="trailing" constant="5" id="hEp-sg-HHU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="head_portrait" destination="Kfb-Tj-hJS" id="gUO-Nf-eVW"/>
+                <outlet property="insert_time" destination="6tO-dj-0sh" id="Ztn-iH-HXQ"/>
+                <outlet property="name" destination="opr-ZT-Z5G" id="Kj7-zp-N43"/>
+                <outlet property="publish_content" destination="EEv-Bl-OKy" id="inb-PU-3d9"/>
+            </connections>
+            <point key="canvasLocation" x="674" y="149"/>
+        </view>
     </objects>
 </document>

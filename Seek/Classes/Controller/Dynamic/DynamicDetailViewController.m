@@ -5,12 +5,15 @@
 //  Created by 吴非凡 on 15/10/14.
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
+#define kdynamicDetail @"dynamicDetail"
 
 #import "DynamicDetailViewController.h"
 #import "Dynamic.h"
 #import "Comment.h"
 #import "CommentForCommentTableViewCell.h"
 #import "CommentForDynamicTableViewCell.h"
+#import "DetailHeaderView.h"
+#import "NSString+textHeightAndWidth.h"
 @interface DynamicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *commentTextField;
 - (IBAction)commentButtonAction:(UIButton *)sender;
@@ -34,10 +37,20 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%ld", self.dynamicId);
     
 #warning self.commentTextField占位   例如:回复***  初始时,回复当前动态的用户
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    DetailHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"DetailHeaderView" owner:nil options:nil].firstObject;
+    //计算文字高度
+    CGFloat height = [NSString calcWithTextHeightStr:self.dnamicObj.content width:kScreenWidth font:[UIFont systemFontOfSize:18.0]];
+    headerView.frame = CGRectMake(0, 0, kScreenWidth, 70 + height);
+
+    [headerView.head_portrait sd_setImageWithURL:[NSURL URLWithString:self.dnamicObj.head_portrait] placeholderImage:nil];
+    headerView.head_portrait.contentMode = UIViewContentModeScaleAspectFit;
+    headerView.name.text = self.dnamicObj.nick_name;
+    headerView.insert_time.text = self.dnamicObj.timestamp;
+    headerView.publish_content.text =self.dnamicObj.content;
+    self.tableView.tableHeaderView = headerView;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentForCommentTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifierForComment];
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentForDynamicTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifierForDynamic];
@@ -57,6 +70,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 
 #pragma mark - 键盘
 - (void)keyboardDidChangeFrame:(NSNotification *)sender {
+    NSLog(@"%@", sender);
     CGRect endRect = [sender.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
     self.constaintForBottom.constant = endRect.size.height;
 }
@@ -65,29 +79,55 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 - (void)loadData
 {
     NSMutableArray *commentArray = [NSMutableArray array];
-    for (int i = 0; i < 10; i++) {
-        Comment *comment = [Comment new];
-        comment.respondType = RespondTypeByDynamic;
-        comment.fromUserHeadImage = @"userIcon";
-        comment.fromUserName = [NSString stringWithFormat:@"用户%02d", i];
-        comment.content = [NSString stringWithFormat:@"不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么%2d", i];
-//        comment.timestamp = [NSDate date];
-        NSMutableArray *childCommentArray = [NSMutableArray array];
-        for (int j = 0; j < i; j++) {
-            Comment *childComment = [Comment new];
-            childComment.respondType = RespondTypeByComment;
-            childComment.fromUserName = [NSString stringWithFormat:@"**%02d", j];
-            childComment.toUserName = [NSString stringWithFormat:@"用户%02d", i];
-            childComment.content = [NSString stringWithFormat:@"不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么%2d", i];
-//            comment.timestamp = [NSDate date];
-            [childCommentArray addObject:childComment];
+//    for (int i = 0; i < 10; i++) {
+//        Comment *comment = [Comment new];
+//        comment.respondType = 1;
+//        comment.fromUserHeadImage = @"userIcon";
+//        comment.fromUserName = [NSString stringWithFormat:@"用户%02d", i];
+//        comment.content = [NSString stringWithFormat:@"不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么%2d", i];
+////        comment.timestamp = [NSDate date];
+//        NSMutableArray *childCommentArray = [NSMutableArray array];
+//        for (int j = 0; j < i; j++) {
+//            Comment *childComment = [Comment new];
+//            childComment.respondType = 2;
+//            childComment.fromUserName = [NSString stringWithFormat:@"**%02d", j];
+//            childComment.toUserName = [NSString stringWithFormat:@"用户%02d", i];
+//            childComment.content = [NSString stringWithFormat:@"不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么不知道说点什么%2d", i];
+////            comment.timestamp = [NSDate date];
+//            [childCommentArray addObject:childComment];
+//        }
+//        
+//        comment.childComments = childCommentArray;
+//        [commentArray addObject:comment];
+//    }
+//    self.commentArray = commentArray;
+//    [self.tableView reloadData];
+    __weak typeof(self) weakSelf = self;
+    [AFHttpTool getReplyWithSuccess:^(id response) {
+        NSLog(@"%@", response);
+        if ([response[@"result"] count] == 0) {
+            return;
         }
-        
-        comment.childComments = childCommentArray;
-        [commentArray addObject:comment];
-    }
-    self.commentArray = commentArray;
-    [self.tableView reloadData];
+        for (int i=0; i < [response[@"result"] count]; i++) {
+            Comment *comment = [Comment new];
+            NSLog(@"%@", response[@"result"][i]);
+            [comment setValuesForKeysWithDictionary:response[@"result"][i]];
+            [commentArray addObject:comment];
+        }
+
+        //判断本地缓存存在进行移除
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:kdynamicDetail]) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kdynamicDetail];
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:commentArray] forKey:kdynamicDetail];
+        weakSelf.commentArray = commentArray;
+        [weakSelf.tableView reloadData];
+    } failure:^(NSError *err) {
+        NSLog(@"%@", err);
+    }];
+    
+    
+    
 }
 
 #pragma mark - 根据当前点击行获取对应的Comment
@@ -106,9 +146,11 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
         if (result) {
             break;
         }
-        for (Comment *subModel in model.childComments) {
+        for (NSDictionary *subModel in model.childComments) {
+            Comment *subModelNew =[Comment new];
+            [subModelNew setValuesForKeysWithDictionary:subModel];
             if (indexPath.row == index) {
-                result = subModel;
+                result = subModelNew;
                 break;
             } else {
                 index++;
@@ -157,10 +199,10 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 {
     UITableViewCell *cell = nil;
     Comment *comment = [self commentByIndexPath:indexPath];
-    if (comment.respondType == RespondTypeByComment) { // 评论的回复
+    if (comment.respondType == 2) { // 评论的回复
         cell = (CommentForCommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifierForComment forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    } else if (comment.respondType == RespondTypeByDynamic) { // 动态的回复
+    } else if (comment.respondType == 1) { // 动态的回复
         cell = (CommentForDynamicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifierForDynamic forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -189,10 +231,10 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 #warning IOS8以下自适应高度未解决,(app版本8.0+,暂不考虑)
         UITableViewCell *cell = nil;
         Comment *comment = [self commentByIndexPath:indexPath];
-        if (comment.respondType == RespondTypeByComment) { // 评论的回复
+        if (comment.respondType == 2) { // 评论的回复
             cell = (CommentForCommentTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForCommentTableViewCell" owner:nil options:nil].firstObject);
     
-        } else if (comment.respondType == RespondTypeByDynamic) {
+        } else if (comment.respondType == 1) {
              cell = (CommentForDynamicTableViewCell *)([[NSBundle mainBundle] loadNibNamed:@"CommentForDynamicTableViewCell" owner:nil options:nil].firstObject);
         }
         [cell performSelector:@selector(setComment:) withObject:comment];
@@ -248,5 +290,26 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
      不为空,说明回复的是某条回复,
      据此来构造回复对象,并提交
      */
+    __weak typeof(self) weakSelf = self;
+    if(_selectedComment)
+    {
+        
+        [AFHttpTool replyCommentWithReplyid:_selectedComment.reply_id content:self.commentTextField.text toUserId:[_selectedComment.fromUserId integerValue] success:^(id response) {
+            NSLog(@"%@", response);
+            [weakSelf loadData];
+            [weakSelf.tableView reloadData];
+        } failure:^(NSError *err) {
+            NSLog(@"%@", err);
+        }];
+    }
+    else
+    {
+        [AFHttpTool commentsDynamicWithDynamicId:self.dnamicObj.dynamicId content:self.commentTextField.text toUserId:self.dnamicObj.userId success:^(id response) {
+            [weakSelf loadData];
+            [weakSelf.tableView reloadData];
+        } failure:^(NSError *err) {
+            NSLog(@"%@", err);
+        }];
+    }
 }
 @end

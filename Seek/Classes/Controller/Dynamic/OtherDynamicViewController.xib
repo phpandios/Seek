@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OtherDynamicViewController">
             <connections>
+                <outlet property="dynamicTableView" destination="GCC-CU-cyp" id="zPi-dw-2t7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +15,50 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-zh-37Z" userLabel="top">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QTQ-M3-AGM">
+                            <rect key="frame" x="15" y="26" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="5Ed-sI-kUq"/>
+                                <constraint firstAttribute="width" constant="32" id="CTq-pV-7DS"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="exitLogin.png"/>
+                            <connections>
+                                <action selector="exitBtnAction:" destination="-1" eventType="touchUpInside" id="jdZ-NK-vTF"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="QTQ-M3-AGM" firstAttribute="leading" secondItem="hcj-zh-37Z" secondAttribute="leading" constant="15" id="5Lf-s1-Foo"/>
+                        <constraint firstItem="QTQ-M3-AGM" firstAttribute="top" secondItem="hcj-zh-37Z" secondAttribute="top" constant="26" id="66R-nj-gkJ"/>
+                        <constraint firstAttribute="height" constant="64" id="vXE-ca-vbF"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GCC-CU-cyp">
+                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="GCC-CU-cyp" firstAttribute="top" secondItem="hcj-zh-37Z" secondAttribute="bottom" id="Kfh-Ov-Lqt"/>
+                <constraint firstAttribute="trailing" secondItem="hcj-zh-37Z" secondAttribute="trailing" id="P1r-Yi-CNR"/>
+                <constraint firstItem="hcj-zh-37Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WIC-AY-mHc"/>
+                <constraint firstAttribute="bottom" secondItem="GCC-CU-cyp" secondAttribute="bottom" id="WaW-e9-SaE"/>
+                <constraint firstAttribute="trailing" secondItem="GCC-CU-cyp" secondAttribute="trailing" id="YzM-EP-yg8"/>
+                <constraint firstItem="hcj-zh-37Z" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pZ0-cn-nHL"/>
+                <constraint firstItem="GCC-CU-cyp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wDg-SK-VMW"/>
+            </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="exitLogin.png" width="48" height="48"/>
+    </resources>
 </document>

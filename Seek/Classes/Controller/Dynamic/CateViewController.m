@@ -87,7 +87,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark -设置每个cell的大小
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.backgroundColor = [UIColor colorWithRed:0.894 green:0.886 blue:0.902 alpha:1.000];
     Dynamic_category *cate = self.cate_arr[indexPath.row];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
     label.textAlignment = NSTextAlignmentCenter;
@@ -99,6 +99,19 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark -点击每个cell事件
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+//    darkGrayColor
+    
+    if (indexPath != _lastIndex) {
+        UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+        cell.backgroundColor = [UIColor colorWithRed:0.369 green:0.027 blue:0.996 alpha:1.000];
+        UILabel *label = (UILabel *)[cell.contentView subviews].firstObject;
+        label.textColor = [UIColor whiteColor];
+        
+        UICollectionViewCell *oldCell = [collectionView cellForItemAtIndexPath:_lastIndex];
+        oldCell.backgroundColor = [UIColor colorWithRed:0.894 green:0.886 blue:0.902 alpha:1.000];
+        UILabel *labelOld = (UILabel *)[cell.contentView subviews].firstObject;
+        labelOld.textColor = [UIColor blackColor];
+    }
     _lastIndex = indexPath;
 }
 - (IBAction)exitAction:(id)sender {

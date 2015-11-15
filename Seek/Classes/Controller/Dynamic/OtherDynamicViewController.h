@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OtherDynamicViewController : UIViewController
-
+@property (nonatomic, copy) NSString *userID;
 @end

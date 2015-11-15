@@ -13,7 +13,7 @@ typedef enum {
     RespondTypeByComment // 响应评论
 } RespondType;// 响应类型
 
-@interface Comment : NSObject
+@interface Comment : NSObject<NSCoding>
 
 // 评论属于哪一条动态
 @property (nonatomic, assign) NSInteger dynamicId;
@@ -32,7 +32,9 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *toUserName;
 
-@property (nonatomic, assign) RespondType respondType;
+@property (nonatomic, assign) NSInteger respondType;
+
+@property (nonatomic, assign) NSInteger reply_id;
 
 // 子评论数组
 @property (nonatomic, strong) NSArray *childComments;

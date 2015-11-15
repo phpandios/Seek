@@ -12,6 +12,7 @@
 #import "UserInfoForMap.h"
 #import "WFFDropdownList.h"
 #import "UserForMapCollectionViewCell.h"
+#import "OtherDynamicViewController.h"
 
 #define kMaxColOfCollectionView 4
 #define kMaxRowOfCollectionView 3
@@ -230,6 +231,9 @@
     if ([view isKindOfClass:[UserAnnotationView class]]) { // 点击的周边用户
         UserAnnotationView *userView = (UserAnnotationView *)view;
         if ([userView.userArray count] == 1) { // 只有一个 直接推出
+            OtherDynamicViewController *otherDynamic = [OtherDynamicViewController new];
+            otherDynamic.userID = [userView.userArray.firstObject userID];
+            [self presentViewController:otherDynamic animated:YES completion:nil];
             SHOWMESSAGE(@"选中用户ID:%@",[userView.userArray.firstObject userID]);
         } else { // 弹出collectionView
             // 移动动画结束后,再根据选中的项进行操作
@@ -395,22 +399,40 @@ updatingLocation:(BOOL)updatingLocation
         
     }];*/
     NSMutableArray *array = [NSMutableArray array];
-    for (int i = 0; i < 10; i++) {
-        int dLa = (arc4random() % 50 - 25);
-        int dLo = (arc4random() % 50 - 25);
-        double dLatitude = dLa / (double)5000.0;
-        double dLongitude = dLo / (double)5000.0;
-        UserInfoForMap *model = [UserInfoForMap new];
-        model.userID = [NSString stringWithFormat:@"用户%2d", i];
-        model.imageUrl = @"userIcon";
-        model.latitude = self.currentUserLocation.coordinate.latitude + dLatitude;
-        model.longitude = self.currentUserLocation.coordinate.longitude + dLongitude;
-        [array addObject:model];
-    }
+    __weak typeof(self) weakSelf = self;
+    [AFHttpTool getNearUserWithSuccess:^(id response) {
+        if(!response)
+        {
+            return;
+        }
+        for (int i=0; i<[response[@"result"] count]; i++) {
+            UserInfoForMap *model = [UserInfoForMap new];
+            [model setValuesForKeysWithDictionary:response[@"result"][i]];
+            model.imageUrl = @"userIcon";
+            [array addObject:model];
+        }
+        weakSelf.otherUserNearByArray = array;
+        // 更新其他用户的地图标注
+        [weakSelf updateAnnotationOfOtherUser];
+        NSLog(@"%@", response);
+    } failure:^(NSError *err) {
+         NSLog(@"%@", err);
+    }];
+//    
+//    for (int i = 0; i < 10; i++) {
+//        int dLa = (arc4random() % 50 - 25);
+//        int dLo = (arc4random() % 50 - 25);
+//        double dLatitude = dLa / (double)5000.0;
+//        double dLongitude = dLo / (double)5000.0;
+//        UserInfoForMap *model = [UserInfoForMap new];
+//        model.userID = [NSString stringWithFormat:@"用户%2d", i];
+//        model.imageUrl = @"userIcon";
+//        model.latitude = self.currentUserLocation.coordinate.latitude + dLatitude;
+//        model.longitude = self.currentUserLocation.coordinate.longitude + dLongitude;
+//        [array addObject:model];
+//    }
     //
-    self.otherUserNearByArray = array;
-    // 更新其他用户的地图标注
-    [self updateAnnotationOfOtherUser];
+    
     
     if (completionHandle) {
         completionHandle();

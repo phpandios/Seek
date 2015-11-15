@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign)NSInteger category_id;//分类id
 
-@property (nonatomic, retain)NSDate *statr_time;
+@property (nonatomic, retain)NSDate *start_time;
 
 @property (nonatomic, retain)NSDate *end_time;
 

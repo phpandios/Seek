@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-@interface UserInfoForMap : NSObject
+@interface UserInfoForMap : NSObject<NSCoding>
 
 @property (nonatomic, copy) NSString *userID;
 

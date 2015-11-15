@@ -10,4 +10,6 @@
 
 @interface IssueViewController : UIViewController
 @property (nonatomic, copy)NSString *tokePhoto;
+
+@property (nonatomic, copy) void(^currentIssue)(id obj);
 @end

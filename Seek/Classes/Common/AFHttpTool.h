@@ -94,6 +94,13 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                       success:(void (^)(id response))success
                       failure:(void (^)(NSError * err))failure;
 
+#pragma mark - 获取其它动态
++ (void)getOtherDynamicWithPage:(NSInteger)page
+                        limit:(NSInteger)limit
+                        user_id:(NSInteger)user_id
+                      success:(void (^)(id response))success
+                      failure:(void (^)(NSError * err))failure;
+
 #pragma mark -发布消息
 + (void)publishMessageCate:(NSInteger)category_id
                      title:(NSString *)title
@@ -119,6 +126,25 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 + (void)getCateGoryWithstate:(NSInteger)state
                      success:(void (^)(id response))success
                      failure:(void (^)(NSError* err))failure;
+
+#pragma mark -获取评论
++ (void)getReplyWithSuccess:(void (^)(id response))success
+                    failure:(void (^)(NSError* err))failure;
+#pragma mark - 评论动态
++ (void)commentsDynamicWithDynamicId:(NSInteger)DynamicId
+                             content:(NSString *)content
+                            toUserId:(NSInteger)toUserId
+                             success:(void (^)(id response))success
+                             failure:(void (^)(NSError* err))failure;
+#pragma mark -回复评论
++ (void)replyCommentWithReplyid:(NSInteger)Replyid
+                        content:(NSString *)content
+                       toUserId:(NSInteger)toUserId
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure;
+#pragma mark -获取周边用户
++ (void)getNearUserWithSuccess:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure;
 //get token
 //+(void) getTokenSuccess:(void (^)(id response))success
 //                failure:(void (^)(NSError* err))failure;

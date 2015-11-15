@@ -67,6 +67,10 @@
 		18CD77DC1BEE2AAF00C72A53 /* transparencyPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 18CD77D91BEE2AAF00C72A53 /* transparencyPattern.png */; };
 		18CD77E01BEE2ED100C72A53 /* PhotoCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD77DE1BEE2ED100C72A53 /* PhotoCutViewController.m */; };
 		18CD77E11BEE2ED100C72A53 /* PhotoCutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CD77DF1BEE2ED100C72A53 /* PhotoCutViewController.xib */; };
+		18D6828E1BF716C6006BFC00 /* DetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6828D1BF716C5006BFC00 /* DetailHeaderView.m */; settings = {ASSET_TAGS = (); }; };
+		18D682901BF716DB006BFC00 /* DetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D6828F1BF716DB006BFC00 /* DetailHeaderView.xib */; settings = {ASSET_TAGS = (); }; };
+		18D682991BF832EF006BFC00 /* OtherDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D682971BF832EF006BFC00 /* OtherDynamicViewController.m */; settings = {ASSET_TAGS = (); }; };
+		18D6829A1BF832EF006BFC00 /* OtherDynamicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D682981BF832EF006BFC00 /* OtherDynamicViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		18E79E5B1BE128FA0036AE02 /* PermissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E79E591BE128FA0036AE02 /* PermissionsViewController.m */; };
 		18E79E5C1BE128FA0036AE02 /* PermissionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E79E5A1BE128FA0036AE02 /* PermissionsViewController.xib */; };
 		6003F56F1BD6120D000FB713 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F56E1BD6120D000FB713 /* Tool.m */; };
@@ -444,6 +448,12 @@
 		18CD77DD1BEE2ED100C72A53 /* PhotoCutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCutViewController.h; sourceTree = "<group>"; };
 		18CD77DE1BEE2ED100C72A53 /* PhotoCutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCutViewController.m; sourceTree = "<group>"; };
 		18CD77DF1BEE2ED100C72A53 /* PhotoCutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCutViewController.xib; sourceTree = "<group>"; };
+		18D6828C1BF716C5006BFC00 /* DetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailHeaderView.h; sourceTree = "<group>"; };
+		18D6828D1BF716C5006BFC00 /* DetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailHeaderView.m; sourceTree = "<group>"; };
+		18D6828F1BF716DB006BFC00 /* DetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailHeaderView.xib; sourceTree = "<group>"; };
+		18D682961BF832EF006BFC00 /* OtherDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherDynamicViewController.h; sourceTree = "<group>"; };
+		18D682971BF832EF006BFC00 /* OtherDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherDynamicViewController.m; sourceTree = "<group>"; };
+		18D682981BF832EF006BFC00 /* OtherDynamicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherDynamicViewController.xib; sourceTree = "<group>"; };
 		18E79E581BE128FA0036AE02 /* PermissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionsViewController.h; sourceTree = "<group>"; };
 		18E79E591BE128FA0036AE02 /* PermissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionsViewController.m; sourceTree = "<group>"; };
 		18E79E5A1BE128FA0036AE02 /* PermissionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionsViewController.xib; sourceTree = "<group>"; };
@@ -1318,6 +1328,9 @@
 				60F059321BF637AE00C6AC90 /* SearchDynamicViewController.h */,
 				60F059331BF637AE00C6AC90 /* SearchDynamicViewController.m */,
 				60F059341BF637AE00C6AC90 /* SearchDynamicViewController.xib */,
+				18D682961BF832EF006BFC00 /* OtherDynamicViewController.h */,
+				18D682971BF832EF006BFC00 /* OtherDynamicViewController.m */,
+				18D682981BF832EF006BFC00 /* OtherDynamicViewController.xib */,
 			);
 			path = Dynamic;
 			sourceTree = "<group>";
@@ -1505,6 +1518,9 @@
 				189950B31BC6CB5100E12BDC /* towPhotoCell.h */,
 				189950B41BC6CB5100E12BDC /* towPhotoCell.m */,
 				189950B51BC6CB5100E12BDC /* towPhotoCell.xib */,
+				18D6828C1BF716C5006BFC00 /* DetailHeaderView.h */,
+				18D6828D1BF716C5006BFC00 /* DetailHeaderView.m */,
+				18D6828F1BF716DB006BFC00 /* DetailHeaderView.xib */,
 			);
 			path = Dynamic;
 			sourceTree = "<group>";
@@ -2311,6 +2327,7 @@
 				60DA7D251BCE075000151717 /* resendButtonDisable@2x.png in Resources */,
 				60C4BDA01BCAA85E00A50D85 /* UMSCommentInputControlleriPad.xib in Resources */,
 				18CD77DC1BEE2AAF00C72A53 /* transparencyPattern.png in Resources */,
+				18D682901BF716DB006BFC00 /* DetailHeaderView.xib in Resources */,
 				60DA7CFE1BCDEDBF00151717 /* inputBgBlue@3x.png in Resources */,
 				60C4BDBB1BCAA9C500A50D85 /* README in Resources */,
 				607AC7911BCF7C87002F8600 /* MAPPOISearchViewController.xib in Resources */,
@@ -2322,6 +2339,7 @@
 				607EE35A1BDDB3DE0008BF7E /* AddFriendViewController.xib in Resources */,
 				60DA7D231BCE075000151717 /* resendButtonBg@2x.png in Resources */,
 				60F059361BF637AE00C6AC90 /* SearchDynamicViewController.xib in Resources */,
+				18D6829A1BF832EF006BFC00 /* OtherDynamicViewController.xib in Resources */,
 				609D481B1BCE4A8600F79A65 /* CommentForDynamicTableViewCell.xib in Resources */,
 				181A87CC1BF014B2001A58BF /* CateViewController.xib in Resources */,
 				18E79E5C1BE128FA0036AE02 /* PermissionsViewController.xib in Resources */,
@@ -2389,6 +2407,7 @@
 				60D3510D1BC95AE500F2C4D7 /* CALayer+BorderColorFromUIColor.m in Sources */,
 				60117BA11BC7EE86001D4EC0 /* ALAlertBanner.m in Sources */,
 				60C4BD7A1BCAA7BB00A50D85 /* UIButton+WebCache.m in Sources */,
+				18D682991BF832EF006BFC00 /* OtherDynamicViewController.m in Sources */,
 				1882DA381BE6390B009DE69B /* NoPhotoCell.m in Sources */,
 				607AC7901BCF7C87002F8600 /* MAPPOISearchViewController.m in Sources */,
 				607EE3A91BDDDAB70008BF7E /* RCDSelectPersonTableViewCell.m in Sources */,
@@ -2466,6 +2485,7 @@
 				607AC76A1BCF4B66002F8600 /* SZTextView.m in Sources */,
 				60E3C2851BD8D25500D43072 /* UIImageView+AFNetworking.m in Sources */,
 				60E3C2D61BD8D47D00D43072 /* DBHelper.m in Sources */,
+				18D6828E1BF716C6006BFC00 /* DetailHeaderView.m in Sources */,
 				6003F56F1BD6120D000FB713 /* Tool.m in Sources */,
 				60C30FD31BD5374100EE62FC /* UIImage+KVNEmpty.m in Sources */,
 				607EE3671BDDC4190008BF7E /* FriendInvitationTableViewCell.m in Sources */,

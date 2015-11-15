@@ -278,6 +278,85 @@
                           success:success
                           failure:failure];
 }
+#pragma mark -获取评论
++ (void)getReplyWithSuccess:(void (^)(id response))success
+                    failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{
+                             @"state" : @(1)
+                             };
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"get_reply"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+#pragma mark - 获取其它动态
++ (void)getOtherDynamicWithPage:(NSInteger)page
+                          limit:(NSInteger)limit
+                        user_id:(NSInteger)user_id
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError * err))failure
+{
+    NSDictionary *params = @{
+                             @"page" : @(page),
+                             @"limit" : @(limit),
+                             @"user_id" : @(user_id)
+                             };
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"get_other_dynamic"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+#pragma mark - 评论动态
++ (void)commentsDynamicWithDynamicId:(NSInteger)DynamicId
+                             content:(NSString *)content
+                            toUserId:(NSInteger)toUserId
+                             success:(void (^)(id response))success
+                             failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{
+                             @"dynamic_id" : @(DynamicId),
+                             @"content" : content,
+                             @"toUserId" :@(toUserId),
+                             @"respondType" : @(1)
+                             };
+    [AFHttpTool requestWihtMethod:RequestMethodTypePost
+                              url:@"reply_dynamic"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+#pragma mark -回复评论
++ (void)replyCommentWithReplyid:(NSInteger)Replyid
+                        content:(NSString *)content
+                       toUserId:(NSInteger)toUserId
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure
+{
+    NSDictionary *params = @{
+                             @"reply_id" : @(Replyid),
+                             @"content" : content,
+                             @"toUserId" : @(toUserId)
+                             };
+    [AFHttpTool requestWihtMethod:RequestMethodTypePost
+                              url:@"reply_child_dynamic"
+                           params:params
+                          success:success
+                          failure:failure];
+    
+}
+#pragma mark -获取周边用户
++ (void)getNearUserWithSuccess:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure
+{
+    [AFHttpTool requestWihtMethod:RequestMethodTypePost
+                              url:@"get_near_user"
+                           params:nil
+                          success:success
+                          failure:failure];
+}
 //get friends
 +(void) getFriendsSuccess:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure
