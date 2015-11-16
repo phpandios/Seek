@@ -26,8 +26,12 @@
     if (_type == CheckPhoneTypeForRegister) {
         self.titleLabel.text = @"手机注册";
         [self setupLabel];
-    } else {
+    } else if (_type == CheckPhoneTypeForFindPwd){
         self.titleLabel.text = @"找回密码";
+    } else if (_type == CheckPhoneTypeForBindingTelPhone) {
+        self.titleLabel.text = @"绑定手机";
+    } else {
+        self.titleLabel.text = @"修改密码";
     }
     // Do any additional setup after loading the view from its nib.
 }
