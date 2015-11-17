@@ -61,18 +61,18 @@
 		189950DA1BC6D3EC00E12BDC /* mine.png in Resources */ = {isa = PBXBuildFile; fileRef = 189950D51BC6D3EC00E12BDC /* mine.png */; };
 		189DCD641BE27AFE00E408A0 /* correct.png in Resources */ = {isa = PBXBuildFile; fileRef = 189DCD631BE27AFE00E408A0 /* correct.png */; };
 		18A7B8C51BF2430400A8F716 /* Dynamic_category.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7B8C41BF2430400A8F716 /* Dynamic_category.m */; };
-		18AAE0361BFA2DE800A3CC0C /* NoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAE0351BFA2DE800A3CC0C /* NoMessage.m */; settings = {ASSET_TAGS = (); }; };
-		18AAE0381BFA2E0000A3CC0C /* NoMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AAE0371BFA2E0000A3CC0C /* NoMessage.xib */; settings = {ASSET_TAGS = (); }; };
+		18AAE0361BFA2DE800A3CC0C /* NoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAE0351BFA2DE800A3CC0C /* NoMessage.m */; };
+		18AAE0381BFA2E0000A3CC0C /* NoMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AAE0371BFA2E0000A3CC0C /* NoMessage.xib */; };
 		18AF577B1BE50C9600562AB1 /* NSString+Feifa_str.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AF577A1BE50C9600562AB1 /* NSString+Feifa_str.m */; };
 		18CD77DA1BEE2AAF00C72A53 /* AGSimpleImageEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD77D71BEE2AAF00C72A53 /* AGSimpleImageEditorView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		18CD77DB1BEE2AAF00C72A53 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 18CD77D81BEE2AAF00C72A53 /* LICENSE */; };
 		18CD77DC1BEE2AAF00C72A53 /* transparencyPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 18CD77D91BEE2AAF00C72A53 /* transparencyPattern.png */; };
 		18CD77E01BEE2ED100C72A53 /* PhotoCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD77DE1BEE2ED100C72A53 /* PhotoCutViewController.m */; };
 		18CD77E11BEE2ED100C72A53 /* PhotoCutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CD77DF1BEE2ED100C72A53 /* PhotoCutViewController.xib */; };
-		18D6828E1BF716C6006BFC00 /* DetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6828D1BF716C5006BFC00 /* DetailHeaderView.m */; settings = {ASSET_TAGS = (); }; };
-		18D682901BF716DB006BFC00 /* DetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D6828F1BF716DB006BFC00 /* DetailHeaderView.xib */; settings = {ASSET_TAGS = (); }; };
-		18D682991BF832EF006BFC00 /* OtherDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D682971BF832EF006BFC00 /* OtherDynamicViewController.m */; settings = {ASSET_TAGS = (); }; };
-		18D6829A1BF832EF006BFC00 /* OtherDynamicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D682981BF832EF006BFC00 /* OtherDynamicViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		18D6828E1BF716C6006BFC00 /* DetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6828D1BF716C5006BFC00 /* DetailHeaderView.m */; };
+		18D682901BF716DB006BFC00 /* DetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D6828F1BF716DB006BFC00 /* DetailHeaderView.xib */; };
+		18D682991BF832EF006BFC00 /* OtherDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D682971BF832EF006BFC00 /* OtherDynamicViewController.m */; };
+		18D6829A1BF832EF006BFC00 /* OtherDynamicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D682981BF832EF006BFC00 /* OtherDynamicViewController.xib */; };
 		18E79E5B1BE128FA0036AE02 /* PermissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E79E591BE128FA0036AE02 /* PermissionsViewController.m */; };
 		18E79E5C1BE128FA0036AE02 /* PermissionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E79E5A1BE128FA0036AE02 /* PermissionsViewController.xib */; };
 		6003F56F1BD6120D000FB713 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F56E1BD6120D000FB713 /* Tool.m */; };
@@ -202,6 +202,8 @@
 		60B487DD1BD0A4C60019196C /* AutoHeightTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B487DC1BD0A4C60019196C /* AutoHeightTextView.m */; };
 		60B917AE1BCF858800CFB454 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B917AD1BCF858800CFB454 /* AMapSearchKit.framework */; };
 		60B917B11BCF8F8900CFB454 /* SearchInputTipTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B917B01BCF8F8900CFB454 /* SearchInputTipTableView.m */; };
+		60C27BF21BFAD30B00004F94 /* SuggestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C27BF01BFAD30B00004F94 /* SuggestionsViewController.m */; };
+		60C27BF31BFAD30B00004F94 /* SuggestionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C27BF11BFAD30B00004F94 /* SuggestionsViewController.xib */; };
 		60C30FCF1BD5374100EE62FC /* KVNProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C30FC51BD5374100EE62FC /* KVNProgress.m */; };
 		60C30FD01BD5374100EE62FC /* KVNProgressConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C30FC71BD5374100EE62FC /* KVNProgressConfiguration.m */; };
 		60C30FD11BD5374100EE62FC /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C30FC81BD5374100EE62FC /* KVNProgressView.xib */; };
@@ -657,6 +659,9 @@
 		60B917AD1BCF858800CFB454 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		60B917AF1BCF8F8900CFB454 /* SearchInputTipTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInputTipTableView.h; sourceTree = "<group>"; };
 		60B917B01BCF8F8900CFB454 /* SearchInputTipTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchInputTipTableView.m; sourceTree = "<group>"; };
+		60C27BEF1BFAD30B00004F94 /* SuggestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionsViewController.h; sourceTree = "<group>"; };
+		60C27BF01BFAD30B00004F94 /* SuggestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionsViewController.m; sourceTree = "<group>"; };
+		60C27BF11BFAD30B00004F94 /* SuggestionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestionsViewController.xib; sourceTree = "<group>"; };
 		60C30FC41BD5374100EE62FC /* KVNProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgress.h; sourceTree = "<group>"; };
 		60C30FC51BD5374100EE62FC /* KVNProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVNProgress.m; sourceTree = "<group>"; };
 		60C30FC61BD5374100EE62FC /* KVNProgressConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgressConfiguration.h; sourceTree = "<group>"; };
@@ -1377,6 +1382,9 @@
 				18CD77DF1BEE2ED100C72A53 /* PhotoCutViewController.xib */,
 				608F78A41BD692030051C462 /* FriendListViewController.h */,
 				608F78A51BD692030051C462 /* FriendListViewController.m */,
+				60C27BEF1BFAD30B00004F94 /* SuggestionsViewController.h */,
+				60C27BF01BFAD30B00004F94 /* SuggestionsViewController.m */,
+				60C27BF11BFAD30B00004F94 /* SuggestionsViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -2311,6 +2319,7 @@
 				606364611BC0FD6000A36965 /* LaunchScreen.storyboard in Resources */,
 				60D351051BC956EB00F2C4D7 /* weixinIcon.png in Resources */,
 				60117BA91BC7EE86001D4EC0 /* bannerSuccess.png in Resources */,
+				60C27BF31BFAD30B00004F94 /* SuggestionsViewController.xib in Resources */,
 				189950BD1BC6CB5100E12BDC /* ThreePhotoCell.xib in Resources */,
 				188D18E51BE8F85500BAF2EE /* MJRefresh.bundle in Resources */,
 				6063645E1BC0FD6000A36965 /* Assets.xcassets in Resources */,
@@ -2521,6 +2530,7 @@
 				60C4BD7D1BCAA7BB00A50D85 /* UIImage+WebP.m in Sources */,
 				607EE38D1BDDD81A0008BF7E /* RCDConversationSettingBaseViewController.m in Sources */,
 				60C4BDB11BCAA8DF00A50D85 /* UserForMapCollectionViewCell.m in Sources */,
+				60C27BF21BFAD30B00004F94 /* SuggestionsViewController.m in Sources */,
 				60C4BD741BCAA7BB00A50D85 /* SDWebImageCompat.m in Sources */,
 				60F6C3D11BDA1A9500C1FE1A /* RCAnnotation.m in Sources */,
 				60117B911BC7ED77001D4EC0 /* DataBaseHelper.m in Sources */,

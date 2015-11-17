@@ -33,6 +33,12 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError *err))failure;
 
+#pragma mark - 意见反馈
++ (void)SuggestionsWithContent:(NSString *)content
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError *err))failure;
+
+
 #pragma mark - 修改性别
 + (void)modifyGender:(NSInteger)gender
              success:(void (^)(id response))success

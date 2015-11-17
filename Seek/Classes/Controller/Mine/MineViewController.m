@@ -18,6 +18,7 @@
 #import "AddressBookViewController.h"
 #import "AFPickerView.h"
 #import "WFFDropdownList.h"
+#import "SuggestionsViewController.h"
 @interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,PhotoCueDelegate, WFFDropdownListDelegate>
 {
     MBProgressHUD *HUD;
@@ -258,6 +259,11 @@
     if (indexPath.section == 3 && indexPath.row == 0) { // 修改密码
         CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
         vc.type = CheckPhoneTypeForModifyPwd;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (indexPath.section == 3 && indexPath.row == 1) { // 意见反馈
+        SuggestionsViewController *vc = [[SuggestionsViewController alloc] initWithNibName:@"SuggestionsViewController" bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

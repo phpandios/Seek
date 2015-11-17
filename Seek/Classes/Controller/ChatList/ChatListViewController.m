@@ -77,14 +77,6 @@
     self.conversationListTableView.tableFooterView = [UIView new];
     //    self.conversationListTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 12)];
     
-    
-}
-
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     [self setNavigationItemTitleView];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showMenu:)];
@@ -93,6 +85,15 @@
                                             selector:@selector(receiveNeedRefreshNotification:)
                                                 name:@"kRCNeedReloadDiscussionListNotification"
                                               object:nil];
+    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
     
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -105,6 +106,11 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.showConnectingStatusOnNavigatorBar = NO;
+    
+}
+
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"kRCNeedReloadDiscussionListNotification"
                                                   object:nil];
@@ -115,7 +121,7 @@
  *
  *  @param sender sender description
  */
-- (void)showMenu:(UIButton *)sender {
+- (void)showMenu:(UIBarButtonItem *)sender {
     NSArray *menuItems =
     @[
       
@@ -145,11 +151,11 @@
 //                    action:@selector(pushAddPublicService:)],
       ];
     
-    CGRect targetFrame = self.navigationItem.rightBarButtonItem.customView.frame;
+    CGRect targetFrame = [sender.customView.superview convertRect:sender.customView.frame toView:self.view];
     targetFrame.origin.y = targetFrame.origin.y + 15;
-    NSLog(@"%@", self.navigationController.navigationBar.superview);
-    [KxMenu showMenuInView:self.navigationController.navigationBar.superview
-                  fromRect:targetFrame
+    NSLog(@"%@", NSStringFromCGRect(sender.customView.frame));
+    [KxMenu showMenuInView:self.view
+                  fromRect:CGRectMake(kScreenWidth - 100, -20, 100, 0)
                  menuItems:menuItems];
 }
 

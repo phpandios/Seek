@@ -76,6 +76,20 @@
             break;
     }
 }
+
+
+#pragma mark - 意见反馈
++ (void)SuggestionsWithContent:(NSString *)content
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError *err))failure
+{
+    NSDictionary *params = @{@"content" : content};
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"pulish_option"
+                           params:params
+                          success:success
+                          failure:failure];
+}
 #pragma mark - 修改性别
 + (void)modifyGender:(NSInteger)gender
              success:(void (^)(id response))success

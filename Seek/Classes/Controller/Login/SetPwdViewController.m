@@ -188,10 +188,10 @@
                     NSInteger code = [response[@"code"] integerValue];
                     if (code == 200) {
                         [DEFAULTS setObject:pwd forKey:@"userPwd"];
-                        [KVNProgress dismiss];
-                        [self showAlertControllerWithTitle:@"修改成功" hasTextField:NO okHandle:^(NSString *returnText) {
+                        [KVNProgress showSuccessWithStatus:@"修改成功" completion:^{
                             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-                        } cancelHandle:nil];
+                        }];
+                        
                     } else {
                         if (response[@"message"] && [response[@"message"] length] > 0) {
                             NSString *message = response[@"message"];
