@@ -28,6 +28,7 @@
 #import "RCDLoginInfo.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
+#import "NoMessage.h"
 
 #import "SearchDynamicViewController.h"
 @interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,UMSocialUIDelegate>
@@ -39,6 +40,7 @@
 @property (nonatomic, retain)NSMutableArray *dynamicArr;
 @property (nonatomic, retain)Dynamic *dynamicObj;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
+@property (nonatomic, retain) UIView *noMessage;
 @end
 static NSString *onePhotoIdentifier = @"oneCell";
 static NSString *twoPhotoIdentifier = @"twoCell";
@@ -52,6 +54,16 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     [super viewDidLoad];
     self.title = @"动态";
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"OnePhotoCell" bundle:nil] forCellReuseIdentifier:onePhotoIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"towPhotoCell" bundle:nil] forCellReuseIdentifier:twoPhotoIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ThreePhotoCell" bundle:nil] forCellReuseIdentifier:threePhotoIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"FourPhotoViewCell" bundle:nil] forCellReuseIdentifier:fourPhotolIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"NoPhotoCell" bundle:nil] forCellReuseIdentifier:noPhotolIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"PulishCell" bundle:nil] forCellReuseIdentifier:pulishIdentifier];
+    
+    
+    self.noMessage= [[NSBundle mainBundle] loadNibNamed:@"NoMessage" owner:nil options:nil].firstObject;
+    self.tableView.tableFooterView = _noMessage;
     
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
@@ -99,15 +111,19 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             [weakSelf.dynamicArr removeAllObjects];
             // 加载数据
             [weakSelf loadDataPage:0 limit:10 finish:^(id obj) {
-                    NSLog(@"%@", obj);
-                
+                NSLog(@"%@", obj);
+                if (obj != nil) {
                     weakSelf.dynamicArr = obj;
-                    //重新加载
-                    [weakSelf.tableView reloadData];
                     //取消
                     [HUD hide:YES];
                     // 结束刷新
                     [weakSelf.tableView.header endRefreshing];
+                }
+                //重新加载
+                [weakSelf.tableView reloadData];
+                // 结束刷新
+                [weakSelf.tableView.header endRefreshing];
+                
             }];
             
             
@@ -124,9 +140,11 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             page++;
             [weakSelf loadDataPage:offset limit:limit finish:^(id obj) {
                 [weakSelf.tableView reloadData];
+                // 结束刷新
+                [weakSelf.tableView.footer endRefreshing];
+
             }];
-            // 结束刷新
-            [weakSelf.tableView.footer endRefreshing];
+            
             
         });
     }];
@@ -161,23 +179,28 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     }
     [AFHttpTool getDynamicWithPage:page limit:limit permissions:permission promote_state:promote_state state:state success:^(id response) {
         if ([response[@"result"] count] == 0) {
+            weakSelf.tableView.tableFooterView = _noMessage;
+            finish(nil);
             return;
         }
-        
+        //移除内容
+        self.tableView.tableFooterView = nil;
         for (int i=0; i < [response[@"result"] count]; i++) {
             Dynamic *dynamic = [Dynamic new];
             [dynamic setValuesForKeysWithDictionary:response[@"result"][i]];
             [weakSelf.dynamicArr addObject:dynamic];
         }
+        NSLog(@"%@", weakSelf.dynamicArr);
         finish(weakSelf.dynamicArr);
         //判断本地缓存存在进行移除
         if ([[NSUserDefaults standardUserDefaults] objectForKey:dynamicList]) {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:dynamicList];
         }
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dynamicArr] forKey:dynamicList];
-        [self.tableView reloadData];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:weakSelf.dynamicArr] forKey:dynamicList];
+        [weakSelf.tableView reloadData];
     } failure:^(NSError *err) {
-        
+        weakSelf.tableView.tableFooterView = _noMessage;
+        NSLog(@"%@", err);
     }];
 }
 #pragma mark -请求推荐数据
@@ -197,7 +220,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:dynamicRecommend];
             }
             [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:dynamic] forKey:dynamicRecommend];
-            [self.tableView reloadData];
+            [weakSelf.tableView reloadData];
         } else {
             weakSelf.dynamicObj = nil;
         }
@@ -291,6 +314,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         }else{
             num1 = indexPath.section - 1;
         }
+        NSLog(@"%@", self.dynamicArr);
         Dynamic *dynamic = self.dynamicArr[num1];
         CGFloat height = [NSString calcWithTextHeightStr:dynamic.content width:self.tableView.bounds.size.width font:[UIFont systemFontOfSize:18.0]];
         
@@ -362,10 +386,6 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     FourPhotoViewCell *fourCell = [tableView dequeueReusableCellWithIdentifier:fourPhotolIdentifier];
     if(indexPath.section == 0)
     {
-        if(!pulishCell)
-        {
-            pulishCell = [[NSBundle mainBundle] loadNibNamed:@"PulishCell" owner:nil options:nil].firstObject;
-        }
         [pulishCell.edit_btn addTarget:self action:@selector(issueEditBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [pulishCell.share_btn addTarget:self action:@selector(issueEditBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [pulishCell.take_photo addTarget:self action:@selector(showImagePickerController:) forControlEvents:UIControlEventTouchUpInside];
@@ -386,10 +406,6 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         }
         switch (case_num) {
             case 1:
-                if(!oneCell)
-                {
-                    oneCell = [[NSBundle mainBundle] loadNibNamed:@"OnePhotoCell" owner:nil options:nil].firstObject;
-                }
                 oneCell.dynamicObj = _dynamicObj;
                 oneCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(_dynamicObj.userId), _dynamicObj.nick_name, _dynamicObj.head_portrait, nil];
                 [oneCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -400,10 +416,6 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return oneCell;
                 break;
             case 2:
-                if(!twoCell)
-                {
-                    twoCell = [[NSBundle mainBundle] loadNibNamed:@"towPhotoCell" owner:nil options:nil].firstObject;
-                }
                 twoCell.dynamicObj = _dynamicObj;
                 twoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(_dynamicObj.userId), _dynamicObj.nick_name, _dynamicObj.head_portrait, nil];
                 [twoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -414,10 +426,6 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return twoCell;
                 break;
             case 3:
-                if(!threeCell)
-                {
-                    threeCell = [[NSBundle mainBundle] loadNibNamed:@"ThreePhotoCell" owner:nil options:nil].firstObject;
-                }
                 threeCell.dynamicObj = _dynamicObj;
                 [threeCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
                 [threeCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -427,10 +435,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return threeCell;
                 break;
             case 4:
-                if(!fourCell)
-                {
-                    fourCell = [[NSBundle mainBundle] loadNibNamed:@"FourPhotoViewCell" owner:nil options:nil].firstObject;
-                }
+                
                 fourCell.dynamicObj = _dynamicObj;
                 [fourCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
                 [fourCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -440,10 +445,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return fourCell;
                 break;
             default:
-                if(!noPhotoCell)
-                {
-                    noPhotoCell = [[NSBundle mainBundle] loadNibNamed:@"NoPhotoCell" owner:nil options:nil].firstObject;
-                }
+            
                 noPhotoCell.dynamicObj = _dynamicObj;
                 [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
                 [noPhotoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -473,10 +475,6 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         }
         switch (case_num) {
             case 1:
-                if(!oneCell)
-                {
-                    oneCell = [[NSBundle mainBundle] loadNibNamed:@"OnePhotoCell" owner:nil options:nil].firstObject;
-                }
                 oneCell.dynamicObj = dynamic;
                 oneCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [oneCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -487,10 +485,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return oneCell;
                 break;
             case 2:
-                if(!twoCell)
-                {
-                    twoCell = [[NSBundle mainBundle] loadNibNamed:@"towPhotoCell" owner:nil options:nil].firstObject;
-                }
+                
                 twoCell.dynamicObj = dynamic;
                 twoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [twoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -501,10 +496,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return twoCell;
                 break;
             case 3:
-                if(!threeCell)
-                {
-                    threeCell = [[NSBundle mainBundle] loadNibNamed:@"ThreePhotoCell" owner:nil options:nil].firstObject;
-                }
+            
                 threeCell.dynamicObj = dynamic;
                 threeCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [threeCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -515,10 +507,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return threeCell;
                 break;
             case 4:
-                if(!fourCell)
-                {
-                    fourCell = [[NSBundle mainBundle] loadNibNamed:@"FourPhotoViewCell" owner:nil options:nil].firstObject;
-                }
+                
                 fourCell.dynamicObj = dynamic;
                 fourCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [fourCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -529,10 +518,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return fourCell;
                 break;
             default:
-                if(!noPhotoCell)
-                {
-                    noPhotoCell = [[NSBundle mainBundle] loadNibNamed:@"NoPhotoCell" owner:nil options:nil].firstObject;
-                }
+            
                 noPhotoCell.dynamicObj = dynamic;
                 noPhotoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];

@@ -61,6 +61,8 @@
 		189950DA1BC6D3EC00E12BDC /* mine.png in Resources */ = {isa = PBXBuildFile; fileRef = 189950D51BC6D3EC00E12BDC /* mine.png */; };
 		189DCD641BE27AFE00E408A0 /* correct.png in Resources */ = {isa = PBXBuildFile; fileRef = 189DCD631BE27AFE00E408A0 /* correct.png */; };
 		18A7B8C51BF2430400A8F716 /* Dynamic_category.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7B8C41BF2430400A8F716 /* Dynamic_category.m */; };
+		18AAE0361BFA2DE800A3CC0C /* NoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAE0351BFA2DE800A3CC0C /* NoMessage.m */; settings = {ASSET_TAGS = (); }; };
+		18AAE0381BFA2E0000A3CC0C /* NoMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AAE0371BFA2E0000A3CC0C /* NoMessage.xib */; settings = {ASSET_TAGS = (); }; };
 		18AF577B1BE50C9600562AB1 /* NSString+Feifa_str.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AF577A1BE50C9600562AB1 /* NSString+Feifa_str.m */; };
 		18CD77DA1BEE2AAF00C72A53 /* AGSimpleImageEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD77D71BEE2AAF00C72A53 /* AGSimpleImageEditorView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		18CD77DB1BEE2AAF00C72A53 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 18CD77D81BEE2AAF00C72A53 /* LICENSE */; };
@@ -439,6 +441,9 @@
 		189DCD631BE27AFE00E408A0 /* correct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = correct.png; sourceTree = "<group>"; };
 		18A7B8C31BF2430400A8F716 /* Dynamic_category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dynamic_category.h; sourceTree = "<group>"; };
 		18A7B8C41BF2430400A8F716 /* Dynamic_category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dynamic_category.m; sourceTree = "<group>"; };
+		18AAE0341BFA2DE800A3CC0C /* NoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoMessage.h; sourceTree = "<group>"; };
+		18AAE0351BFA2DE800A3CC0C /* NoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoMessage.m; sourceTree = "<group>"; };
+		18AAE0371BFA2E0000A3CC0C /* NoMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoMessage.xib; sourceTree = "<group>"; };
 		18AF57791BE50C9600562AB1 /* NSString+Feifa_str.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Feifa_str.h"; sourceTree = "<group>"; };
 		18AF577A1BE50C9600562AB1 /* NSString+Feifa_str.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Feifa_str.m"; sourceTree = "<group>"; };
 		18CD77D61BEE2AAF00C72A53 /* AGSimpleImageEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSimpleImageEditorView.h; sourceTree = "<group>"; };
@@ -1521,6 +1526,9 @@
 				18D6828C1BF716C5006BFC00 /* DetailHeaderView.h */,
 				18D6828D1BF716C5006BFC00 /* DetailHeaderView.m */,
 				18D6828F1BF716DB006BFC00 /* DetailHeaderView.xib */,
+				18AAE0341BFA2DE800A3CC0C /* NoMessage.h */,
+				18AAE0351BFA2DE800A3CC0C /* NoMessage.m */,
+				18AAE0371BFA2E0000A3CC0C /* NoMessage.xib */,
 			);
 			path = Dynamic;
 			sourceTree = "<group>";
@@ -2307,6 +2315,7 @@
 				188D18E51BE8F85500BAF2EE /* MJRefresh.bundle in Resources */,
 				6063645E1BC0FD6000A36965 /* Assets.xcassets in Resources */,
 				609CEABF1BC96CC000F99BD6 /* exitLogin.png in Resources */,
+				18AAE0381BFA2E0000A3CC0C /* NoMessage.xib in Resources */,
 				60C4BD9C1BCAA85E00A50D85 /* UMSocialLocalizable.strings in Resources */,
 				60117BA41BC7EE86001D4EC0 /* bannerAlert@2x.png in Resources */,
 				189DCD641BE27AFE00E408A0 /* correct.png in Resources */,
@@ -2482,6 +2491,7 @@
 				607EE38A1BDDD8050008BF7E /* RCDSettingBaseViewController.m in Sources */,
 				189950BE1BC6CB5100E12BDC /* towPhotoCell.m in Sources */,
 				189950BC1BC6CB5100E12BDC /* ThreePhotoCell.m in Sources */,
+				18AAE0361BFA2DE800A3CC0C /* NoMessage.m in Sources */,
 				607AC76A1BCF4B66002F8600 /* SZTextView.m in Sources */,
 				60E3C2851BD8D25500D43072 /* UIImageView+AFNetworking.m in Sources */,
 				60E3C2D61BD8D47D00D43072 /* DBHelper.m in Sources */,

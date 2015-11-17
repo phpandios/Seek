@@ -257,6 +257,7 @@
                              @"promote_state" : @(promote_state),
                              @"state" : @(state)
                              };
+    NSLog(@"%@", params);
     [AFHttpTool requestWihtMethod:RequestMethodTypeGet
                               url:@"get_dynamic"
                            params:params
