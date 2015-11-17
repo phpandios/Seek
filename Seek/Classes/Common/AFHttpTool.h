@@ -33,6 +33,11 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError *err))failure;
 
+#pragma mark - 修改性别
++ (void)modifyGender:(NSInteger)gender
+             success:(void (^)(id response))success
+             failure:(void (^)(NSError *err))failure;
+
 #pragma mark - 更新位置
 + (void)updateLocationWithLongitude:(CGFloat)longitude
                            latitude:(CGFloat)latitude

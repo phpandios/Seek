@@ -17,7 +17,8 @@
 #import "PhotoCutViewController.h"
 #import "AddressBookViewController.h"
 #import "AFPickerView.h"
-@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,PhotoCueDelegate>
+#import "WFFDropdownList.h"
+@interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,PhotoCueDelegate, WFFDropdownListDelegate>
 {
     MBProgressHUD *HUD;
 }
@@ -83,6 +84,23 @@
     [super viewDidAppear:animated];
     //
     [self loadUserDataCompletionHandle:nil];
+}
+
+#pragma mark - WFFDropdownListDelegate - 性别选择
+- (void)dropdownList:(WFFDropdownList *)dropdownList didSelectedIndex:(NSInteger)selectedIndex
+{
+    [KVNProgress show];
+    [AFHttpTool modifyGender:selectedIndex success:^(id response) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [KVNProgress dismiss];
+        });
+        [[RCDLoginInfo shareLoginInfo] setGender:selectedIndex];
+    } failure:^(NSError *err) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [KVNProgress showErrorWithStatus:@"网络故障"];
+            [dropdownList setSelectedIndex:[[RCDLoginInfo shareLoginInfo] gender]];
+        });
+    }];
 }
 
 #pragma mark - 网络相关
@@ -163,8 +181,14 @@
                     break;
                 case 2:
                     cell.textLabel.text = @"性别";
-                    NSString *gender = [[RCDLoginInfo shareLoginInfo] gender] == 0 ? @"请选择" : ([[RCDLoginInfo shareLoginInfo] gender] == 1 ? @"男" : @"女");
-                    cell.detailTextLabel.text = gender;
+                    if (!(WFFDropdownList *)[cell viewWithTag:indexPath.section * 10 + indexPath.row]) {
+                        WFFDropdownList *dropdownList = [[WFFDropdownList alloc] initWithFrame:CGRectMake(kScreenWidth - 60 - 40    , (60 - 30) / 2, 60, 30) dataSource:@[@"请选择", @"男", @"女"]];
+                        dropdownList.tag = indexPath.section * 10 + indexPath.row;
+                        dropdownList.textColor = [UIColor lightGrayColor];
+                        dropdownList.delegate = self;
+                        [cell addSubview:dropdownList];
+                    }
+                    ((WFFDropdownList *)[cell viewWithTag:indexPath.section * 10 + indexPath.row]).selectedIndex = [[RCDLoginInfo shareLoginInfo] gender];
                     break;
             }
         } else if (indexPath.section == 3){

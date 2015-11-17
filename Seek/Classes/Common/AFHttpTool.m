@@ -76,6 +76,19 @@
             break;
     }
 }
+#pragma mark - 修改性别
++ (void)modifyGender:(NSInteger)gender
+             success:(void (^)(id response))success
+             failure:(void (^)(NSError *err))failure
+{
+    NSDictionary *params = @{@"gender" : @(gender)};
+    [AFHttpTool requestWihtMethod:RequestMethodTypeGet
+                              url:@"update_gender"
+                           params:params
+                          success:success
+                          failure:failure];
+}
+
 #pragma mark - 更新位置
 + (void)updateLocationWithLongitude:(CGFloat)longitude
                            latitude:(CGFloat)latitude

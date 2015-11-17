@@ -101,6 +101,7 @@
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.layer.borderWidth = 1;
+    tableView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.dropdownTalbeView = tableView;
     
     [shadeView addSubview:_dropdownTalbeView];
