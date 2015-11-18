@@ -30,6 +30,7 @@
 #import "UMSocialWechatHandler.h"
 #import "NoMessage.h"
 
+#import "MAPPOISearchViewController.h"
 #import "SearchDynamicViewController.h"
 @interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,UMSocialUIDelegate>
 {
@@ -389,6 +390,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         [pulishCell.edit_btn addTarget:self action:@selector(issueEditBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [pulishCell.share_btn addTarget:self action:@selector(issueEditBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [pulishCell.take_photo addTarget:self action:@selector(showImagePickerController:) forControlEvents:UIControlEventTouchUpInside];
+        [pulishCell.sign_btn addTarget:self action:@selector(signBtnAtion:) forControlEvents:UIControlEventTouchUpInside];
         NSString *loginUserPortrait = [[RCDLoginInfo shareLoginInfo] head_portrait];
         [pulishCell.head_portrait sd_setImageWithURL:[NSURL URLWithString:loginUserPortrait] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
         pulishCell.contentMode = UIViewContentModeScaleAspectFit;
@@ -673,5 +675,35 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         [self presentViewController:vc animated:YES completion:nil];
     }];
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 自定义方法
+- (void)presentPOISearchViewControllerWithCompletionHandle:(void (^)(CGFloat la, CGFloat lo, NSString *address, NSString *name, BOOL hasChoose))completionHandle
+{
+    MAPPOISearchViewController *mapPOISearch = [[MAPPOISearchViewController alloc] initWithNibName:@"MAPPOISearchViewController" bundle:nil];
+    // locationWithLatitude:39.990459 longitude:116.481476
+    mapPOISearch.defaultLatitude = [[RCDLoginInfo shareLoginInfo] latitude];
+    mapPOISearch.defaultLongitude = [[RCDLoginInfo shareLoginInfo] longitude];
+    mapPOISearch.dismisBlock = completionHandle;
+    [self presentViewController:mapPOISearch animated:YES completion:nil];
+}
+
+#pragma mark-签到定位
+- (void)signBtnAtion:(UIButton *)sender
+{
+    __weak typeof(self) weakSelf = self;
+    [self presentPOISearchViewControllerWithCompletionHandle:^(CGFloat la, CGFloat lo, NSString *address, NSString *name, BOOL hasChoose) {
+        if (hasChoose) {
+            //将发布要调起，传进当前选中地址
+            IssueViewController *vc = [[IssueViewController alloc] initWithNibName:@"IssueViewController" bundle:nil];
+            vc.isNotHave = YES;
+            vc.selectedAddressDict = @{@"latitude" : @(la), @"longitude" : @(lo), @"address" : address, @"name" : name};
+            [weakSelf presentViewController:vc animated:YES completion:nil];
+    
+        } else {
+                            SHOWMESSAGE(@"未选中地址");
+            //                weakSelf.selectedAddressDict = nil;
+        }
+    }];
 }
 @end

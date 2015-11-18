@@ -12,4 +12,8 @@
 @property (nonatomic, copy)NSString *tokePhoto;
 
 @property (nonatomic, copy) void(^currentIssue)(id obj);
+
+@property (nonatomic, strong) NSDictionary *selectedAddressDict;// 键值对,latitude, longitude, address, name
+@property (nonatomic, assign) BOOL isNotHave;
+
 @end

@@ -28,7 +28,6 @@
 
 @property (nonatomic, strong) NSMutableArray *imagesArray;
 
-@property (nonatomic, strong) NSDictionary *selectedAddressDict;// 键值对,latitude, longitude, address, name
 @property (nonatomic, retain) NSMutableDictionary *currentPermission;
 @property (weak, nonatomic) IBOutlet UIButton *perssionName;
 @property (weak, nonatomic) IBOutlet UILabel *perssionDecrip;
@@ -71,6 +70,12 @@
     [super viewDidLayoutSubviews];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (self.isNotHave) {
+        self.addressTextField.text = self.selectedAddressDict[@"name"];
+    }
+}
 /*
 #pragma mark - Navigation
 
@@ -322,7 +327,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = info[UIImagePickerControllerEditedImage] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
+    //压缩尺寸
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     
     __weak typeof(self) weakSelf = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

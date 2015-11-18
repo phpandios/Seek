@@ -208,7 +208,10 @@
             }
             annotationView.userArray = sectionArray;
             annotationView.canShowCallout= NO;       //设置气泡可以弹出，默认为NO[自定义气泡的时候,需要设置为NO]//http://lbs.amap.com/api/ios-sdk/guide/mapkit/
-            
+//            UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+//            [imageV sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
+//            imageV.userInteractionEnabled = NO;
+//            [annotationView addSubview:imageV];
             annotationView.image = [UIImage imageNamed:model.imageUrl];
             //设置中心点偏移，使得标注底部中间点成为经纬度对应点
             annotationView.centerOffset = CGPointMake(0, -kUserIconSize);
@@ -234,7 +237,7 @@
             OtherDynamicViewController *otherDynamic = [OtherDynamicViewController new];
             otherDynamic.userID = [userView.userArray.firstObject userID];
             [self presentViewController:otherDynamic animated:YES completion:nil];
-            SHOWMESSAGE(@"选中用户ID:%@",[userView.userArray.firstObject userID]);
+//            SHOWMESSAGE(@"选中用户ID:%@",[userView.userArray.firstObject userID]);
         } else { // 弹出collectionView
             // 移动动画结束后,再根据选中的项进行操作
             self.selectedAnnotationView = view;
@@ -310,7 +313,10 @@ updatingLocation:(BOOL)updatingLocation
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UserInfoForMap *model = self.otherUsersShowOnCollectionView[indexPath.row];
-    SHOWMESSAGE(@"选中的用户ID%@", model.userID);
+    OtherDynamicViewController *otherDynamic = [OtherDynamicViewController new];
+    otherDynamic.userID = model.userID;
+    [self presentViewController:otherDynamic animated:YES completion:nil];
+//    SHOWMESSAGE(@"选中的用户ID%@", model.userID);
 }
 #pragma mark - 私有方法
 #pragma mark 计算两点距离

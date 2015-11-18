@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 @interface MAPPOISearchViewController : UIViewController
 
+
+
 @property (nonatomic, assign) CGFloat defaultLatitude;
 
 @property (nonatomic, assign) CGFloat defaultLongitude;
