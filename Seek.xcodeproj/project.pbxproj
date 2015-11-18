@@ -202,6 +202,7 @@
 		60B487DD1BD0A4C60019196C /* AutoHeightTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B487DC1BD0A4C60019196C /* AutoHeightTextView.m */; };
 		60B917AE1BCF858800CFB454 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B917AD1BCF858800CFB454 /* AMapSearchKit.framework */; };
 		60B917B11BCF8F8900CFB454 /* SearchInputTipTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B917B01BCF8F8900CFB454 /* SearchInputTipTableView.m */; };
+		60C1FD501BFC1AA7009451C7 /* MAAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1FD4F1BFC1AA7009451C7 /* MAAnnotationView+WebCache.m */; };
 		60C27BF21BFAD30B00004F94 /* SuggestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C27BF01BFAD30B00004F94 /* SuggestionsViewController.m */; };
 		60C27BF31BFAD30B00004F94 /* SuggestionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60C27BF11BFAD30B00004F94 /* SuggestionsViewController.xib */; };
 		60C30FCF1BD5374100EE62FC /* KVNProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C30FC51BD5374100EE62FC /* KVNProgress.m */; };
@@ -659,6 +660,8 @@
 		60B917AD1BCF858800CFB454 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		60B917AF1BCF8F8900CFB454 /* SearchInputTipTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchInputTipTableView.h; sourceTree = "<group>"; };
 		60B917B01BCF8F8900CFB454 /* SearchInputTipTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchInputTipTableView.m; sourceTree = "<group>"; };
+		60C1FD4E1BFC1AA7009451C7 /* MAAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MAAnnotationView+WebCache.h"; sourceTree = "<group>"; };
+		60C1FD4F1BFC1AA7009451C7 /* MAAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MAAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		60C27BEF1BFAD30B00004F94 /* SuggestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionsViewController.h; sourceTree = "<group>"; };
 		60C27BF01BFAD30B00004F94 /* SuggestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionsViewController.m; sourceTree = "<group>"; };
 		60C27BF11BFAD30B00004F94 /* SuggestionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestionsViewController.xib; sourceTree = "<group>"; };
@@ -1812,6 +1815,8 @@
 			children = (
 				60C4BD501BCAA7BB00A50D85 /* MKAnnotationView+WebCache.h */,
 				60C4BD511BCAA7BB00A50D85 /* MKAnnotationView+WebCache.m */,
+				60C1FD4E1BFC1AA7009451C7 /* MAAnnotationView+WebCache.h */,
+				60C1FD4F1BFC1AA7009451C7 /* MAAnnotationView+WebCache.m */,
 				60C4BD521BCAA7BB00A50D85 /* NSData+ImageContentType.h */,
 				60C4BD531BCAA7BB00A50D85 /* NSData+ImageContentType.m */,
 				60C4BD541BCAA7BB00A50D85 /* SDImageCache.h */,
@@ -2497,6 +2502,7 @@
 				60E3C2B81BD8D3CA00D43072 /* JSONModel.m in Sources */,
 				60E3C2881BD8D25500D43072 /* UIWebView+AFNetworking.m in Sources */,
 				60E3C2D91BD8D47D00D43072 /* FMDatabasePool.m in Sources */,
+				60C1FD501BFC1AA7009451C7 /* MAAnnotationView+WebCache.m in Sources */,
 				607EE38A1BDDD8050008BF7E /* RCDSettingBaseViewController.m in Sources */,
 				189950BE1BC6CB5100E12BDC /* towPhotoCell.m in Sources */,
 				189950BC1BC6CB5100E12BDC /* ThreePhotoCell.m in Sources */,

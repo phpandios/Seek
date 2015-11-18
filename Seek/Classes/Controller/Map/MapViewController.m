@@ -13,7 +13,7 @@
 #import "WFFDropdownList.h"
 #import "UserForMapCollectionViewCell.h"
 #import "OtherDynamicViewController.h"
-
+#import "MAAnnotationView+WebCache.h"
 #define kMaxColOfCollectionView 4
 #define kMaxRowOfCollectionView 3
 #define kCellMargin 5
@@ -212,7 +212,8 @@
 //            [imageV sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
 //            imageV.userInteractionEnabled = NO;
 //            [annotationView addSubview:imageV];
-            annotationView.image = [UIImage imageNamed:model.imageUrl];
+            NSLog(@"%@", model.imageUrl);
+            [annotationView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
             //设置中心点偏移，使得标注底部中间点成为经纬度对应点
             annotationView.centerOffset = CGPointMake(0, -kUserIconSize);
             
