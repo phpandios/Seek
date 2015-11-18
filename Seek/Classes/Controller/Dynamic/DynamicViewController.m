@@ -701,7 +701,6 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             [weakSelf presentViewController:vc animated:YES completion:nil];
     
         } else {
-                            SHOWMESSAGE(@"未选中地址");
             //                weakSelf.selectedAddressDict = nil;
         }
     }];

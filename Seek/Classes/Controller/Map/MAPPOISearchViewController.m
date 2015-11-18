@@ -215,19 +215,19 @@ updatingLocation:(BOOL)updatingLocation
         [self poiAroundSearch];
     } else {
         AMapPOI *poi = self.poiAroundArray[indexPath.row];
+        [self dismissViewControllerAnimated:YES completion:nil];
         if (_dismisBlock) {
             _dismisBlock(poi.location.latitude, poi.location.longitude, poi.address, poi.name, YES);
         }
-        [self dismissViewControllerAnimated:YES completion:nil];
         
     }
 }
 
 - (IBAction)dismisButtonAction:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
     if (_dismisBlock) {
         _dismisBlock(0, 0, nil, nil, NO);
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 搜索
