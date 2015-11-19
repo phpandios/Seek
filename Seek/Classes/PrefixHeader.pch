@@ -110,6 +110,13 @@ typedef enum {
 #define SHOWSUCCESS(...) [KVNProgress showSuccessWithStatus:[NSString stringWithFormat:__VA_ARGS__]]
 
 
+#define kDispatch_asyn_safety(block) \
+if (![NSThread isMainThread]) { \
+    dispatch_async(dispatch_get_main_queue(), block); \
+} else { \
+    block(); \
+}
+
 #endif
 
 // 自定义 -- END
