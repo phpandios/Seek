@@ -212,7 +212,7 @@
 //            [imageV sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
 //            imageV.userInteractionEnabled = NO;
 //            [annotationView addSubview:imageV];
-            NSLog(@"%@", model.imageUrl);
+//            annotationView.image = [UIImage imageNamed:model.imageUrl];
             [annotationView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
             //设置中心点偏移，使得标注底部中间点成为经纬度对应点
             annotationView.centerOffset = CGPointMake(0, -kUserIconSize);
@@ -236,8 +236,9 @@
         UserAnnotationView *userView = (UserAnnotationView *)view;
         if ([userView.userArray count] == 1) { // 只有一个 直接推出
             OtherDynamicViewController *otherDynamic = [OtherDynamicViewController new];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:otherDynamic];
             otherDynamic.userID = [userView.userArray.firstObject userID];
-            [self presentViewController:otherDynamic animated:YES completion:nil];
+            [self presentViewController:nav animated:YES completion:nil];
 //            SHOWMESSAGE(@"选中用户ID:%@",[userView.userArray.firstObject userID]);
         } else { // 弹出collectionView
             // 移动动画结束后,再根据选中的项进行操作
@@ -307,7 +308,10 @@ updatingLocation:(BOOL)updatingLocation
 {
     UserForMapCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"otherUserCell" forIndexPath:indexPath];
     UserInfoForMap *model = self.otherUsersShowOnCollectionView[indexPath.row];
-    cell.imageView.image = [UIImage imageNamed:model.imageUrl];
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 29, 29)];
+    [imageV sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
+    cell.imageView = imageV;
+//    cell.imageView.image = [UIImage imageNamed:model.imageUrl];
     return cell;
 }
 
@@ -315,8 +319,9 @@ updatingLocation:(BOOL)updatingLocation
 {
     UserInfoForMap *model = self.otherUsersShowOnCollectionView[indexPath.row];
     OtherDynamicViewController *otherDynamic = [OtherDynamicViewController new];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:otherDynamic];
     otherDynamic.userID = model.userID;
-    [self presentViewController:otherDynamic animated:YES completion:nil];
+    [self presentViewController:nav animated:YES completion:nil];
 //    SHOWMESSAGE(@"选中的用户ID%@", model.userID);
 }
 #pragma mark - 私有方法
@@ -415,12 +420,15 @@ updatingLocation:(BOOL)updatingLocation
         for (int i=0; i<[response[@"result"] count]; i++) {
             UserInfoForMap *model = [UserInfoForMap new];
             [model setValuesForKeysWithDictionary:response[@"result"][i]];
-            model.imageUrl = @"userIcon";
+//            model.imageUrl = @"userIcon";
             [array addObject:model];
         }
         weakSelf.otherUserNearByArray = array;
         // 更新其他用户的地图标注
         [weakSelf updateAnnotationOfOtherUser];
+        if (completionHandle) {
+            completionHandle();
+        }
         NSLog(@"%@", response);
     } failure:^(NSError *err) {
          NSLog(@"%@", err);
@@ -440,10 +448,10 @@ updatingLocation:(BOOL)updatingLocation
 //    }
     //
     
-    
     if (completionHandle) {
         completionHandle();
     }
+    
     
 }
 

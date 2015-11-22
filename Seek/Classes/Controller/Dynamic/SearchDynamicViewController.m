@@ -19,6 +19,7 @@
 #import "NSString+textHeightAndWidth.h"
 #import "DynamicDetailViewController.h"
 #import "AddFriendViewController.h"
+#import "OtherDynamicViewController.h"
 @interface SearchDynamicViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *dynamicTableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -251,7 +252,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             oneCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [oneCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [oneCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            oneCell.comments_btn.tag = dynamic.dynamicId;
+            oneCell.comments_btn.tag = dynamic.userId;
             return oneCell;
             break;
         case 2:
@@ -263,7 +264,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             twoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [twoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [twoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            twoCell.comments_btn.tag = dynamic.dynamicId;
+            twoCell.comments_btn.tag = dynamic.userId;
             return twoCell;
             break;
         case 3:
@@ -275,7 +276,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             threeCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [threeCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [threeCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            threeCell.comments_btn.tag = dynamic.dynamicId;
+            threeCell.comments_btn.tag = dynamic.userId;
             return threeCell;
             break;
         case 4:
@@ -287,7 +288,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             fourCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [fourCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [fourCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            fourCell.comments_btn.tag = dynamic.dynamicId;
+            fourCell.comments_btn.tag = dynamic.userId;
             return fourCell;
             break;
         default:
@@ -299,7 +300,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             noPhotoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [noPhotoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            noPhotoCell.comments_btn.tag = dynamic.dynamicId;
+            noPhotoCell.comments_btn.tag = dynamic.userId;
             return noPhotoCell;
             break;
     }
@@ -329,10 +330,10 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 - (void)commentAction:(UIButton *)sender
 {
     self.hidesBottomBarWhenPushed = YES;
-    DynamicDetailViewController *vc = [[DynamicDetailViewController alloc] initWithNibName:@"DynamicDetailViewController" bundle:nil];
-//    vc.dynamicId = sender.tag;
-    [self presentViewController:vc animated:YES completion:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
+    OtherDynamicViewController *otherDynamic = [OtherDynamicViewController new];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:otherDynamic];
+    otherDynamic.userID = [NSString stringWithFormat:@"%ld", sender.tag];
+    [self presentViewController:nav animated:YES completion:nil];
     self.hidesBottomBarWhenPushed = NO;
 }
 /*

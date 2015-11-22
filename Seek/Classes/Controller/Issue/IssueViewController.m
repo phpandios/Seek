@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) NSMutableArray *imagesArray;
 
+@property (nonatomic, strong) NSMutableArray *publishImages;
+
 @property (nonatomic, retain) NSMutableDictionary *currentPermission;
 @property (weak, nonatomic) IBOutlet UIButton *perssionName;
 @property (weak, nonatomic) IBOutlet UILabel *perssionDecrip;
@@ -51,8 +53,8 @@
     [self.imageCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     self.imagesArray = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"issueAddImage"]];
     //照相选择图片
-    if (self.tokePhoto != nil) {
-        [self.imagesArray addObject:_tokePhoto];
+    if (self.image != nil) {
+        [self.imagesArray addObject:_image];
     }
     
     if ([[RCDLoginInfo shareLoginInfo] addressName]) {
@@ -151,7 +153,9 @@
     if (indexPath.row==self.imagesArray.count-1) {
         imageView.image = self.imagesArray[0];
     } else {
-        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imagesArray[indexPath.row+1]] placeholderImage:nil];
+//        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imagesArray[indexPath.row+1]] placeholderImage:nil];
+        NSLog(@"%@", self.imagesArray[indexPath.row + 1]);
+        imageView.image = self.imagesArray[indexPath.row + 1];
     }
     
     
@@ -189,15 +193,6 @@
             NSInteger permission = [self.currentPermission objectForKey:_perssionName.titleLabel.text] ? [[self.currentPermission objectForKey:_perssionName.titleLabel.text] intValue] : 3;
             //将图片编历
             NSString *images_arr = @"";
-            if (self.imagesArray.count > 1) {
-                if (self.imagesArray.count == 2) {
-                    images_arr =self.imagesArray[1];
-                } else {
-                    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.imagesArray];
-                    [arr removeObjectAtIndex:0];
-                    images_arr = [arr componentsJoinedByString:@"#@#"];
-                }
-            }
             CGFloat longitude=0,latitude=0;
             NSString *name=@"",*address = @"";
             //判断字典是否有值
@@ -207,7 +202,8 @@
                 name = [_selectedAddressDict objectForKey:@"name"];
                 address = [_selectedAddressDict objectForKey:@"address"];
             }
-          
+            
+            __weak typeof(self) weakSelf = self;
             [AFHttpTool publishMessageCate:self.cateGoryBtn.tag
                                      title:_titleTextField.text
                                    content:_contentTextView.text
@@ -217,10 +213,40 @@
                               locationName:name
                            locationAddress:address
                                 permission:permission success:^(id response) {
-                                        [KVNProgress showSuccessWithStatus:@"发布成功"];
-                                        [self dismissViewControllerAnimated:YES completion:nil];
+                                    
+                                    NSDictionary *dict = @{@"id":response[@"result"]};
+                                    if (self.imagesArray.count > 1)
+                                    {
+                                        dispatch_queue_t queue = dispatch_queue_create("tk.bourne.testQueue", DISPATCH_QUEUE_CONCURRENT);
+                                        for (int i=1; i < self.imagesArray.count; i++) {
+                                            UIImage *image = self.imagesArray[i];
+                                            CGSize oldSize = image.size;
+                                            CGSize newSize = CGSizeMake(600, 600 / oldSize.width * oldSize.height);
+                                            UIImage *newImage = [UIImage imageWithImage:image scaledToSize:newSize];
+                                            //压缩尺寸
+                                            NSData *imageData = UIImageJPEGRepresentation(newImage, 0.000001);
+                                            //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                            //异步函数
+                                            dispatch_async(queue, ^{
+                                                [UIImage uplodImageWithData:imageData
+                                                                     method:@"POST"
+                                                                  urlString:[kRequestUrl stringByAppendingString:@"dynamic_image"]
+                                                                 parameters:dict
+                                                                   mimeType:@"image/jpeg"
+                                                                  inputName:@"upload_file"
+                                                                   fileName:@"a.jpg"
+                                                                  returnUrl:^(id obj) {
+                                                                      NSLog(@"%@", obj);
+                                                }];
+                                            });
+                                        }
+                                    }
+                                    
+                                    [KVNProgress showSuccessWithStatus:@"发布成功,请耐心等待审核"];
+                                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
                                     }
                                    failure:^(NSError *err) {
+                                       NSLog(@"%@", err);
                                        [KVNProgress showErrorWithStatus:@"发布失败请重新发布"];
                                    }];
         }
@@ -327,25 +353,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = info[UIImagePickerControllerEditedImage] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
-    //压缩尺寸
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
-    
-    __weak typeof(self) weakSelf = self;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //异步函数
-    dispatch_async(queue, ^{
-        [UIImage uplodImageWithData:imageData method:@"POST" urlString:[kRequestUrl stringByAppendingString:@"dynamic_image"] mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
-            if (obj != nil) {
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            }
-            NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            [weakSelf.imagesArray addObject:dict[@"result"]];
-            [weakSelf.imageCollectionView reloadData];
-        }];
-    });
-    
+    [self.imagesArray addObject:image];
+    [self.imageCollectionView reloadData];
     [picker dismissViewControllerAnimated:YES completion:nil];
     //    self.actualImageView.image = [Common shareCommon].actualImage;
 }
@@ -357,5 +366,13 @@
         weakSelf.cateGoryBtn.tag= ID;
     };
     [self presentViewController:cate animated:YES completion:nil];
+}
+
+- (NSMutableArray *)publishImages
+{
+    if (_publishImages) {
+        self.publishImages = [NSMutableArray new];
+    }
+    return _publishImages;
 }
 @end

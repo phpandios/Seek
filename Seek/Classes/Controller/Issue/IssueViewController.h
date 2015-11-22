@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface IssueViewController : UIViewController
-@property (nonatomic, copy)NSString *tokePhoto;
+@property (nonatomic, retain) UIImage *image;
 
 @property (nonatomic, copy) void(^currentIssue)(id obj);
 

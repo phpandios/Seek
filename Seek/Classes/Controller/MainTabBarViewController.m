@@ -53,8 +53,9 @@
     [self.locationManager startUpdatingLocation];
     
     
-
-    
+    [[UINavigationBar appearance] setBarTintColor:kNavBgColor];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
     
     self.delegate = self;
     
@@ -74,13 +75,6 @@
         
         if (needNav) {
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
-            navigationController.navigationBar.translucent = NO;
-            // item的颜色
-            navigationController.navigationBar.tintColor = [UIColor whiteColor];
-            // 背景颜色
-            navigationController.navigationBar.barTintColor = kNavBgColor;
-            // title的颜色
-            navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
             navigationController.tabBarItem.title = title;
             navigationController.tabBarItem.image = [UIImage imageNamed:imageName];
             [viewControllers addObject:navigationController];

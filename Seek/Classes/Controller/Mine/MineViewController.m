@@ -140,10 +140,12 @@
 {
     __weak typeof(self) weakSelf = self;
     UITableViewCell *cell = nil;
+    NSLog(@"%ld", indexPath.section);
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"headerCell" forIndexPath:indexPath];
        
         NSString *loginUserPortrait = [[RCDLoginInfo shareLoginInfo] head_portrait];
+        NSLog(@"%@", loginUserPortrait);
         [((UserHeaderTableViewCell *)cell).headerImageView sd_setImageWithURL:[NSURL URLWithString:loginUserPortrait] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
         ((UserHeaderTableViewCell *)cell).userNameLabel.text = [[RCDLoginInfo shareLoginInfo] nick_name];
         ((UserHeaderTableViewCell *)cell).headerViewClickBlock = ^(){
@@ -355,18 +357,29 @@
 -(void)passImage:(UIImage *)image
 {
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
+    
+    UIImage *imageOld = image;
+    CGSize newSize = CGSizeMake(99, 99);
+    UIImage *newImage = [UIImage imageWithImage:imageOld scaledToSize:newSize];
+    NSData *imageData = UIImagePNGRepresentation(newImage);
     HUD.labelText = @"图片正在上传中...";
     [HUD show:YES];
-    [UIImage uplodImageWithData:imageData method:@"POST" urlString:[kRequestUrl stringByAppendingString:@"update_photo"] mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
-        if (obj != nil) {
-            [HUD hide:YES];
-        }
-        NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        [[RCDLoginInfo shareLoginInfo] setValue:dict[@"result"] forKey:@"head_portrait"];
-        [self.tableView reloadData];
-    }];
+    
+    __weak typeof(self) weakSelf = self;
+    dispatch_queue_t queue = dispatch_queue_create("tk.bourne.testQueue", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_async(queue, ^{
+        [UIImage uplodImageWithData:imageData method:@"POST" urlString:[kRequestUrl stringByAppendingString:@"update_photo"] mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
+            if (obj != nil) {
+                [HUD hide:YES];
+            }
+            NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            [[RCDLoginInfo shareLoginInfo] setValue:dict[@"result"] forKey:@"head_portrait"];
+            [weakSelf.tableView reloadData];
+        }];
+    });
+    
+    
 
     NSLog(@"%@", image);
 }

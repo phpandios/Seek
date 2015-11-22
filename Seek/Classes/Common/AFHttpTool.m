@@ -307,11 +307,13 @@
                           failure:failure];
 }
 #pragma mark -获取评论
-+ (void)getReplyWithSuccess:(void (^)(id response))success
++ (void)getReplyWithUser_id:(NSInteger)user_id
+                    Success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure
 {
     NSDictionary *params = @{
-                             @"state" : @(1)
+                             @"state" : @(1),
+                             @"user_id":@(user_id)
                              };
     [AFHttpTool requestWihtMethod:RequestMethodTypeGet
                               url:@"get_reply"

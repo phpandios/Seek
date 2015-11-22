@@ -16,6 +16,7 @@
 #import "NSString+textHeightAndWidth.h"
 #import "DynamicDetailViewController.h"
 #import "AddFriendViewController.h"
+#import "NoMessage.h"
 
 static NSString *onePhotoIdentifier = @"oneCell";
 static NSString *twoPhotoIdentifier = @"twoCell";
@@ -27,6 +28,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 @property (weak, nonatomic) IBOutlet UITableView *dynamicTableView;
 
 @property (nonatomic, retain) NSMutableArray *otherArray;
+@property (nonatomic, retain) UIView *noMessage;
 @end
 
 @implementation OtherDynamicViewController
@@ -35,12 +37,17 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     [super viewDidLoad];
     self.dynamicTableView.delegate = self;
     self.dynamicTableView.dataSource = self;
-    
+    NSLog(@"%@", self.userID);
     [self.dynamicTableView registerNib:[UINib nibWithNibName:@"OnePhotoCell" bundle:nil] forCellReuseIdentifier:onePhotoIdentifier];
     [self.dynamicTableView registerNib:[UINib nibWithNibName:@"towPhotoCell" bundle:nil] forCellReuseIdentifier:twoPhotoIdentifier];
     [self.dynamicTableView registerNib:[UINib nibWithNibName:@"ThreePhotoCell" bundle:nil] forCellReuseIdentifier:threePhotoIdentifier];
     [self.dynamicTableView registerNib:[UINib nibWithNibName:@"FourPhotoViewCell" bundle:nil] forCellReuseIdentifier:fourPhotolIdentifier];
     [self.dynamicTableView registerNib:[UINib nibWithNibName:@"NoPhotoCell" bundle:nil] forCellReuseIdentifier:noPhotolIdentifier];
+    
+    self.noMessage= [[NSBundle mainBundle] loadNibNamed:@"NoMessage" owner:nil options:nil].firstObject;
+    self.dynamicTableView.tableFooterView = _noMessage;
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStyleDone target:self action:@selector(exitAction:)];
     
     [self loadData];
 }
@@ -56,10 +63,11 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 - (void)loadData
 {
     __weak typeof(self) weakSelf = self;
-    [AFHttpTool getOtherDynamicWithPage:1 limit:20 user_id:[self.userID integerValue] success:^(id response) {
+    [AFHttpTool getOtherDynamicWithPage:0 limit:20 user_id:[self.userID integerValue] success:^(id response) {
         if ([response[@"result"] count] == 0) {
             return;
         }
+        self.dynamicTableView.tableFooterView = nil;
         
         for (int i=0; i < [response[@"result"] count]; i++) {
             Dynamic *dynamic = [Dynamic new];
@@ -148,7 +156,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             oneCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [oneCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [oneCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            oneCell.comments_btn.tag = dynamic.dynamicId;
+            oneCell.comments_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             return oneCell;
             break;
         case 2:
@@ -160,7 +168,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             twoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [twoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [twoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            twoCell.comments_btn.tag = dynamic.dynamicId;
+            twoCell.comments_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             return twoCell;
             break;
         case 3:
@@ -172,7 +180,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             threeCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [threeCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [threeCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            threeCell.comments_btn.tag = dynamic.dynamicId;
+            threeCell.comments_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             return threeCell;
             break;
         case 4:
@@ -184,7 +192,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             fourCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [fourCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [fourCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            fourCell.comments_btn.tag = dynamic.dynamicId;
+            fourCell.comments_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             return fourCell;
             break;
         default:
@@ -196,7 +204,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             noPhotoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [noPhotoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
-            noPhotoCell.comments_btn.tag = dynamic.dynamicId;
+            noPhotoCell.comments_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             return noPhotoCell;
             break;
     }
@@ -227,8 +235,9 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 {
     self.hidesBottomBarWhenPushed = YES;
     DynamicDetailViewController *vc = [[DynamicDetailViewController alloc] initWithNibName:@"DynamicDetailViewController" bundle:nil];
+    vc.dnamicObj = sender.accessibilityElements.firstObject;
     //    vc.dynamicId = sender.tag;
-    [self presentViewController:vc animated:YES completion:nil];
+    [self.navigationController pushViewController:vc animated:YES];
     //    [self.navigationController pushViewController:vc animated:YES];
     self.hidesBottomBarWhenPushed = NO;
 }
@@ -238,7 +247,10 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)exitAction:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (IBAction)exitBtnAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

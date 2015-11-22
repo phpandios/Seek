@@ -179,6 +179,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         [self.dynamicArr removeAllObjects];
     }
     [AFHttpTool getDynamicWithPage:page limit:limit permissions:permission promote_state:promote_state state:state success:^(id response) {
+        NSLog(@"%@", response);
         if ([response[@"result"] count] == 0) {
             weakSelf.tableView.tableFooterView = _noMessage;
             finish(nil);
@@ -191,13 +192,13 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             [dynamic setValuesForKeysWithDictionary:response[@"result"][i]];
             [weakSelf.dynamicArr addObject:dynamic];
         }
-        NSLog(@"%@", weakSelf.dynamicArr);
         finish(weakSelf.dynamicArr);
         //判断本地缓存存在进行移除
         if ([[NSUserDefaults standardUserDefaults] objectForKey:dynamicList]) {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:dynamicList];
         }
         [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:weakSelf.dynamicArr] forKey:dynamicList];
+        first_state++;
         [weakSelf.tableView reloadData];
     } failure:^(NSError *err) {
         weakSelf.tableView.tableFooterView = _noMessage;
@@ -244,12 +245,6 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    // 加载数据
-    [self loadDataPage:0 limit:10 finish:^(id obj) {
-    }];
-}
 #pragma mark-点击编辑按钮模态发布页面
 - (void)issueEditBtnAction:(UIButton *)sender
 {
@@ -661,20 +656,10 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = info[UIImagePickerControllerEditedImage] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.6);
-    HUD.labelText = @"图片正在上传中...";
-    [HUD show:YES];
-    [UIImage uplodImageWithData:imageData method:@"POST" urlString:@"http://www.hzftjy.com/seek/seek.php/dynamic_image" mimeType:@"image/jpeg" inputName:@"upload_file" fileName:@"a.jpg" returnUrl:^(id obj) {
-        if (obj != nil) {
-            [HUD hide:YES];
-        }
-        NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        IssueViewController *vc = [[IssueViewController alloc] initWithNibName:@"IssueViewController" bundle:nil];
-        vc.tokePhoto = dict[@"result"];
-        [self presentViewController:vc animated:YES completion:nil];
-    }];
+    IssueViewController *vc = [[IssueViewController alloc] initWithNibName:@"IssueViewController" bundle:nil];
+    vc.image = image;
     [picker dismissViewControllerAnimated:YES completion:nil];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - 自定义方法

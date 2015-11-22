@@ -139,7 +139,8 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                      failure:(void (^)(NSError* err))failure;
 
 #pragma mark -获取评论
-+ (void)getReplyWithSuccess:(void (^)(id response))success
++ (void)getReplyWithUser_id:(NSInteger)user_id
+                    Success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure;
 #pragma mark - 评论动态
 + (void)commentsDynamicWithDynamicId:(NSInteger)DynamicId

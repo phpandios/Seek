@@ -16,4 +16,13 @@
                        inputName:(NSString *)inputName
                         fileName:(NSString *)fileName
                        returnUrl:(void (^)(id obj))returnUrl;
++ (void)uplodImageWithData:(NSData *)data
+                    method:(NSString *)method
+                 urlString:(NSString *)urlString
+                parameters:(NSDictionary *)parameters
+                  mimeType:(NSString *)mimeType
+                 inputName:(NSString *)inputName
+                  fileName:(NSString *)fileName
+                 returnUrl:(void (^)(id obj))returnUrl;
++(UIImage *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 @end

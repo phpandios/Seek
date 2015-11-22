@@ -52,6 +52,8 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     headerView.publish_content.text =self.dnamicObj.content;
     self.tableView.tableHeaderView = headerView;
     
+    self.tableView.userInteractionEnabled = YES;
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentForCommentTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifierForComment];
     [self.tableView registerNib:[UINib nibWithNibName:@"CommentForDynamicTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifierForDynamic];
     // Do any additional setup after loading the view from its nib.
@@ -70,9 +72,8 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 
 #pragma mark - 键盘
 - (void)keyboardDidChangeFrame:(NSNotification *)sender {
-    NSLog(@"%@", sender);
     CGRect endRect = [sender.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    self.constaintForBottom.constant = endRect.size.height;
+    self.constaintForBottom.constant = kScreenHeight - endRect.origin.y;
 }
 
 #pragma mark - 加载数据
@@ -103,7 +104,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 //    self.commentArray = commentArray;
 //    [self.tableView reloadData];
     __weak typeof(self) weakSelf = self;
-    [AFHttpTool getReplyWithSuccess:^(id response) {
+    [AFHttpTool getReplyWithUser_id:self.dnamicObj.userId Success:^(id response) {
         NSLog(@"%@", response);
         if ([response[@"result"] count] == 0) {
             return;
@@ -277,6 +278,11 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     // Pass the selected object to the new view controller.
 }
 */
+#warning 不走
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.commentTextField resignFirstResponder];
+}
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
