@@ -38,9 +38,12 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
 #warning self.commentTextField占位   例如:回复***  初始时,回复当前动态的用户
+    self.commentTextField.placeholder = [NSString stringWithFormat:@"回复%@:", _dnamicObj.nick_name];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
     DetailHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"DetailHeaderView" owner:nil options:nil].firstObject;
+    [headerView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerViewClickAction)]];
     //计算文字高度
     CGFloat height = [NSString calcWithTextHeightStr:self.dnamicObj.content width:kScreenWidth font:[UIFont systemFontOfSize:18.0]];
     headerView.frame = CGRectMake(0, 0, kScreenWidth, 70 + height);
@@ -63,6 +66,13 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)headerViewClickAction
+{
+    self.selectedComment = nil;
+    // 界面取消选中
+    [self.tableView selectRowAtIndexPath:nil animated:NO scrollPosition:UITableViewRowAnimationNone];
 }
 
 - (void)dealloc
@@ -205,7 +215,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     } else if (comment.respondType == 1) { // 动态的回复
         cell = (CommentForDynamicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifierForDynamic forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     [cell performSelector:@selector(setComment:) withObject:comment];
     return cell;
@@ -213,9 +223,24 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     Comment *comment = [self commentByIndexPath:indexPath];
     self.selectedComment = comment;
-#warning 根据模型改变当前选中的回复,同时更新清空self.commentTextField的值,重置其占位文字 
+
+}
+
+- (void)setSelectedComment:(Comment *)selectedComment
+{
+    if (_selectedComment != selectedComment) {
+        _selectedComment = nil;
+        _selectedComment = selectedComment;
+        if (_selectedComment) { // 存在
+            self.commentTextField.placeholder = [NSString stringWithFormat:@"回复%@:", _selectedComment.fromUserName];
+        } else {
+            self.commentTextField.placeholder = [NSString stringWithFormat:@"回复%@:", _dnamicObj.nick_name];
+        }
+        self.commentTextField.text = nil;
+    }
 }
 
 #pragma mark - 动态计算cell高度 -- 费时操作.
@@ -226,7 +251,6 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (IS_IOS8_OR_ABOVE) {
-        
         return UITableViewAutomaticDimension;
     } else {
 #warning IOS8以下自适应高度未解决,(app版本8.0+,暂不考虑)
@@ -278,11 +302,13 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     // Pass the selected object to the new view controller.
 }
 */
-#warning 不走
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    [self.commentTextField resignFirstResponder];
+    NSLog(@"%@ %@", NSStringFromSelector(action), sender);
+    return YES;
 }
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

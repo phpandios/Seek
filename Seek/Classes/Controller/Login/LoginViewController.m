@@ -53,6 +53,7 @@
 {
     [super viewWillAppear:animated];
     
+    
     self.navigationController.navigationBarHidden = YES;
 }
 - (void)viewDidLayoutSubviews
@@ -109,11 +110,11 @@
 
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     
-    [KVNProgress showWithStatus:@"授权中..."];
+    
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
 
         // 获取微博用户名、uid、token等
-        
+        [KVNProgress showWithStatus:@"授权中..."];
         // QQ头像大小 100 * 100
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
@@ -135,9 +136,12 @@
                     SHOWERROR(@"APP服务器错误,请联系客服人员!");
                 }];
             } failure:^(NSError *err) {
-                
+                SHOWERROR(@"网络连接故障,请重试!");
             }];
-        }});
+        } else { // 取消登陆 等等~~ 详细查看.h
+            [KVNProgress dismiss];
+        }
+    });
 }
 
 - (IBAction)loginByWeiChatButtonAction:(UIButton *)sender {

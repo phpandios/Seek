@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
-- (IBAction)commentButtonAction:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 
@@ -39,13 +38,8 @@
 //    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:comment.fromUserHeadImage]];
     self.headImageView.image = [UIImage imageNamed:comment.fromUserHeadImage];
     self.userNameLabel.text = comment.fromUserName;
-    self.timestampLabel.text = [NSString stringWithDate:comment.timestamp];
+    self.timestampLabel.text = comment.timestamp;
     self.contentLabel.text = comment.content;
 }
 
-- (IBAction)commentButtonAction:(UIButton *)sender {
-    if (self.btnClickBlock) {
-        self.btnClickBlock(self);
-    }
-}
 @end
