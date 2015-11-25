@@ -101,6 +101,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 + (void)searchDynamicWithPage:(NSInteger)page
                         limit:(NSInteger)limit
                   category_id:(NSInteger)category_id
+              category_two_id:(NSInteger)category_two_id
                       keyword:(NSString *)keyword
                       success:(void (^)(id response))success
                       failure:(void (^)(NSError * err))failure;
@@ -114,6 +115,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 
 #pragma mark -发布消息
 + (void)publishMessageCate:(NSInteger)category_id
+                 towCateId:(NSInteger)towCateId
                      title:(NSString *)title
                    content:(NSString *)content
                     images:(NSString *)images
@@ -135,6 +137,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 
 #pragma mark -请求动态分类
 + (void)getCateGoryWithstate:(NSInteger)state
+                   parent_id:(NSInteger)parent_id
                      success:(void (^)(id response))success
                      failure:(void (^)(NSError* err))failure;
 

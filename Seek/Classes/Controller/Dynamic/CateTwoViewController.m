@@ -1,40 +1,37 @@
 //
-//  CateViewController.m
+//  CateTwoViewController.m
 //  Seek
 //
-//  Created by apple on 15/11/9.
+//  Created by apple on 15/11/25.
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
-#import "CateViewController.h"
-#import "Dynamic_category.h"
+
 #import "CateTwoViewController.h"
-@interface CateViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
-- (IBAction)exitAction:(id)sender;
-- (IBAction)completeAction:(id)sender;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectView;
+#import "Dynamic_category.h"
+
+@interface CateTwoViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+- (IBAction)exitAtion:(id)sender;
+- (IBAction)completAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionContent;
 
 @property (nonatomic, retain) NSMutableArray *cate_arr;
 @property (nonatomic, retain) NSIndexPath *lastIndex;
-@property (nonatomic, assign) NSInteger towCateId;
-@property (nonatomic, copy) NSString *towCateName;
 @end
+
 static NSString * const reuseIdentifier = @"Cell";
-@implementation CateViewController
+@implementation CateTwoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.collectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    self.collectView.delegate = self;
-    self.collectView.dataSource = self;
-    self.collectView.backgroundColor = [UIColor whiteColor];
+    [self.collectionContent registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    self.collectionContent.delegate = self;
+    self.collectionContent.dataSource = self;
+    self.collectionContent.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doneAction:)];
-    //加载数据
+   
     [self loadData];
 }
-
-
 #pragma mark -重写getter方法
 - (NSMutableArray *)cate_arr
 {
@@ -43,15 +40,13 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     return _cate_arr;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 #pragma mark -分类数据
 - (void)loadData
 {
     __weak typeof(self) weakSelf = self;
-    [AFHttpTool getCateGoryWithstate:1 parent_id:0 success:^(id response) {
+    NSLog(@"%ld", self.parent_id);
+    [AFHttpTool getCateGoryWithstate:1 parent_id:self.parent_id success:^(id response) {
         if ([response[@"result"] count] == 0) {
             return;
         }
@@ -60,7 +55,7 @@ static NSString * const reuseIdentifier = @"Cell";
             [dynamic_cate setValuesForKeysWithDictionary:response[@"result"][i]];
             [weakSelf.cate_arr addObject:dynamic_cate];
         }
-        [weakSelf.collectView reloadData];
+        [weakSelf.collectionContent reloadData];
     } failure:^(NSError *err) {
         
     }];
@@ -103,7 +98,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark -点击每个cell事件
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    darkGrayColor
+    //    darkGrayColor
     
     if (indexPath != _lastIndex) {
         UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
@@ -116,39 +111,38 @@ static NSString * const reuseIdentifier = @"Cell";
         UILabel *labelOld = (UILabel *)[cell.contentView subviews].firstObject;
         labelOld.textColor = [UIColor blackColor];
     }
-    CateTwoViewController *cateTwo = [CateTwoViewController new];
-    Dynamic_category *cate = self.cate_arr[_lastIndex.row];
-    cateTwo.parent_id = cate.ID;
-    __weak typeof(self) weakSelf = self;
-    cateTwo.cateTwoCurrent = ^(NSString *currentName, NSInteger ID){
-        weakSelf.towCateName = currentName;
-        weakSelf.towCateId = ID;
-    };
-    [self.navigationController pushViewController:cateTwo animated:YES];
+    
     _lastIndex = indexPath;
 }
-- (IBAction)exitAction:(id)sender {
-    if (_cateCurrent) {
-//        Dynamic_category *cate = self.cate_arr[_lastIndex.row];
-        _cateCurrent(nil, -1, 0);
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)completeAction:(id)sender {
-    if (_cateCurrent) {
-        Dynamic_category *cate = self.cate_arr[_lastIndex.row];
-        _cateCurrent(cate.category_name, cate.ID, self.towCateId);
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+/*
+#pragma mark - Navigation
 
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 - (void)doneAction:(id)sender
 {
-    if (_cateCurrent) {
+    if (_cateTwoCurrent) {
         Dynamic_category *cate = self.cate_arr[_lastIndex.row];
-        _cateCurrent(self.towCateName, cate.ID, self.towCateId);
+        _cateTwoCurrent(cate.category_name, cate.ID);
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+- (IBAction)exitAtion:(id)sender {
+}
+
+- (IBAction)completAction:(id)sender {
 }
 @end

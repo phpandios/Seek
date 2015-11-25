@@ -172,21 +172,25 @@ static NSString *fourPhotolIdentifier = @"fourCell";
               finish:(void(^)(id obj))finish
 {
     __weak typeof(self) weakSelf = self;
-    NSInteger permission = 3, promote_state=0, state = 2;
+    NSInteger permission = 0, promote_state=0, state = 2;
     static NSInteger first_state = 1;
+    if ([self.dynamicArr count] > 0 ) {
+        //移除内容
+        self.tableView.tableFooterView = nil;
+    }
     //判断第一次加载的时候清除内容
     if (first_state == 1) {
         [self.dynamicArr removeAllObjects];
     }
+    NSLog(@"%ld", page);
+     NSLog(@"%ld", limit);
     [AFHttpTool getDynamicWithPage:page limit:limit permissions:permission promote_state:promote_state state:state success:^(id response) {
-        NSLog(@"%@", response);
         if ([response[@"result"] count] == 0) {
-            weakSelf.tableView.tableFooterView = _noMessage;
             finish(nil);
             return;
         }
         //移除内容
-        self.tableView.tableFooterView = nil;
+        weakSelf.tableView.tableFooterView = nil;
         for (int i=0; i < [response[@"result"] count]; i++) {
             Dynamic *dynamic = [Dynamic new];
             [dynamic setValuesForKeysWithDictionary:response[@"result"][i]];
@@ -210,6 +214,11 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 {
     NSInteger page = 0, limit = 1, permission = 3, promote_state=1, state = 2;
     __weak typeof(self) weakSelf = self;
+    if (self.dynamicObj != nil) {
+        //移除内容
+        self.tableView.tableFooterView = nil;
+    }
+    
     [AFHttpTool getDynamicWithPage:page limit:limit permissions:permission promote_state:promote_state state:state success:^(id response) {
         if (!response) {
             return;

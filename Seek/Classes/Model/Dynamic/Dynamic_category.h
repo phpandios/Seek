@@ -10,5 +10,6 @@
 
 @interface Dynamic_category : NSObject
 @property (nonatomic, assign) NSInteger ID;
+@property (nonatomic, assign) NSInteger prent_id;
 @property (nonatomic, copy) NSString *category_name;
 @end

@@ -66,20 +66,22 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 #pragma mark - 跳转分类选择
 - (IBAction)showCategoryVC:(UIButton *)sender {
     CateViewController *cate = [[CateViewController alloc] initWithNibName:@"CateViewController" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cate];
     __weak typeof(self) weakSelf=self;
-    cate.cateCurrent = ^(NSString *cate_name, NSInteger ID){
+    cate.cateCurrent = ^(NSString *cate_name, NSInteger ID, NSInteger twoID){
         if (ID < 0) {
             return ;
         }
         weakSelf.infoLabel.text = @"暂无数据";
         [weakSelf.categoryDynamicButton setTitle:cate_name forState:UIControlStateNormal];
-        weakSelf.categoryDynamicButton.tag = ID;
-        [weakSelf loadDataWithCategory_id:ID keyword:weakSelf.searchBar.text completionHandle:^(BOOL success) {
+//        weakSelf.categoryDynamicButton.tag = ID;
+        weakSelf.categoryDynamicButton.accessibilityElements = [NSArray arrayWithObjects:@(ID),@(twoID), nil];
+        [weakSelf loadDataWithCategory_id:ID twoCateId:twoID keyword:weakSelf.searchBar.text completionHandle:^(BOOL success) {
             
             [weakSelf doByLoadDataResult:success];
         }];
     };
-    [self presentViewController:cate animated:YES completion:nil];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)doByLoadDataResult:(BOOL)success
@@ -101,21 +103,22 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 - (void)refreshHeaderFooer
 {
     __weak typeof(self) weakSelf = self;
+     NSArray *idArr = self.categoryDynamicButton.accessibilityElements;
     // 下拉刷新
     self.dynamicTableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         weakSelf.currentPage = 0;
-        [weakSelf loadDataWithCategory_id:self.categoryDynamicButton.tag keyword:self.searchBar.text completionHandle:^(BOOL success) {
+       
+        [weakSelf loadDataWithCategory_id:[[idArr objectAtIndex:0] integerValue] twoCateId:[[idArr objectAtIndex:1] integerValue]  keyword:self.searchBar.text completionHandle:^(BOOL success) {
             [weakSelf doByLoadDataResult:success];
 
         }];
     }];
     
-    
     // 上拉刷新
     self.dynamicTableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         weakSelf.currentPage++;
-        [weakSelf loadDataWithCategory_id:self.categoryDynamicButton.tag keyword:self.searchBar.text completionHandle:^(BOOL success) {
+        [weakSelf loadDataWithCategory_id:[[idArr objectAtIndex:0] integerValue] twoCateId:[[idArr objectAtIndex:1] integerValue] keyword:self.searchBar.text completionHandle:^(BOOL success) {
             [weakSelf doByLoadDataResult:success];
             
         }];
@@ -125,20 +128,23 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 #pragma mark - UISearchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+     NSArray *idArr = self.categoryDynamicButton.accessibilityElements;
     // XIB中,分类按钮tag初始为0
-    if (self.categoryDynamicButton.tag < 0) {
+    if ([[idArr objectAtIndex:0] integerValue] < 0) {
         return;
     }
     
     self.currentPage = 0;
     
     __weak typeof(self) weakSelf = self;
-    [self loadDataWithCategory_id:self.categoryDynamicButton.tag keyword:searchText completionHandle:^(BOOL success){
+    
+    [self loadDataWithCategory_id:[[idArr objectAtIndex:0] integerValue] twoCateId:[[idArr objectAtIndex:1] integerValue] keyword:searchText completionHandle:^(BOOL success){
        [weakSelf doByLoadDataResult:success];
     }];
 }
 
 - (void)loadDataWithCategory_id:(NSInteger)category_id
+                      twoCateId:(NSInteger)twoCateId
                  keyword:(NSString *)keyword
                completionHandle:(void (^)(BOOL success))completionHandle
 {
@@ -154,7 +160,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     }
     
     __weak typeof(self) weakSelf = self;
-    [AFHttpTool searchDynamicWithPage:self.currentPage limit:20 category_id:category_id keyword:keyword success:^(id response) {
+    [AFHttpTool searchDynamicWithPage:self.currentPage limit:20 category_id:category_id category_two_id:twoCateId keyword:keyword success:^(id response) {
         if (weakSelf.currentPage == 0) {
             weakSelf.searchDynamicArray = [NSMutableArray array];
         }

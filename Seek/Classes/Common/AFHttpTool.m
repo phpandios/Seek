@@ -228,11 +228,12 @@
 + (void)searchDynamicWithPage:(NSInteger)page
                         limit:(NSInteger)limit
                   category_id:(NSInteger)category_id
+              category_two_id:(NSInteger)category_two_id
                       keyword:(NSString *)keyword
                       success:(void (^)(id response))success
                       failure:(void (^)(NSError * err))failure
 {
-    NSDictionary *params = @{@"page" : @(page), @"limit" : @(limit), @"category_id" : @(category_id), @"keyword" : keyword};
+    NSDictionary *params = @{@"page" : @(page), @"limit" : @(limit), @"category_id" : @(category_id),@"two_category_id":@(category_two_id), @"keyword" : keyword};
     [AFHttpTool requestWihtMethod:RequestMethodTypeGet
                               url:@"search__dynamic"
                            params:params
@@ -241,6 +242,7 @@
 }
 #pragma mark -发布消息
 + (void)publishMessageCate:(NSInteger)category_id
+                 towCateId:(NSInteger)towCateId
                      title:(NSString *)title
                content:(NSString *)content
                 images:(NSString *)images
@@ -254,6 +256,7 @@
 {
     NSDictionary *params = @{
                              @"category_id":@(category_id),
+                             @"towCateId":@(towCateId),
                              @"title" : title,
                              @"content" : content,
                              @"images" : images,
@@ -294,11 +297,13 @@
 
 #pragma mark -请求动态分类
 + (void)getCateGoryWithstate:(NSInteger)state
+                   parent_id:(NSInteger)parent_id
                    success:(void (^)(id response))success
                    failure:(void (^)(NSError* err))failure
 {
     NSDictionary *params = @{
-                            @"state" : @(state)
+                            @"state" : @(state),
+                            @"parent_id" : @(parent_id)
                              };
     [AFHttpTool requestWihtMethod:RequestMethodTypeGet
                               url:@"category_list"

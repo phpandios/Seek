@@ -18,6 +18,8 @@
 		1882DA381BE6390B009DE69B /* NoPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1882DA361BE6390B009DE69B /* NoPhotoCell.m */; };
 		1882DA391BE6390B009DE69B /* NoPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1882DA371BE6390B009DE69B /* NoPhotoCell.xib */; };
 		1882DA3C1BE6473E009DE69B /* NSString+textHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 1882DA3B1BE6473E009DE69B /* NSString+textHeightAndWidth.m */; };
+		188B4D001C04C56000093384 /* CateTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188B4CFE1C04C56000093384 /* CateTwoViewController.m */; settings = {ASSET_TAGS = (); }; };
+		188B4D011C04C56000093384 /* CateTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188B4CFF1C04C56000093384 /* CateTwoViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		188D18D71BE8F85500BAF2EE /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 188D18AD1BE8F85500BAF2EE /* MJRefreshAutoFooter.m */; };
 		188D18D81BE8F85500BAF2EE /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 188D18AF1BE8F85500BAF2EE /* MJRefreshBackFooter.m */; };
 		188D18D91BE8F85500BAF2EE /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 188D18B11BE8F85500BAF2EE /* MJRefreshComponent.m */; };
@@ -376,6 +378,9 @@
 		1882DA371BE6390B009DE69B /* NoPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoPhotoCell.xib; sourceTree = "<group>"; };
 		1882DA3A1BE6473E009DE69B /* NSString+textHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+textHeightAndWidth.h"; sourceTree = "<group>"; };
 		1882DA3B1BE6473E009DE69B /* NSString+textHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+textHeightAndWidth.m"; sourceTree = "<group>"; };
+		188B4CFD1C04C56000093384 /* CateTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CateTwoViewController.h; sourceTree = "<group>"; };
+		188B4CFE1C04C56000093384 /* CateTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CateTwoViewController.m; sourceTree = "<group>"; };
+		188B4CFF1C04C56000093384 /* CateTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CateTwoViewController.xib; sourceTree = "<group>"; };
 		188D18AC1BE8F85500BAF2EE /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		188D18AD1BE8F85500BAF2EE /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		188D18AE1BE8F85500BAF2EE /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -1338,6 +1343,9 @@
 				181A87C81BF014B2001A58BF /* CateViewController.h */,
 				181A87C91BF014B2001A58BF /* CateViewController.m */,
 				181A87CA1BF014B2001A58BF /* CateViewController.xib */,
+				188B4CFD1C04C56000093384 /* CateTwoViewController.h */,
+				188B4CFE1C04C56000093384 /* CateTwoViewController.m */,
+				188B4CFF1C04C56000093384 /* CateTwoViewController.xib */,
 				60F059321BF637AE00C6AC90 /* SearchDynamicViewController.h */,
 				60F059331BF637AE00C6AC90 /* SearchDynamicViewController.m */,
 				60F059341BF637AE00C6AC90 /* SearchDynamicViewController.xib */,
@@ -2360,6 +2368,7 @@
 				60DA7D041BCDF05100151717 /* registerBg@2x.png in Resources */,
 				607EE3751BDDC93F0008BF7E /* PersonDetailViewController.xib in Resources */,
 				607EE35A1BDDB3DE0008BF7E /* AddFriendViewController.xib in Resources */,
+				188B4D011C04C56000093384 /* CateTwoViewController.xib in Resources */,
 				60DA7D231BCE075000151717 /* resendButtonBg@2x.png in Resources */,
 				60F059361BF637AE00C6AC90 /* SearchDynamicViewController.xib in Resources */,
 				18D6829A1BF832EF006BFC00 /* OtherDynamicViewController.xib in Resources */,
@@ -2575,6 +2584,7 @@
 				607EE36F1BDDC8F00008BF7E /* AddressBookTableViewCell.m in Sources */,
 				60E3C27F1BD8D25500D43072 /* AFURLResponseSerialization.m in Sources */,
 				60F6C3D31BDA1A9500C1FE1A /* RCLocationConvert.m in Sources */,
+				188B4D001C04C56000093384 /* CateTwoViewController.m in Sources */,
 				188D18DE1BE8F85500BAF2EE /* MJRefreshAutoStateFooter.m in Sources */,
 				60E3C2781BD8D25500D43072 /* AFHTTPRequestOperation.m in Sources */,
 				60E3C2901BD8D2DB00D43072 /* RCDataBaseManager.m in Sources */,

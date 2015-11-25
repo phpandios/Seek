@@ -173,7 +173,8 @@
 }
 #pragma mark - 按钮点击
 - (IBAction)commitButtonAction:(UIButton *)sender {
-    if (self.cateGoryBtn.tag < 0) {
+    NSArray *iDarr = self.cateGoryBtn.accessibilityElements;
+    if ([[iDarr objectAtIndex:1] integerValue] < 0) {
         [KVNProgress showErrorWithStatus:@"请选择分类!"];
         return;
     }
@@ -204,7 +205,10 @@
             }
             
             __weak typeof(self) weakSelf = self;
-            [AFHttpTool publishMessageCate:self.cateGoryBtn.tag
+            NSArray *IDArr = self.cateGoryBtn.accessibilityElements;
+            
+            [AFHttpTool publishMessageCate:[[IDArr objectAtIndex:0] integerValue]
+                                 towCateId:[[IDArr objectAtIndex:1] integerValue]
                                      title:_titleTextField.text
                                    content:_contentTextView.text
                                     images:images_arr
@@ -360,12 +364,13 @@
 }
 - (IBAction)cateGoryAction:(id)sender {
     CateViewController *cate = [[CateViewController alloc] initWithNibName:@"CateViewController" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cate];
     __weak typeof(self) weakSelf=self;
-    cate.cateCurrent = ^(NSString *cate_name, NSInteger ID){
+    cate.cateCurrent = ^(NSString *cate_name, NSInteger ID, NSInteger twoID){
         [weakSelf.cateGoryBtn setTitle:cate_name forState:UIControlStateNormal];
-        weakSelf.cateGoryBtn.tag= ID;
+        weakSelf.cateGoryBtn.accessibilityElements = [NSArray arrayWithObjects:@(ID),@(twoID), nil];
     };
-    [self presentViewController:cate animated:YES completion:nil];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (NSMutableArray *)publishImages

@@ -426,6 +426,7 @@ updatingLocation:(BOOL)updatingLocation
         weakSelf.otherUserNearByArray = array;
         // 更新其他用户的地图标注
         [weakSelf updateAnnotationOfOtherUser];
+        NSLog(@"%@", [NSThread mainThread]);
         if (completionHandle) {
             completionHandle();
         }
@@ -433,7 +434,7 @@ updatingLocation:(BOOL)updatingLocation
     } failure:^(NSError *err) {
          NSLog(@"%@", err);
     }];
-//    
+//
 //    for (int i = 0; i < 10; i++) {
 //        int dLa = (arc4random() % 50 - 25);
 //        int dLo = (arc4random() % 50 - 25);
@@ -446,7 +447,7 @@ updatingLocation:(BOOL)updatingLocation
 //        model.longitude = self.currentUserLocation.coordinate.longitude + dLongitude;
 //        [array addObject:model];
 //    }
-    //
+    
     
     if (completionHandle) {
         completionHandle();

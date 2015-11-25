@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CateTwoViewController">
+            <connections>
+                <outlet property="collectionContent" destination="INA-DZ-l7z" id="hoK-4v-g4A"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZJ-HU-IeW" userLabel="top">
+                    <rect key="frame" x="0.0" y="8" width="600" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElX-L3-q3U">
+                            <rect key="frame" x="15" y="26" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="ixd-CB-4AL"/>
+                                <constraint firstAttribute="height" constant="32" id="kl9-7U-Mi8"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="exitLogin.png"/>
+                            <connections>
+                                <action selector="exitAtion:" destination="-1" eventType="touchUpInside" id="X3g-8l-yW9"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smg-oM-bNu">
+                            <rect key="frame" x="555" y="27" width="30" height="30"/>
+                            <state key="normal" title="完成">
+                                <color key="titleColor" red="0.93513257579999998" green="0.93513257579999998" blue="0.93513257579999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="completAction:" destination="-1" eventType="touchUpInside" id="oW4-ZQ-kqs"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="2Iy-5q-Fh6"/>
+                        <constraint firstItem="smg-oM-bNu" firstAttribute="centerY" secondItem="NZJ-HU-IeW" secondAttribute="centerY" constant="10" id="4Wb-WA-Ywt"/>
+                        <constraint firstAttribute="trailing" secondItem="smg-oM-bNu" secondAttribute="trailing" constant="15" id="ESe-pt-iXx"/>
+                        <constraint firstItem="ElX-L3-q3U" firstAttribute="leading" secondItem="NZJ-HU-IeW" secondAttribute="leading" constant="15" id="LGr-gR-5eU"/>
+                        <constraint firstItem="ElX-L3-q3U" firstAttribute="centerY" secondItem="NZJ-HU-IeW" secondAttribute="centerY" constant="10" id="uYb-um-97o"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="40a3d3"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="INA-DZ-l7z">
+                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="t5D-vo-9ok">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="NZJ-HU-IeW" secondAttribute="trailing" id="664-oq-ZnD"/>
+                <constraint firstItem="INA-DZ-l7z" firstAttribute="top" secondItem="NZJ-HU-IeW" secondAttribute="bottom" id="9qC-jJ-6rW"/>
+                <constraint firstItem="INA-DZ-l7z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DQn-mU-i8y"/>
+                <constraint firstItem="NZJ-HU-IeW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dM8-eG-ZCf"/>
+                <constraint firstAttribute="bottom" secondItem="INA-DZ-l7z" secondAttribute="bottom" id="h4O-2R-Woz"/>
+                <constraint firstAttribute="trailing" secondItem="INA-DZ-l7z" secondAttribute="trailing" id="sjb-pe-VM4"/>
+                <constraint firstItem="NZJ-HU-IeW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="y4P-jY-21a"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="exitLogin.png" width="48" height="48"/>
+    </resources>
+</document>

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CateViewController : UIViewController
-@property (nonatomic, copy) void (^cateCurrent)(NSString *currentName, NSInteger ID);
+@property (nonatomic, copy) void (^cateCurrent)(NSString *currentName, NSInteger ID, NSInteger TwoID);
 @end
