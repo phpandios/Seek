@@ -26,7 +26,7 @@
     self.permissionsTable.dataSource = self;
     self.permissionTitle = @[
                              @[@"私有", @"朋友圈", @"公开"],
-                             @[@"仅自己可见", @"关注好友可见", @"所有人都能看见"]
+                             @[@"仅自己可见", @"关注可见", @"所有人都能看见"]
                              ];
     [self.permissionsTable removeConstraint:_permissionH];
       [self.permissionsTable addConstraint:  [NSLayoutConstraint constraintWithItem:self.permissionsTable attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:[self.permissionTitle[0] count]*cellH]];

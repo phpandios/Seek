@@ -25,11 +25,10 @@
 // 选中的回复
 @property (nonatomic, strong) Comment *selectedComment;
 
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @end
 
-
-#warning 第一个cell要放当前动态内容.当点击当前动态时,selectedComment要设置为nil. 因为最终点击回复,是根据selectedComment是否为空.来决定当前回复的是动态还是某条回复
 @implementation DynamicDetailViewController
 
 static NSString *cellIdentifierForComment = @"CommentForCommentTableViewCell";
@@ -38,8 +37,6 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-#warning self.commentTextField占位   例如:回复***  初始时,回复当前动态的用户
     self.commentTextField.placeholder = [NSString stringWithFormat:@"回复%@:", _dnamicObj.nick_name];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
     DetailHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"DetailHeaderView" owner:nil options:nil].firstObject;
@@ -86,6 +83,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     self.constaintForBottom.constant = kScreenHeight - endRect.origin.y;
 }
 
+
 #pragma mark - 加载数据
 - (void)loadData
 {
@@ -121,7 +119,6 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
         }
         for (int i=0; i < [response[@"result"] count]; i++) {
             Comment *comment = [Comment new];
-            NSLog(@"%@", response[@"result"][i]);
             [comment setValuesForKeysWithDictionary:response[@"result"][i]];
             [commentArray addObject:comment];
         }
@@ -218,6 +215,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     [cell performSelector:@selector(setComment:) withObject:comment];
+    cell.userInteractionEnabled = YES;
     return cell;
 }
 
@@ -226,6 +224,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     
     Comment *comment = [self commentByIndexPath:indexPath];
     self.selectedComment = comment;
+    [self.commentTextField resignFirstResponder];
 
 }
 
@@ -315,6 +314,7 @@ static NSString *cellIdentifierForDynamic = @"CommentForDynamicTableViewCell";
     [textField resignFirstResponder];
     return YES;
 }
+
 - (IBAction)commentButtonAction:(UIButton *)sender {
 #warning 根据selectedComment是否为空,判断是选中了回复还是选中了动态.   
     /*

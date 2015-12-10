@@ -39,12 +39,12 @@
         _lblDetail = [UILabel new];
         [_lblDetail setFont:[UIFont systemFontOfSize:14.f]];
         [_lblDetail setTextColor:HEXCOLOR(0x8c8c8c)];
-        _lblDetail.text = [NSString stringWithFormat:@"来自%@的好友请求",_userName];
+        _lblDetail.text = [NSString stringWithFormat:@"来自%@的关注请求",_userName];
         
         _lblName = [UILabel new];
         [_lblName setFont:[UIFont boldSystemFontOfSize:16.f]];
         [_lblName setTextColor:HEXCOLOR(0x252525)];
-        _lblName.text = @"好友消息";
+        _lblName.text = @"关注消息";
         
         _labelTime = [[UILabel alloc] init];
         _labelTime.backgroundColor = [UIColor clearColor];

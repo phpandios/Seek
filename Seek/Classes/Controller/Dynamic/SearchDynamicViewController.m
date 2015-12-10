@@ -20,7 +20,10 @@
 #import "DynamicDetailViewController.h"
 #import "AddFriendViewController.h"
 #import "OtherDynamicViewController.h"
-@interface SearchDynamicViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+@interface SearchDynamicViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, NSURLSessionTaskDelegate,UMSocialUIDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *dynamicTableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
@@ -41,7 +44,8 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#warning tableView注册cell
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorAction:) name:@"background" object:nil];
     
     [self.dynamicTableView registerNib:[UINib nibWithNibName:@"OnePhotoCell" bundle:nil] forCellReuseIdentifier:onePhotoIdentifier];
     [self.dynamicTableView registerNib:[UINib nibWithNibName:@"towPhotoCell" bundle:nil] forCellReuseIdentifier:twoPhotoIdentifier];
@@ -258,6 +262,8 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             oneCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [oneCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [oneCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+            [oneCell.share_btn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+            oneCell.share_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             oneCell.comments_btn.tag = dynamic.userId;
             return oneCell;
             break;
@@ -270,6 +276,8 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             twoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [twoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [twoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+            [twoCell.share_btn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+            twoCell.share_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             twoCell.comments_btn.tag = dynamic.userId;
             return twoCell;
             break;
@@ -282,6 +290,8 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             threeCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [threeCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [threeCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+            [threeCell.share_btn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+            threeCell.share_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             threeCell.comments_btn.tag = dynamic.userId;
             return threeCell;
             break;
@@ -294,6 +304,8 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             fourCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [fourCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [fourCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+            [fourCell.share_btn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+            fourCell.share_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
             fourCell.comments_btn.tag = dynamic.userId;
             return fourCell;
             break;
@@ -306,6 +318,9 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             noPhotoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
             [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
             [noPhotoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
+            [noPhotoCell.share_btn addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
+            noPhotoCell.share_btn.accessibilityElements = [NSArray arrayWithObject:dynamic];
+
             noPhotoCell.comments_btn.tag = dynamic.userId;
             return noPhotoCell;
             break;
@@ -338,9 +353,42 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     self.hidesBottomBarWhenPushed = YES;
     OtherDynamicViewController *otherDynamic = [OtherDynamicViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:otherDynamic];
-    otherDynamic.userID = [NSString stringWithFormat:@"%ld", sender.tag];
+    otherDynamic.userID = [NSString stringWithFormat:@"%ld", (long)sender.tag];
     [self presentViewController:nav animated:YES completion:nil];
     self.hidesBottomBarWhenPushed = NO;
+}
+
+#pragma mark -分享
+- (void)shareAction:(UIButton *)sender
+{
+    Dynamic *dynamic = sender.accessibilityElements.firstObject;
+    NSArray *arr = [dynamic.images componentsSeparatedByString:@"#@#"];
+    NSRange range = [dynamic.images rangeOfString:@"#@#"];
+    NSString *imageUrl = nil;
+    if(range.location ==  NSNotFound && ![dynamic.images isEqualToString:@""])
+    {
+        imageUrl = dynamic.images;
+    }
+    else
+    {
+        imageUrl = arr.firstObject;
+    }
+    [UMSocialWechatHandler setWXAppId:kUMWXAppID appSecret:kUMWXAppKey url:kUMUrl];
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:kUMAppKey
+                                      shareText:dynamic.content
+                                     shareImage:nil
+                                shareToSnsNames:@[UMShareToWechatTimeline,UMShareToWechatSession]
+                                       delegate:self];
+    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:imageUrl];
+}
+
+#pragma mark 改变颜色
+- (void)colorAction:(NSNotification *)sender
+{
+    NSDictionary *userInfo = sender.userInfo;
+    self.dynamicTableView.backgroundColor = userInfo[@"tableBacgroud"];
+    [self.dynamicTableView reloadData];
 }
 /*
 #pragma mark - Navigation

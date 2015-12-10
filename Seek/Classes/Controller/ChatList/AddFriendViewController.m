@@ -9,6 +9,7 @@
 #import "AddFriendViewController.h"
 
 @interface AddFriendViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *attensionBtn;
 
 @end
 
@@ -16,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.translucent = NO;
     
     self.lblName.text = self.targetUserInfo.name;
     [self.ivAva sd_setImageWithURL:[NSURL URLWithString:self.targetUserInfo.portraitUri] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
@@ -25,11 +27,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)actionAddFriend:(id)sender {
-    SHOWMESSAGE(@"发送好友请求中");
+- (IBAction)actionAddFriend:(UIButton *)sender {
+    SHOWMESSAGE(@"发送关注请求中");
     [RCDHTTPTOOL requestFriend:_targetUserInfo.userId complete:^(BOOL result) {
         if (result) {
-            SHOWSUCCESS(@"好友请求已发送");
+            [self.attensionBtn setTitle:@"关注成功" forState:UIControlStateNormal];
+            SHOWSUCCESS(@"关注请求已发送");
         }
     }];
 }

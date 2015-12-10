@@ -195,7 +195,24 @@
 
     [self.navigationController pushViewController:settingVC animated:YES];
 
-  } /*else if (self.conversationType == ConversationType_DISCUSSION) {
+  } //客服设置
+  else if (self.conversationType == ConversationType_CUSTOMERSERVICE) {
+      RCDSettingBaseViewController *settingVC = [[RCDSettingBaseViewController alloc] init];
+      settingVC.conversationType = self.conversationType;
+      settingVC.targetId = self.targetId;
+      //清除聊天记录之后reload data
+      __weak typeof (self) weakSelf = self;
+      settingVC.clearHistoryCompletion = ^(BOOL isSuccess) {
+          if (isSuccess) {
+              [weakSelf.conversationDataRepository removeAllObjects];
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [weakSelf.conversationMessageCollectionView reloadData];
+              });
+          }
+      };
+      [self.navigationController pushViewController:settingVC animated:YES];
+  }
+    /*else if (self.conversationType == ConversationType_DISCUSSION) {
 
     RCDDiscussGroupSettingViewController *settingVC =
         [[RCDDiscussGroupSettingViewController alloc] init];

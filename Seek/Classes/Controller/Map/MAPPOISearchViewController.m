@@ -58,7 +58,7 @@
     // 设置缩放级别
     [_mapView setZoomLevel:16 animated:YES];
     
-    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake([[RCDLoginInfo shareLoginInfo] latitude], [[RCDLoginInfo shareLoginInfo] longitude])];
+    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake([[RCDLoginInfo shareLoginInfo] mapLatitude], [[RCDLoginInfo shareLoginInfo] mapLongitude])];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];    

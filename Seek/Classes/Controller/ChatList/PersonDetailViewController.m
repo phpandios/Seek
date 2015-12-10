@@ -71,10 +71,10 @@
 {
     
     if (self.inBlackList) {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"解除好友关系", @"取消黑名单", nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"解除关注关系", @"取消黑名单", nil];
         [actionSheet showInView:self.view];
     } else {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"解除好友关系", @"加入黑名单", nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"解除关注关系", @"加入黑名单", nil];
         [actionSheet showInView:self.view];
     }
 }
@@ -93,7 +93,7 @@
         {
             //解除好友关系
             [RCDHTTPTOOL deleteFriend:self.userInfo.userId complete:^(BOOL result) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"删除好友成功！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"删除关注成功！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil
                                           , nil];
                 [alertView show];
             }];

@@ -23,6 +23,17 @@
 - (void)setDynamicObj:(Dynamic *)dynamicObj
 {
     _dynamicObj = dynamicObj;
+    if ([[User shareUserInfo] backColor] != nil) {
+        self.backgroundColor = [[User shareUserInfo] backColor];
+    }
+    
+    if([[User shareUserInfo] textColor] != nil)
+    {
+        self.name.textColor = [[User shareUserInfo] textColor];
+        self.insert_time.textColor = [[User shareUserInfo] textColor];
+        self.publish_content.textColor = [[User shareUserInfo] textColor];
+        self.comments_nums.textColor = [[User shareUserInfo] textColor];
+    }
     [self.head_portrait sd_setImageWithURL:[NSURL URLWithString:dynamicObj.head_portrait] placeholderImage:nil];
     self.contentMode = UIViewContentModeScaleAspectFit;
     self.name.text = dynamicObj.nick_name;

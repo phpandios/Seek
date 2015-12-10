@@ -10,6 +10,16 @@
 
 @implementation User
 
++ (id)shareUserInfo
+{
+    static User *userInfo = nil;
+    static dispatch_once_t  predicate;
+    dispatch_once(&predicate,^{
+        userInfo = [[self alloc] init];
+    });
+    return userInfo;
+}
+
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
     SBLog(@"ERROR KEY:%@", key);

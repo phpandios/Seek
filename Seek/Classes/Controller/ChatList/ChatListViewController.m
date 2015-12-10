@@ -69,6 +69,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorAction:) name:@"background" object:nil];
+    
+    //设置徽标
+    self.navigationController.tabBarItem.badgeValue = nil;
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
@@ -135,10 +139,10 @@
                     target:self
                     action:@selector(pushAddFriend:)],
       
-      [KxMenuItem menuItem:@"通讯录"
-                     image:[UIImage imageNamed:@"contact_icon"]
-                    target:self
-                    action:@selector(pushAddressBook:)],
+//      [KxMenuItem menuItem:@"通讯录"
+//                     image:[UIImage imageNamed:@"contact_icon"]
+//                    target:self
+//                    action:@selector(pushAddressBook:)],
       
 //      [KxMenuItem menuItem:@"公众账号"
 //                     image:[UIImage imageNamed:@"public_account"]
@@ -189,17 +193,16 @@
 }
 
 -(void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath
-{
-//    
-//    if (model.conversationModelType == RC_CONVERSATION_MODEL_TYPE_PUBLIC_SERVICE) {
-//        RCPublicServiceChatViewController *_conversationVC = [[RCPublicServiceChatViewController alloc] init];
-//        _conversationVC.conversationType = model.conversationType;
-//        _conversationVC.targetId = model.targetId;
-//        _conversationVC.userName = model.conversationTitle;
-//        _conversationVC.title = model.conversationTitle;
-//        
-//        [self.navigationController pushViewController:_conversationVC animated:YES];
-//    }
+{  
+    if (model.conversationModelType == RC_CONVERSATION_MODEL_TYPE_PUBLIC_SERVICE) {
+        RCPublicServiceChatViewController *_conversationVC = [[RCPublicServiceChatViewController alloc] init];
+        _conversationVC.conversationType = model.conversationType;
+        _conversationVC.targetId = model.targetId;
+        _conversationVC.userName = model.conversationTitle;
+        _conversationVC.title = model.conversationTitle;
+        _conversationVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:_conversationVC animated:YES];
+    }
     
     if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_NORMAL) {
         ChatViewController *_conversationVC = [[ChatViewController alloc]init];
@@ -236,8 +239,10 @@
         temp.userName = model.conversationTitle;
         temp.title = model.conversationTitle;
         temp.conversation = model;
+        temp.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:temp animated:YES];
     }
+    
     
 }
 
@@ -426,7 +431,7 @@
     }
     
     RCDChatListCell *cell = [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-    cell.lblDetail.text =[NSString stringWithFormat:@"来自%@的好友请求",userName];
+    cell.lblDetail.text =[NSString stringWithFormat:@"来自%@的关注请求",userName];
     [cell.ivAva sd_setImageWithURL:[NSURL URLWithString:portraitUri] placeholderImage:[UIImage imageNamed:@"system_notice"]];
     cell.labelTime.text = [self ConvertMessageTime:model.sentTime / 1000];
     return cell;
@@ -569,6 +574,13 @@
     });
 }
 
+#pragma mark 改变颜色
+- (void)colorAction:(NSNotification *)sender
+{
+    NSDictionary *userInfo = sender.userInfo;
+    self.conversationListTableView.backgroundColor = userInfo[@"tableBacgroud"];
+    [self.conversationListTableView reloadData];
+}
 
 
 @end

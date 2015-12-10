@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DynamicDetailViewController">
             <connections>
+                <outlet property="bottomView" destination="Dcm-76-m3H" id="7ZO-Ce-azp"/>
                 <outlet property="commentTextField" destination="2b6-Xk-46A" id="M19-ky-SDU"/>
                 <outlet property="constaintForBottom" destination="9y1-Fl-xU0" id="9BL-g3-iuD"/>
                 <outlet property="tableView" destination="O1Q-9E-gh1" id="oKE-95-1x9"/>

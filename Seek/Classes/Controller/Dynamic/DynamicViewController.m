@@ -2,13 +2,14 @@
 //  DynamicViewController.m
 //  Seek
 //
-//  Created by apple on 15/10/9.
+//  Created by apple on 15/12/1.
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
+
 #define dynamicList @"dynamic"
 #define dynamicRecommend @"recommend_dynamic"
+#define kCateList @"http://www.seek-sb.cn/seek.php/category_list?parent_id=0"
 
-#import "DynamicViewController.h"
 #import "KnowPersonCell.h"
 #import "OnePhotoCell.h"
 #import "PulishCell.h"
@@ -26,15 +27,20 @@
 #import "NSString+textHeightAndWidth.h"
 #import "IssueViewController.h"
 #import "RCDLoginInfo.h"
-#import "UMSocial.h"
-#import "UMSocialWechatHandler.h"
 #import "NoMessage.h"
 
 #import "MAPPOISearchViewController.h"
 #import "SearchDynamicViewController.h"
-@interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,UMSocialUIDelegate>
+
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "Dynamic_category.h"
+
+#import "DynamicViewController.h"
+
+@interface DynamicViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,UMSocialUIDelegate,UITableViewDataSource,UITableViewDelegate>
 {
-     MBProgressHUD *HUD;
+    MBProgressHUD *HUD;
     UMSocialBar *_socialBar;
 }
 
@@ -42,7 +48,16 @@
 @property (nonatomic, retain)Dynamic *dynamicObj;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, retain) UIView *noMessage;
+
+@property (nonatomic, retain) NSArray *cateArr;
+
+@property (nonatomic, retain) UITableView *tableView;
+
+@property (nonatomic, retain) UIScrollView *scrollView;
+
+@property (nonatomic, assign) NSInteger categoryId;
 @end
+
 static NSString *onePhotoIdentifier = @"oneCell";
 static NSString *twoPhotoIdentifier = @"twoCell";
 static NSString *threePhotoIdentifier = @"threeCell";
@@ -53,7 +68,44 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.title = @"动态";
+    
+    CGFloat width = 80;
+    CGFloat height = 45;
+    CGFloat navH = 64;
+    self.cateArr= [self loadCateGory];
+    UIScrollView *scrollCate =[[UIScrollView alloc] initWithFrame:CGRectMake(0, navH, kScreenWidth, height)];
+    [self.view addSubview:scrollCate];
+
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, navH, kScreenWidth, height)];
+
+    _scrollView.contentSize = CGSizeMake(width * [self.cateArr count], scrollCate.frame.size.height);
+    // 隐藏水平滚动条
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.backgroundColor = [UIColor colorWithRed:0.941 green:0.973 blue:1.0 alpha:1.0];
+    [self.view addSubview:_scrollView];
+    
+    for (int i=0; i < [self.cateArr count]; i++) {
+        Dynamic_category *cateObj = self.cateArr[i];
+        UIButton *catogry_btn =[UIButton buttonWithType:UIButtonTypeSystem];
+        catogry_btn.frame = CGRectMake(i * width, 0, width, scrollCate.frame.size.height);
+        [catogry_btn setTitle:cateObj.category_name forState:UIControlStateNormal];
+        [catogry_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        catogry_btn.tag = cateObj.ID;
+        [catogry_btn addTarget:self action:@selector(catogryAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_scrollView addSubview:catogry_btn];
+    }
+
+    
+    //添加tableView表格
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, height+navH, kScreenWidth, kScreenHeight - height - navH - 49) style:UITableViewStyleGrouped];
+    [self.view addSubview:_tableView];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
     
     [self.tableView registerNib:[UINib nibWithNibName:@"OnePhotoCell" bundle:nil] forCellReuseIdentifier:onePhotoIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"towPhotoCell" bundle:nil] forCellReuseIdentifier:twoPhotoIdentifier];
@@ -62,9 +114,12 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     [self.tableView registerNib:[UINib nibWithNibName:@"NoPhotoCell" bundle:nil] forCellReuseIdentifier:noPhotolIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"PulishCell" bundle:nil] forCellReuseIdentifier:pulishIdentifier];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorAction:) name:@"background" object:nil];
     
     self.noMessage= [[NSBundle mainBundle] loadNibNamed:@"NoMessage" owner:nil options:nil].firstObject;
     self.tableView.tableFooterView = _noMessage;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
@@ -85,9 +140,9 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         }
     }];
     if (kIsNetWork) {
-        [self loadRemmondData];
+        [self loadRemmondDataCategoryId:self.categoryId];
         // 加载数据
-        [self loadDataPage:0 limit:10 finish:^(id obj) {
+        [self loadDataPage:0 limit:10 categoryId:self.categoryId finish:^(id obj) {
             if (obj != nil) {
                 //取消
                 [HUD hide:YES];
@@ -96,9 +151,33 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     }
     //上拉下载刷新
     [self refreshHeaderFooer];
-  
 }
 
+- (NSArray *)cateArr
+{
+    if (_cateArr == nil) {
+        self.cateArr = [NSArray new];
+    }
+    return _cateArr;
+}
+
+- (NSArray *)loadCateGory
+{
+    //获取url地址内
+    NSURL *url =[NSURL URLWithString:kCateList];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSData *data=[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@"%@", dict);
+    NSMutableArray *cateArr = [NSMutableArray new];
+    for (int i = 0; i < [dict[@"result"] count]; i++) {
+        NSLog(@"%@", dict[@"result"][i]);
+        Dynamic_category *dynaCate = [Dynamic_category new];
+        [dynaCate setValuesForKeysWithDictionary:dict[@"result"][i]];
+        [cateArr addObject:dynaCate];
+    }
+    return  cateArr;
+}
 
 #pragma mark - 上拉下载
 - (void)refreshHeaderFooer
@@ -108,10 +187,10 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf loadRemmondData];
+            [weakSelf loadRemmondDataCategoryId:self.categoryId];
             [weakSelf.dynamicArr removeAllObjects];
             // 加载数据
-            [weakSelf loadDataPage:0 limit:10 finish:^(id obj) {
+            [weakSelf loadDataPage:0 limit:10 categoryId:self.categoryId finish:^(id obj) {
                 NSLog(@"%@", obj);
                 if (obj != nil) {
                     weakSelf.dynamicArr = obj;
@@ -139,17 +218,16 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             static NSInteger page = 1,offset=0,limit=10;
             offset = page * limit;
             page++;
-            [weakSelf loadDataPage:offset limit:limit finish:^(id obj) {
+            [weakSelf loadDataPage:offset limit:limit categoryId:self.categoryId finish:^(id obj) {
                 [weakSelf.tableView reloadData];
                 // 结束刷新
                 [weakSelf.tableView.footer endRefreshing];
-
             }];
-            
-            
         });
     }];
 }
+
+
 - (NSMutableArray *)dynamicArr
 {
     if (!_dynamicArr) {
@@ -169,6 +247,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 #pragma mark -请求数据
 - (void)loadDataPage:(NSInteger)page
                limit:(NSInteger)limit
+          categoryId:(NSInteger)categoryId
               finish:(void(^)(id obj))finish
 {
     __weak typeof(self) weakSelf = self;
@@ -182,9 +261,8 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     if (first_state == 1) {
         [self.dynamicArr removeAllObjects];
     }
-    NSLog(@"%ld", page);
-     NSLog(@"%ld", limit);
-    [AFHttpTool getDynamicWithPage:page limit:limit permissions:permission promote_state:promote_state state:state success:^(id response) {
+    
+    [AFHttpTool getDynamicWithPage:page limit:limit category_id:categoryId permissions:permission promote_state:promote_state state:state success:^(id response) {
         if ([response[@"result"] count] == 0) {
             finish(nil);
             return;
@@ -210,7 +288,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     }];
 }
 #pragma mark -请求推荐数据
-- (void)loadRemmondData
+- (void)loadRemmondDataCategoryId:(NSInteger)CategoryId
 {
     NSInteger page = 0, limit = 1, permission = 3, promote_state=1, state = 2;
     __weak typeof(self) weakSelf = self;
@@ -219,7 +297,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         self.tableView.tableFooterView = nil;
     }
     
-    [AFHttpTool getDynamicWithPage:page limit:limit permissions:permission promote_state:promote_state state:state success:^(id response) {
+    [AFHttpTool getDynamicWithPage:page limit:limit category_id:CategoryId permissions:permission promote_state:promote_state state:state success:^(id response) {
         if (!response) {
             return;
         }
@@ -235,7 +313,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         } else {
             weakSelf.dynamicObj = nil;
         }
-       
+        
     } failure:^(NSError *err) {
         
     }];
@@ -262,9 +340,9 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     vc.currentIssue = ^(id obj){
         if (obj != nil) {
             // 加载数据
-            [weakSelf loadDataPage:0 limit:10 finish:^(id obj) {
+            [weakSelf loadDataPage:0 limit:10  categoryId:self.categoryId finish:^(id obj) {
             }];
-
+            
         }
     };
     [self presentViewController:vc animated:YES completion:nil];
@@ -290,7 +368,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         NSArray *arr = [_dynamicObj.images componentsSeparatedByString:@"#@#"];
         NSRange range = [_dynamicObj.images rangeOfString:@"#@#"];
         NSInteger case_num = [arr count];
-    
+        
         if(range.location ==  NSNotFound && ![_dynamicObj.images isEqualToString:@""])
         {
             case_num = 1;//如果为一张图
@@ -299,7 +377,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         }
         switch (case_num) {
             case 0:
-                return 136 + height;
+                return 146 + height;
                 break;
             case 3:
                 return 507 + height;
@@ -334,7 +412,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
         }
         switch (case_num) {
             case 0:
-                return 136 + height;
+                return 146 + height;
                 break;
             case 3:
                 return 507 + height;
@@ -389,6 +467,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     NoPhotoCell *noPhotoCell = [tableView dequeueReusableCellWithIdentifier:noPhotolIdentifier];
     PulishCell *pulishCell = [tableView dequeueReusableCellWithIdentifier:pulishIdentifier];
     FourPhotoViewCell *fourCell = [tableView dequeueReusableCellWithIdentifier:fourPhotolIdentifier];
+    
     if(indexPath.section == 0)
     {
         [pulishCell.edit_btn addTarget:self action:@selector(issueEditBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -451,7 +530,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return fourCell;
                 break;
             default:
-            
+                
                 noPhotoCell.dynamicObj = _dynamicObj;
                 [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
                 [noPhotoCell.comments_btn addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -502,7 +581,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return twoCell;
                 break;
             case 3:
-            
+                
                 threeCell.dynamicObj = dynamic;
                 threeCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [threeCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -524,7 +603,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
                 return fourCell;
                 break;
             default:
-            
+                
                 noPhotoCell.dynamicObj = dynamic;
                 noPhotoCell.attention.accessibilityElements = [NSArray arrayWithObjects:@(dynamic.userId), dynamic.nick_name, dynamic.head_portrait, nil];
                 [noPhotoCell.attention addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -545,28 +624,41 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 {
     NSArray *userArr = sender.accessibilityElements;
     
-     RCUserInfo *userInfo = [RCUserInfo new];
-     userInfo.userId = userArr[0];
-     userInfo.name = userArr[1];
-     userInfo.portraitUri = userArr[2];
+    RCUserInfo *userInfo = [RCUserInfo new];
+    userInfo.userId = userArr[0];
+    userInfo.name = userArr[1];
+    userInfo.portraitUri = userArr[2];
     
-     AddFriendViewController *addViewController = [[AddFriendViewController
-     alloc] initWithNibName:@"AddFriendViewController" bundle:nil];
-     addViewController.targetUserInfo = userInfo;
-     [self.navigationController pushViewController:addViewController animated:YES];
-        
+    AddFriendViewController *addViewController = [[AddFriendViewController
+                                                   alloc] initWithNibName:@"AddFriendViewController" bundle:nil];
+    addViewController.targetUserInfo = userInfo;
+    [self.navigationController pushViewController:addViewController animated:YES];
+    
 }
 
 #pragma mark -分享
-- (void)shareAction:(id)sender
+- (void)shareAction:(UIButton *)sender
 {
+    Dynamic *dynamic = sender.accessibilityElements.firstObject;
+    NSArray *arr = [dynamic.images componentsSeparatedByString:@"#@#"];
+    NSRange range = [dynamic.images rangeOfString:@"#@#"];
+    NSString *imageUrl = nil;
+    if(range.location ==  NSNotFound && ![dynamic.images isEqualToString:@""])
+    {
+        imageUrl = dynamic.images;
+    }
+    else
+    {
+        imageUrl = arr.firstObject;
+    }
     [UMSocialWechatHandler setWXAppId:kUMWXAppID appSecret:kUMWXAppKey url:kUMUrl];
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:kUMAppKey
-                                      shareText:@"友盟社会化分享让您快速实现分享等社会化功能，www.umeng.com/social"
-                                     shareImage:[UIImage imageNamed:@"icon.png"]
-                                shareToSnsNames:@[UMShareToWechatSession]
+                                      shareText:dynamic.content
+                                     shareImage:nil
+                                shareToSnsNames:@[UMShareToWechatTimeline,UMShareToWechatSession]
                                        delegate:self];
+    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:imageUrl];
 }
 
 //实现回调方法（可选）：
@@ -584,7 +676,6 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 {
     OnePhotoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
 }
 
 #pragma mark - 点击效果
@@ -660,7 +751,7 @@ static NSString *fourPhotolIdentifier = @"fourCell";
     }
     
     [self presentViewController:alertController animated:YES completion:nil];
-   }
+}
 #pragma mark-获取图片的代理方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -676,8 +767,8 @@ static NSString *fourPhotolIdentifier = @"fourCell";
 {
     MAPPOISearchViewController *mapPOISearch = [[MAPPOISearchViewController alloc] initWithNibName:@"MAPPOISearchViewController" bundle:nil];
     // locationWithLatitude:39.990459 longitude:116.481476
-    mapPOISearch.defaultLatitude = [[RCDLoginInfo shareLoginInfo] latitude];
-    mapPOISearch.defaultLongitude = [[RCDLoginInfo shareLoginInfo] longitude];
+    mapPOISearch.defaultLatitude = [[RCDLoginInfo shareLoginInfo] mapLatitude];
+    mapPOISearch.defaultLongitude = [[RCDLoginInfo shareLoginInfo] mapLongitude];
     mapPOISearch.dismisBlock = completionHandle;
     [self presentViewController:mapPOISearch animated:YES completion:nil];
 }
@@ -693,10 +784,59 @@ static NSString *fourPhotolIdentifier = @"fourCell";
             vc.isNotHave = YES;
             vc.selectedAddressDict = @{@"latitude" : @(la), @"longitude" : @(lo), @"address" : address, @"name" : name};
             [weakSelf presentViewController:vc animated:YES completion:nil];
-    
+            
         } else {
             //                weakSelf.selectedAddressDict = nil;
         }
     }];
 }
+
+#pragma mark 改变颜色
+- (void)colorAction:(NSNotification *)sender
+{
+    NSDictionary *userInfo = sender.userInfo;
+    self.tableView.backgroundColor = userInfo[@"tableBacgroud"];
+    [self.tableView reloadData];
+    NSLog(@"%@", sender);
+}
+
+#pragma mark -分类按钮
+- (void)catogryAction:(UIButton *)sender
+{
+    __weak typeof(self) weakSelf = self;
+    sender.backgroundColor = [UIColor clearColor];
+    for(id button  in _scrollView.subviews) {
+        ((UIButton *)button).backgroundColor = [UIColor clearColor];
+    }
+
+    sender.backgroundColor = [UIColor colorWithRed:0 green:0.749 blue:1.0 alpha:1.0];
+   
+    
+    self.categoryId = sender.tag;
+    [self.dynamicArr removeAllObjects];
+    self.dynamicObj = nil;
+    [self loadRemmondDataCategoryId:sender.tag];
+    [self loadDataPage:0 limit:10 categoryId:sender.tag finish:^(id obj) {
+        if(obj == nil)
+        {
+            self.tableView.tableFooterView = _noMessage;
+        }
+        else
+        {
+            self.tableView.tableFooterView = nil;
+        }
+        [weakSelf.tableView reloadData];
+    }];
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 @end

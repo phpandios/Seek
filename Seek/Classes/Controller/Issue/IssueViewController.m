@@ -14,7 +14,9 @@
 #import "PermissionsViewController.h"
 #import "AFHttpTool.h"
 #import "CateViewController.h"
+
 @interface IssueViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate>
+
 
 - (IBAction)commitButtonAction:(UIButton *)sender;
 - (IBAction)dismisButtonAction:(UIButton *)sender;
@@ -39,6 +41,7 @@
 - (IBAction)cateGoryAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *cateGoryBtn;
 
+
 @end
 
 @implementation IssueViewController
@@ -60,6 +63,8 @@
     if ([[RCDLoginInfo shareLoginInfo] addressName]) {
         self.addressTextField.text = [[RCDLoginInfo shareLoginInfo] addressName];
     }
+    
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -166,15 +171,16 @@
 {
     MAPPOISearchViewController *mapPOISearch = [[MAPPOISearchViewController alloc] initWithNibName:@"MAPPOISearchViewController" bundle:nil];
     // locationWithLatitude:39.990459 longitude:116.481476
-    mapPOISearch.defaultLatitude = [[RCDLoginInfo shareLoginInfo] latitude];
-    mapPOISearch.defaultLongitude = [[RCDLoginInfo shareLoginInfo] longitude];
+    mapPOISearch.defaultLatitude = [[RCDLoginInfo shareLoginInfo] mapLatitude];
+    mapPOISearch.defaultLongitude = [[RCDLoginInfo shareLoginInfo] mapLongitude];
     mapPOISearch.dismisBlock = completionHandle;
     [self presentViewController:mapPOISearch animated:YES completion:nil];
 }
 #pragma mark - 按钮点击
 - (IBAction)commitButtonAction:(UIButton *)sender {
     NSArray *iDarr = self.cateGoryBtn.accessibilityElements;
-    if ([[iDarr objectAtIndex:1] integerValue] < 0) {
+    NSLog(@"%@", iDarr);
+    if ([[iDarr objectAtIndex:1] integerValue] < 0 || [iDarr count] == 0) {
         [KVNProgress showErrorWithStatus:@"请选择分类!"];
         return;
     }

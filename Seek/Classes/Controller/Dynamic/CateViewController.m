@@ -32,8 +32,9 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doneAction:)];
     //加载数据
     [self loadData];
+    
+    
 }
-
 
 #pragma mark -重写getter方法
 - (NSMutableArray *)cate_arr
@@ -50,6 +51,11 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark -分类数据
 - (void)loadData
 {
+    if([[User shareUserInfo] backColor] != nil)
+    {
+        self.collectView.backgroundColor = [[User shareUserInfo] backColor];
+    }
+    
     __weak typeof(self) weakSelf = self;
     [AFHttpTool getCateGoryWithstate:1 parent_id:0 success:^(id response) {
         if ([response[@"result"] count] == 0) {
@@ -140,15 +146,26 @@ static NSString * const reuseIdentifier = @"Cell";
         Dynamic_category *cate = self.cate_arr[_lastIndex.row];
         _cateCurrent(cate.category_name, cate.ID, self.towCateId);
     }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)doneAction:(id)sender
 {
+     Dynamic_category *cate = self.cate_arr[_lastIndex.row];
     if (_cateCurrent) {
-        Dynamic_category *cate = self.cate_arr[_lastIndex.row];
         _cateCurrent(self.towCateName, cate.ID, self.towCateId);
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (cate == nil)
+    {
+        [KVNProgress showErrorWithStatus:@"请选择分类"];
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
+
+
 @end

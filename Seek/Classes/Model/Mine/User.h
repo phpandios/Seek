@@ -28,4 +28,13 @@
 
 @property (nonatomic, assign) CGFloat latitude;
 
+@property (nonatomic, assign) BOOL isLightOrBlack;
+
+@property (nonatomic, retain) UIColor *backColor;
+
+@property (nonatomic, retain) UIColor *textColor;
+
+@property (nonatomic, retain) UIColor *tableBackColor;//表格背色
+
++ (id)shareUserInfo;
 @end

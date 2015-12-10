@@ -28,9 +28,9 @@
 
 @property (nonatomic, copy) NSString *we_chat_id;
 
-@property (nonatomic, assign) CGFloat longitude;
+@property (nonatomic, assign) CGFloat mapLongitude;
 
-@property (nonatomic, assign) CGFloat latitude;
+@property (nonatomic, assign) CGFloat mapLatitude;
 
 @property (nonatomic, copy) NSString *addressName;
 

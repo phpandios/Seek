@@ -28,6 +28,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionContent.dataSource = self;
     self.collectionContent.backgroundColor = [UIColor whiteColor];
     
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doneAction:)];
    
     [self loadData];
@@ -44,8 +45,12 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark -分类数据
 - (void)loadData
 {
+    if([[User shareUserInfo] backColor] != nil)
+    {
+        self.collectionContent.backgroundColor = [[User shareUserInfo] backColor];
+    }
+    
     __weak typeof(self) weakSelf = self;
-    NSLog(@"%ld", self.parent_id);
     [AFHttpTool getCateGoryWithstate:1 parent_id:self.parent_id success:^(id response) {
         if ([response[@"result"] count] == 0) {
             return;
@@ -120,23 +125,20 @@ static NSString * const reuseIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (void)doneAction:(id)sender
 {
+     Dynamic_category *cate = self.cate_arr[_lastIndex.row];
     if (_cateTwoCurrent) {
-        Dynamic_category *cate = self.cate_arr[_lastIndex.row];
         _cateTwoCurrent(cate.category_name, cate.ID);
     }
-    [self.navigationController popViewControllerAnimated:YES];
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    if (cate == nil) {
+        [KVNProgress showErrorWithStatus:@"请选择分类"];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
 }
 

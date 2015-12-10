@@ -37,6 +37,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    if([UIApplication sharedApplication].applicationIconBadgeNumber > 0)
+    {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
     
     // 判断定位操作是否被允许
     if([CLLocationManager locationServicesEnabled]) {
@@ -51,7 +56,8 @@
     [self.locationManager requestLocation];
     // 开始定位
     [self.locationManager startUpdatingLocation];
-    
+    //接收通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorAction:) name:@"background" object:nil];
     
     [[UINavigationBar appearance] setBarTintColor:kNavBgColor];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -122,11 +128,12 @@
     
     CLLocationCoordinate2D coor = currentLocation.coordinate;
     
-    if ([[RCDLoginInfo shareLoginInfo] longitude] == coor.longitude && [[RCDLoginInfo shareLoginInfo] latitude] == coor.latitude) {
+    if ([[RCDLoginInfo shareLoginInfo] mapLongitude] == coor.longitude && [[RCDLoginInfo shareLoginInfo] mapLatitude] == coor.latitude) {
         return;
     }
-    [[RCDLoginInfo shareLoginInfo] setLongitude:coor.longitude];
-    [[RCDLoginInfo shareLoginInfo] setLatitude:coor.latitude];
+    [[RCDLoginInfo shareLoginInfo] setMapLatitude:coor.latitude];
+    [[RCDLoginInfo shareLoginInfo] setMapLongitude:coor.longitude];
+    
      [AFHttpTool updateLocationWithLongitude:coor.longitude latitude:coor.latitude success:^(id response) {
          NSLog(@"%@", @"位置更新成功");
      } failure:^(NSError *err) {
@@ -165,6 +172,12 @@
         SHOWERROR(@"%@", error.localizedDescription);
         // 提示用户出错原因，可按住Option键点击 KCLErrorDenied的查看更多出错信息，可打印error.code值查找原因所在
     }
+}
+
+#pragma mark 改变颜色
+- (void)colorAction:(NSNotification *)sender
+{
+    NSLog(@"%@", sender);
 }
 
 @end

@@ -17,7 +17,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 #import "LoginViewController.h"
-
+#import "UMessage.h"
 
 #define iPhone6                                                                \
 ([UIScreen instancesRespondToSelector:@selector(currentMode)]                \
@@ -29,6 +29,9 @@
 ? CGSizeEqualToSize(CGSizeMake(1242, 2208),                             \
 [[UIScreen mainScreen] currentMode].size)           \
 : NO)
+
+#define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define _IPHONE80_ 80000
 @interface AppDelegate ()
 
 
@@ -39,7 +42,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-        
     // 友盟
     int i = 0;
     NSLog(@"%d", i++);
@@ -47,6 +49,11 @@
     NSLog(@"%d", i++);
     [UMSocialData openLog:YES];
     NSLog(@"%d", i++);
+    
+    
+  
+    //for log
+    [UMessage setLogEnabled:YES];
     
     // 融云
     [[RCIM sharedRCIM] initWithAppKey:kRCIMAppKey];
@@ -325,6 +332,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
      withString:@""];
     
     [[RCIMClient sharedRCIMClient] setDeviceToken:token];
+    
+    [UMessage registerDeviceToken:deviceToken];
 }
 
 /**
@@ -337,6 +346,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
      * 统计推送打开率2
      */
     [[RCIMClient sharedRCIMClient] recordRemoteNotificationEvent:userInfo];
+    
+    [UMessage didReceiveRemoteNotification:userInfo];
 //    /**
 //     * 获取融云推送服务扩展字段2
 //     */

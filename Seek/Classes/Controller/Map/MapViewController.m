@@ -64,7 +64,7 @@
     
     // 模拟器没有定位.手动创建
     self.currentUserLocation = [[MAUserLocation alloc] init];
-    _currentUserLocation.coordinate = CLLocationCoordinate2DMake([[RCDLoginInfo shareLoginInfo] latitude], [[RCDLoginInfo shareLoginInfo] longitude]);
+    _currentUserLocation.coordinate = CLLocationCoordinate2DMake([[RCDLoginInfo shareLoginInfo] mapLatitude], [[RCDLoginInfo shareLoginInfo] mapLongitude]);
     
     // 屏幕旋转通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -290,7 +290,7 @@ updatingLocation:(BOOL)updatingLocation
 #pragma mark - WFFDropdownListDelegate
 - (void)dropdownList:(WFFDropdownList *)dropdownList didSelectedIndex:(NSInteger)selectedIndex
 {
-    SHOWMESSAGE(@"选中第%ld个筛选项目", selectedIndex);
+//    SHOWMESSAGE(@"选中第%ld个筛选项目", selectedIndex);
 }
 
 #pragma mark - UICollectionViewDatasource && UICollectionViewDelegate
@@ -457,8 +457,10 @@ updatingLocation:(BOOL)updatingLocation
 }
 
 #pragma mark - 控件
-- (IBAction)locationSwitchValueChanged:(UISwitch *)sender {
+- (IBAction)locationSwitchValueChanged:(UISwitch *)sender
+{
 }
+
 - (IBAction)locationButtonAction:(UIButton *)sender {
     
     // 设置缩放级别

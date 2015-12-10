@@ -5,6 +5,7 @@
 //  Created by 吴非凡 on 15/10/8.
 //  Copyright © 2015年 吴非凡. All rights reserved.
 //
+#import <RongIMKit/RongIMKit.h>
 
 #import "MineViewController.h"
 #import "LoginViewController.h"
@@ -19,6 +20,11 @@
 #import "AFPickerView.h"
 #import "WFFDropdownList.h"
 #import "SuggestionsViewController.h"
+#import "AttentionViewController.h"
+
+#import "MineAutoLightViewCell.h"
+#import "ChatViewController.h"
+
 @interface MineViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionTaskDelegate,PhotoCueDelegate, WFFDropdownListDelegate>
 {
     MBProgressHUD *HUD;
@@ -42,8 +48,9 @@
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
     
-    self.canSelectedArray = @[@[@(NO)], @[@(YES), @(YES)], @[@(YES), @(YES), @(YES)], @[@(YES), @(YES)], @[@(NO)]];
+    self.canSelectedArray = @[@[@(NO)], @[@(NO)], @[@(YES), @(YES)], @[@(YES), @(YES), @(YES)], @[@(YES), @(YES),@(YES)], @[@(NO)]];
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"MineAutoLightViewCell" bundle:nil] forCellReuseIdentifier:@"autoCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"UserHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:@"headerCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"UserLogoutTableViewCell" bundle:nil] forCellReuseIdentifier:@"logoutCell"];
     
@@ -77,6 +84,16 @@
 //            }
 //        }];
 //    }
+    
+    UILabel *titleView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 44)];
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:19];
+    titleView.textColor = [UIColor whiteColor];
+    titleView.textAlignment = NSTextAlignmentCenter;
+    titleView.text = @"客服2.0";
+    self.tabBarController.navigationItem.titleView = titleView;
+    // self.tabBarController.navigationItem.title = @"客服";
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
 // 到该方法.说明已经登陆了.设置界面的值
@@ -116,7 +133,7 @@
 #pragma mark - UITableViewDelegate && UITableViewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -124,13 +141,15 @@
     switch (section) {
         case 0: // 头像
             return 1;
-        case 1: // 关注 --------粉丝
+        case 1: // 头像
             return 1;
-        case 2: // 昵称,手机,性别
+        case 2: // 关注 --------粉丝
+            return 1;
+        case 3: // 昵称,手机,性别
             return 3;
-        case 3: // 修改密码,意见反馈
-            return 2;
-        case 4: // 退出登陆
+        case 4: // 修改密码,意见反馈
+            return 3;
+        case 5: // 退出登陆
             return 1;
     }
     return 0;
@@ -140,26 +159,36 @@
 {
     __weak typeof(self) weakSelf = self;
     UITableViewCell *cell = nil;
-    NSLog(@"%ld", indexPath.section);
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"headerCell" forIndexPath:indexPath];
-       
+        
         NSString *loginUserPortrait = [[RCDLoginInfo shareLoginInfo] head_portrait];
-        NSLog(@"%@", loginUserPortrait);
         [((UserHeaderTableViewCell *)cell).headerImageView sd_setImageWithURL:[NSURL URLWithString:loginUserPortrait] placeholderImage:[UIImage imageNamed:@"placeholderUserIcon"]];
         ((UserHeaderTableViewCell *)cell).userNameLabel.text = [[RCDLoginInfo shareLoginInfo] nick_name];
         ((UserHeaderTableViewCell *)cell).headerViewClickBlock = ^(){
             [weakSelf showImagePickerControllerWithTitle:@"更换头像" cancleHandle:nil];
-//            SHOWMESSAGE(@"更换头像");
+            //            SHOWMESSAGE(@"更换头像");
         };
-
+        
+    } else if (indexPath.section == 1) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"autoCell" forIndexPath:indexPath];
+        [((MineAutoLightViewCell *)cell).switchBtn addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+        static BOOL first = true;
+        if (first)
+        {
+            [((MineAutoLightViewCell *)cell).switchBtn setOn:NO];
+            first = false;
+        }
+            [((MineAutoLightViewCell *)cell).switchBtn setOn:[[User shareUserInfo] isLightOrBlack]];
+        
+        
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"normalCell"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"normalCell"];
         }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if (indexPath.section == 1) {
+        if (indexPath.section == 2) {
             switch (indexPath.row) {
                 case 0:
                     cell.textLabel.text = @"我的关注";
@@ -168,7 +197,7 @@
 //                    cell.textLabel.text = @"关注请求";
 //                    break;
             }
-        } else if (indexPath.section == 2) {
+        } else if (indexPath.section == 3) {
             switch (indexPath.row) {
                 case 0:
                     cell.textLabel.text = @"昵称";
@@ -194,13 +223,16 @@
                     ((WFFDropdownList *)[cell viewWithTag:indexPath.section * 10 + indexPath.row]).selectedIndex = [[RCDLoginInfo shareLoginInfo] gender];
                     break;
             }
-        } else if (indexPath.section == 3){
+        } else if (indexPath.section == 4){
             switch (indexPath.row) {
                 case 0:
                     cell.textLabel.text = @"修改密码";
                     break;
                 case 1:
                     cell.textLabel.text = @"意见反馈";
+                    break;
+                case 2:
+                    cell.textLabel.text = @"联系客服";
                     break;
             }
         } else {
@@ -215,6 +247,15 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     } else {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    if ([[User shareUserInfo] backColor] != nil) {
+        cell.backgroundColor = [[User shareUserInfo] backColor];
+    }
+    
+    if([[User shareUserInfo] textColor] != nil)
+    {
+        cell.textLabel.textColor = [[User shareUserInfo] textColor];
     }
     return cell;
 }
@@ -239,14 +280,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         if (indexPath.row == 0) { // 我的好友
-            AddressBookViewController *addressBookVC = [AddressBookViewController new];
-            [self.navigationController pushViewController:addressBookVC animated:YES];
+            AttentionViewController *attentionVC = [AttentionViewController new];
+//            AddressBookViewController *addressBookVC = [AddressBookViewController new];
+            [self.navigationController pushViewController:attentionVC animated:YES];
         }
     }
     
-    if (indexPath.section == 2 && indexPath.row == 1) { // 手机
+    if (indexPath.section == 3 && indexPath.row == 1) { // 手机
         if ([[[RCDLoginInfo shareLoginInfo] telephone] length] == 0) { // 没绑定手机,就绑定手机
             CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
             vc.type = CheckPhoneTypeForBindingTelPhone;
@@ -254,20 +296,32 @@
         }
     }
     
-    if (indexPath.section == 2 && indexPath.row == 2) { // 选择性别
+    if (indexPath.section == 3 && indexPath.row == 2) { // 选择性别
         
     }
     
-    if (indexPath.section == 3 && indexPath.row == 0) { // 修改密码
+    if (indexPath.section == 4 && indexPath.row == 0) { // 修改密码
         CheckPhoneViewController *vc = [[CheckPhoneViewController alloc] initWithNibName:@"CheckPhoneViewController" bundle:nil];
         vc.type = CheckPhoneTypeForModifyPwd;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-    if (indexPath.section == 3 && indexPath.row == 1) { // 意见反馈
+    if (indexPath.section == 4 && indexPath.row == 1) { // 意见反馈
         SuggestionsViewController *vc = [[SuggestionsViewController alloc] initWithNibName:@"SuggestionsViewController" bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
     }
+    
+    if (indexPath.section == 4 && indexPath.row == 2) {
+        #define SERVICE_ID @"KEFU144901296348686"
+        ChatViewController *chatService = [[ChatViewController alloc] init];
+        chatService.userName = @"客服01";
+        chatService.targetId = SERVICE_ID;
+        chatService.conversationType = ConversationType_APPSERVICE;
+        chatService.title = chatService.userName;
+        chatService.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController :chatService animated:YES];
+    }
+    
 }
 
 #pragma mark - UIPickerViewDelegate
@@ -393,6 +447,72 @@
     UIGraphicsEndImageContext();
     return scaledImage;
 }
+
+#pragma mark -改变亮度
+- (void)switchAction:(UISwitch *)sender
+{
+    [[User shareUserInfo] setIsLightOrBlack:sender.on];
+    if (sender.on == 1) {
+        [[User shareUserInfo] setTableBackColor:[UIColor darkGrayColor]];
+        [[User shareUserInfo] setBackColor:[UIColor blackColor]];
+        [[User shareUserInfo] setTextColor:[UIColor whiteColor]];
+        self.tableView.backgroundColor = [[User shareUserInfo] tableBackColor];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"background" object:sender userInfo:@{@"bacgroud": [[User shareUserInfo] backColor],@"textColor": [[User shareUserInfo] textColor], @"tableBacgroud": [[User shareUserInfo] tableBackColor]}];
+    } else {
+        [[User shareUserInfo] setTableBackColor:[UIColor colorWithRed:0.941 green:0.937 blue:0.961 alpha:1.0]];
+        [[User shareUserInfo] setBackColor:[UIColor whiteColor]];
+        [[User shareUserInfo] setTextColor:[UIColor blackColor]];
+        self.tableView.backgroundColor = [[User shareUserInfo] tableBackColor];
+       [[NSNotificationCenter defaultCenter] postNotificationName:@"background" object:sender userInfo:@{@"bacgroud":[[User shareUserInfo] backColor],@"textColor": [[User shareUserInfo] textColor], @"tableBacgroud": [[User shareUserInfo] tableBackColor]}];
+    }
+    
+//    [[NSUserDefaults standardUserDefaults] setValue:[[User shareUserInfo] backColor] forKey:@"background"];
+//    [[NSUserDefaults standardUserDefaults] setValue:[[User shareUserInfo] textColor] forKey:@"textColor"];
+//    [[NSUserDefaults standardUserDefaults] setValue:[[User shareUserInfo] tableBackColor] forKey:@"tableBacgroud"];
+//    [[NSUserDefaults standardUserDefaults] setValue:@(sender.on) forKey:@"isLightOrBlack"];
+    [self.tableView reloadData];
+    
+}
+
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        //设置为不用默认渲染方式
+        self.tabBarItem.image = [[UIImage imageNamed:@"icon_server"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        self.tabBarItem.selectedImage = [[UIImage imageNamed:@"icon_server_hover"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didReceiveMessageNotification:)
+                                                     name:RCKitDispatchMessageNotification
+                                                   object:nil];
+    }
+    return self;
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    self.tabBarItem.badgeValue = nil;
+}
+-(void)didReceiveMessageNotification:(NSNotification *)notification
+{
+    __weak typeof(&*self) __weakSelf = self;
+    RCMessage *message = notification.object;
+    if (message.conversationType == ConversationType_CUSTOMERSERVICE) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //            int count = [[RCIMClient sharedRCIMClient]getUnreadCount:@[@(ConversationType_CUSTOMERSERVICE)]];
+            //            if (count>0) {
+            __weakSelf.tabBarItem.badgeValue = @"";
+            //            }
+        });
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:RCKitDispatchMessageNotification object:nil];
+}
+
 
 //#pragma mark - 右上角添加好友
 //- (void)addFriend:(UIBarButtonItem *)sender

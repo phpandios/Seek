@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     
     
-    self.navigationItem.title = @"查找好友";
+    self.navigationItem.title = @"查找关注";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     //initial data

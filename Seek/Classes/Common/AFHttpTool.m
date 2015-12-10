@@ -274,6 +274,7 @@
 #pragma mark -请求动态消息
 + (void)getDynamicWithPage:(NSInteger)page
                      limit:(NSInteger)limit
+               category_id:(NSInteger)category_id
                permissions:(NSInteger)permissions
              promote_state:(NSInteger)promote_state
                      state:(NSInteger)state
@@ -283,6 +284,7 @@
     NSDictionary *params = @{
                              @"page" : @(page),
                              @"limit" : @(limit),
+                             @"category_id" : @(category_id),
                              @"permissions" : @(permissions),
                              @"promote_state" : @(promote_state),
                              @"state" : @(state)

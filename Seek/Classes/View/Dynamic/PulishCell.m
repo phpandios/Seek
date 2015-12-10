@@ -11,13 +11,20 @@
 @implementation PulishCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
+}
+
+- (void)layoutSubviews
+{
+    if ([[User shareUserInfo] backColor] != nil) {
+        self.backgroundColor = [[User shareUserInfo] backColor];
+    }
 }
 
 @end
